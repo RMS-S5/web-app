@@ -14,12 +14,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSidebarShow, setSidebarShow } from "../../store/ui";
 import { getAccountType } from "../../store/user/select";
 // sidebar nav config
-import navigation from "../_nav";
+import navigation from "../Navigations/_Mnav";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const show = useSelector(getSidebarShow);
   const accountType = useSelector(getAccountType);
+  
 
   let navItems = navigation.filter((item) => {
     if (item.accountType) {

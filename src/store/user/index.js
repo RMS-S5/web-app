@@ -16,7 +16,7 @@ const initialState = {
     refresh: "",
   },
   bankData: {},
-  admins : []
+  admins : [] //todo:remove
 };
 
 /**
