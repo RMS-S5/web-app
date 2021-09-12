@@ -66,6 +66,16 @@ const OrderView = React.lazy(() =>
     import("./views/order/orderView"));
 
 const Dashboard = React.lazy(() => import("./views/dashboard/index"))
+//////////////
+/**
+ * Staff Management Component
+ */
+ const CreateStaff = React.lazy(() =>
+ import("./views/staff/addStaff"));
+// const StaffTable = React.lazy(() =>
+//  import("./views/product/staffTable"));
+// const StaffView = React.lazy(() =>
+//  import("./views/product/staffView"));
 
 
 
@@ -156,6 +166,24 @@ const routes = [
     path: "/admin/order/update-order/:orderId",
     name: "Order",
     component: OrderView,
+  },
+
+  //Manager routes
+  { path: "/manager/", exact: true, name: "Home" },
+  {
+    path: "/manager/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+  },
+  {
+    path: "/manager/staff/add-staff",
+    name: "Staff",
+    component: CreateStaff,
+  },
+  {
+    path: "/manager/staff/view-staff",
+    name: "Staff",
+    component: ProductTable,
   },
 ];
 
