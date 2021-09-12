@@ -157,6 +157,14 @@ const routes = [
     name: "Order",
     component: OrderView,
   },
+
+  //Manager routes
+  { path: "/manager/", exact: true, name: "Home" },
+  {
+    path: "/manager/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+  },
 ];
 
 export default routes;
