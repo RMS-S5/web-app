@@ -65,6 +65,7 @@ async function ajaxResolver(axiosRes, options = null) {
   }
 }
 
+
 /**
  * Form data config
  */
@@ -202,6 +203,76 @@ export default {
     put : {
       async updateOrder(orderId,data) {
         return ajaxResolver(axios.put(`/order/update-order/${orderId}`, data))
+      }
+    }
+  },
+
+  //manager
+  staff: {
+    add: {
+      async staff(staffData) {
+        return ajaxResolver(axios.post(`/staff/add-staff`, staffData, formDataConfig))
+      },
+    },
+    get: {
+      async allStaffm(query) {
+        return ajaxResolver(axios.get(`/staff/get-all-staffm`, { params: query }));
+      },
+    },
+    put : {
+      async updateStaff(user_id, data) {
+        return ajaxResolver(axios.put(`/staff/update-staff/${user_id}`, data, formDataConfig))
+      }
+    },
+    remove : {
+      async removeStaff(user_id) {
+        return ajaxResolver(axios.delete(`/staff/remove-staff/${user_id}`))
+      }
+      },
+  },
+
+  branch: {
+    add: {
+      async branch(branchData) {
+        return ajaxResolver(axios.post(`/product/add-branch`, branchData));
+      },
+    },
+    get: {
+      async allBranches(query) {
+        return ajaxResolver(axios.get(`/product/get-branches`, { params: query }));
+      },
+    },
+    put : {
+      async updateBranch(id,data) {
+        return ajaxResolver(axios.put(`/product/update-branch/${id}`, data))
+      }
+    },
+    remove : {
+      async removeBranch(id) {
+        return ajaxResolver(axios.delete(`/product/remove-branch/${id}`))
+      }
+    }
+  },
+
+  role: {
+    add: {
+      async role(roleData) {
+        return ajaxResolver(axios.post(`/product/add-role`, roleData));
+      },
+    },
+    get: {
+      async allRoles(query) {
+        return ajaxResolver(axios.get(`/product/get-roles`, { params: query }));
+      },
+    },
+    put : {
+      async updateRole(role,data) {
+        return ajaxResolver(axios.put(`/product/update-role/${role}`, data))
+      }
+    },
+    remove : {
+      async removeRole(role) {
+        return ajaxResolver(axios.delete(`/product/remove-role/${role}`))
       }
     }
   },

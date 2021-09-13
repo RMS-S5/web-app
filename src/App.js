@@ -54,7 +54,7 @@ function App() {
             isLoggedIn={false}
             path="/admin"
             name="Home"
-            render={(props) => <MLayout {...props} />}
+            render={(props) => <Layout {...props} />}
           />
           <Redirect from="/" to="/admin" /> */}
           <ProtectedRoute
