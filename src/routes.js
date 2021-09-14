@@ -77,6 +77,16 @@ const StaffTable = React.lazy(() =>
 const StaffView = React.lazy(() =>
  import("./views/staff/staffView"));
 
+ /**
+ * Room Type Management Component
+ */
+  const CreateRoomType = React.lazy(() =>
+  import("./views/roomType/addRoomType"));
+ const RoomTypeTable = React.lazy(() =>
+  import("./views/roomType/roomTypeTable"));
+ const RoomTypeView = React.lazy(() =>
+  import("./views/roomType/roomTypeView"));
+
 
 
 
@@ -189,6 +199,21 @@ const routes = [
     path: "/manager/staff/update-staff/:user_id",
     name: "Staff",
     component: StaffView,
+  },
+  {
+    path: "/manager/room-type/add-room-type",
+    name: "room-type",
+    component: CreateRoomType,
+  },
+  {
+    path: "/manager/room-type/view-room-types",
+    name: "room-type",
+    component: RoomTypeTable,
+  },
+  {
+    path: "/manager/room-type/update-room-type/:room_type",
+    name: "room-type",
+    component: RoomTypeView,
   },
 ];
 

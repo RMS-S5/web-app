@@ -27,6 +27,10 @@ import staffReducer , {
   setStaffm
 } from "./staff";
 
+import roomTypeReducer , {
+  setRoomTypes
+} from "./roomType";
+
 /**
  * Thunk Actions
  */
@@ -35,6 +39,7 @@ import productThunk from "./product/thunk";
 import orderThunk from "./order/thunk";
 
 import staffThunk from "./staff/thunk";
+import roomTypeThunk from "./roomType/thunk";
 
 const store = configureStore({
   reducer: {
@@ -43,6 +48,7 @@ const store = configureStore({
     product : productReducer,
     order : orderReducer,
     staff : staffReducer,
+    roomType : roomTypeReducer,
   },
 
   middleware: getDefaultMiddleware({
@@ -79,13 +85,17 @@ export const actions = {
     setRoles,
     setStaffm
   },
+  roomType : {
+    setRoomTypes
+  },
 };
 
 export const thunks = {
   user: userThunk,
   product : productThunk,
   order : orderThunk,
-  staff : staffThunk
+  staff : staffThunk,
+  roomType: roomTypeThunk
 
 };
 

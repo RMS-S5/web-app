@@ -38,7 +38,7 @@ const _Mnav = [ //todo:add account type to each item if needed
   {
     _tag: "CSidebarNavItem",
     name: "View Room Types",
-    to: "/manager/room-type/view-room-type",
+    to: "/manager/room-type/view-room-types",
     icon: "cil-library",
   },
   {
