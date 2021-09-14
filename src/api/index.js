@@ -276,4 +276,27 @@ export default {
       }
     }
   },
+
+  roomType: {
+    add: {
+      async roomType(roomTypeData) {
+        return ajaxResolver(axios.post(`/room-type/add-room-type`, roomTypeData, formDataConfig))
+      },
+    },
+    get: {
+      async allRoomTypes(query) {
+        return ajaxResolver(axios.get(`/room-type/get-all-room-types`, { params: query }));
+      },
+    },
+    put : {
+      async updateRoomType(room_type, data) {
+        return ajaxResolver(axios.put(`/room-type/update-room-type/${room_type}`, data, formDataConfig))
+      }
+    },
+    remove : {
+      async removeRoomType(room_type) {
+        return ajaxResolver(axios.delete(`/room-type/remove-room-type/${room_type}`))
+      }
+      },
+  },
 };
