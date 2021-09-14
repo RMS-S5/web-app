@@ -51,25 +51,57 @@ export default class staffThunk {
   //   }
   // }
 
-  // /**
-  //  * ------------------Update------------------------------
-  //  */
-  // /**
-  //  * Update Product
-  //  */
-  // static updateProduct(pCode, productData) {
-  //   return async (dispatch, getState) => {
-  //     registerAccessToken(getState().user.tokens.access);
-  //     const [res, data1] = await api.product.put.updateProduct(pCode, productData);
-  //     if (res.status === 200) {
-  //       const [res1, data] = await api.product.get.allProducts();
-  //       if (res1.status === 200) {
-  //         dispatch(setProducts(data));
-  //       }
-  //     }
-  //     return res;
-  //   }
-  // }
+  /**
+   * ------------------Update------------------------------
+   */
+  /**
+   * Update Staff
+   */
+  static updateStaff(user_id, staffData) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      //const [res, data1] = await api.staff.put.updateStaff(user_id, staffData);
+      const [res, data1] = [{status: 200}, []] //todo:remove mock
+      if (res.status === 200) {
+                //const [res1, data] = await api.staff.get.allStaffm();
+        const [res1, data] = [{status: 200}, 
+          [
+            {
+              user_id: "u1",
+              first_name: "Nagitha",
+              last_name: "Abeywickrema",
+              email: "nagitha.18@uom.lk",
+              account_type: "Manager",
+              role: "Manager",
+              branch_id: "b1",
+              branch_name: "Nugegoda Branch",
+              birthday: "02/09/98",
+              mobile_number: "0891272786",
+              nic: "9812771661V",
+            }, 
+            {
+              user_id: "u2",
+              first_name: "DonaldUpdated",
+              last_name: "TrumpUpdated",
+              email: "donald.18@uom.lk",
+              account_type: "Waiter",
+              role: "Waiter",
+              branch_id: "b1",
+              branch_name: "Nugegoda Branch",
+              birthday: "02/09/98",
+              mobile_number: "0711272786",
+              nic: "6512771661V",
+            }
+          ]
+        ] //todo:remove mock
+        if (res1.status === 200) {
+          console.log("dispatched##")
+          dispatch(setStaffm(data));
+        }
+      }
+      return res;
+    }
+  }
 
   // /**
   //  * Update Category
@@ -89,22 +121,52 @@ export default class staffThunk {
   //   }
   // }
 
-  // /**
-  //  * --------------------Getters----------------------------------------
-  //  */
-  // /**
-  //  * Get All Products
-  //  */
-  // static getAllProducts(query) {
-  //   return async (dispatch, getState) => {
-  //     registerAccessToken(getState().user.tokens.access);
-  //     const [res, data] = await api.product.get.allProducts(query);
-  //     if (res.status === 200) {
-  //         dispatch(setProducts(data));
-  //     }
-  //     return res;
-  //   }
-  // }
+  /**
+   * --------------------Getters----------------------------------------
+   */
+  /**
+   * Get All Products
+   */
+  static getAllStaffm(query) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      //const [res, data] = await api.staff.get.allStaffm(query);
+      const [res, data] = [{status: 200}, 
+        [
+          {
+          user_id: "u1",
+          first_name: "Nagitha",
+          last_name: "Abeywickrema",
+          email: "nagitha.18@uom.lk",
+          account_type: "Manager",
+          role: "Manager",
+          branch_id: "b1",
+          branch_name: "Nugegoda Branch",
+          birthday: "02/09/98",
+          mobile_number: "0891272786",
+          nic: "9812771661V",
+        }, 
+        {
+          user_id: "u2",
+          first_name: "Donald",
+          last_name: "Trump",
+          email: "donald.18@uom.lk",
+          account_type: "Waiter",
+          role: "Waiter",
+          branch_id: "b1",
+          branch_name: "Nugegoda Branch",
+          birthday: "02/09/98",
+          mobile_number: "0711272786",
+          nic: "6512771661V",
+        }
+      ]
+    ] //todo:remove mock
+      if (res.status === 200) {
+          dispatch(setStaffm(data));
+      }
+      return res;
+    }
+  }
 
   /**
    * get all branches
@@ -150,25 +212,65 @@ export default class staffThunk {
   //   }
   // }
 
-  // /**
-  //  * ------------------Remove------------------------------
-  //  */
-  // /**
-  //  * Remove Product
-  //  */
-  // static removeProduct(pCode) {
-  //   return async (dispatch, getState) => {
-  //     registerAccessToken(getState().user.tokens.access);
-  //     const [res, data1] = await api.product.remove.removeProduct(pCode);
-  //     if (res.status === 200) {
-  //       const [res1, data] = await api.product.get.allProducts();
-  //       if (res1.status === 200) {
-  //         dispatch(setProducts(data));
-  //       }
-  //     }
-  //     return res;
-  //   }
-  // }
+  /**
+   * ------------------Remove------------------------------
+   */
+  /**
+   * Remove Staff
+   */
+  static removeStaff(user_id) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      //const [res, data1] = await api.staff.remove.removeStaff(user_id);
+      const [res, data1] = [{status: 200}, []] //todo:remove mock
+      if (res.status === 200) {
+        //const [res1, data] = await api.staff.get.allStaffm();
+        let [res1, data] = [{status: 200}, 
+          [
+            {
+              user_id: "u1",
+              first_name: "Nagitha",
+              last_name: "Abeywickrema",
+              email: "nagitha.18@uom.lk",
+              account_type: "Manager",
+              role: "Manager",
+              branch_id: "b1",
+              branch_name: "Nugegoda Branch",
+              birthday: "02/09/98",
+              mobile_number: "0891272786",
+              nic: "9812771661V",
+            }, 
+            {
+              user_id: "u2",
+              first_name: "Donald",
+              last_name: "Trump",
+              email: "donald.18@uom.lk",
+              account_type: "Waiter",
+              role: "Waiter",
+              branch_id: "b1",
+              branch_name: "Nugegoda Branch",
+              birthday: "02/09/98",
+              mobile_number: "0711272786",
+              nic: "6512771661V",
+            }
+
+          ]
+        ] //todo:remove mock
+        console.log("before")
+        console.log(data)
+        console.log(user_id)
+        data = data.filter(function(obj) {
+          return obj.user_id !== user_id;
+        });//todo:remove mock
+        console.log("after")
+        console.log(data)
+        if (res1.status === 200) {
+          dispatch(setStaffm(data));
+        }
+      }
+      return res;
+    }
+  }
 
   // /**
   //  * Remove Category

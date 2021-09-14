@@ -13,79 +13,96 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import Form from "../../components/common/NewForm";
 import { thunks , cleanQuery} from "../../store/index";
-import {getAllCategories, getAllProducts} from "../../store/product/select";
+import {getAllBranches, getAllRoles, getAllStaffm} from "../../store/staff/select";
 
-class ProductView extends Form {
+class StaffView extends Form {
     state = {
 
         data: {
-            pName: "",
-            color: "",
-            size : "",
-            status : "",
-            stock : "",
-            price : "",
-            description : "",
+            first_name: "",
+            last_name: "",
+            email : "",
+            account_type : "",
+            role : "",
+            branch_id : "",
+            birthday : "",
+            mobile_number : "",
+            nic : "",
         },
-        categories : [],
-        status : ["Available" , "Not Available"],
-        pCode : "",
+        branches : [],
+        roles : [],
+        //status : ["Available" , "Not Available"],
+        user_id : "",
         image : "",
         errors: {},
         btnDisable: false,
         spinner: false,
     };
 
-    getProductBypCode = (pCode) => {
-        console.log(pCode, this.props.products);
-        const product = this.props.products.find((item) => {
-            return item.pCode == pCode;
+    getStaffByID = (user_id) => {
+        console.log(user_id, this.props.staffm);
+        const staff = this.props.staffm.find((item) => {
+            return item.user_id == user_id;
         });
-        if (!product) {
-            toast.error("Product Not found");
+        if (!staff) {
+            toast.error("Staff Not found");
             return;
         }
-        return product;
+        return staff;
     };
 
     schema = {
-        status: Joi.string().optional().label("Product Status"),
-        pName: Joi.string().optional().label("Product Name"),
-        color: Joi.string().optional().label("Color"),
-        size: Joi.string().optional().label("Size"),
-        price: Joi.number().optional().label("Price"),
-        stock: Joi.number().optional().label("Stock"),
-        categoryId: Joi.number().optional().label("categoryId"),
-        description: Joi.string().optional().label("Description"),
-
+        //status: Joi.string().optional().label("Staff Status"),
+        first_name: Joi.string().optional().label("First Name"),
+        last_name: Joi.string().optional().label("Last Name"),
+        email: Joi.string().optional().email({ tlds: { allow: false } }).label("Email"),
+        account_type: Joi.string().optional().label("Account Type"),
+        role: Joi.string().optional().label("Role"),
+        branch_id: Joi.string().optional().label("Branch ID"),
+        birthday: Joi.date().optional().label("Birthday"),
+        mobile_number: Joi.string().optional().label("Mobile Number"),
+        nic: Joi.string().optional().label("NIC"),
     };
 
     async componentDidMount() {
-        const res = await this.props.getAllCategories();
-        const res1 = await this.props.getAllProducts();
-        if (res.status === 200 && res1.status === 200) {
-            const categoriesData = this.props.categories;
+        const res = await this.props.getAllBranches();
+        const res1 = await this.props.getAllStaffm();
+        const res2 = await this.props.getAllRoles();
+        if (res.status === 200 && res1.status === 200 && res2.status === 200) {
+            const branchesData = this.props.branches;
+            const rolesData = this.props.roles;
             let pairValue = [];
-            categoriesData.forEach(
+            branchesData.forEach(
                 (item, index) => {
                     pairValue.push({
-                        value : item.categoryId,
+                        value : item.id,
                         label : item.name
                     })
                 }
             )
-            this.setState({ categories:pairValue,loading: false });
+            this.setState({ branches:pairValue,loading: false });
+
+            let pairValue1 = [];
+            rolesData.forEach(
+                (item, index) => {
+                    pairValue1.push({
+                        value : item.role,
+                        label : item.description
+                    })
+                }
+            )
+            this.setState({ roles:pairValue1,loading: false });
         } else {
             this.setState({ loading: false, error: true });
             toast.error(res.message);
         }
 
-        const product = this.getProductBypCode(this.props.match.params.pCode);
-        if (product) {
-            const updateData = cleanQuery(product,
-                ["status", "categoryId", "pName","color", "size", "price", "stock", "description"]);
-            const pCode= product.pCode;
-            this.setState({data : {...updateData}, pCode});
+        const staff = this.getStaffByID(this.props.match.params.user_id);
+        if (staff) {
+            const updateData = cleanQuery(staff,
+                ["first_name", "last_name", "email","account_type", "role", "branch_id", "birthday", "mobile_number", "nic"]); //todo: include status when implemented
+            const user_id= staff.user_id;
+            this.setState({data : {...updateData}, user_id});
         }
     }
 
@@ -99,76 +116,90 @@ class ProductView extends Form {
                 <CRow>
                     <CCol xs="12" md="12">
                         <CCard>
-                            <CCardHeader>Change Product</CCardHeader>
+                            <CCardHeader>Change Staff</CCardHeader>
                             <CCardBody>
                                 <CForm action="" method="post" onSubmit={this.handleSubmit}>
                                     <CRow>
                                         <CCol xs="12" md="6">
-                                            <CLabel htmlFor="name">Product Code</CLabel>
-                                            <CInput id="name" readOnly value={this.state.pCode} />
+                                            <CLabel htmlFor="name">User ID</CLabel>
+                                            <CInput id="name" readOnly value={this.state.user_id} />
                                         </CCol>
                                     </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
-                                            {this.renderInput("pName", "Product Name", "text", {
-                                                placeholder: "Enter product name",
+                                            {this.renderInput("first_name", "First Name", "text", {
+                                                placeholder: "Enter first name",
                                             }, false)}
                                         </CCol>
                                     </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
-                                            {this.renderInput("color", "Product Color", "text", {
-                                                placeholder: "Enter product color",
+                                            {this.renderInput("last_name", "Last Name", "text", {
+                                                placeholder: "Enter last name",
                                             }, false)}
                                         </CCol>
                                     </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
-                                            {this.renderInput("size", "Product Size", "text", {
-                                                placeholder: "Enter product size",
+                                            {this.renderInput("email", "Email", "text", {
+                                                placeholder: "Enter email",
                                             },false)}
                                         </CCol>
                                     </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
-                                            {this.renderTextArea("description", "Product description", "4", {
-                                                placeholder: "Enter product description",
-                                            }, true)}
-                                        </CCol>
-                                    </CRow>
-                                    <CRow>
-                                        <CCol xs="12" md="6">
-                                            {this.renderInput("stock", "Stock", "text", {
-                                                placeholder: "Enter product stock",
-                                            },false)}
-                                        </CCol>
-                                    </CRow>
-                                    <CRow>
-                                        <CCol xs="12" md="6">
-                                            {this.renderInput("price", "Product Price", "text", {
-                                                placeholder: "Enter product price",
+                                            {this.renderInput("account_type", "Account Type", "text", {
+                                                placeholder: "Enter account type",
                                             },false)}
                                         </CCol>
                                     </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             {this.renderSelectWithLabelValue(
-                                                "categoryId", "Category Name", this.state.categories
+                                                "role", "Role", this.state.roles
                                             )}
                                         </CCol>
                                     </CRow>
                                     <CRow>
+                                        <CCol xs="12" md="6">
+                                            {this.renderSelectWithLabelValue(
+                                                "branch_id", "Branch", this.state.branches
+                                            )}
+                                        </CCol>
+                                    </CRow>
+                                    <CRow>
+                                        <CCol xs="12" md="6">
+                                            {this.renderInput("birthday", "Date of Birth", "date", {
+                                                placeholder: "Enter date of birth",
+                                            })}
+                                        </CCol>
+                                    </CRow>
+                                    <CRow>
+                                        <CCol xs="12" md="6">
+                                            {this.renderInput("mobile_number", "Mobile Number", "text", {
+                                                placeholder: "Enter mobile number",
+                                            })}
+                                        </CCol>
+                                    </CRow>
+                                    <CRow>
+                                        <CCol xs="12" md="6">
+                                            {this.renderInput("nic", "NIC", "text", {
+                                                placeholder: "Enter NIC number",
+                                            })}
+                                        </CCol>
+                                    </CRow>
+                                    {/* <CRow>
                                         <CCol xs="12" md="6">
                                             {this.renderSelect(
                                                 "status", "Status", this.state.status
                                             )}
                                         </CCol>
-                                    </CRow>
+                                    </CRow> */}
 
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             {this.renderImageInput("image", "Product Image", "file", {
-                                                placeholder: "Upload product image",
+                                                placeholder: "Upload profile image",
                                             },false)}
                                         </CCol>
                                     </CRow>
@@ -192,48 +223,49 @@ class ProductView extends Form {
             "image",
             this.state.image
         );
+        // formData.append(
+        //     "user_id",
+        //     this.state.data.user_id
+        // )
         formData.append(
-            "color",
-            this.state.data.color
-        );
-        formData.append(
-            "pName",
-            this.state.data.pName
-        );
-        formData.append(
-            "status",
-            this.state.data.status
+            "first_name",
+            this.state.data.first_name
         )
         formData.append(
-            "size",
-            this.state.data.size
+            "last_name",
+            this.state.data.last_name
         )
         formData.append(
-            "description",
-            this.state.data.description
+            "email",
+            this.state.data.email
         )
         formData.append(
-            "stock",
-            this.state.data.stock
+            "role",
+            this.state.data.role
         )
         formData.append(
-            "price",
-            this.state.data.price
+            "branch_id",
+            this.state.data.branch_id //todo:branch must have an id property
         )
         formData.append(
-            "categoryId",
-            this.state.data.categoryId
+            "birthday",
+            this.state.data.birthday
         )
-        console.log("state", this.state);
-        console.log("formData",formData);
+        formData.append(
+            "mobile_number",
+            this.state.data.mobile_number
+        )
+        console.log("########") //test
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+        console.log("########") //test
 
-        console.log("Props", this.props);
+        const res = await this.props.updateStaff(this.state.user_id, formData);
 
-        const res = await this.props.updateProduct(this.state.pCode, formData);
-        console.log("PRoduct reposnes", res);
         this.setState({ spinner: false });
         if (res.status === 200) {
-            this.props.history.push("/admin/product/view-products");
+            this.props.history.push("/manager/staff/view-staffm");
         } else {
 
             toast.error(res.message);
@@ -242,14 +274,16 @@ class ProductView extends Form {
 }
 
 const mapStateToProps = (state) => ({
-    products : getAllProducts(state),
-    categories: getAllCategories(state),
+    staffm : getAllStaffm(state),
+    branches: getAllBranches(state),
+    roles: getAllRoles(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getAllProducts : () => dispatch(thunks.product.getAllProducts()) ,
-    getAllCategories : () => dispatch(thunks.product.getAllCategory()),
-    updateProduct : (pCode, productData) => dispatch(thunks.product.updateProduct(pCode,productData))
+    getAllStaffm : () => dispatch(thunks.staff.getAllStaffm()) ,
+    getAllBranches : () => dispatch(thunks.staff.getAllBranches()),
+    getAllRoles : () => dispatch(thunks.staff.getAllRoles()),
+    updateStaff : (user_id, staffData) => dispatch(thunks.staff.updateStaff(user_id, staffData))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductView);
+export default connect(mapStateToProps, mapDispatchToProps)(StaffView);
