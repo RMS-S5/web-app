@@ -12,19 +12,21 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { thunks , cleanQuery} from "../../store/index";
-import {getAllProducts} from "../../store/product/select";
+import {getAllStaffm} from "../../store/staff/select";
 
-const ProductTable = (props) => {
+const StaffTable = (props) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-    const products = useSelector(getAllProducts);
+    const staffm = useSelector(getAllStaffm);
+
 
     useEffect(async () => {
         setLoading(true);
-        const res = await dispatch(thunks.product.getAllProducts());
+        const res = await dispatch(thunks.staff.getAllStaffm());
         if (res.status !== 200) {
             toast.error(res.message);
         }
+        
         setLoading(false);
     }, []);
 
@@ -32,25 +34,28 @@ const ProductTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
-    const handleRemoveProduct = async (pCode) => {
+    const handleRemoveStaff = async (user_id) => {
         setLoading(true);
-        const res = await dispatch(thunks.product.removeProduct(pCode));
+        console.log("remove satff member with user_id:", user_id)
+        const res = await dispatch(thunks.staff.removeStaff(user_id)); //todo: add new method
         if (res.status !== 200) {
             toast.error(res.message);
         }
-        toast.success("Product removed Successfully");
+        toast.success("Staff member removed successfully");
         setLoading(false);
     }
 
     const fields = [
-        { key: "pCode", label: "Product Code", _style: { width: "30%" } },
-        { key: "pName", label: "Product Name", _style: { width: "10%" } },
-        { key: "color", label: "Color", _style: { width: "10%" } },
-        { key: "size", label: "Size", _style: { width: "10%" } },
-        { key: "stock", label: "stock", _style: { width: "10%" } },
-        { key: "price", label: "price", _style: { width: "10%" } },
-        { key: "categoryName", label: "categoryName", _style: { width: "10%" } },
-        { key: "status",label: "Status", _style: { width: "10%" } },
+        { key: "user_id", label: "User ID", _style: { width: "30%" } },
+        { key: "first_name", label: "First Name", _style: { width: "10%" } },
+        { key: "last_name", label: "Last Name", _style: { width: "10%" } },
+        { key: "email", label: "Email", _style: { width: "10%" } },
+        { key: "account_type", label: "Account Type", _style: { width: "10%" } },
+        { key: "role", label: "Role", _style: { width: "10%" } },
+        { key: "branch_name", label: "Branch", _style: { width: "10%" } }, //todo: replace with branch name
+        { key: "birthday",label: "Birthday", _style: { width: "10%" } },
+        { key: "mobile_number", label: "Mobile Number", _style: { width: "10%" } },
+        { key: "nic", label: "NIC", _style: { width: "10%" } },
         {
             key: "show_details",
             label: "",
@@ -59,7 +64,7 @@ const ProductTable = (props) => {
             filter: false,
         },
         {
-            key: "remove_item",
+            key: "remove_item", //todo:change name
             label: "",
             _style: { width: "1%" },
             sorter: false,
@@ -82,10 +87,10 @@ const ProductTable = (props) => {
         <CRow>
             <CCol>
                 <CCard>
-                    <CCardHeader>Products</CCardHeader>
+                    <CCardHeader>Staff</CCardHeader>
                     <CCardBody>
                         <CDataTable
-                            items={products}
+                            items={staffm}
                             fields={fields}
                             columnFilter
                             footer
@@ -96,13 +101,14 @@ const ProductTable = (props) => {
                             sorter
                             pagination
                             scopedSlots={{
-                                status: (item) => (
-                                    <td>
-                                        <CBadge color={getBadge(item.status)}>
-                                            {item.status}
-                                        </CBadge>
-                                    </td>
-                                ),
+                                // status: (item) => (
+                                    
+                                //     <td>
+                                //         <CBadge color={"success"}> {/*getBadge(item.status) //todo: add staff state*/}
+                                //             {item.status}
+                                //         </CBadge>
+                                //     </td>
+                                // ),
                                 show_details: (item) => {
                                     return (
                                         <td className="py-2">
@@ -112,7 +118,7 @@ const ProductTable = (props) => {
                                                 shape="square"
                                                 size="sm"
                                                 onClick={() => {
-                                                    props.history.push(`/admin/product/update-product/${item.pCode}`);
+                                                    props.history.push(`/manager/staff/update-staff/${item.user_id}`);
                                                 }}
                                             >
                                                 Edit
@@ -129,7 +135,7 @@ const ProductTable = (props) => {
                                                 shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    handleRemoveProduct(item.pCode);
+                                                    handleRemoveStaff(item.user_id);
                                                 }}
                                             >
                                                 Remove
@@ -146,4 +152,4 @@ const ProductTable = (props) => {
     );
 };
 
-export default ProductTable;
+export default StaffTable;

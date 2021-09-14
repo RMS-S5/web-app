@@ -72,10 +72,10 @@ const Dashboard = React.lazy(() => import("./views/dashboard/index"))
  */
  const CreateStaff = React.lazy(() =>
  import("./views/staff/addStaff"));
-// const StaffTable = React.lazy(() =>
-//  import("./views/product/staffTable"));
-// const StaffView = React.lazy(() =>
-//  import("./views/product/staffView"));
+const StaffTable = React.lazy(() =>
+ import("./views/staff/staffTable"));
+const StaffView = React.lazy(() =>
+ import("./views/staff/staffView"));
 
 
 
@@ -181,9 +181,14 @@ const routes = [
     component: CreateStaff,
   },
   {
-    path: "/manager/staff/view-staff",
+    path: "/manager/staff/view-staffm",
     name: "Staff",
-    component: ProductTable,
+    component: StaffTable,
+  },
+  {
+    path: "/manager/staff/update-staff/:user_id",
+    name: "Staff",
+    component: StaffView,
   },
 ];
 

@@ -22,7 +22,7 @@ const _Mnav = [ //todo:add account type to each item if needed
   {
     _tag: "CSidebarNavItem",
     name: "View Staff",
-    to: "/manager/staff/view-staff",
+    to: "/manager/staff/view-staffm",
     icon: "cil-people",
   },
   {
