@@ -41,15 +41,20 @@ const Sidebar = () => {
       <CSidebarBrand className="d-md-down-none" to="/my/dashboard">
         <img
           className="c-sidebar-brand-full"
-          src={"/img/ozarro-logo.png"}
-          alt={"ozarro logo"}
-          style={{ width: "130px" }}
+          src={"/img/hrms-logo.png"}
+          alt={"hrms logo"}
+          style={{ width: "70px" }}
         />
         <p
           className="c-sidebar-brand-minimized"
           style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
         >
-          PV
+          <img
+            className="c-sidebar-rest-full"
+            src={"/img/icon-rest.jpg"}
+            alt={"rest logo"}
+            style={{ width: "30px" }}
+        />
         </p>
       </CSidebarBrand>
       <CSidebarNav>

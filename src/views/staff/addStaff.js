@@ -193,9 +193,7 @@ class StaffAdd extends Form {
                   <CCol xs="12" md="6">
                     {this.renderInput("account_type", "Account Type", "text", {
                       placeholder: "Enter account type",
-                    },
-                    true,
-                    )}
+                    })}
                   </CCol>
                 </CRow>
                 <CRow>
