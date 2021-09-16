@@ -15,7 +15,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          OZARRO
+          HRMS
         </a>
       </div>
     </CFooter>

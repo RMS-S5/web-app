@@ -108,7 +108,7 @@ class Login extends Form {
                       <div>
                         <p style={{ fontWeight: "bold" }}>
                           If you are not a user already, please register to
-                          Ozarro Clothing.
+                          HRMS.
                         </p>
                         <Link to="/admin/auth/register">
                           <CButton color="primary" className="mt-1">

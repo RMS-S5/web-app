@@ -48,8 +48,8 @@ const MHeader = () => {
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
         <img
-          src={"/img/ozarro-logo.png"}
-          alt={"ozarro logo"}
+          src={"/img/hrms-logo.png"}
+          alt={"hrms logo"}
           style={{ width: "130px" }}
         />
       </CHeaderBrand>
@@ -61,7 +61,7 @@ const MHeader = () => {
         {/*</CHeaderNav>*/}
 
       <CHeaderNav className="px-3">
-        <MHeaderDropdown />
+        {/* <MHeaderDropdown /> */}
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">

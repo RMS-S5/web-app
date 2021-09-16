@@ -40,8 +40,8 @@ const Sidebar = () => {
       <CSidebarBrand className="d-md-down-none" to="/my/dashboard">
         <img
           className="c-sidebar-brand-full"
-          src={"/img/ozarro-logo.png"}
-          alt={"ozarro logo"}
+          src={"/img/hrms-logo.png"}
+          alt={"hrms logo"}
           style={{ width: "130px" }}
         />
         <p
