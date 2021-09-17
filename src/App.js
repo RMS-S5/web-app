@@ -14,10 +14,8 @@ const loading = (
   </div>
 );
 
-const Layout = React.lazy(() => import("./containers/Layout"));
+
 const MLayout = React.lazy(() => import("./containers/Layouts/MLayout"));
-const Auth = React.lazy(() => import("./views/pages/auth"));
-const Order = React.lazy(() => import("./views/pages/order"));
 
 function App() {
   const dispatch = useDispatch();
@@ -27,36 +25,6 @@ function App() {
     <BrowserRouter>
       <React.Suspense fallback={loading}>
         <Switch>
-          <Route
-            exact
-            path="/404"
-            name="Page 404"
-            render={(props) => <div>404 Component</div>}
-          />
-          <Route
-            exact
-            path="/500"
-            name="Page 500"
-            render={(props) => <div>500 Component</div>}
-          />
-          <Route
-            path="/admin/auth"
-            name="Auth Page"
-            render={(props) => <Auth {...props} />}
-          />
-
-          {/* <Route
-            path="/order"
-            name="Order Page"
-            render={(props) => <Order {...props} />}
-          /> */}
-          {/* <ProtectedRoute
-            isLoggedIn={false}
-            path="/admin"
-            name="Home"
-            render={(props) => <Layout {...props} />}
-          />
-          <Redirect from="/" to="/admin" /> */}
           <ProtectedRoute
             isLoggedIn={false}
             path="/manager"

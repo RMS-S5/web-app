@@ -31,7 +31,6 @@ class StaffView extends Form {
         },
         branches : [],
         roles : [],
-        //status : ["Available" , "Not Available"],
         user_id : "",
         image : "",
         errors: {},

@@ -7,19 +7,8 @@ import userReducer, {
   setTokenData,
   setUserData,
   updateProfileData,
-    setAdmins
+    setManagers
 } from "./user";
-
-import productReducer , {
-  setCategories,
-  setProducts
-} from "./product";
-
-import orderReducer, {
-  setCoupons,
-    setOrders,
-    setOrderCounts,
-} from "./order";
 
 import staffReducer , {
   setBranches,
@@ -35,9 +24,6 @@ import roomTypeReducer , {
  * Thunk Actions
  */
 import userThunk from "./user/thunk";
-import productThunk from "./product/thunk";
-import orderThunk from "./order/thunk";
-
 import staffThunk from "./staff/thunk";
 import roomTypeThunk from "./roomType/thunk";
 
@@ -45,8 +31,6 @@ const store = configureStore({
   reducer: {
     ui: uiReducer,
     user: userReducer,
-    product : productReducer,
-    order : orderReducer,
     staff : staffReducer,
     roomType : roomTypeReducer,
   },
@@ -69,16 +53,7 @@ export const actions = {
     setTokenData,
     setProfileData,
     updateProfileData,
-    setAdmins
-  },
-  product : {
-    setCategories,
-    setProducts
-  },
-  order : {
-    setCoupons,
-    setOrders,
-    setOrderCounts
+    setManagers
   },
   staff : {
     setBranches,
@@ -92,8 +67,6 @@ export const actions = {
 
 export const thunks = {
   user: userThunk,
-  product : productThunk,
-  order : orderThunk,
   staff : staffThunk,
   roomType: roomTypeThunk
 

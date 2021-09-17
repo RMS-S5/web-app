@@ -23,30 +23,34 @@ const MHeaderDropdown = () => {
   }else{
     image_url = image_url2;
   }
+  image_url = "https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png"; //todo:remove mock
 
 
   const handleLogout = () => {
-    if (localStorage.getItem("ozarro-access-token")) {
-      localStorage.removeItem("ozarro-access-token");
+    if (localStorage.getItem("hrms-access-token")) {
+      localStorage.removeItem("hrms-access-token");
     }
-    if (localStorage.getItem("ozarro-refresh-token")) {
-      localStorage.removeItem("ozarro-refresh-token");
+    if (localStorage.getItem("hrms-refresh-token")) {
+      localStorage.removeItem("hrms-refresh-token");
     }
     window.location = "/manager/auth/login"; //todo: update routes
   };
-  console.log(AVATAR_URL+image_url);
+  //console.log(AVATAR_URL+image_url);
   return (
     <CDropdown inNav className="c-header-nav-items mx-2" direction="down">
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar-xl">
           <CImg
-            src={AVATAR_URL+image_url}
+            // src={AVATAR_URL+image_url}
+            src={image_url}
+            shape={"rounded-circle"}
+            thumbnail={true}
             className="c-avatar-xl"
-            alt="admin@bootstrapmaster.com"
+            alt=""
           />
         </div>
         <div className="ml-2 h7">
-          Hey {(userData) ? userData.name : ""}
+          Hey {"Nagitha!"/*(userData) ? userData.name : ""*/}
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
@@ -57,7 +61,9 @@ const MHeaderDropdown = () => {
         <CDropdownItem>
           <div className="c-avatar-xl">
             <CImg
-                src={AVATAR_URL+image_url}
+                src={image_url}
+                
+                shape={"rounded-circle"}
                 className="c-avatar-xl"
                 alt="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
             />

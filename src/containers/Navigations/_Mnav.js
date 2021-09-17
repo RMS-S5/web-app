@@ -15,6 +15,7 @@ const _Mnav = [ //todo:add account type to each item if needed
   {
     _tag: "CSidebarNavItem",
     name: "Add Staff",
+    color: "bg-success",
     to: "/manager/staff/add-staff",
     icon: "cil-user",
 

@@ -74,7 +74,7 @@ const RoomTypeTable = (props) => {
                             items={roomTypes}
                             fields={fields}
                             columnFilter
-                            footer
+                            // footer
                             loading={loading}
                             itemsPerPageSelect
                             itemsPerPage={20}

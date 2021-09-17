@@ -15,8 +15,7 @@ const initialState = {
     access: "",
     refresh: "",
   },
-  bankData: {},
-  admins : [] //todo:remove
+
 };
 
 /**
@@ -43,8 +42,8 @@ const userSlice = createSlice({
       state.profileData = action.payload;
     },
 
-    setAdmins(state,action){
-      state.admins = action.payload;
+    setManagers(state,action){
+      state.managers = action.payload;
     }
   },
 });
@@ -57,7 +56,7 @@ export const {
   setTokenData,
   setProfileData,
   updateProfileData,
-  setAdmins
+  setManagers
 } = userSlice.actions;
 
 export default userSlice.reducer;

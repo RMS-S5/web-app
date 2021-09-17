@@ -76,27 +76,27 @@ const formDataConfig = {
 export default {
   user: {
     login: {
-      async admin(email, password) {
+      async manager(email, password) {
         return ajaxResolver(
-          axios.post("/user/login/admin", { email, password }),
+          axios.post("/user/login/manager", { email, password }),
           { fullBody: true }
         );
       },
     },
 
     add: {
-      async admin(data) {
-        return ajaxResolver(axios.post("/user/register/admin", data));
+      async manager(data) {
+        return ajaxResolver(axios.post("/user/register/manager", data));
       },
     },
 
     get: {
-      async admins(query) {
+      async managers(query) {
         return ajaxResolver(
-          axios.get("/user/get-all-admin", { params: query })
+          axios.get("/user/get-all-manager", { params: query })
         );
       },
-      async adminProfile() {
+      async managerProfile() {
         return ajaxResolver(axios.get("/user/get-profile"));
       }
     },
@@ -104,15 +104,15 @@ export default {
     put: {
       async changeStatus(userId, status) {
         return ajaxResolver(
-          axios.put(`/user/update-status/admin/${userId}`, { status })
+          axios.put(`/user/update-status/manager/${userId}`, { status })
         );
       },
-      async changeAdminPassword(data) {
-        return ajaxResolver(axios.put(`/user/change-password/admin`, data));
+      async changeManagerPassword(data) {
+        return ajaxResolver(axios.put(`/user/change-password/manager`, data));
       },
-      async updateAdminProfile(profileData) {
+      async updateManagerProfile(profileData) {
         return ajaxResolver(
-          axios.put(`/user/update-profile/admin`, profileData,formDataConfig)
+          axios.put(`/user/update-profile/manager`, profileData,formDataConfig)
         );
       }
     },
@@ -121,93 +121,6 @@ export default {
     },
   },
 
-  product: {
-    add: {
-      async product(productData) {
-        return ajaxResolver(axios.post(`/product/add-product`, productData, formDataConfig))
-      },
-    },
-    get: {
-      async allProducts(query) {
-        return ajaxResolver(axios.get(`/product/get-all-products`, { params: query }));
-      },
-    },
-    put : {
-      async updateProduct(pCode, data) {
-        return ajaxResolver(axios.put(`/product/update-product/${pCode}`, data, formDataConfig))
-      }
-    },
-    remove : {
-      async removeProduct(pCode) {
-        return ajaxResolver(axios.delete(`/product/remove-product/${pCode}`))
-      }
-      },
-  },
-
-  category: {
-    add: {
-      async category(categoryData) {
-        return ajaxResolver(axios.post(`/product/add-category`, categoryData));
-      },
-    },
-    get: {
-      async allCategories(query) {
-        return ajaxResolver(axios.get(`/product/get-categories`, { params: query }));
-      },
-    },
-    put : {
-      async updateCategory(categoryId,data) {
-        return ajaxResolver(axios.put(`/product/update-category/${categoryId}`, data))
-      }
-    },
-    remove : {
-      async removeCategory(categoryId) {
-        return ajaxResolver(axios.delete(`/product/remove-category/${categoryId}`))
-      }
-    }
-  },
-  coupon: {
-    add: {
-      async coupon(couponData) {
-        return ajaxResolver(axios.post(`/order/generate-coupon`, couponData));
-      },
-    },
-    get: {
-      async allCoupons(query) {
-        return ajaxResolver(axios.get(`/order/get-coupons`, { params: query }));
-      },
-      async couponByCode(couponCode){
-        return ajaxResolver(axios.get(`/order/get-coupon/${couponCode}`))
-      }
-    },
-    put : {
-      async updateCoupon(couponCode,data) {
-        return ajaxResolver(axios.put(`/order/update-coupon/${couponCode}`, data))
-      }
-    },
-    remove : {
-      async removeCoupon(couponCode) {
-        return ajaxResolver(axios.delete(`/order/remove-coupon/${couponCode}`))
-      }
-    },
-  },
-  order: {
-    get: {
-      async allOrders(query) {
-        return ajaxResolver(axios.get(`/order/get-orders`, { params: query }));
-      },
-      async orderCounts(query) {
-        return ajaxResolver(axios.get(`/order/get-order-counts`, { params: query }));
-      },
-    },
-    put : {
-      async updateOrder(orderId,data) {
-        return ajaxResolver(axios.put(`/order/update-order/${orderId}`, data))
-      }
-    }
-  },
-
-  //manager
   staff: {
     add: {
       async staff(staffData) {

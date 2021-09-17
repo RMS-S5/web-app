@@ -93,7 +93,7 @@ const StaffTable = (props) => {
                             items={staffm}
                             fields={fields}
                             columnFilter
-                            footer
+                            //footer
                             loading={loading}
                             itemsPerPageSelect
                             itemsPerPage={20}
@@ -101,14 +101,6 @@ const StaffTable = (props) => {
                             sorter
                             pagination
                             scopedSlots={{
-                                // status: (item) => (
-                                    
-                                //     <td>
-                                //         <CBadge color={"success"}> {/*getBadge(item.status) //todo: add staff state*/}
-                                //             {item.status}
-                                //         </CBadge>
-                                //     </td>
-                                // ),
                                 show_details: (item) => {
                                     return (
                                         <td className="py-2">

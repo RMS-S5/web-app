@@ -2,35 +2,24 @@ import jwtDecode from "jwt-decode";
 import _ from "lodash";
 import api, { registerAccessToken } from "./../../api";
 import {
-  setAdmins,
+  setManagers,
   setProfileData,
   setTokenData,
   setUserData,
   updateProfileData,
 } from "./index";
-import {setOrders} from "../order";
 
 export default class userThunk {
-  
-  // static userLogin(email, password) {
-  //   return async (dispatch, getState) => {
-  //     const [res, data] = await api.user.login.user(email, password);
-  //     if (res.status === 200) {
-  //       dispatch(setUserData(data.data));
-  //       dispatch(setTokenData(data.token));
-  //     }
-  //     return res;
-  //   };
-  // }
+
   /**
    * Login
    * @param email
    * @param password
    * @returns {function(*, *): {message: string, status: number}|{message: *, status: *}}
    */
-  static adminLogin(email, password) {
+  static managerLogin(email, password) {
     return async (dispatch, getState) => {
-      const [res, data] = await api.user.login.admin(email, password);
+      const [res, data] = await api.user.login.manager(email, password);
       console.log(res);
       if (res.status === 200) {
         dispatch(setUserData(data.data));
@@ -47,7 +36,7 @@ export default class userThunk {
    */
   static checkToken() {
     return (dispatch, getState) => {
-      const accessToken = localStorage.getItem("ozarro-access-token");
+      const accessToken = localStorage.getItem("hrms-access-token");
       if (!accessToken) return;
       const payload = jwtDecode(accessToken);
       if (!payload) return;
@@ -59,7 +48,7 @@ export default class userThunk {
             "name",
             "userType",
             "mobile",
-              "image"
+              "image" //todo:include rest of the attributes
           ])
         )
       );
@@ -86,7 +75,7 @@ export default class userThunk {
     return async (dispatch, getState) => {
       if (Object.keys(getState().user.profileData).length === 0) {
         registerAccessToken(getState().user.tokens.access);
-        const [res, data] = await api.user.get.adminProfile();
+        const [res, data] = await api.user.get.managerProfile();
         if (res.status === 200) {
           dispatch(setProfileData(data));
         }
@@ -97,12 +86,12 @@ export default class userThunk {
     };
   }
 
-  static getAllAdmins() {
+  static getAllManagers() {
     return async (dispatch , getState) => {
       registerAccessToken(getState().user.tokens.access);
-      const [res,data] =  await api.user.get.admins();
+      const [res,data] =  await api.user.get.managers();
       if (res.status === 200) {
-        dispatch(setAdmins(data));
+        dispatch(setManagers(data));
       }
       return res;
     }
@@ -113,12 +102,12 @@ export default class userThunk {
    * @param profileData
    * @returns
    */
-  static updateAdminProfile(profileData) {
+  static updateManagerProfile(profileData) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      const [res, data] = await api.user.put.updateAdminProfile(profileData);
+      const [res, data] = await api.user.put.updateManagerProfile(profileData);
       if (res.status === 200) {
-        const [res, data] = await api.user.get.adminProfile();
+        const [res, data] = await api.user.get.managerProfile();
         if (res.status === 200) {
           dispatch(setProfileData(data));
           dispatch(setUserData(data));
@@ -129,22 +118,22 @@ export default class userThunk {
     };
   }
 
-  static changeAdminPassword(passwordData) {
+  static changeManagerPassword(passwordData) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      const [res, data] = await api.user.put.changeAdminPassword(passwordData);
+      const [res, data] = await api.user.put.changeManagerPassword(passwordData);
       return res;
     };
   }
 
-  static updateAdminStatus(userId, status) {
+  static updateManagerStatus(userId, status) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
       const [res, data] = await api.user.put.changeStatus(userId, status);
       if (res.status === 200) {
-        const [res,data] =  await api.user.get.admins();
+        const [res,data] =  await api.user.get.managers();
         if (res.status === 200) {
-          dispatch(setAdmins(data));
+          dispatch(setManagers(data));
         }
       }
       return res;
