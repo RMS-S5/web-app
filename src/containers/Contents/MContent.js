@@ -16,7 +16,7 @@ const MContent = () => {
     <main className="c-main">
       <CContainer fluid>
         <Suspense fallback={loading}>
-          <Switch>
+          <Switch>a
             {routes.map((route, idx) => {
               return (
                 route.component && (

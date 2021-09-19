@@ -61,7 +61,7 @@ const MHeader = () => {
         {/*</CHeaderNav>*/}
 
       <CHeaderNav className="px-3">
-        {/* <MHeaderDropdown /> */}
+        <MHeaderDropdown />
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">

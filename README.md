@@ -70,7 +70,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 ### .env 
-BASE_URL_HEROKU=https://ozarro-back-end.herokuapp.com/api   \
-FILE_URL_HEROKU=https://ozarro-back-end.herokuapp.com/file/     \
+BASE_URL_HEROKU=https://hrms-back-end.herokuapp.com/api   \
+FILE_URL_HEROKU=https://hrms-back-end.herokuapp.com/file/     \
 BASE_URL_LOCAL=http://localhost:8000/api    \
 FILE_URL_LOCAL=http://localhost:8000/file/  \
