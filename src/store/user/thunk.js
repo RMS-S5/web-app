@@ -47,7 +47,7 @@ export default class userThunk {
    */
   static checkToken() {
     return (dispatch, getState) => {
-      const accessToken = localStorage.getItem("ozarro-access-token");
+      const accessToken = localStorage.getItem("hrms-access-token");
       if (!accessToken) return;
       const payload = jwtDecode(accessToken);
       if (!payload) return;

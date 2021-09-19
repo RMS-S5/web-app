@@ -67,6 +67,8 @@ const OrderView = React.lazy(() =>
 
 const Dashboard = React.lazy(() => import("./views/dashboard/index"))
 //////////////
+
+const MDashboard = React.lazy(() => import("./views/dashboard/MDashboard"))
 /**
  * Staff Management Component
  */
@@ -183,7 +185,7 @@ const routes = [
   {
     path: "/manager/dashboard",
     name: "Dashboard",
-    component: Dashboard,
+    component: MDashboard,
   },
   {
     path: "/manager/staff/add-staff",

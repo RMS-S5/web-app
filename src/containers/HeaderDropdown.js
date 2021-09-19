@@ -26,11 +26,11 @@ const HeaderDropdown = () => {
 
 
   const handleLogout = () => {
-    if (localStorage.getItem("ozarro-access-token")) {
-      localStorage.removeItem("ozarro-access-token");
+    if (localStorage.getItem("hrms-access-token")) {
+      localStorage.removeItem("hrms-access-token");
     }
-    if (localStorage.getItem("ozarro-refresh-token")) {
-      localStorage.removeItem("ozarro-refresh-token");
+    if (localStorage.getItem("hrms-refresh-token")) {
+      localStorage.removeItem("hrms-refresh-token");
     }
     window.location = "/admin/auth/login";
   };

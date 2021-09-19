@@ -146,8 +146,8 @@ class Login extends Form {
 
     if (res.status === 200) {
       if (this.state.rememberMe) {
-        localStorage.setItem("ozarro-access-token", this.props.accessToken);
-        localStorage.setItem("ozarro-refresh-token", this.props.refreshToken);
+        localStorage.setItem("hrms-access-token", this.props.accessToken);
+        localStorage.setItem("hrms-refresh-token", this.props.refreshToken);
       }
       if (this.props.location.state) {
         this.props.history.push(this.props.location.state.from.pathname);

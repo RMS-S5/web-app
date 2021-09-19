@@ -52,7 +52,8 @@ const StaffTable = (props) => {
         { key: "email", label: "Email", _style: { width: "10%" } },
         { key: "account_type", label: "Account Type", _style: { width: "10%" } },
         { key: "role", label: "Role", _style: { width: "10%" } },
-        { key: "branch_name", label: "Branch", _style: { width: "10%" } }, //todo: replace with branch name
+        { key: "branch_name", label: "Branch", _style: { width: "10%" } }, 
+        { key: "status",label: "Status", _style: { width: "10%" } },
         { key: "birthday",label: "Birthday", _style: { width: "10%" } },
         { key: "mobile_number", label: "Mobile Number", _style: { width: "10%" } },
         { key: "nic", label: "NIC", _style: { width: "10%" } },
@@ -74,14 +75,26 @@ const StaffTable = (props) => {
 
     const getBadge = (status) => {
         switch (status) {
-            case "Not Available":
-                return "warning";
-            case "Available":
-                return "success";
-            default:
+            case "employed":
                 return "primary";
+            case "available":
+                return "success";
+            case "unavailable":
+                return "warning";
+            case "resigned":
+                return "danger";
+            default:
+                return "light";
         }
     };
+
+    function humanize(str) {
+        var i, frags = str.split('_');
+        for (i=0; i<frags.length; i++) {
+          frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+        }
+        return frags.join(' ');
+    }
 
     return (
         <CRow>
@@ -101,14 +114,13 @@ const StaffTable = (props) => {
                             sorter
                             pagination
                             scopedSlots={{
-                                // status: (item) => (
-                                    
-                                //     <td>
-                                //         <CBadge color={"success"}> {/*getBadge(item.status) //todo: add staff state*/}
-                                //             {item.status}
-                                //         </CBadge>
-                                //     </td>
-                                // ),
+                                status: (item) => ( 
+                                    <td>
+                                        <CBadge color={getBadge(item.status)} textColor={"white"}> {/*getBadge(item.status) //todo: add staff state*/}
+                                            {humanize(item.status)}
+                                        </CBadge>
+                                    </td>
+                                ),
                                 show_details: (item) => {
                                     return (
                                         <td className="py-2">
