@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSidebarShow, setSidebarShow } from "../../store/ui";
 import { getAccountType } from "../../store/user/select";
 // sidebar nav config
-import navigation from "../Navigations/_Mnav";
+import navigation from "../Navigations/_Customernav";
 
 const Sidebar = () => {
   const dispatch = useDispatch();

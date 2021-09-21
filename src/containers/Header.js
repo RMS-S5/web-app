@@ -48,7 +48,7 @@ const Header = () => {
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
         <img
-          src={"/img/ozarro-logo.png"}
+          src={"/img/hrms-logo.png"}
           alt={"ozarro logo"}
           style={{ width: "130px" }}
         />
@@ -56,9 +56,9 @@ const Header = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto"></CHeaderNav>
 
-        {/*<CHeaderNav className="px-3">*/}
-        {/*    Hy {(userData) ? userData.name : ''}*/}
-        {/*</CHeaderNav>*/}
+      {/*<CHeaderNav className="px-3">*/}
+      {/*    Hy {(userData) ? userData.name : ''}*/}
+      {/*</CHeaderNav>*/}
 
       <CHeaderNav className="px-3">
         <HeaderDropdown />

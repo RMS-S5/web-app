@@ -12,9 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import routes from "../../routes";
 import { getSidebarShow, setSidebarShow } from "../../store/ui";
 import { getUserData } from "../../store/user/select";
-import { MHeaderDropdown } from "../index"; //todo:add to index.js
+import { CustomerHeaderDropdown } from "../index"; //todo:add to index.js
 
-const MHeader = () => {
+const CustomerHeader = () => {
   const dispatch = useDispatch();
   const sidebarShow = useSelector(getSidebarShow);
 
@@ -61,7 +61,7 @@ const MHeader = () => {
       {/*</CHeaderNav>*/}
 
       <CHeaderNav className="px-3">
-        <MHeaderDropdown />
+        {/* <CustomerHeaderDropdown /> */}
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">
@@ -74,4 +74,4 @@ const MHeader = () => {
   );
 };
 
-export default MHeader;
+export default CustomerHeader;
