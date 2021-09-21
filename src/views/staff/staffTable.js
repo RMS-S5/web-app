@@ -11,8 +11,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import humanize from "../../utils/humanize";
 import { thunks , cleanQuery} from "../../store/index";
 import {getAllStaffm} from "../../store/staff/select";
+
 
 const StaffTable = (props) => {
     const dispatch = useDispatch();
@@ -87,14 +89,6 @@ const StaffTable = (props) => {
                 return "light";
         }
     };
-
-    function humanize(str) {
-        var i, frags = str.split('_');
-        for (i=0; i<frags.length; i++) {
-          frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
-        }
-        return frags.join(' ');
-    }
 
     return (
         <CRow>

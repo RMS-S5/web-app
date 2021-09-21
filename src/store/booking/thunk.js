@@ -3,123 +3,123 @@ import _ from "lodash";
 import api, { registerAccessToken } from "./../../api";
 
 import {
-  setMonthlyCompletedOrders,
+  setMonthlyCompletedBookings,
 } from "./index";
 
-export default class orderThunk {
+export default class bookingThunk {
 
   /**
    * --------------------Getters----------------------------------------
    */
   /**
-   * Get Monthly Completed Orders
+   * Get Monthly Completed Bookings
    */
-  static getMonthlyCompletedOrders(query) {
+  static getMonthlyCompletedBookings(query) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data] = await api.order.get.monthlyCompletedOrders(query);
+      //const [res, data] = await api.booking.get.monthlyCompletedBookings(query);
       const [res, data] = [{ status: 200 },
       [
         {
-          order_id: "o1",
-          order_status: "served",
+          id: "b1",
+          status: "completed",
           placed_time: "2021-09-01 00:00:00"
         },
         {
-          order_id: "o2",
-          order_status: "served",
+          id: "b2",
+          status: "completed",
           placed_time: "2021-09-06 00:00:00"
         },
         {
-          order_id: "o3",
-          order_status: "served",
+          id: "b3",
+          status: "completed",
           placed_time: "2021-09-11 00:00:00"
         },
         {
-          order_id: "o4",
-          order_status: "served",
+          id: "b4",
+          status: "completed",
           placed_time: "2021-09-16 00:00:00"
         },
         ,
         {
-          order_id: "o5",
-          order_status: "served",
+          id: "b5",
+          status: "completed",
           placed_time: "2021-09-21 00:00:00"
         },
         ,
         {
-          order_id: "o6",
-          order_status: "served",
+          id: "b6",
+          status: "completed",
           placed_time: "2021-09-26 00:00:00"
         },
         ,
         {
-          order_id: "o7",
-          order_status: "served",
+          id: "b7",
+          status: "completed",
           placed_time: "2021-09-21 00:00:00"
         },
         ,
         {
-          order_id: "o8",
-          order_status: "served",
+          id: "b8",
+          status: "completed",
           placed_time: "2021-09-21 04:00:00"
         },
         ,
         {
-          order_id: "o9",
-          order_status: "served",
+          id: "b9",
+          status: "completed",
           placed_time: "2021-09-21 08:00:00"
         },
         ,
         {
-          order_id: "o10",
-          order_status: "served",
+          id: "b10",
+          status: "completed",
           placed_time: "2021-09-21 12:12:00"
         },
         {
-          order_id: "o11",
-          order_status: "served",
+          id: "b11",
+          status: "completed",
           placed_time: "2021-09-21 16:00:00"
         },
         {
-          order_id: "o12",
-          order_status: "served",
+          id: "b12",
+          status: "completed",
           placed_time: "2021-09-21 20:00:00"
         },
         {
-          order_id: "o13",
-          order_status: "served",
+          id: "b13",
+          status: "completed",
           placed_time: "2021-09-21 23:00:00"
         },
         {
-          order_id: "o14",
-          order_status: "served",
+          id: "b14",
+          status: "completed",
           placed_time: "2021-09-21 13:00:00"
         },
         {
-          order_id: "o15",
-          order_status: "served",
+          id: "b15",
+          status: "completed",
           placed_time: "2021-09-06 00:00:00"
         },
         {
-          order_id: "o16",
-          order_status: "served",
+          id: "b16",
+          status: "completed",
           placed_time: "2021-09-16 00:00:00"
         },
         {
-          order_id: "o17",
-          order_status: "served",
+          id: "b17",
+          status: "completed",
           placed_time: "2021-09-26 00:00:00"
         },
         {
-          order_id: "o18",
-          order_status: "served",
+          id: "b18",
+          status: "completed",
           placed_time: "2021-09-1 00:00:00"
         },
       ]
       ] //todo:remove mock
       if (res.status === 200) {
-        dispatch(setMonthlyCompletedOrders(data));
+        dispatch(setMonthlyCompletedBookings(data));
       }
       return res;
     }

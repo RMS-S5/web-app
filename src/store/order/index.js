@@ -2,30 +2,21 @@ import { /*createAsyncThunk,*/ createSlice } from "@reduxjs/toolkit";
 //import api from "../../api"
 
 const initialState = {
-  orders : [],
-  coupons : [],
-  orderCounts : []
+  monthlyCompletedOrders: [],
+
 };
 
 /**
- * Product Slice
+ * Order Slice
  */
 const orderSlice = createSlice({
   name: "order",
   initialState,
 
   reducers: {
-    setOrders(state, action) {
-      state.orders = action.payload;
+    setMonthlyCompletedOrders(state, action) {
+      state.monthlyCompletedOrders = action.payload;
     },
-
-    setCoupons(state, action) {
-      state.coupons = action.payload;
-    },
-
-    setOrderCounts(state, action){
-      state.orderCounts = action.payload
-    }
 
   },
 });
@@ -34,9 +25,7 @@ const orderSlice = createSlice({
  * Exports
  */
 export const {
-  setOrders,
-  setCoupons,
-    setOrderCounts
+  setMonthlyCompletedOrders
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

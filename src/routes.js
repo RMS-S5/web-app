@@ -47,23 +47,6 @@ const CategoryTable = React.lazy(() =>
 const CategoryView = React.lazy(() =>
     import("./views/category/categoryView"));
 
-/**
- * Coupon Management Component
- */
-const CreateCoupon = React.lazy(() =>
-    import("./views/coupon/addCoupon"));
-const CouponTable = React.lazy(() =>
-    import("./views/coupon/couponTable"));
-const CouponView = React.lazy(() =>
-    import("./views/coupon/couponView"));
-
-/**
- * Order Management Component
- */
-const OrderTable = React.lazy(() =>
-    import("./views/order/orderTable"));
-const OrderView = React.lazy(() =>
-    import("./views/order/orderView"));
 
 const Dashboard = React.lazy(() => import("./views/dashboard/index"))
 //////////////
@@ -153,31 +136,6 @@ const routes = [
     path: "/admin/category/update-category/:categoryId",
     name: "Category",
     component: CategoryView,
-  },
-  {
-    path: "/admin/coupon/add-coupon",
-    name: "Coupon",
-    component: CreateCoupon,
-  },
-  {
-    path: "/admin/coupon/view-coupons",
-    name: "Coupon",
-    component: CouponTable,
-  },
-  {
-    path: "/admin/coupon/update-coupon/:couponId",
-    name: "Category",
-    component: CouponView,
-  },
-  {
-    path: "/admin/order/view-orders",
-    name: "Order",
-    component: OrderTable,
-  },
-  {
-    path: "/admin/order/update-order/:orderId",
-    name: "Order",
-    component: OrderView,
   },
 
   //Manager routes

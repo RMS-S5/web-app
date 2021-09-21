@@ -15,12 +15,6 @@ import productReducer , {
   setProducts
 } from "./product";
 
-import orderReducer, {
-  setCoupons,
-    setOrders,
-    setOrderCounts,
-} from "./order";
-
 import staffReducer , {
   setBranches,
   setRoles,
@@ -31,24 +25,35 @@ import roomTypeReducer , {
   setRoomTypes
 } from "./roomType";
 
+import orderReducer , {
+  setMonthlyCompletedOrders
+} from "./order";
+
+import bookingReducer , {
+  setMonthlyCompletedBookings
+} from "./booking";
+
 /**
  * Thunk Actions
  */
 import userThunk from "./user/thunk";
 import productThunk from "./product/thunk";
-import orderThunk from "./order/thunk";
 
 import staffThunk from "./staff/thunk";
 import roomTypeThunk from "./roomType/thunk";
+import orderThunk from "./order/thunk";
+import bookingThunk from "./booking/thunk";
 
 const store = configureStore({
   reducer: {
     ui: uiReducer,
     user: userReducer,
     product : productReducer,
-    order : orderReducer,
+    
     staff : staffReducer,
     roomType : roomTypeReducer,
+    order : orderReducer,
+    booking : bookingReducer,
   },
 
   middleware: getDefaultMiddleware({
@@ -75,11 +80,7 @@ export const actions = {
     setCategories,
     setProducts
   },
-  order : {
-    setCoupons,
-    setOrders,
-    setOrderCounts
-  },
+
   staff : {
     setBranches,
     setRoles,
@@ -88,14 +89,22 @@ export const actions = {
   roomType : {
     setRoomTypes
   },
+  order : {
+    setMonthlyCompletedOrders
+  },
+  booking : {
+    setMonthlyCompletedBookings
+  },
 };
 
 export const thunks = {
   user: userThunk,
   product : productThunk,
-  order : orderThunk,
+  
   staff : staffThunk,
-  roomType: roomTypeThunk
+  roomType: roomTypeThunk,
+  order : orderThunk,
+  booking : bookingThunk,
 
 };
 
