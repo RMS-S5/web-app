@@ -23,98 +23,116 @@ export default class bookingThunk {
         {
           id: "b1",
           status: "completed",
-          placed_time: "2021-09-01 00:00:00"
+          placed_time: "2021-09-01 00:00:00",
+          total_amount: "34000"
         },
         {
           id: "b2",
           status: "completed",
-          placed_time: "2021-09-06 00:00:00"
+          placed_time: "2021-09-06 00:00:00",
+          total_amount: "90000"
         },
         {
           id: "b3",
           status: "completed",
-          placed_time: "2021-09-11 00:00:00"
+          placed_time: "2021-09-11 00:00:00",
+          total_amount: "43500"
         },
         {
           id: "b4",
           status: "completed",
-          placed_time: "2021-09-16 00:00:00"
+          placed_time: "2021-09-16 00:00:00",
+          total_amount: "12300"
         },
         ,
         {
           id: "b5",
           status: "completed",
-          placed_time: "2021-09-21 00:00:00"
+          placed_time: "2021-09-21 00:00:00",
+          total_amount: "76500"
         },
         ,
         {
           id: "b6",
           status: "completed",
-          placed_time: "2021-09-26 00:00:00"
+          placed_time: "2021-09-26 00:00:00",
+          total_amount: "12000"
         },
         ,
         {
           id: "b7",
           status: "completed",
-          placed_time: "2021-09-21 00:00:00"
+          placed_time: "2021-09-21 00:00:00",
+          total_amount: "32200"
         },
         ,
         {
           id: "b8",
           status: "completed",
-          placed_time: "2021-09-21 04:00:00"
+          placed_time: "2021-09-21 04:00:00",
+          total_amount: "3200"
         },
         ,
         {
           id: "b9",
           status: "completed",
-          placed_time: "2021-09-21 08:00:00"
+          placed_time: "2021-09-21 08:00:00",
+          total_amount: "9000"
         },
         ,
         {
           id: "b10",
           status: "completed",
-          placed_time: "2021-09-21 12:12:00"
+          placed_time: "2021-09-21 12:12:00",
+          total_amount: "8000"
         },
         {
           id: "b11",
           status: "completed",
-          placed_time: "2021-09-21 16:00:00"
+          placed_time: "2021-09-21 16:00:00",
+          total_amount: "54300"
         },
         {
           id: "b12",
           status: "completed",
-          placed_time: "2021-09-21 20:00:00"
+          placed_time: "2021-09-21 20:00:00",
+          total_amount: "34500"
         },
         {
           id: "b13",
           status: "completed",
-          placed_time: "2021-09-21 23:00:00"
+          placed_time: "2021-09-21 23:00:00",
+          total_amount: "54300"
         },
         {
           id: "b14",
           status: "completed",
-          placed_time: "2021-09-21 13:00:00"
+          placed_time: "2021-09-21 13:00:00",
+          total_amount: "43200"
         },
         {
           id: "b15",
           status: "completed",
-          placed_time: "2021-09-06 00:00:00"
+          placed_time: "2021-09-06 00:00:00",
+          total_amount: "32100"
         },
         {
           id: "b16",
           status: "completed",
-          placed_time: "2021-09-16 00:00:00"
+          placed_time: "2021-09-16 00:00:00",
+          total_amount: "14500"
         },
         {
           id: "b17",
           status: "completed",
-          placed_time: "2021-09-26 00:00:00"
+          placed_time: "2021-09-26 00:00:00",
+          total_amount: "12500"
         },
         {
           id: "b18",
           status: "completed",
-          placed_time: "2021-09-1 00:00:00"
+          placed_time: "2021-09-1 00:00:00",
+          total_amount: "7000"
         },
       ]
       ] //todo:remove mock
