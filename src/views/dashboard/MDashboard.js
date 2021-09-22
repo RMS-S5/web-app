@@ -62,25 +62,31 @@ const MDashboard = (props) => {
     setLoading(false);
   }, []);
 
-  const makeOrderCounts = () => {
-    const counts = {
-      
+  const makeGraphData = (monthlyCompletedData) => {
+    const graphData = {
+      today: 0,
       daily: 0,
       dailyRevenue: 0,
       monthly: 0,
       monthlyRevenue: 0,
       dailyDataSet: [0, 0, 0, 0, 0, 0],
       monthlyDataSet: [0, 0, 0, 0, 0, 0],
+      dailyBranchDataSets: [],
+      monthlyBranchDataSets: [],
+      dailyDataSetLabels: [],
+      monthlyDataSetLabels: [],
     };
 
-    //todo: verify date object values
-    let date = new Date();
-    let thisYear = date.getFullYear();
-    let thisMonth = date.getMonth();
-    let today = date.getDate();
+    let branchIds = branches.map(element => element.id)
 
-    let todayStart = new Date(thisYear, thisMonth, today);
-    let todayEnd = new Date(thisYear, thisMonth, today, 23, 59, 59);
+    let today = new Date();
+    let thisYear = today.getFullYear();
+    let thisMonth = today.getMonth();
+    let thisDate = today.getDate();
+    graphData.today = today;
+
+    let todayStart = new Date(thisYear, thisMonth, thisDate);
+    let todayEnd = new Date(thisYear, thisMonth, thisDate, 23, 59, 59);
 
     let monthStart = new Date(thisYear, thisMonth);
     let monthEnd = new Date(thisYear, thisMonth + 1, 0, 23, 59, 59);
@@ -108,114 +114,31 @@ const MDashboard = (props) => {
       }
     }
 
-    // console.log("######");
-    // console.log("tSlots:", tSlots);
-    // console.log("######");
-    // console.log("dSlots:", dSlots);
+    let dailyDataSetLabels = [];
+    let monthlyDataSetLabels = [];
 
-    monthlyCompletedOrders.forEach((element) => {
-      let elementDate = new Date(element.placed_time);
-      counts.monthly = counts.monthly + 1;
-      counts.monthlyRevenue = counts.monthlyRevenue + parseInt(element.total_amount)
-      for (let i = 0; i < dSlots.length - 1; i++) {
-        // console.log("######");
-        // console.log("i:", i);
-        // console.log("######");
-        // console.log("dSlots[i].getTime():", dSlots[i]);
-        // console.log("######");
-        // console.log("elementDate.getTime():", elementDate);
-        // console.log("######");
-        // console.log("dSlots[i + 1].getTime():", dSlots[i + 1]);
-        // console.log("######");
-        // console.log("statement:", dSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < dSlots[i + 1].getTime());
-        if (dSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < dSlots[i + 1].getTime()) {
-          counts.monthlyDataSet[i] = counts.monthlyDataSet[i] + 1;
-          break;
-        }
-      }
-
-      if (elementDate.getDate() === today) {
-        counts.daily = counts.daily + 1;
-        counts.dailyRevenue = counts.dailyRevenue + parseInt(element.total_amount)
-
-        for (let i = 0; i < tSlots.length - 1; i++) {
-          // console.log("######");
-          // console.log("i:", i);
-          // console.log("######");
-          // console.log("tSlots[i].getTime():", tSlots[i]);
-          // console.log("######");
-          // console.log("elementDate.getTime():", elementDate);
-          // console.log("######");
-          // console.log("tSlots[i + 1].getTime():", tSlots[i + 1]);
-          // console.log("######");
-          // console.log("statement:", tSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < tSlots[i + 1].getTime());
-          if (tSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < tSlots[i + 1].getTime()) {
-            counts.dailyDataSet[i] = counts.dailyDataSet[i] + 1;
-            break;
-          }
-        }
-      }
-
-    })
-    // console.log("######");
-    // console.log("counts:", counts);
-    return counts;
-  };
-
-  const makeBookingCounts = () => {
-    const counts = {
-      daily: 0,
-      dailyRevenue: 0,
-      monthly: 0,
-      monthlyRevenue: 0,
-      dailyDataSet: [0, 0, 0, 0, 0, 0],
-      monthlyDataSet: [0, 0, 0, 0, 0, 0],
-    };
-
-    //todo: verify date object values
-    let date = new Date();
-    let thisYear = date.getFullYear();
-    let thisMonth = date.getMonth();
-    let today = date.getDate();
-
-    let todayStart = new Date(thisYear, thisMonth, today);
-    let todayEnd = new Date(thisYear, thisMonth, today, 23, 59, 59);
-
-    let monthStart = new Date(thisYear, thisMonth);
-    let monthEnd = new Date(thisYear, thisMonth + 1, 0, 23, 59, 59);
-
-    let tSlots = [];
-    let dSlots = [];
-
-    for (let i = 0; i < 7; i++) {
-      if (i === 0) {
-        tSlots.push(todayStart);
-        dSlots.push(monthStart);
-      }
-      else if (i === 6) {
-        tSlots.push(todayEnd);
-        dSlots.push(monthEnd);
-      }
-      else {
-        let tempDate1 = new Date(todayStart);
-        tempDate1.setHours(tempDate1.getHours() + i * 4);
-        tSlots.push(tempDate1);
-        let tempDate2 = new Date(monthStart);
-        tempDate2.setDate(tempDate2.getDate() + i * 5);
-        dSlots.push(tempDate2);
-
-      }
+    for (let i = 0; i < dSlots.length - 1; i++) {
+      monthlyDataSetLabels.push(dSlots[i].getDate().toString() + "-" + dSlots[i + 1].getDate().toString());
     }
 
+    for (let i = 0; i < tSlots.length - 1; i++) {
+      dailyDataSetLabels.push(tSlots[i].getHours().toString() + ":" + tSlots[i].getMinutes().toString() + "-" + tSlots[i + 1].getHours().toString() + ":" + tSlots[i+1].getMinutes().toString());
+    }
     // console.log("######");
     // console.log("tSlots:", tSlots);
     // console.log("######");
     // console.log("dSlots:", dSlots);
+    let dailyBranchDataSets = []
+    let monthlyBranchDataSets = []
+    branchIds.map(element => dailyBranchDataSets[element] = [0, 0, 0, 0, 0, 0])
+    branchIds.map(element => monthlyBranchDataSets[element] = [0, 0, 0, 0, 0, 0])
 
-    monthlyCompletedBookings.forEach((element) => {
+
+
+    monthlyCompletedData.forEach((element) => {
       let elementDate = new Date(element.placed_time);
-      counts.monthly = counts.monthly + 1;
-      counts.monthlyRevenue = counts.monthlyRevenue + parseInt(element.total_amount)
+      graphData.monthly = graphData.monthly + 1;
+      graphData.monthlyRevenue = graphData.monthlyRevenue + parseInt(element.total_amount)
       for (let i = 0; i < dSlots.length - 1; i++) {
         // console.log("######");
         // console.log("i:", i);
@@ -228,14 +151,20 @@ const MDashboard = (props) => {
         // console.log("######");
         // console.log("statement:", dSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < dSlots[i + 1].getTime());
         if (dSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < dSlots[i + 1].getTime()) {
-          counts.monthlyDataSet[i] = counts.monthlyDataSet[i] + 1;
+          graphData.monthlyDataSet[i] = graphData.monthlyDataSet[i] + 1;
+          for (let j = 0; j < branchIds.length; j++) {
+            if (element.branch_id === branchIds[j]) {
+              monthlyBranchDataSets[branchIds[j]][i] += 1;
+              break;
+            }
+          }
           break;
         }
       }
 
-      if (elementDate.getDate() === today) {
-        counts.daily = counts.daily + 1;
-        counts.dailyRevenue = counts.dailyRevenue + parseInt(element.total_amount)
+      if (elementDate.getDate() === thisDate) {
+        graphData.daily = graphData.daily + 1;
+        graphData.dailyRevenue = graphData.dailyRevenue + parseInt(element.total_amount)
 
         for (let i = 0; i < tSlots.length - 1; i++) {
           // console.log("######");
@@ -249,20 +178,34 @@ const MDashboard = (props) => {
           // console.log("######");
           // console.log("statement:", tSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < tSlots[i + 1].getTime());
           if (tSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < tSlots[i + 1].getTime()) {
-            counts.dailyDataSet[i] = counts.dailyDataSet[i] + 1;
+            graphData.dailyDataSet[i] = graphData.dailyDataSet[i] + 1;
+            for (let j = 0; j < branchIds.length; j++) {
+              if (element.branch_id === branchIds[j]) {
+                dailyBranchDataSets[branchIds[j]][i] += 1;
+                break;
+              }
+            }
             break;
           }
         }
       }
 
     })
+    graphData.monthlyDataSetLabels = monthlyDataSetLabels;
+    graphData.dailyDataSetLabels = dailyDataSetLabels;
+    graphData.monthlyBranchDataSets = monthlyBranchDataSets;
+    graphData.dailyBranchDataSets = dailyBranchDataSets;
+    // console.log("######");
+    // console.log("monthlyDataSetLabels:", graphData.monthlyDataSetLabels);
+    // console.log("######");
+    // console.log("dailyDataSetLabels:", graphData.dailyDataSetLabels);
     // console.log("######");
     // console.log("counts:", counts);
-    return counts;
+    return graphData;
   };
 
-  const completedOrderCount = makeOrderCounts();
-  const completedBookingCount = makeBookingCounts();
+  const completedOrderData = makeGraphData(monthlyCompletedOrders);
+  const completedBookingData = makeGraphData(monthlyCompletedBookings);
 
   useEffect(() => {
     return () => toast.dismiss();
@@ -271,7 +214,7 @@ const MDashboard = (props) => {
   return (
     <React.Fragment>
       <CRow hidden={amountError} className="justify-content-center">
-        <MWidgetsDropdown completedOrderCount={completedOrderCount} completedBookingCount={completedBookingCount} />
+        <MWidgetsDropdown completedOrderData={completedOrderData} completedBookingData={completedBookingData} />
       </CRow>
       <CCardGroup columns className="cols-2" >
         <CCard>
@@ -279,7 +222,7 @@ const MDashboard = (props) => {
             <CRow>
               <CCol sm="5">
                 <h4 id="traffic" className="card-title mb-0">Orders</h4>
-                <div className="small text-muted">November 2017</div>
+                <div className="small text-muted">{ordersChartButtons === "Day" ? completedOrderData.today.getFullYear().toString() + " " + completedOrderData.today.toLocaleString('default', { month: 'long' }) + " " + completedOrderData.today.getDate().toString() : ordersChartButtons === "Month" ? completedOrderData.today.getFullYear().toString() + " " + completedOrderData.today.toLocaleString('default', { month: 'long' }) : ordersChartButtons === "Year" ? completedOrderData.today.getFullYear().toString() : ""}</div>
               </CCol>
               <CCol sm="7" className="d-none d-md-block">
                 <CButtonGroup className="float-right mr-3">
@@ -314,28 +257,28 @@ const MDashboard = (props) => {
                   {
                     label: value.name,
                     backgroundColor: graphColors[index],
-                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+                    data: ordersChartButtons === "Day"? completedOrderData.dailyBranchDataSets[value.id]: ordersChartButtons === "Month"? completedOrderData.monthlyBranchDataSets[value.id]: ordersChartButtons === "Year"? []: []
                   }
                 ))
               }
-            // {[
-            //   {
-            //     label: 'GitHub Commits',
-            //     backgroundColor: '#F4A261',
-            //     data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-            //   },
-            //   {
-            //     label: 'GitHub Commits',
-            //     backgroundColor: '#F4A261',
-            //     data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-            //   }
-            // ]}
-            labels="dates"
-            options={{
-              tooltips: {
-                enabled: true
-              }
-            }}
+              // {[
+              //   {
+              //     label: 'GitHub Commits',
+              //     backgroundColor: '#F4A261',
+              //     data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+              //   },
+              //   {
+              //     label: 'GitHub Commits',
+              //     backgroundColor: '#F4A261',
+              //     data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+              //   }
+              // ]}
+              labels={ordersChartButtons === "Day"? completedOrderData.dailyDataSetLabels: ordersChartButtons === "Month"? completedOrderData.monthlyDataSetLabels: ordersChartButtons === "Year"? "": ""}
+              options={{
+                tooltips: {
+                  enabled: true
+                }
+              }}
             />
           </CCardBody>
         </CCard>

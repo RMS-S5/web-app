@@ -20,7 +20,7 @@ import intToCurrencey from "../../utils/intToCurrency";
 import { thunks } from "../../store/index";
 
 
-const MWidgetsDropdown = ({ completedOrderCount, completedBookingCount }) => {
+const MWidgetsDropdown = ({ completedOrderData, completedBookingData }) => {
   const dispatch = useDispatch();
 
 
@@ -42,15 +42,15 @@ const MWidgetsDropdown = ({ completedOrderCount, completedBookingCount }) => {
         <CWidgetDropdown
           className="widgetColor1"
           color="gradient-warning"
-          header={totCompOrdersWidget === "monthly" ? completedOrderCount.monthly : totCompOrdersWidget === "daily" ? completedOrderCount.daily : "N/A"}
+          header={totCompOrdersWidget === "monthly" ? completedOrderData.monthly : totCompOrdersWidget === "daily" ? completedOrderData.daily : "N/A"}
           text={"Orders Completed " + humanize(totCompOrdersWidget)}
           footerSlot={
             <ChartBarSimple
               pointed
               className="c-chart-wrapper mt-3 mx-3"
               style={{ height: '70px' }}
-              dataPoints={totCompOrdersWidget === "monthly" ? completedOrderCount.monthlyDataSet : totCompOrdersWidget === "daily" ? completedOrderCount.dailyDataSet : []}
-              pointHoverBackgroundColor="primary"
+              dataPoints={totCompOrdersWidget === "monthly" ? completedOrderData.monthlyDataSet : totCompOrdersWidget === "daily" ? completedOrderData.dailyDataSet : []}
+              pointHoverBackgroundColor="warning"
               backgroundColor="rgb(250, 220, 130)"
               label="Orders"
               labels="months"
@@ -84,14 +84,14 @@ const MWidgetsDropdown = ({ completedOrderCount, completedBookingCount }) => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header={totCompBookingsWidget === "monthly" ? completedBookingCount.monthly : totCompBookingsWidget === "daily" ? completedBookingCount.daily : "N/A"}
+          header={totCompBookingsWidget === "monthly" ? completedBookingData.monthly : totCompBookingsWidget === "daily" ? completedBookingData.daily : "N/A"}
           text={"Bookings Completed " + humanize(totCompBookingsWidget)}
           footerSlot={
             <ChartBarSimple
               pointed
               className="mt-3 mx-3"
               style={{ height: '70px' }}
-              dataPoints={totCompBookingsWidget === "monthly" ? completedBookingCount.monthlyDataSet : totCompBookingsWidget === "daily" ? completedBookingCount.dailyDataSet : []}
+              dataPoints={totCompBookingsWidget === "monthly" ? completedBookingData.monthlyDataSet : totCompBookingsWidget === "daily" ? completedBookingData.dailyDataSet : []}
               pointHoverBackgroundColor="danger"
               backgroundColor="rgb(250, 152, 152)"
               // options={{ elements: { line: { tension: 0.00001 } } }}
@@ -127,7 +127,7 @@ const MWidgetsDropdown = ({ completedOrderCount, completedBookingCount }) => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header={totCompOrdersRevWidget === "monthly" ? intToCurrencey(completedOrderCount.monthlyRevenue) : totCompOrdersRevWidget === "daily" ? intToCurrencey(completedOrderCount.dailyRevenue) : "N/A"}
+          header={totCompOrdersRevWidget === "monthly" ? intToCurrencey(completedOrderData.monthlyRevenue) : totCompOrdersRevWidget === "daily" ? intToCurrencey(completedOrderData.dailyRevenue) : "N/A"}
           text={humanize(totCompOrdersRevWidget) + " Order Revenue"}
           footerSlot={
             <CIcon className="mt-3" style={{ height: '90px' }} size={'5xl'} name="cil-dollar" />
@@ -160,7 +160,7 @@ const MWidgetsDropdown = ({ completedOrderCount, completedBookingCount }) => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header={totCompBookingsRevWidget === "monthly" ? intToCurrencey(completedBookingCount.monthlyRevenue) : totCompBookingsRevWidget === "daily" ? intToCurrencey(completedBookingCount.dailyRevenue) : "N/A"}
+          header={totCompBookingsRevWidget === "monthly" ? intToCurrencey(completedBookingData.monthlyRevenue) : totCompBookingsRevWidget === "daily" ? intToCurrencey(completedBookingData.dailyRevenue) : "N/A"}
           text={humanize(totCompBookingsRevWidget) + " Booking Revenue"}
           footerSlot={
             <CIcon className="mt-3" style={{ height: '90px' }} size={'5xl'} name="cil-dollar" />
