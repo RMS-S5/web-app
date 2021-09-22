@@ -2,44 +2,69 @@ import CIcon from "@coreui/icons-react";
 import {
   CBadge,
   CButton,
+  CButtonGroup,
   CCard,
   CCardBody,
   CCardHeader,
+  CCardGroup,
   CCol,
   CDataTable,
   CPopover,
   CRow,
   CWidgetProgressIcon,
+  CDropdown,
+  CDropdownMenu,
+  CDropdownItem,
+  CDropdownToggle,
 } from "@coreui/react";
-import React, { useEffect, useState,lazy } from "react";
+import {
+  CChartBar,
+} from '@coreui/react-chartjs'
+import React, { useEffect, useState, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { thunks } from "../../store/index";
-import { getMonthlyCompletedOrders} from "../../store/order/select";
+import { getMonthlyCompletedOrders } from "../../store/order/select";
 import { getMonthlyCompletedBookings } from "../../store/booking/select";
+import { getAllBranches } from "../../store/staff/select";
 
 const MWidgetsDropdown = lazy(() => import('../widgets/MWidgetsDropdown.js'))
 
 const MDashboard = (props) => {
+  const graphColors = ["#EF7512", "#F4A261"];
+
   const dispatch = useDispatch();
   const monthlyCompletedOrders = useSelector(getMonthlyCompletedOrders);
   const monthlyCompletedBookings = useSelector(getMonthlyCompletedBookings);
+  const branches = useSelector(getAllBranches);
 
   const [amountError, setAmountError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [ordersChartButtons, setOrdersChartButtons] = useState("Month");
+
 
   useEffect(async () => {
     setLoading(true);
-    // let res = await dispatch(thunks.order.getOrderCounts()); //sample only. tood:remove
-    // if (res.status !== 200) {
-    //   //setAmountError(true);
-    //   toast.error(res.message);
-    // }
+    let res = await dispatch(thunks.order.getMonthlyCompletedOrders());
+    if (res.status !== 200) {
+      toast.error(res.message);
+    }
+
+    res = await dispatch(thunks.booking.getMonthlyCompletedBookings());
+    if (res.status !== 200) {
+      toast.error(res.message);
+    }
+
+    res = await dispatch(thunks.staff.getAllBranches());
+    if (res.status !== 200) {
+      toast.error(res.message);
+    }
     setLoading(false);
   }, []);
 
   const makeOrderCounts = () => {
     const counts = {
+      
       daily: 0,
       dailyRevenue: 0,
       monthly: 0,
@@ -236,18 +261,85 @@ const MDashboard = (props) => {
     return counts;
   };
 
-  const completedOrderCount = makeOrderCounts(); 
+  const completedOrderCount = makeOrderCounts();
   const completedBookingCount = makeBookingCounts();
 
   useEffect(() => {
     return () => toast.dismiss();
-    }, []);
+  }, []);
 
   return (
     <React.Fragment>
       <CRow hidden={amountError} className="justify-content-center">
-        <MWidgetsDropdown completedOrderCount={completedOrderCount} completedBookingCount={completedBookingCount}/>
+        <MWidgetsDropdown completedOrderCount={completedOrderCount} completedBookingCount={completedBookingCount} />
       </CRow>
+      <CCardGroup columns className="cols-2" >
+        <CCard>
+          <CCardHeader>
+            <CRow>
+              <CCol sm="5">
+                <h4 id="traffic" className="card-title mb-0">Orders</h4>
+                <div className="small text-muted">November 2017</div>
+              </CCol>
+              <CCol sm="7" className="d-none d-md-block">
+                <CButtonGroup className="float-right mr-3">
+                  {
+                    ['Day', 'Month', 'Year'].map(value => (
+                      <CButton
+                        color="outline-secondary"
+                        key={value}
+                        className="mx-0"
+                        active={value === "Year" ? false : value === ordersChartButtons}
+                        disabled={value === "Year" ? true : false}
+                        onClick={(e) => {
+                          value === "Year" ? false : setOrdersChartButtons(value);
+                        }}
+                      >
+                        {value}
+                      </CButton>
+                    ))
+                  }
+                </CButtonGroup>
+              </CCol>
+            </CRow>
+
+          </CCardHeader>
+          <CCardBody>
+
+
+
+            <CChartBar
+              datasets={
+                branches.map((value, index) => (
+                  {
+                    label: value.name,
+                    backgroundColor: graphColors[index],
+                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+                  }
+                ))
+              }
+            // {[
+            //   {
+            //     label: 'GitHub Commits',
+            //     backgroundColor: '#F4A261',
+            //     data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+            //   },
+            //   {
+            //     label: 'GitHub Commits',
+            //     backgroundColor: '#F4A261',
+            //     data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+            //   }
+            // ]}
+            labels="dates"
+            options={{
+              tooltips: {
+                enabled: true
+              }
+            }}
+            />
+          </CCardBody>
+        </CCard>
+      </CCardGroup>
     </React.Fragment>
   );
 };

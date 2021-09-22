@@ -34,19 +34,6 @@ const MWidgetsDropdown = ({ completedOrderCount, completedBookingCount }) => {
 
 
 
-  useEffect(async () => {
-    setLoading(true);
-    let res = await dispatch(thunks.order.getMonthlyCompletedOrders());
-    if (res.status !== 200) {
-      toast.error(res.message);
-    }
-
-    res = await dispatch(thunks.booking.getMonthlyCompletedBookings());
-    if (res.status !== 200) {
-      toast.error(res.message);
-    }
-    setLoading(false);
-  }, []);
 
   // render
   return (
@@ -54,16 +41,17 @@ const MWidgetsDropdown = ({ completedOrderCount, completedBookingCount }) => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           className="widgetColor1"
-          color="gradient-primary"
+          color="gradient-warning"
           header={totCompOrdersWidget === "monthly" ? completedOrderCount.monthly : totCompOrdersWidget === "daily" ? completedOrderCount.daily : "N/A"}
           text={"Orders Completed " + humanize(totCompOrdersWidget)}
           footerSlot={
-            <ChartLineSimple
+            <ChartBarSimple
               pointed
               className="c-chart-wrapper mt-3 mx-3"
               style={{ height: '70px' }}
               dataPoints={totCompOrdersWidget === "monthly" ? completedOrderCount.monthlyDataSet : totCompOrdersWidget === "daily" ? completedOrderCount.dailyDataSet : []}
               pointHoverBackgroundColor="primary"
+              backgroundColor="rgb(250, 220, 130)"
               label="Orders"
               labels="months"
             />
@@ -95,16 +83,17 @@ const MWidgetsDropdown = ({ completedOrderCount, completedBookingCount }) => {
 
       <CCol sm="6" lg="3">
         <CWidgetDropdown
-          color="gradient-info"
+          color="gradient-danger"
           header={totCompBookingsWidget === "monthly" ? completedBookingCount.monthly : totCompBookingsWidget === "daily" ? completedBookingCount.daily : "N/A"}
           text={"Bookings Completed " + humanize(totCompBookingsWidget)}
           footerSlot={
-            <ChartLineSimple
+            <ChartBarSimple
               pointed
               className="mt-3 mx-3"
               style={{ height: '70px' }}
               dataPoints={totCompBookingsWidget === "monthly" ? completedBookingCount.monthlyDataSet : totCompBookingsWidget === "daily" ? completedBookingCount.dailyDataSet : []}
-              pointHoverBackgroundColor="info"
+              pointHoverBackgroundColor="danger"
+              backgroundColor="rgb(250, 152, 152)"
               // options={{ elements: { line: { tension: 0.00001 } } }}
               label="Bookings"
               labels="months"
