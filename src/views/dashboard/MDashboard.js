@@ -41,6 +41,7 @@ const MDashboard = (props) => {
   const [amountError, setAmountError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [ordersChartButtons, setOrdersChartButtons] = useState("Month");
+  const [bookingsChartButtons, setBookingsChartButtons] = useState("Month");
 
 
   useEffect(async () => {
@@ -261,19 +262,60 @@ const MDashboard = (props) => {
                   }
                 ))
               }
-              // {[
-              //   {
-              //     label: 'GitHub Commits',
-              //     backgroundColor: '#F4A261',
-              //     data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-              //   },
-              //   {
-              //     label: 'GitHub Commits',
-              //     backgroundColor: '#F4A261',
-              //     data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-              //   }
-              // ]}
               labels={ordersChartButtons === "Day"? completedOrderData.dailyDataSetLabels: ordersChartButtons === "Month"? completedOrderData.monthlyDataSetLabels: ordersChartButtons === "Year"? "": ""}
+              options={{
+                tooltips: {
+                  enabled: true
+                }
+              }}
+            />
+          </CCardBody>
+        </CCard>
+        <CCard>
+          <CCardHeader>
+            <CRow>
+              <CCol sm="5">
+                <h4 id="traffic" className="card-title mb-0">Bookings</h4>
+                <div className="small text-muted">{bookingsChartButtons === "Day" ? completedBookingData.today.getFullYear().toString() + " " + completedBookingData.today.toLocaleString('default', { month: 'long' }) + " " + completedBookingData.today.getDate().toString() : bookingsChartButtons === "Month" ? completedBookingData.today.getFullYear().toString() + " " + completedBookingData.today.toLocaleString('default', { month: 'long' }) : bookingsChartButtons === "Year" ? completedBookingData.today.getFullYear().toString() : ""}</div>
+              </CCol>
+              <CCol sm="7" className="d-none d-md-block">
+                <CButtonGroup className="float-right mr-3">
+                  {
+                    ['Day', 'Month', 'Year'].map(value => (
+                      <CButton
+                        color="outline-secondary"
+                        key={value}
+                        className="mx-0"
+                        active={value === "Year" ? false : value === bookingsChartButtons}
+                        disabled={value === "Year" ? true : false}
+                        onClick={(e) => {
+                          value === "Year" ? false : setBookingsChartButtons(value);
+                        }}
+                      >
+                        {value}
+                      </CButton>
+                    ))
+                  }
+                </CButtonGroup>
+              </CCol>
+            </CRow>
+
+          </CCardHeader>
+          <CCardBody>
+
+
+
+            <CChartBar
+              datasets={
+                branches.map((value, index) => (
+                  {
+                    label: value.name,
+                    backgroundColor: graphColors[index],
+                    data: bookingsChartButtons === "Day"? completedBookingData.dailyBranchDataSets[value.id]: bookingsChartButtons === "Month"? completedBookingData.monthlyBranchDataSets[value.id]: bookingsChartButtons === "Year"? []: []
+                  }
+                ))
+              }
+              labels={bookingsChartButtons === "Day"? completedBookingData.dailyDataSetLabels: bookingsChartButtons === "Month"? completedBookingData.monthlyDataSetLabels: bookingsChartButtons === "Year"? "": ""}
               options={{
                 tooltips: {
                   enabled: true
