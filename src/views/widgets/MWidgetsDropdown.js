@@ -127,7 +127,7 @@ const MWidgetsDropdown = ({ completedOrderData, completedBookingData }) => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header={totCompOrdersRevWidget === "monthly" ? intToCurrencey(completedOrderData.monthlyRevenue) : totCompOrdersRevWidget === "daily" ? intToCurrencey(completedOrderData.dailyRevenue) : "N/A"}
+          header={"Rs. " + (totCompOrdersRevWidget === "monthly" ? intToCurrencey(completedOrderData.monthlyRevenue) : totCompOrdersRevWidget === "daily" ? intToCurrencey(completedOrderData.dailyRevenue) : "N/A")}
           text={humanize(totCompOrdersRevWidget) + " Order Revenue"}
           footerSlot={
             <CIcon className="mt-3" style={{ height: '90px' }} size={'5xl'} name="cil-dollar" />
@@ -160,7 +160,7 @@ const MWidgetsDropdown = ({ completedOrderData, completedBookingData }) => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header={totCompBookingsRevWidget === "monthly" ? intToCurrencey(completedBookingData.monthlyRevenue) : totCompBookingsRevWidget === "daily" ? intToCurrencey(completedBookingData.dailyRevenue) : "N/A"}
+          header={"Rs. " + (totCompBookingsRevWidget === "monthly" ? intToCurrencey(completedBookingData.monthlyRevenue) : totCompBookingsRevWidget === "daily" ? intToCurrencey(completedBookingData.dailyRevenue) : "N/A")}
           text={humanize(totCompBookingsRevWidget) + " Booking Revenue"}
           footerSlot={
             <CIcon className="mt-3" style={{ height: '90px' }} size={'5xl'} name="cil-dollar" />
