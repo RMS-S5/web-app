@@ -4,19 +4,19 @@ import { /*createAsyncThunk,*/ createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userData: {
     userId: "",
-    name: "",
-    mobile: "",
-    userType: "",
-    image : ""
+    firstName: "",
+    LastName: "",
+    email: "",
+    accountType: "",
+    mobileNumber: "", // only for customers
+    image: "",
   },
-  profileData: {
-  },
+  profileData: {},
   tokens: {
     access: "",
     refresh: "",
   },
   bankData: {},
-  admins : []
 };
 
 /**
@@ -42,22 +42,13 @@ const userSlice = createSlice({
     updateProfileData(state, action) {
       state.profileData = action.payload;
     },
-
-    setAdmins(state,action){
-      state.admins = action.payload;
-    }
   },
 });
 
 /**
  * Exports
  */
-export const {
-  setUserData,
-  setTokenData,
-  setProfileData,
-  updateProfileData,
-  setAdmins
-} = userSlice.actions;
+export const { setUserData, setTokenData, setProfileData, updateProfileData } =
+  userSlice.actions;
 
 export default userSlice.reducer;

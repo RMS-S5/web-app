@@ -7,20 +7,16 @@ import userReducer, {
   setTokenData,
   setUserData,
   updateProfileData,
-    setAdmins
 } from "./user";
 
-import productReducer , {
-  setCategories,
-  setProducts
-} from "./product";
+import productReducer, { setCategories, setProducts } from "./product";
 
-import orderReducer, {
-  setCoupons,
-    setOrders,
-    setOrderCounts,
-} from "./order";
+import orderReducer, { setCoupons, setOrders, setOrderCounts } from "./order";
 
+import staffReducer, { setBranches, setRoles, setStaffm } from "./staff";
+
+import customerReducer, { setBookings, setAccountLevel } from "./customer";
+import roomTypeReducer, { setRoomDetails } from "./roomType";
 /**
  * Thunk Actions
  */
@@ -28,12 +24,19 @@ import userThunk from "./user/thunk";
 import productThunk from "./product/thunk";
 import orderThunk from "./order/thunk";
 
+import staffThunk from "./staff/thunk";
+import customerThunk from "./customer/thunk";
+import roomTypeThunk from "./roomType/thunk";
+
 const store = configureStore({
   reducer: {
     ui: uiReducer,
     user: userReducer,
-    product : productReducer,
-    order : orderReducer,
+    product: productReducer,
+    order: orderReducer,
+    staff: staffReducer,
+    customer: customerReducer,
+    roomType: roomTypeReducer,
   },
 
   middleware: getDefaultMiddleware({
@@ -54,43 +57,51 @@ export const actions = {
     setTokenData,
     setProfileData,
     updateProfileData,
-    setAdmins
   },
-  product : {
+  product: {
     setCategories,
-    setProducts
+    setProducts,
   },
-  order : {
+  order: {
     setCoupons,
     setOrders,
-    setOrderCounts
-  }
+    setOrderCounts,
+  },
+  staff: {
+    setBranches,
+    setRoles,
+    setStaffm,
+  },
+  customer: {
+    setAccountLevel,
+    setBookings,
+  },
+  roomType: {
+    setRoomDetails,
+  },
 };
 
 export const thunks = {
   user: userThunk,
-  product : productThunk,
-  order : orderThunk
-
+  product: productThunk,
+  order: orderThunk,
+  staff: staffThunk,
+  customer: customerThunk,
+  roomType: roomTypeThunk,
 };
-
 
 /**
  * Helper Function
  */
-export function cleanQuery(query , fields = null) {
-  const qClone = {...query}
-  Object.keys(qClone).forEach(
-      (k) => {
-        if (fields === null || fields.includes(k) ) {
-          (qClone[k] === null || qClone[k] === undefined) && delete qClone[k]
-        } else {
-          delete qClone[k]
-        }
+export function cleanQuery(query, fields = null) {
+  const qClone = { ...query };
+  Object.keys(qClone).forEach((k) => {
+    if (fields === null || fields.includes(k)) {
+      (qClone[k] === null || qClone[k] === undefined) && delete qClone[k];
+    } else {
+      delete qClone[k];
+    }
+  });
 
-      }
-  )
-
-  return qClone
+  return qClone;
 }
-

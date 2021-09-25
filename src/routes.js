@@ -2,7 +2,6 @@ import React from "react";
 
 // const Dashboard = React.lazy(() => import("./views/dashboard"));
 
-
 /**
  * Profile Components
  * @type {React.LazyExoticComponent<React.ComponentType<any>>}
@@ -21,54 +20,49 @@ const ChangePassword = React.lazy(() =>
  * User Management Components
  *
  */
-const AdminTable = React.lazy(() =>
-    import("./views/user/admin/adminTable"));
-const AdminView = React.lazy(() =>
-    import("./views/user/admin/adminView"));
+const AdminTable = React.lazy(() => import("./views/user/admin/adminTable"));
+const AdminView = React.lazy(() => import("./views/user/admin/adminView"));
 
 /**
  * Product Management Component
  */
-const CreateProduct = React.lazy(() =>
-    import("./views/product/addProduct"));
-const ProductTable = React.lazy(() =>
-    import("./views/product/productTable"));
-const ProductView = React.lazy(() =>
-    import("./views/product/productView"));
-
+const CreateProduct = React.lazy(() => import("./views/product/addProduct"));
+const ProductTable = React.lazy(() => import("./views/product/productTable"));
+const ProductView = React.lazy(() => import("./views/product/productView"));
 
 /**
  * Category Management Component
  */
-const CreateCategory = React.lazy(() =>
-    import("./views/category/addCategory"));
+const CreateCategory = React.lazy(() => import("./views/category/addCategory"));
 const CategoryTable = React.lazy(() =>
-    import("./views/category/categoryTable"));
-const CategoryView = React.lazy(() =>
-    import("./views/category/categoryView"));
+  import("./views/category/categoryTable")
+);
+const CategoryView = React.lazy(() => import("./views/category/categoryView"));
 
 /**
  * Coupon Management Component
  */
-const CreateCoupon = React.lazy(() =>
-    import("./views/coupon/addCoupon"));
-const CouponTable = React.lazy(() =>
-    import("./views/coupon/couponTable"));
-const CouponView = React.lazy(() =>
-    import("./views/coupon/couponView"));
+const CreateCoupon = React.lazy(() => import("./views/coupon/addCoupon"));
+const CouponTable = React.lazy(() => import("./views/coupon/couponTable"));
+const CouponView = React.lazy(() => import("./views/coupon/couponView"));
 
 /**
  * Order Management Component
  */
-const OrderTable = React.lazy(() =>
-    import("./views/order/orderTable"));
-const OrderView = React.lazy(() =>
-    import("./views/order/orderView"));
+const OrderTable = React.lazy(() => import("./views/order/orderTable"));
+const OrderView = React.lazy(() => import("./views/order/orderView"));
 
-const Dashboard = React.lazy(() => import("./views/dashboard/index"))
+const Dashboard = React.lazy(() => import("./views/dashboard/index"));
 
-
-
+//////////////
+/**
+ * Customer Management Component
+ */
+const CheckAvailability = React.lazy(() =>
+  import("./views/customer/checkAvailability")
+);
+const Bookingform = React.lazy(() => import("./views/customer/bookingForm"));
+const AskQuestions = React.lazy(() => import("./views/customer/askQuestions"));
 
 const routes = [
   { path: "/admin/", exact: true, name: "Home" },
@@ -148,14 +142,19 @@ const routes = [
     component: CouponView,
   },
   {
-    path: "/admin/order/view-orders",
-    name: "Order",
-    component: OrderTable,
+    path: "/customer/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
   },
   {
-    path: "/admin/order/update-order/:orderId",
-    name: "Order",
-    component: OrderView,
+    path: "/customer/check-availability",
+    name: "Check Availability",
+    component: CheckAvailability,
+  },
+  {
+    path: "/customer/booking-form",
+    name: "Booking form",
+    component: Bookingform,
   },
 ];
 
