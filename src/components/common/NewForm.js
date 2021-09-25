@@ -24,7 +24,7 @@ import { Component } from "react";
 class Form extends Component {
   state = {
     data: {},
-    image : "",
+    image: "",
     errors: {},
     btnDisable: false,
     spinner: false,
@@ -35,7 +35,7 @@ class Form extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const error = this.validate();
-    console.log("These are submit errors",error);
+    // console.log("These are submit errors",error);
     if (!error) {
       this.callServer();
     } else {
@@ -112,12 +112,10 @@ class Form extends Component {
   };
 
   // On file select (from the pop up)
-  onFileChange = event => {
+  onFileChange = (event) => {
     // Update the state
     this.setState({ image: event.target.files[0] });
-
   };
-
 
   validateProperty = (name, value) => {
     const schema = {
@@ -169,64 +167,64 @@ class Form extends Component {
   };
 
   renderDateInput = (
-      name,
-      label,
-      type,
-      others = {},
-      notRequired = false,
-      hidden = false
+    name,
+    label,
+    type,
+    others = {},
+    notRequired = false,
+    hidden = false
   ) => {
     const { data, errors } = this.state;
     return (
-        <CFormGroup hidden={hidden}>
-          <CLabel htmlFor={name}>
-            {label}{" "}
-            <span hidden={notRequired} style={{ color: "red" }}>
+      <CFormGroup hidden={hidden}>
+        <CLabel htmlFor={name}>
+          {label}{" "}
+          <span hidden={notRequired} style={{ color: "red" }}>
             *
           </span>
-          </CLabel>
-          <CInput
-              type={type}
-              id={name}
-              name={name}
-              onChange={this.handleChange}
-              value={this.getCreateDate(data[name])}
-              invalid={errors[name] ? true : false}
-              {...others}
-          />
-          <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
-        </CFormGroup>
+        </CLabel>
+        <CInput
+          type={type}
+          id={name}
+          name={name}
+          onChange={this.handleChange}
+          value={this.getCreateDate(data[name])}
+          invalid={errors[name] ? true : false}
+          {...others}
+        />
+        <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
+      </CFormGroup>
     );
   };
 
   renderImageInput = (
-      name,
-      label,
-      type,
-      others = {},
-      notRequired = false,
-      hidden = false
+    name,
+    label,
+    type,
+    others = {},
+    notRequired = false,
+    hidden = false
   ) => {
     const { data, errors } = this.state;
     return (
-        <CFormGroup hidden={hidden}>
-          <CLabel htmlFor={name}>
-            {label}{" "}
-            <span hidden={notRequired} style={{ color: "red" }}>
+      <CFormGroup hidden={hidden}>
+        <CLabel htmlFor={name}>
+          {label}{" "}
+          <span hidden={notRequired} style={{ color: "red" }}>
             *
           </span>
-          </CLabel>
-          <CInput
-              type={type}
-              id={name}
-              name={name}
-              onChange={this.onFileChange}
-              value={data[name]}
-              invalid={errors[name] ? true : false}
-              {...others}
-          />
-          <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
-        </CFormGroup>
+        </CLabel>
+        <CInput
+          type={type}
+          id={name}
+          name={name}
+          onChange={this.onFileChange}
+          value={data[name]}
+          invalid={errors[name] ? true : false}
+          {...others}
+        />
+        <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
+      </CFormGroup>
     );
   };
 
@@ -343,7 +341,6 @@ class Form extends Component {
           </option>
           {options
             ? options.map((option, index) => {
-
                 return (
                   <option key={index} value={option}>
                     {displayNames[index] ? displayNames[index] : option}
@@ -358,47 +355,45 @@ class Form extends Component {
   };
 
   renderSelectWithLabelValue = (
-      name,
-      label,
-      options,
-      others = {},
-      displayNames = [],
-      notRequired = false,
-      hidden = false
+    name,
+    label,
+    options,
+    others = {},
+    displayNames = [],
+    notRequired = false,
+    hidden = false
   ) => {
     const { data, errors } = this.state;
     return (
-        <CFormGroup hidden={hidden}>
-          <CLabel htmlFor={name}>
-            {label}{" "}
-            <span hidden={notRequired} style={{ color: "red" }}>
+      <CFormGroup hidden={hidden}>
+        <CLabel htmlFor={name}>
+          {label}{" "}
+          <span hidden={notRequired} style={{ color: "red" }}>
             *
           </span>
-          </CLabel>
-          <CSelect
-              custom
-              name={name}
-              id={name}
-              value={data[name]}
-              onChange={this.handleChange}
-              invalid={errors[name] ? true : false}
-              {...others}
-          >
-
-            <option value="" disabled hidden>
-              Choose here..
-            </option>
-            {options.map((item, index) => {
-                  return (
-                      <option key={index} value={item.value}>
-                        {item.label ? item.label : item}
-                      </option>
-                  );
-                })
-                }
-          </CSelect>
-          <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
-        </CFormGroup>
+        </CLabel>
+        <CSelect
+          custom
+          name={name}
+          id={name}
+          value={data[name]}
+          onChange={this.handleChange}
+          invalid={errors[name] ? true : false}
+          {...others}
+        >
+          <option value="" disabled hidden>
+            Choose here..
+          </option>
+          {options.map((item, index) => {
+            return (
+              <option key={index} value={item.value}>
+                {item.label ? item.label : item}
+              </option>
+            );
+          })}
+        </CSelect>
+        <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
+      </CFormGroup>
     );
   };
 

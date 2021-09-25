@@ -33,6 +33,7 @@ class AskQuestions extends Form {
       email: "",
       mobile_number: "",
       nic: "",
+      isPaid: false,
     },
     //image : "",
     //categories : [],
@@ -58,6 +59,7 @@ class AskQuestions extends Form {
     first_name: Joi.string().label("First Name"),
     last_name: Joi.string().label("Last Name"),
     email: Joi.string().label("Email"),
+    isPaid: Joi.boolean().label("isPaid"),
 
     mobile_number: Joi.string().label("Mobile Number"),
     nic: Joi.string().label("NIC"),
@@ -132,27 +134,72 @@ class AskQuestions extends Form {
 
   async callServer() {
     this.setState({ spinner: true });
+    const self = this;
+    var payment = {
+      sandbox: true,
+      merchant_id: "1218700", // Replace your Merchant ID
+      return_url: undefined, // Important
+      cancel_url: undefined, // Important
+      notify_url: "http://sample.com/notify",
+      order_id: "ItemNo12345",
+      items: "Door bell wireles",
+      amount: "31.00",
+      currency: "LKR",
+      first_name: "Saman",
+      last_name: "Perera",
+      email: "samanp@gmail.com",
+      phone: "0771234567",
+      address: "No.1, Galle Road",
+      city: "Colombo",
+      country: "Sri Lanka",
+      delivery_address: "No. 46, Galle road, Kalutara South",
+      delivery_city: "Kalutara",
+      delivery_country: "Sri Lanka",
+      custom_1: "",
+      custom_2: "",
+    };
+    payhere.onCompleted = function onCompleted(orderId) {
+      console.log("Payment completed. OrderID:" + orderId);
+      self.state.data.isPaid = true;
+      const formData = new FormData();
+      // Update the formData object
+      // formData.append("image", self.state.image);
+      console.log(self.state.data.first_name);
+      formData.append("first_name", self.state.data.first_name);
+      formData.append("last_name", self.state.data.last_name);
+      formData.append("email", self.state.data.email);
+      formData.append("mobile_number", self.state.data.mobile_number);
+      formData.append("nic", self.state.data.nic);
 
-    const formData = new FormData();
-    // Update the formData object
-    formData.append("image", this.state.image);
+      const res = { status: 200, message: "OK" }; //await self.props.addBookingData(formData);
 
-    formData.append("first_name", this.state.data.first_name);
-    formData.append("last_name", this.state.data.last_name);
-    formData.append("email", this.state.data.email);
-    formData.append("mobile_number", this.state.data.mobile_number);
-    formData.append("nic", this.state.data.nic);
+      self.setState({ spinner: false });
 
-    const res = { status: 200, message: "OK" }; //await this.props.addBookingData(formData);
+      if (res.status === 200) {
+        toast.success(res.message);
+        self.props.history.push("/customer/previous-bookings");
+      } else {
+        if (res.status !== 200) toast.error(res.message);
+      }
+      //Note: validate the payment and show success or failure page to the customer
+    };
 
-    this.setState({ spinner: false });
+    // Called when user closes the payment without completing
+    payhere.onDismissed = function onDismissed() {
+      //Note: Prompt user to pay again or show an error page
+      console.log("Payment dismissed");
+      self.setState({ spinner: false });
+      toast.error("Payment dismissed!");
+    };
 
-    if (res.status === 200) {
-      toast.success(res.message);
-      this.props.history.push("/customer/payment");
-    } else {
-      if (res.status !== 200) toast.error(res.message);
-    }
+    // Called when error happens when initializing payment such as invalid parameters
+    payhere.onError = function onError(error) {
+      // Note: show an error page
+      console.log("Error:" + error);
+      self.setState({ spinner: false });
+      toast.error("Payment Error", error);
+    };
+    payhere.startPayment(payment);
   }
 }
 
