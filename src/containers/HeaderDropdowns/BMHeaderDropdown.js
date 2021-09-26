@@ -14,7 +14,7 @@ import {BACK_END_URL} from "../../api/index";
 
 const AVATAR_URL = BACK_END_URL.DEFAULT_FILE_URL;
 
-const MHeaderDropdown = () => {
+const BMHeaderDropdown = () => {
   // const image_url1 = useSelector(getImage);
   // const image_url2 = useSelector(getImageFromProfile);
   const userData = {name: "Nagitha"}//useSelector(getUserData); //todo:remove mock
@@ -35,7 +35,7 @@ const MHeaderDropdown = () => {
     if (localStorage.getItem("hrms-refresh-token")) {
       localStorage.removeItem("hrms-refresh-token");
     }
-    window.location = "/manager/auth/login"; //todo: implement route
+    window.location = "/branch-manager/auth/login"; //todo: implement route
   };
   //console.log(AVATAR_URL+image_url);
   return (
@@ -55,7 +55,7 @@ const MHeaderDropdown = () => {
         <Avatar color="#FF9030" name={"N A"} round size ="50px"  src={image_url} textSizeRatio={1}/>
         </CDropdownItem>
 
-        <CDropdownItem to="/manager/profile"> {/*todo:update routes*/}
+        <CDropdownItem to="/branch-manager/profile"> {/*todo:update routes*/}
           <CIcon name="cil-user" className="mfe-2" />
           Profile
         </CDropdownItem>
@@ -70,4 +70,4 @@ const MHeaderDropdown = () => {
   );
 };
 
-export default MHeaderDropdown;
+export default BMHeaderDropdown;

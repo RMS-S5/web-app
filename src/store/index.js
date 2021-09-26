@@ -10,11 +10,6 @@ import userReducer, {
     setAdmins
 } from "./user";
 
-import productReducer , {
-  setCategories,
-  setProducts
-} from "./product";
-
 import staffReducer , {
   setBranches,
   setRoles,
@@ -26,12 +21,30 @@ import roomTypeReducer , {
 } from "./roomType";
 
 import orderReducer , {
-  setMonthlyCompletedOrders
+  setMonthlyCompletedOrders,
+  setOrders,
 } from "./order";
 
 import bookingReducer , {
-  setMonthlyCompletedBookings
+  setMonthlyCompletedBookings,
+  setBookings,
 } from "./booking";
+
+import customerReportReducer , {
+  setCustomerReports,
+} from "./customerReport";
+
+import roomReducer , {
+  setRooms
+} from "./room";
+
+import foodItemReducer , {
+  setFoodItems
+} from "./foodItem";
+
+import categoryReducer , {
+  setCategories
+} from "./category";
 
 
 /**
@@ -44,17 +57,24 @@ import staffThunk from "./staff/thunk";
 import roomTypeThunk from "./roomType/thunk";
 import orderThunk from "./order/thunk";
 import bookingThunk from "./booking/thunk";
+import customerReportThunk from "./customerReport/thunk";
+import roomThunk from "./room/thunk";
+import foodItemThunk from "./foodItem/thunk";
+import categoryThunk from "./category/thunk";
 
 const store = configureStore({
   reducer: {
     ui: uiReducer,
     user: userReducer,
-    product : productReducer,
     
     staff : staffReducer,
     roomType : roomTypeReducer,
     order : orderReducer,
     booking : bookingReducer,
+    customerReport : customerReportReducer,
+    room : roomReducer,
+    foodItem : foodItemReducer,
+    category : categoryReducer,
   },
 
   middleware: getDefaultMiddleware({
@@ -77,10 +97,6 @@ export const actions = {
     updateProfileData,
     setAdmins
   },
-  product : {
-    setCategories,
-    setProducts
-  },
 
   staff : {
     setBranches,
@@ -91,10 +107,24 @@ export const actions = {
     setRoomTypes
   },
   order : {
-    setMonthlyCompletedOrders
+    setMonthlyCompletedOrders,
+    setOrders,
   },
   booking : {
-    setMonthlyCompletedBookings
+    setMonthlyCompletedBookings,
+    setBookings,
+  },
+  customerReport : {
+    setCustomerReports
+  },
+  room : {
+    setRooms
+  },
+  foodItem : {
+    setFoodItems
+  },
+  category : {
+    setCategories
   },
 };
 
@@ -106,7 +136,10 @@ export const thunks = {
   roomType: roomTypeThunk,
   order : orderThunk,
   booking : bookingThunk,
-
+  customerReport : customerReportThunk,
+  room : roomThunk,
+  foodItem : foodItemThunk,
+  category : categoryThunk,
 };
 
 

@@ -22,30 +22,30 @@ const ChangePassword = React.lazy(() =>
  *
  */
 const AdminTable = React.lazy(() =>
-    import("./views/user/admin/adminTable"));
+  import("./views/user/admin/adminTable"));
 const AdminView = React.lazy(() =>
-    import("./views/user/admin/adminView"));
+  import("./views/user/admin/adminView"));
 
 /**
  * Product Management Component
  */
 const CreateProduct = React.lazy(() =>
-    import("./views/product/addProduct"));
+  import("./views/product/addProduct"));
 const ProductTable = React.lazy(() =>
-    import("./views/product/productTable"));
+  import("./views/product/productTable"));
 const ProductView = React.lazy(() =>
-    import("./views/product/productView"));
+  import("./views/product/productView"));
 
 
 /**
  * Category Management Component
  */
 const CreateCategory = React.lazy(() =>
-    import("./views/category/addCategory"));
+  import("./views/category/addCategory"));
 const CategoryTable = React.lazy(() =>
-    import("./views/category/categoryTable"));
+  import("./views/category/categoryTable"));
 const CategoryView = React.lazy(() =>
-    import("./views/category/categoryView"));
+  import("./views/category/categoryView"));
 
 
 const Dashboard = React.lazy(() => import("./views/dashboard/index"))
@@ -55,25 +55,68 @@ const MDashboard = React.lazy(() => import("./views/dashboard/MDashboard"))
 /**
  * Staff Management Component
  */
- const CreateStaff = React.lazy(() =>
- import("./views/staff/addStaff"));
+const CreateStaff = React.lazy(() =>
+  import("./views/staff/addStaff"));
 const StaffTable = React.lazy(() =>
- import("./views/staff/staffTable"));
+  import("./views/staff/staffTable"));
 const StaffView = React.lazy(() =>
- import("./views/staff/staffView"));
+  import("./views/staff/staffView"));
 
- /**
- * Room Type Management Component
- */
-  const CreateRoomType = React.lazy(() =>
+/**
+* Room Type Management Component
+*/
+const CreateRoomType = React.lazy(() =>
   import("./views/roomType/addRoomType"));
- const RoomTypeTable = React.lazy(() =>
+const RoomTypeTable = React.lazy(() =>
   import("./views/roomType/roomTypeTable"));
- const RoomTypeView = React.lazy(() =>
+const RoomTypeView = React.lazy(() =>
   import("./views/roomType/roomTypeView"));
 
+/**
+ * Manager Profile Components
+ */
+const ManagerProfile = React.lazy(() =>
+  import("./views/accountSettings/profile")
+);
 
 
+/**
+* Order Management Component
+*/
+const OrderTable = React.lazy(() =>
+  import("./views/order/orderTable"));
+
+/**
+* Customer Report Management Component
+*/
+const CustomerReportTable = React.lazy(() =>
+  import("./views/customerReport/customerReportTable"));
+
+/**
+ * Room Management Component
+ */
+ const CreateRoom = React.lazy(() =>
+ import("./views/room/addRoom"));
+const RoomTable = React.lazy(() =>
+ import("./views/room/roomTable"));
+const RoomView = React.lazy(() =>
+ import("./views/room/roomView"));
+
+ /**
+ * Food Item Management Component
+ */
+  const CreateFoodItem = React.lazy(() =>
+  import("./views/foodItem/addFoodItem"));
+ const FoodItemTable = React.lazy(() =>
+  import("./views/foodItem/foodItemTable"));
+ const FoodItemView = React.lazy(() =>
+  import("./views/foodItem/foodItemView"));
+
+/**
+ * Booking Management Component
+ */
+const BookingTable = React.lazy(() =>
+ import("./views/booking/bookingTable"));
 
 const routes = [
   { path: "/admin/", exact: true, name: "Home" },
@@ -146,6 +189,11 @@ const routes = [
     component: MDashboard,
   },
   {
+    path: "/manager/profile",
+    name: "Profile",
+    component: ManagerProfile,
+  },
+  {
     path: "/manager/staff/add-staff",
     name: "Staff",
     component: CreateStaff,
@@ -174,6 +222,84 @@ const routes = [
     path: "/manager/room-type/update-room-type/:room_type",
     name: "room-type",
     component: RoomTypeView,
+  },
+  {
+    path: "/manager/order/view-orders",
+    name: "order",
+    component: OrderTable,
+  },
+  {
+    path: "/manager/customer-report/view-customer-reports",
+    name: "customer-report",
+    component: CustomerReportTable,
+  },
+
+  //Branch manager routes
+  { path: "/branch-manager/", exact: true, name: "Home" },
+  {
+    path: "/branch-manager/dashboard",
+    name: "Dashboard",
+    component: MDashboard,
+  },
+  {
+    path: "/branch-manager/profile",
+    name: "Profile",
+    component: ManagerProfile,
+  },
+  {
+    path: "/branch-manager/staff/add-staff",
+    name: "Staff",
+    component: CreateStaff,
+  },
+  {
+    path: "/branch-manager/staff/view-staffm",
+    name: "Staff",
+    component: StaffTable,
+  },
+  {
+    path: "/branch-manager/staff/update-staff/:user_id",
+    name: "Staff",
+    component: StaffView,
+  },
+  {
+    path: "/branch-manager/room/add-room",
+    name: "Room",
+    component: CreateRoom,
+  },
+  {
+    path: "/branch-manager/room/view-rooms",
+    name: "Room",
+    component: RoomTable,
+  },
+  {
+    path: "/branch-manager/room/update-room/:room_number", //todo:clairfy URL parameter passing
+    name: "Room",
+    component: RoomView,
+  },
+  {
+    path: "/branch-manager/food-item/add-food-item",
+    name: "Food Item",
+    component: CreateFoodItem,
+  },
+  {
+    path: "/branch-manager/food-item/view-food-items",
+    name: "Food Item",
+    component: FoodItemTable,
+  },
+  {
+    path: "/branch-manager/food-item/update-food-item/:id", //todo:clairfy URL parameter passing
+    name: "Food Item",
+    component: FoodItemView,
+  },
+  {
+    path: "/branch-manager/booking/view-bookings",
+    name: "Booking",
+    component: BookingTable,
+  },
+  {
+    path: "/branch-manager/order/view-orders",
+    name: "order",
+    component: OrderTable,
   },
 ];
 

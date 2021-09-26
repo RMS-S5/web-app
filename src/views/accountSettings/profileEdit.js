@@ -53,7 +53,7 @@ class ProfileEdit extends Form {
       }
       this.setState({ data, loading: false });
     } else {
-      this.setState({ loading: false, error: true });
+      this.setState({ loading: false, error: false });
       toast.error(res.message);
     }
   }

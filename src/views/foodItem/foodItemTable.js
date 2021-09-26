@@ -13,18 +13,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import humanize from "../../utils/humanize";
 import { thunks , cleanQuery} from "../../store/index";
-import {getAllStaffm} from "../../store/staff/select";
+import {getAllFoodItems} from "../../store/foodItem/select";
 
 
-const StaffTable = (props) => {
+const FoodItemTable = (props) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-    const staffm = useSelector(getAllStaffm);
+    const foodItems = useSelector(getAllFoodItems);
 
 
     useEffect(async () => {
         setLoading(true);
-        const res = await dispatch(thunks.staff.getAllStaffm());
+        const res = await dispatch(thunks.foodItem.getAllFoodItems());
         if (res.status !== 200) {
             toast.error(res.message);
         }
@@ -36,29 +36,23 @@ const StaffTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
-    const handleRemoveStaff = async (user_id) => {
+    const handleRemoveFoodItem = async (id) => {
         setLoading(true);
-        console.log("remove satff member with user_id:", user_id)
-        const res = await dispatch(thunks.staff.removeStaff(user_id)); //todo: add new method
+        console.log("remove satff member with id:", id)
+        const res = await dispatch(thunks.foodItem.removeFoodItem(id)); //todo: add new method
         if (res.status !== 200) {
             toast.error(res.message);
         }
-        toast.success("Staff member removed successfully");
+        toast.success("Food Item removed successfully");
         setLoading(false);
     }
 
     const fields = [
-        { key: "user_id", label: "User ID", _style: { width: "30%" } },
-        { key: "first_name", label: "First Name", _style: { width: "10%" } },
-        { key: "last_name", label: "Last Name", _style: { width: "10%" } },
-        { key: "email", label: "Email", _style: { width: "10%" } },
-        { key: "account_type", label: "Account Type", _style: { width: "10%" } },
-        { key: "role", label: "Role", _style: { width: "10%" } },
-        { key: "branch_name", label: "Branch", _style: { width: "10%" } }, 
-        { key: "status",label: "Status", _style: { width: "10%" } },
-        { key: "birthday",label: "Birthday", _style: { width: "10%" } },
-        { key: "mobile_number", label: "Mobile Number", _style: { width: "10%" } },
-        { key: "nic", label: "NIC", _style: { width: "10%" } },
+        { key: "id", label: "ID", _style: { width: "30%" } },
+        { key: "name", label: "Name", _style: { width: "10%" } },
+        { key: "category_name", label: "Category", _style: { width: "10%" } },
+        { key: "description", label: "Description", _style: { width: "10%" } },
+        { key: "price", label: "Price", _style: { width: "10%" } },
         {
             key: "show_details",
             label: "",
@@ -75,29 +69,29 @@ const StaffTable = (props) => {
         },
     ];
 
-    const getBadge = (status) => {
-        switch (status) {
-            case "employed":
-                return "primary";
-            case "available":
-                return "success";
-            case "unavailable":
-                return "warning";
-            case "resigned":
-                return "danger";
-            default:
-                return "light";
-        }
-    };
+    // const getBadge = (status) => {
+    //     switch (status) {
+    //         case "employed":
+    //             return "primary";
+    //         case "available":
+    //             return "success";
+    //         case "unavailable":
+    //             return "warning";
+    //         case "resigned":
+    //             return "danger";
+    //         default:
+    //             return "light";
+    //     }
+    // };
 
     return (
         <CRow>
             <CCol>
                 <CCard>
-                    <CCardHeader>Staff</CCardHeader>
+                    <CCardHeader>Food Item</CCardHeader>
                     <CCardBody>
                         <CDataTable
-                            items={staffm}
+                            items={foodItems}
                             fields={fields}
                             columnFilter
                             footer
@@ -108,13 +102,13 @@ const StaffTable = (props) => {
                             sorter
                             pagination
                             scopedSlots={{
-                                status: (item) => ( 
-                                    <td>
-                                        <CBadge color={getBadge(item.status)} textColor={"white"}> {/*getBadge(item.status) //todo: add staff state*/}
-                                            {humanize(item.status)}
-                                        </CBadge>
-                                    </td>
-                                ),
+                                // status: (item) => ( 
+                                //     <td>
+                                //         <CBadge color={getBadge(item.status)} textColor={"white"}>  //todo: add availability
+                                //             {humanize(item.status)}
+                                //         </CBadge>
+                                //     </td>
+                                // ),
                                 show_details: (item) => {
                                     return (
                                         <td className="py-2">
@@ -124,7 +118,7 @@ const StaffTable = (props) => {
                                                 shape="square"
                                                 size="sm"
                                                 onClick={() => {
-                                                    props.history.push(`/manager/staff/update-staff/${item.user_id}`); 
+                                                    props.history.push(`/branch-manager/food-item/update-food-item/${item.id}`);
                                                 }}
                                             >
                                                 Edit
@@ -141,7 +135,7 @@ const StaffTable = (props) => {
                                                 shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    handleRemoveStaff(item.user_id);
+                                                    handleRemoveFoodItem(item.id);
                                                 }}
                                             >
                                                 Remove
@@ -158,4 +152,4 @@ const StaffTable = (props) => {
     );
 };
 
-export default StaffTable;
+export default FoodItemTable;

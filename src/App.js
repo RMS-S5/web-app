@@ -16,6 +16,7 @@ const loading = (
 
 const Layout = React.lazy(() => import("./containers/Layout"));
 const MLayout = React.lazy(() => import("./containers/Layouts/MLayout"));
+const BMLayout = React.lazy(() => import("./containers/Layouts/BMLayout"));
 const Auth = React.lazy(() => import("./views/pages/auth"));
 const Order = React.lazy(() => import("./views/pages/order"));
 
@@ -57,13 +58,20 @@ function App() {
             render={(props) => <Layout {...props} />}
           />
           <Redirect from="/" to="/admin" /> */}
-          <ProtectedRoute
+          {/* <ProtectedRoute
             isLoggedIn={false}
             path="/manager"
             name="Home"
             render={(props) => <MLayout {...props} />}
           />
-          <Redirect from="/" to="/manager" />  {/*todo:update routes*/}
+          <Redirect from="/" to="/manager" /> */}
+          <ProtectedRoute
+            isLoggedIn={false}
+            path="/branch-manager"
+            name="Home"
+            render={(props) => <BMLayout {...props} />}
+          />
+          <Redirect from="/" to="/branch-manager" />
         </Switch>
       </React.Suspense>
       <ToastContainer

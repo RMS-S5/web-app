@@ -3,6 +3,7 @@ import { /*createAsyncThunk,*/ createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   monthlyCompletedOrders: [],
+  orders: [],
 
 };
 
@@ -17,6 +18,9 @@ const orderSlice = createSlice({
     setMonthlyCompletedOrders(state, action) {
       state.monthlyCompletedOrders = action.payload;
     },
+    setOrders(state, action) {
+      state.orders = action.payload;
+    },
 
   },
 });
@@ -25,7 +29,8 @@ const orderSlice = createSlice({
  * Exports
  */
 export const {
-  setMonthlyCompletedOrders
+  setMonthlyCompletedOrders,
+  setOrders
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

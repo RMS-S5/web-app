@@ -13,4 +13,12 @@ import MHeaderDropdown from "./HeaderDropdowns/MHeaderDropdown";
 import MLayout from "./Layouts/MLayout";
 import MSidebar from "./Sidebars/MSidebar";
 
-export { Content, Footer, Header, HeaderDropdown, Layout, Sidebar, MContent, MFooter, MHeader, MHeaderDropdown, MLayout, MSidebar };
+//Branch Manager containers
+import BMContent from "./Contents/BMContent";
+import BMFooter from "./Footers/BMFooter";
+import BMHeader from "./Headers/BMHeader";
+import BMHeaderDropdown from "./HeaderDropdowns/BMHeaderDropdown";
+import BMLayout from "./Layouts/BMLayout";
+import BMSidebar from "./Sidebars/BMSidebar";
+
+export { Content, Footer, Header, HeaderDropdown, Layout, Sidebar, MContent, MFooter, MHeader, MHeaderDropdown, MLayout, MSidebar, BMContent, BMFooter, BMHeader, BMHeaderDropdown, BMLayout, BMSidebar };

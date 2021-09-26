@@ -12,23 +12,23 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import humanize from "../../utils/humanize";
-import { thunks , cleanQuery} from "../../store/index";
-import {getAllStaffm} from "../../store/staff/select";
+import { thunks, cleanQuery } from "../../store/index";
+import { getAllBookings } from "../../store/booking/select";
 
 
-const StaffTable = (props) => {
+const BookingTable = (props) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-    const staffm = useSelector(getAllStaffm);
+    const bookings = useSelector(getAllBookings);
 
 
     useEffect(async () => {
         setLoading(true);
-        const res = await dispatch(thunks.staff.getAllStaffm());
+        const res = await dispatch(thunks.booking.getAllBookings());
         if (res.status !== 200) {
             toast.error(res.message);
         }
-        
+
         setLoading(false);
     }, []);
 
@@ -36,38 +36,44 @@ const StaffTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
-    const handleRemoveStaff = async (user_id) => {
+    const handleAcceptBooking = async (id) => {
         setLoading(true);
-        console.log("remove satff member with user_id:", user_id)
-        const res = await dispatch(thunks.staff.removeStaff(user_id)); //todo: add new method
+        console.log("accept booking with id:", id)
+        const res = await dispatch(thunks.booking.acceptBooking(id)); //todo: add new method
         if (res.status !== 200) {
             toast.error(res.message);
         }
-        toast.success("Staff member removed successfully");
+        toast.success("Booking accepted successfully");
+        setLoading(false);
+    }
+
+    const handleRejectBooking = async (id) => {
+        setLoading(true);
+        console.log("reject booking with id:", id)
+        const res = await dispatch(thunks.booking.rejectBooking(id)); //todo: add new method
+        if (res.status !== 200) {
+            toast.error(res.message);
+        }
+        toast.success("Booking rejected successfully");
         setLoading(false);
     }
 
     const fields = [
-        { key: "user_id", label: "User ID", _style: { width: "30%" } },
-        { key: "first_name", label: "First Name", _style: { width: "10%" } },
-        { key: "last_name", label: "Last Name", _style: { width: "10%" } },
-        { key: "email", label: "Email", _style: { width: "10%" } },
-        { key: "account_type", label: "Account Type", _style: { width: "10%" } },
-        { key: "role", label: "Role", _style: { width: "10%" } },
-        { key: "branch_name", label: "Branch", _style: { width: "10%" } }, 
-        { key: "status",label: "Status", _style: { width: "10%" } },
-        { key: "birthday",label: "Birthday", _style: { width: "10%" } },
-        { key: "mobile_number", label: "Mobile Number", _style: { width: "10%" } },
-        { key: "nic", label: "NIC", _style: { width: "10%" } },
+        { key: "id", label: "ID", _style: { width: "30%" } },
+        { key: "customer_id", label: "Customer ID", _style: { width: "10%" } },
+        { key: "customer_name", label: "Customer Name", _style: { width: "10%" } },
+        { key: "arrival", label: "Arrival", _style: { width: "10%" } },
+        { key: "departure", label: "Departure", _style: { width: "10%" } },
+        { key: "status", label: "Status", _style: { width: "10%" } },
         {
-            key: "show_details",
+            key: "accept",
             label: "",
             _style: { width: "1%" },
             sorter: false,
             filter: false,
         },
         {
-            key: "remove_item", //todo:change name
+            key: "reject",
             label: "",
             _style: { width: "1%" },
             sorter: false,
@@ -77,13 +83,17 @@ const StaffTable = (props) => {
 
     const getBadge = (status) => {
         switch (status) {
-            case "employed":
-                return "primary";
-            case "available":
-                return "success";
-            case "unavailable":
+            case "placed":
                 return "warning";
-            case "resigned":
+            case "accepted":
+                return "primary";
+            case "lodged":
+                return "primary";
+            case "completed":
+                return "success";
+            case "rejected":
+                return "danger";
+            case "expired":
                 return "danger";
             default:
                 return "light";
@@ -94,10 +104,10 @@ const StaffTable = (props) => {
         <CRow>
             <CCol>
                 <CCard>
-                    <CCardHeader>Staff</CCardHeader>
+                    <CCardHeader>Booking</CCardHeader>
                     <CCardBody>
                         <CDataTable
-                            items={staffm}
+                            items={bookings}
                             fields={fields}
                             columnFilter
                             footer
@@ -108,43 +118,45 @@ const StaffTable = (props) => {
                             sorter
                             pagination
                             scopedSlots={{
-                                status: (item) => ( 
+                                status: (item) => (
                                     <td>
-                                        <CBadge color={getBadge(item.status)} textColor={"white"}> {/*getBadge(item.status) //todo: add staff state*/}
+                                        <CBadge color={getBadge(item.status)} textColor={"white"}> {/*getBadge(item.status) //todo: add booking state*/}
                                             {humanize(item.status)}
                                         </CBadge>
                                     </td>
                                 ),
-                                show_details: (item) => {
+                                accept: (item) => {
                                     return (
                                         <td className="py-2">
                                             <CButton
-                                                color="primary"
-                                                variant="outline"
-                                                shape="square"
+                                                color="success"
+                                                // variant="outline"
+                                                active={item.status === 'placed'}
+                                                shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    props.history.push(`/manager/staff/update-staff/${item.user_id}`); 
+                                                    handleAcceptBooking(item.id);
                                                 }}
                                             >
-                                                Edit
+                                                Accept
                                             </CButton>
                                         </td>
                                     );
                                 },
-                                remove_item: (item) => {
+                                reject: (item) => {
                                     return (
                                         <td className="py-2">
                                             <CButton
                                                 color="danger"
                                                 // variant="outline"
+                                                active={item.status === 'placed'}
                                                 shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    handleRemoveStaff(item.user_id);
+                                                    handleRejectBooking(item.id);
                                                 }}
                                             >
-                                                Remove
+                                                Reject
                                             </CButton>
                                         </td>
                                     );
@@ -158,4 +170,4 @@ const StaffTable = (props) => {
     );
 };
 
-export default StaffTable;
+export default BookingTable;

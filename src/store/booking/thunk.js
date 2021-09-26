@@ -4,6 +4,7 @@ import api, { registerAccessToken } from "./../../api";
 
 import {
   setMonthlyCompletedBookings,
+  setBookings,
 } from "./index";
 
 export default class bookingThunk {
@@ -11,6 +12,47 @@ export default class bookingThunk {
   /**
    * --------------------Getters----------------------------------------
    */
+
+  /**
+   * Get Bookings
+   */
+  static getAllBookings(query) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      //const [res, data] = await api.staff.get.allBookings(query);
+      const [res, data] = [{ status: 200 },
+      [
+        {
+          id: "b1",
+          status: "placed",
+          placed_time: "2021-09-01 00:00:00",
+          branch_id: "b1",
+          total_amount: "34000",
+          customer_id: "u1",
+          customer_name: "Sandun Edirimuni",
+          arrival: "2021-09-02 08:08:00",
+          departure: "2021-09-02 20:20:00",
+        },
+        {
+          id: "b2",
+          status: "completed",
+          placed_time: "2021-09-06 00:00:00",
+          branch_id: "b1",
+          total_amount: "90000",
+          customer_id: "u1",
+          customer_name: "Calvin Stafford",
+          arrival: "2021-09-03 08:08:00",
+          departure: "2021-09-03 20:20:00",
+        },
+      ]
+      ] //todo:remove mock
+      if (res.status === 200) {
+        dispatch(setBookings(data));
+      }
+      return res;
+    }
+  }
+
   /**
    * Get Monthly Completed Bookings
    */
@@ -156,6 +198,99 @@ export default class bookingThunk {
       ] //todo:remove mock
       if (res.status === 200) {
         dispatch(setMonthlyCompletedBookings(data));
+      }
+      return res;
+    }
+  }
+
+  /**
+   * ------------------Update------------------------------
+   */
+  /**
+   * Accept Booking
+   */
+  static acceptBooking(id) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      //const [res, data1] = await api.booking.put.acceptBooking(id);
+      const [res, data1] = [{ status: 200 }, []] //todo:remove mock
+      if (res.status === 200) {
+        //const [res1, data] = await api.booking.get.allBookings();
+        const [res1, data] = [{ status: 200 },
+        [
+          {
+            id: "b1",
+            status: "accepted",
+            placed_time: "2021-09-01 00:00:00",
+            branch_id: "b1",
+            total_amount: "34000",
+            customer_id: "u1",
+            customer_name: "Sandun Edirimuni",
+            arrival: "2021-09-02 08:08:00",
+            departure: "2021-09-02 20:20:00",
+          },
+          {
+            id: "b2",
+            status: "completed",
+            placed_time: "2021-09-06 00:00:00",
+            branch_id: "b1",
+            total_amount: "90000",
+            customer_id: "u1",
+            customer_name: "Calvin Stafford",
+            arrival: "2021-09-03 08:08:00",
+            departure: "2021-09-03 20:20:00",
+          },
+        ]
+        ] //todo:remove mock
+        if (res1.status === 200) {
+          console.log("dispatched##")
+          dispatch(setBookings(data));
+        }
+      }
+      return res;
+    }
+  }
+
+  /**
+   * Reject Booking
+   */
+   static rejectBooking(id) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      //const [res, data1] = await api.booking.put.rejectBooking(id);
+      const [res, data1] = [{ status: 200 }, []] //todo:remove mock
+      if (res.status === 200) {
+        //const [res1, data] = await api.booking.get.allBookings();
+        const [res1, data] = [{ status: 200 },
+        [
+          {
+            id: "b1",
+            status: "rejected",
+            placed_time: "2021-09-01 00:00:00",
+            branch_id: "b1",
+            total_amount: "34000",
+            customer_id: "u1",
+            customer_name: "Sandun Edirimuni",
+            arrival: "2021-09-02 08:08:00",
+            departure: "2021-09-02 20:20:00",
+          },
+          {
+            id: "b2",
+            status: "completed",
+            placed_time: "2021-09-06 00:00:00",
+            branch_id: "b1",
+            total_amount: "90000",
+            customer_id: "u1",
+            customer_name: "Calvin Stafford",
+            arrival: "2021-09-03 08:08:00",
+            departure: "2021-09-03 20:20:00",
+          },
+        ]
+        ] //todo:remove mock
+        if (res1.status === 200) {
+          console.log("dispatched##")
+          dispatch(setBookings(data));
+        }
       }
       return res;
     }

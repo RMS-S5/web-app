@@ -105,29 +105,12 @@ export default class staffThunk {
     }
   }
 
-  // /**
-  //  * Update Category
-  //  */
-  // static updateCategory(categoryId, categoryData) {
-  //   return async (dispatch, getState) => {
-  //     registerAccessToken(getState().user.tokens.access);
-  //     console.log("Thunk check",categoryId, categoryData);
-  //     const [res] = await api.category.put.updateCategory(categoryId, categoryData);
-  //     if (res.status === 200) {
-  //       const [res1, data] = await api.category.get.allCategories();
-  //       if (res1.status === 200) {
-  //         dispatch(setCategories(data));
-  //       }
-  //     }
-  //     return res;
-  //   }
-  // }
 
   /**
    * --------------------Getters----------------------------------------
    */
   /**
-   * Get All Products
+   * Get All Staffm
    */
   static getAllStaffm(query) {
     return async (dispatch, getState) => {

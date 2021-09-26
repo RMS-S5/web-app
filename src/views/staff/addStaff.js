@@ -1,3 +1,4 @@
+
 import {
   CCol,
   CContainer,
@@ -21,6 +22,7 @@ import { thunks } from "../../store/index";
 import {getAllBranches} from "../../store/staff/select";
 import {getAllRoles} from "../../store/staff/select";
 import CIcon from "@coreui/icons-react";
+import humanize from "../../utils/humanize";
 
 class StaffAdd extends Form {
   state = {
@@ -100,7 +102,6 @@ class StaffAdd extends Form {
     //   this.setState({ loading: false, error: true });
     //   toast.error(res.message);
     // }
-
     let res = await this.props.getAllBranches();
     if (res.status === 200) {
       const branchesData = this.props.branches;
@@ -128,7 +129,7 @@ class StaffAdd extends Form {
           (item, index) => {
             pairValue.push({
               value : item.role,
-              label : item.description
+              label : humanize(item.role)
             })
           }
       )
