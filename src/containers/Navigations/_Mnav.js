@@ -41,22 +41,60 @@ const _Mnav = [ //todo:add account type to each item if needed
     to: "/manager/room-type/view-room-types",
     icon: "cil-library",
   },
+  // {
+  //   _tag: "CSidebarNavTitle",
+  //   _children: ["Other"],
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Settings",
+  //   to: "/manager/settings",
+  //   icon: "cil-settings",
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Subscription",
+  //   to: "/manager/subscription",
+  //   icon: "cil-cart",
+  // },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Other"],
+    _children: ["Orders"],
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Settings",
-    to: "/manager/settings",
-    icon: "cil-settings",
+    name: "View Orders",
+    to: "/manager/order/view-orders",
+    icon: "cil-list",
+  },
+  // {
+  //   _tag: "CSidebarNavTitle",
+  //   _children: ["Manage Food Items"],
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Add Food Item",
+  //   to: "/manager/food-item/add-food-item",
+  //   icon: "cil-fast-food",
+
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "View Food Items",
+  //   to: "/manager/food-item/view-food-items",
+  //   icon: "cil-people",
+  // },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Customer Reports"],
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Subscription",
-    to: "/manager/subscription",
-    icon: "cil-cart",
+    name: "View Customer Reports",
+    to: "/manager/customer-report/view-customer-reports",
+    icon: "cil-warning",
   },
+  
 ];
 
 export default _Mnav;

@@ -3,6 +3,7 @@ import _ from "lodash";
 import api, { registerAccessToken } from "./../../api";
 
 import {
+  setOrders,
   setMonthlyCompletedOrders,
 } from "./index";
 
@@ -11,6 +12,47 @@ export default class orderThunk {
   /**
    * --------------------Getters----------------------------------------
    */
+
+  /**
+   * Get All Orders
+   */
+  static getAllOrders(query) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      //const [res, data] = await api.order.get.allOrders(query);
+      const [res, data] = [{ status: 200 },
+      [
+        {
+          order_id: "o1",
+          customer_name: "Samuel Jackson",
+          total_amount: "1200",
+          table_number: "4A",
+          branch_name: "Nugegoda Branch",
+          order_status: "served",
+          placed_time: "2021-09-01 00:00:00",
+          waiter_name: "Manuel",
+          kitchen_staff_name: "Sandaru",
+        },
+        {
+          order_id: "o2",
+          customer_name: "Samuel Jackson",
+          total_amount: "1200",
+          table_number: "4A",
+          branch_name: "Nugegoda Branch",
+          order_status: "served",
+          placed_time: "2021-09-05 00:00:00",
+          waiter_name: "Sandun",
+          kitchen_staff_name: "Vinura",
+        },
+      ]
+      ] //todo:remove mock
+      if (res.status === 200) {
+        dispatch(setOrders(data));
+      }
+      return res;
+    }
+  }
+
   /**
    * Get Monthly Completed Orders
    */

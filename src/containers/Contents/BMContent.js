@@ -11,7 +11,7 @@ const loading = (
   </div>
 );
 
-const MContent = () => {
+const BMContent = () => {
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -36,7 +36,7 @@ const MContent = () => {
                 )
               );
             })}
-            <Redirect from="/manager" to="/manager/dashboard" /> {/*todo:update routes*/}
+            <Redirect from="/branch-manager" to="/branch-manager/dashboard" /> {/*todo:update routes*/}
           </Switch>
         </Suspense>
       </CContainer>
@@ -44,4 +44,4 @@ const MContent = () => {
   );
 };
 
-export default React.memo(MContent);
+export default React.memo(BMContent);
