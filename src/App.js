@@ -57,20 +57,20 @@ function App() {
             render={(props) => <Layout {...props} />}
           />
           <Redirect from="/" to="/admin" /> */}
-          <ProtectedRoute
+          {/* <ProtectedRoute
             isLoggedIn={false}
             path="/manager"
             name="Home"
             render={(props) => <MLayout {...props} />}
           />
-          <Redirect from="/" to="/manager" />
-          {/* <ProtectedRoute
+          <Redirect from="/" to="/manager" /> */}
+          <ProtectedRoute
             isLoggedIn={false}
             path="/branch-manager"
             name="Home"
             render={(props) => <BMLayout {...props} />}
           />
-          <Redirect from="/" to="/branch-manager" /> */}
+          <Redirect from="/" to="/branch-manager" />
         </Switch>
       </React.Suspense>
       <ToastContainer

@@ -25,6 +25,7 @@ const StaffTable = (props) => {
     useEffect(async () => {
         setLoading(true);
         const res = await dispatch(thunks.staff.getAllStaffm());
+        console.log("props:",props);
         if (res.status !== 200) {
             toast.error(res.message);
         }
@@ -124,7 +125,8 @@ const StaffTable = (props) => {
                                                 shape="square"
                                                 size="sm"
                                                 onClick={() => {
-                                                    props.history.push(`/manager/staff/update-staff/${item.user_id}`); 
+                                                    
+                                                    props.history.push(`/`+props.accountType+`/staff/update-staff/${item.user_id}`); 
                                                 }}
                                             >
                                                 Edit

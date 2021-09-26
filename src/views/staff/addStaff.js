@@ -310,7 +310,7 @@ class StaffAdd extends Form {
 
     if (res.status === 200) {
       toast.success(res.message)
-      this.props.history.push("/manager/staff");
+      this.props.history.push("/"+this.props.accountType+"/staff");
     } else {
       if (res.status !== 200) toast.error(res.message);
     }

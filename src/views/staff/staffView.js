@@ -265,7 +265,7 @@ class StaffView extends Form {
 
         this.setState({ spinner: false });
         if (res.status === 200) {
-            this.props.history.push("/manager/staff/view-staffm");
+            this.props.history.push("/"+this.props.accountType+"/staff/view-staffm");
         } else {
 
             toast.error(res.message);
