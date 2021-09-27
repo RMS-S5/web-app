@@ -28,7 +28,7 @@ export default class userThunk {
    */
   static login(email, password) {
     return async (dispatch, getState) => {
-      const [res, data] = await api.user.login(email, password);
+      const [res, data] = await api.user.login.login(email, password);
       console.log(res);
       if (res.status === 200) {
         dispatch(setUserData(data.data));

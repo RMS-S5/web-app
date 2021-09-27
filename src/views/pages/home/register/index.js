@@ -76,61 +76,60 @@ class Register extends Form {
           <CRow className="justify-content-center">
             <CCol md="7"></CCol>
             <CCol md="4">
-              {/* <CCard
+              <CCard
                 className=""
                 style={{
-                  marginTop: `${
-                    this.state.currentStep === 1
-                      ? this.state.userAccountType === "Business"
-                        ? `15px`
-                        : `50px`
-                      : `200px`
-                  }`,
+                  marginTop: `${`200px`}`,
                 }}
-              > */}
-              <CCardBody className="p-4">
-                <CForm onSubmit={this.handleSubmit}>
-                  <h3>HRMS Application</h3>
-                  <p className="text-muted">Create your account</p>
-                  <div>
-                    {this.renderInputGroup(
-                      "first_name",
-                      "text",
-                      "First name",
-                      "cil-user"
-                    )}
-                    {this.renderInputGroup(
-                      "last_name",
-                      "text",
-                      "Last Name",
-                      "cil-user"
-                    )}
-                    {this.renderInputGroup(
-                      "mobile",
-                      "text",
-                      "Mobile Number",
-                      "cil-mobile"
-                    )}
-                    {this.renderInputGroup("email", "text", "Email", "cil-at")}
-                    {this.renderInputGroup(
-                      "password",
-                      "password",
-                      "Password",
-                      "cil-lock-locked"
-                    )}
-                    {this.renderInputGroup(
-                      "confirmPassword",
-                      "password",
-                      "Confirm Password",
-                      "cil-lock-locked"
-                    )}
-                  </div>
-                  {this.renderButton("Create Account", "success", "danger", {
-                    style: { width: "100%" },
-                  })}
-                </CForm>
-              </CCardBody>
-              {/* </CCard> */}
+              >
+                <CCardBody className="p-4">
+                  <CForm onSubmit={this.handleSubmit}>
+                    <h3>HRMS Application</h3>
+                    <p className="text-muted">Create your account</p>
+                    <div>
+                      {this.renderInputGroup(
+                        "first_name",
+                        "text",
+                        "First name",
+                        "cil-user"
+                      )}
+                      {this.renderInputGroup(
+                        "last_name",
+                        "text",
+                        "Last Name",
+                        "cil-user"
+                      )}
+                      {this.renderInputGroup(
+                        "mobile",
+                        "text",
+                        "Mobile Number",
+                        "cil-mobile"
+                      )}
+                      {this.renderInputGroup(
+                        "email",
+                        "text",
+                        "Email",
+                        "cil-at"
+                      )}
+                      {this.renderInputGroup(
+                        "password",
+                        "password",
+                        "Password",
+                        "cil-lock-locked"
+                      )}
+                      {this.renderInputGroup(
+                        "confirmPassword",
+                        "password",
+                        "Confirm Password",
+                        "cil-lock-locked"
+                      )}
+                    </div>
+                    {this.renderButton("Create Account", "success", "danger", {
+                      style: { width: "100%" },
+                    })}
+                  </CForm>
+                </CCardBody>
+              </CCard>
             </CCol>
           </CRow>
         </CContainer>
@@ -155,9 +154,9 @@ class Register extends Form {
     [res, data] = await api.user.add.register(
       // filteredData
       {
-        first_name: filteredData.first_name,
-        last_name: filteredData.last_name,
-        mobile_number: filteredData.mobile,
+        firstName: filteredData.first_name,
+        lastName: filteredData.last_name,
+        mobileNumber: filteredData.mobile,
         email: filteredData.email,
         password: filteredData.password,
       }
@@ -172,7 +171,7 @@ class Register extends Form {
 
     if (res.status === 200) {
       toast.success("Registration successful");
-      this.props.history.push("/login");
+      this.props.history.push("/home/login");
     } else {
       toast.error(res.message);
     }

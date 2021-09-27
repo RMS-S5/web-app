@@ -76,17 +76,17 @@ export default {
   user: {
     add: {
       async register(data) {
-        //console.log(first_name, last_name, mobile, email, password);
-        return ajaxResolver(
-          axios.post("/user/register/customer", JSON.stringify(data))
-        );
+        return ajaxResolver(axios.post("/user/register/customer", data));
       },
     },
     login: {
       async login(email, password) {
-        return ajaxResolver(axios.post("/user/login", { email, password }), {
-          fullBody: true,
-        });
+        return ajaxResolver(
+          axios.post("/user/login/user", { email, password }),
+          {
+            fullBody: true,
+          }
+        );
       },
     },
 

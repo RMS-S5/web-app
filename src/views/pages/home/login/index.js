@@ -147,9 +147,8 @@ class Login extends Form {
       if (this.state.rememberMe) {
         localStorage.setItem("rms-access-token", this.props.accessToken);
         localStorage.setItem("rms-refresh-token", this.props.refreshToken);
-      } else {
-        this.props.history.push("/customer");
       }
+      this.props.history.push("/customer");
     } else {
       toast.error(res.message);
     }

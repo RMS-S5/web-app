@@ -63,6 +63,7 @@ class CheckAvailability extends Form {
       "Presidential Suite",
       "Executive Floor",
     ],
+    prices: [30, 20, 40, 70, 20, 10, 10, 20],
     branches: [
       "Main Branch - Horana",
       "Malabe Branch",
@@ -385,7 +386,9 @@ class CheckAvailability extends Form {
 
     //const res = await this.props.checkAvailability(formData);
     if (
-      new Date().getTime() <= new Date(this.state.data.arrival).getTime() &&
+      (new Date().getTime() < new Date(this.state.data.arrival).getTime() ||
+        new Date().toString() ===
+          new Date(this.state.data.arrival).toString()) &&
       new Date(this.state.data.arrival) < new Date(this.state.data.departure)
     ) {
       const res = { status: 200 }; //await this.props.checkAvailability(formData);

@@ -63,6 +63,9 @@ const CheckAvailability = React.lazy(() =>
 );
 const Bookingform = React.lazy(() => import("./views/customer/bookingForm"));
 const AskQuestions = React.lazy(() => import("./views/customer/askQuestions"));
+const ViewRoomCategories = React.lazy(() =>
+  import("./views/customer/viewRoomCategories")
+);
 
 const routes = [
   { path: "/admin/", exact: true, name: "Home" },
@@ -155,6 +158,11 @@ const routes = [
     path: "/customer/booking-form",
     name: "Booking form",
     component: Bookingform,
+  },
+  {
+    path: "/customer/view-room-categories",
+    name: "Room Categories",
+    component: ViewRoomCategories,
   },
 ];
 
