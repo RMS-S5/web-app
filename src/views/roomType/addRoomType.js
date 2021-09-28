@@ -100,13 +100,13 @@ class RoomTypeAdd extends Form {
       console.log(pair[0]+ ', ' + pair[1]); 
     }
     console.log("########") //test
-    const res = await this.props.addRoomType(formData);
+    const res = await this.props.addRoomType(this.state.data);  //todo:formData
 
     this.setState({ spinner: false });
 
     if (res.status === 200) {
       toast.success(res.message)
-      this.props.history.push("/manager/room-type");
+      this.props.history.push("/manager/room-type/view-room-types");
     } else {
       if (res.status !== 200) toast.error(res.message);
     }

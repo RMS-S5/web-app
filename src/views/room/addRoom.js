@@ -40,7 +40,7 @@ class RoomAdd extends Form {
   };
 
   schema = {
-    roomNumber: Joi.string().label("Room Number"),
+    roomNumber: Joi.number().label("Room Number"),
     capacity: Joi.number().label("Capacity"),
     roomType: Joi.string().label("Room Type"),
     price: Joi.number().label("Price"),
@@ -149,13 +149,13 @@ class RoomAdd extends Form {
       console.log(pair[0]+ ', ' + pair[1]); 
     }
     console.log("########") //test
-    const res = await this.props.addRoom(formData);
+    const res = await this.props.addRoom(this.state.data);  //todo:formData
 
     this.setState({ spinner: false });
 
     if (res.status === 200) {
       toast.success(res.message)
-      this.props.history.push("/branch-manager/room");
+      this.props.history.push("/branch-manager/room/view-rooms");
     } else {
       if (res.status !== 200) toast.error(res.message);
     }

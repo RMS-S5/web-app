@@ -124,7 +124,7 @@ export default {
   roomType: {
     add: {
       async roomType(roomTypeData) {
-        return ajaxResolver(axios.post(`/room-type/add-room-type`, roomTypeData, formDataConfig))
+        return ajaxResolver(axios.post(`/room/add-room-type`, roomTypeData))
       },
     },
     get: {
@@ -147,7 +147,8 @@ export default {
   room: {
     add: {
       async room(roomData) {
-        return ajaxResolver(axios.post(`/room-/add-room-`, roomData, formDataConfig))
+        
+        return ajaxResolver(axios.post(`/room/add-room`, roomData))
       },
     },
     get: {
@@ -157,12 +158,12 @@ export default {
     },
     put : {
       async updateRoom(room_number, data) {
-        return ajaxResolver(axios.put(`/room-/update-room/${room_number}`, data, formDataConfig))
+        return ajaxResolver(axios.put(`/room/update-room/${room_number}`, data, formDataConfig))
       }
     },
     remove : {
       async removeRoom(room_number) {
-        return ajaxResolver(axios.delete(`/room-/remove-room-/${room_number}`))
+        return ajaxResolver(axios.delete(`/room/remove-room/${room_number}`))
       }
       },
   },
@@ -189,31 +190,7 @@ export default {
       }
     }
   },
-  coupon: {
-    add: {
-      async coupon(couponData) {
-        return ajaxResolver(axios.post(`/order/generate-coupon`, couponData));
-      },
-    },
-    get: {
-      async allCoupons(query) {
-        return ajaxResolver(axios.get(`/order/get-coupons`, { params: query }));
-      },
-      async couponByCode(couponCode){
-        return ajaxResolver(axios.get(`/order/get-coupon/${couponCode}`))
-      }
-    },
-    put : {
-      async updateCoupon(couponCode,data) {
-        return ajaxResolver(axios.put(`/order/update-coupon/${couponCode}`, data))
-      }
-    },
-    remove : {
-      async removeCoupon(couponCode) {
-        return ajaxResolver(axios.delete(`/order/remove-coupon/${couponCode}`))
-      }
-    },
-  },
+
   order: {
     get: {
       async allOrders(query) {
@@ -230,7 +207,6 @@ export default {
     }
   },
 
-  //manager
   staff: {
     add: {
       async staff(staffData) {

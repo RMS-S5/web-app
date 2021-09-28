@@ -23,7 +23,7 @@ export default class roomThunk {
       registerAccessToken(getState().user.tokens.access);
       const [res, data] = await api.room.add.room(roomData);
       if (res.status === 200) {
-        const [res1, data] = await api.room.get.allRoomsRooms();
+        const [res1, data] = await api.room.get.allRooms();
         if (res1.status === 200) {
           dispatch(setRooms(data));
         }
@@ -62,7 +62,7 @@ export default class roomThunk {
         ]
         ] //todo:remove mock
         if (res1.status === 200) {
-          console.log("dispatched##")
+          //console.log("dispatched##")
           dispatch(setRooms(data));
         }
       }
@@ -129,14 +129,11 @@ export default class roomThunk {
 
         ]
         ] //todo:remove mock
-        console.log("before")
-        console.log(data)
-        console.log(userId)
+
         data = data.filter(function (obj) {
           return obj.userId !== userId;
         });//todo:remove mock
-        console.log("after")
-        console.log(data)
+
         if (res1.status === 200) {
           dispatch(setRooms(data));
         }

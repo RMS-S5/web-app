@@ -304,13 +304,13 @@ class StaffAdd extends Form {
       console.log(pair[0]+ ', ' + pair[1]); 
     }
     console.log("########") //test
-    const res = await this.props.addStaff(formData);
+    const res = await this.props.addStaff(this.state.data); //todo:formData
 
     this.setState({ spinner: false });
 
     if (res.status === 200) {
       toast.success(res.message)
-      this.props.history.push("/"+this.props.accountType+"/staff");
+      this.props.history.push("/"+this.props.accountType+"/staff/view-staffm");
     } else {
       if (res.status !== 200) toast.error(res.message);
     }

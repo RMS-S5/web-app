@@ -63,7 +63,7 @@ export default class roomTypeThunk {
           ]
         ] //todo:remove mock
         if (res1.status === 200) {
-          console.log("dispatched##")
+          //console.log("dispatched##")
           dispatch(setRoomTypes(data));
         }
       }
@@ -98,7 +98,7 @@ export default class roomTypeThunk {
     //       }
     //     ]
     // ] //todo:remove mock
-    console.log("data:", data)
+    //console.log("data:", data)
       if (res.status === 200) {
           dispatch(setRoomTypes(data));
       }

@@ -243,7 +243,7 @@ export default class bookingThunk {
         ]
         ] //todo:remove mock
         if (res1.status === 200) {
-          console.log("dispatched##")
+          //console.log("dispatched##")
           dispatch(setBookings(data));
         }
       }
@@ -288,7 +288,7 @@ export default class bookingThunk {
         ]
         ] //todo:remove mock
         if (res1.status === 200) {
-          console.log("dispatched##")
+          //console.log("dispatched##")
           dispatch(setBookings(data));
         }
       }

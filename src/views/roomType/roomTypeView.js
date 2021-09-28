@@ -12,16 +12,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import Form from "../../components/common/NewForm";
-import { thunks , cleanQuery} from "../../store/index";
-import {getAllRoomTypes} from "../../store/roomType/select";
+import { thunks, cleanQuery } from "../../store/index";
+import { getAllRoomTypes } from "../../store/roomType/select";
 
 class RoomTypeView extends Form {
     state = {
 
         data: {
-            description : "",
+            description: "",
         },
-        roomType : "",
+        roomType: "",
         errors: {},
         btnDisable: false,
         spinner: false,
@@ -49,19 +49,19 @@ class RoomTypeView extends Form {
         const res = await this.props.getAllRoomTypes();
 
         if (res.status === 200) {
-            
+
         } else {
             this.setState({ loading: false, error: true });
             toast.error(res.message);
-        } 
-        
-        console.log("roomType",this.props.match.params)
+        }
+
+        console.log("roomType", this.props.match.params)
         const roomType = this.getRoomTypeByID(this.props.match.params.roomType);
         if (roomType) {
             const updateData = cleanQuery(roomType,
                 ["description"]);
-            const roomType= roomType.roomType;
-            this.setState({data : {...updateData}, roomType});
+            const roomType_pk = roomType.roomType;
+            this.setState({ data: { ...updateData }, roomType: roomType_pk });
         }
 
     }
@@ -91,7 +91,7 @@ class RoomTypeView extends Form {
                                                 placeholder: "Enter description",
                                             }, false)}
                                         </CCol>
-                                    </CRow>                                   
+                                    </CRow>
                                     {this.renderButton("Submit", "primary", "danger")}
 
                                 </CForm>
@@ -112,10 +112,10 @@ class RoomTypeView extends Form {
             "description",
             this.state.data.description
         );
-    
+
         console.log("########") //test
         for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
+            console.log(pair[0] + ', ' + pair[1]);
         }
         console.log("########") //test
 
@@ -132,12 +132,12 @@ class RoomTypeView extends Form {
 }
 
 const mapStateToProps = (state) => ({
-    roomTypes : getAllRoomTypes(state)
+    roomTypes: getAllRoomTypes(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getAllRoomTypes : () => dispatch(thunks.roomType.getAllRoomTypes()) ,
-    updateRoomType : (roomType, roomTypeData) => dispatch(thunks.roomType.updateRoomType(roomType, roomTypeData))
+    getAllRoomTypes: () => dispatch(thunks.roomType.getAllRoomTypes()),
+    updateRoomType: (roomType, roomTypeData) => dispatch(thunks.roomType.updateRoomType(roomType, roomTypeData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomTypeView);
