@@ -25,6 +25,7 @@ const StaffTable = (props) => {
     useEffect(async () => {
         setLoading(true);
         const res = await dispatch(thunks.staff.getAllStaffm());
+        console.log("props:",props);
         if (res.status !== 200) {
             toast.error(res.message);
         }
@@ -36,10 +37,10 @@ const StaffTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
-    const handleRemoveStaff = async (user_id) => {
+    const handleRemoveStaff = async (userId) => {
         setLoading(true);
-        console.log("remove satff member with user_id:", user_id)
-        const res = await dispatch(thunks.staff.removeStaff(user_id)); //todo: add new method
+        console.log("remove satff member with userId:", userId)
+        const res = await dispatch(thunks.staff.removeStaff(userId)); //todo: add new method
         if (res.status !== 200) {
             toast.error(res.message);
         }
@@ -48,16 +49,16 @@ const StaffTable = (props) => {
     }
 
     const fields = [
-        { key: "user_id", label: "User ID", _style: { width: "30%" } },
-        { key: "first_name", label: "First Name", _style: { width: "10%" } },
-        { key: "last_name", label: "Last Name", _style: { width: "10%" } },
+        { key: "userId", label: "User ID", _style: { width: "30%" } },
+        { key: "firstName", label: "First Name", _style: { width: "10%" } },
+        { key: "lastName", label: "Last Name", _style: { width: "10%" } },
         { key: "email", label: "Email", _style: { width: "10%" } },
-        { key: "account_type", label: "Account Type", _style: { width: "10%" } },
+        { key: "accountType", label: "Account Type", _style: { width: "10%" } }, //todo:remove
         { key: "role", label: "Role", _style: { width: "10%" } },
-        { key: "branch_name", label: "Branch", _style: { width: "10%" } }, 
+        { key: "branchName", label: "Branch", _style: { width: "10%" } }, 
         { key: "status",label: "Status", _style: { width: "10%" } },
         { key: "birthday",label: "Birthday", _style: { width: "10%" } },
-        { key: "mobile_number", label: "Mobile Number", _style: { width: "10%" } },
+        { key: "mobileNumber", label: "Mobile Number", _style: { width: "10%" } },
         { key: "nic", label: "NIC", _style: { width: "10%" } },
         {
             key: "show_details",
@@ -77,13 +78,13 @@ const StaffTable = (props) => {
 
     const getBadge = (status) => {
         switch (status) {
-            case "employed":
+            case "Employed":
                 return "primary";
-            case "available":
+            case "Available":
                 return "success";
-            case "unavailable":
+            case "Unavailable":
                 return "warning";
-            case "resigned":
+            case "Resigned":
                 return "danger";
             default:
                 return "light";
@@ -111,7 +112,7 @@ const StaffTable = (props) => {
                                 status: (item) => ( 
                                     <td>
                                         <CBadge color={getBadge(item.status)} textColor={"white"}> {/*getBadge(item.status) //todo: add staff state*/}
-                                            {humanize(item.status)}
+                                            {item.status}
                                         </CBadge>
                                     </td>
                                 ),
@@ -124,7 +125,8 @@ const StaffTable = (props) => {
                                                 shape="square"
                                                 size="sm"
                                                 onClick={() => {
-                                                    props.history.push(`/manager/staff/update-staff/${item.user_id}`); 
+                                                    
+                                                    props.history.push(`/`+props.accountType+`/staff/update-staff/${item.userId}`); 
                                                 }}
                                             >
                                                 Edit
@@ -141,7 +143,7 @@ const StaffTable = (props) => {
                                                 shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    handleRemoveStaff(item.user_id);
+                                                    handleRemoveStaff(item.userId);
                                                 }}
                                             >
                                                 Remove

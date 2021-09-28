@@ -38,23 +38,23 @@ export default class categoryThunk {
   /**
    * Update Category
    */
-  static updateCategory(category_id, categoryData) {
+  static updateCategory(categoryId, categoryData) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.category.put.updateCategory(category_id, categoryData);
+      //const [res, data1] = await api.category.put.updateCategory(categoryId, categoryData);
       const [res, data1] = [{ status: 200 }, []] //todo:remove mock
       if (res.status === 200) {
         //const [res1, data] = await api.category.get.allCategories();
         const [res1, data] = [{ status: 200 },
         [
           {
-            category_id: "c1",
-            category_name: "Burgers",
+            categoryId: "c1",
+            categoryName: "Burgers",
             description: "",
           },
           {
-            category_id: "c1",
-            category_name: "Pizza",
+            categoryId: "c1",
+            categoryName: "Pizza",
             description: "",
           }
         ]
@@ -81,13 +81,13 @@ export default class categoryThunk {
       const [res, data] = [{ status: 200 },
       [
         {
-          category_id: "c1",
-          category_name: "Burgers",
+          categoryId: "c1",
+          categoryName: "Burgers",
           description: "",
         },
         {
-          category_id: "c1",
-          category_name: "Pizza",
+          categoryId: "c1",
+          categoryName: "Pizza",
           description: "",
         }
       ]
@@ -105,23 +105,23 @@ export default class categoryThunk {
   /**
    * Remove Category
    */
-  static removeCategory(category_id) {
+  static removeCategory(categoryId) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.category.remove.removeCategory(category_id);
+      //const [res, data1] = await api.category.remove.removeCategory(categoryId);
       const [res, data1] = [{ status: 200 }, []] //todo:remove mock
       if (res.status === 200) {
         //const [res1, data] = await api.category.get.allCategories();
         let [res1, data] = [{ status: 200 },
         [
           {
-            category_id: "c1",
-            category_name: "Burgers",
+            categoryId: "c1",
+            categoryName: "Burgers",
             description: "",
           },
           {
-            category_id: "c1",
-            category_name: "Pizza",
+            categoryId: "c1",
+            categoryName: "Pizza",
             description: "",
           }
 

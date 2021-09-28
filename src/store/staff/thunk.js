@@ -57,41 +57,41 @@ export default class staffThunk {
   /**
    * Update Staff
    */
-  static updateStaff(user_id, staffData) {
+  static updateStaff(userId, staffData) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.staff.put.updateStaff(user_id, staffData);
+      //const [res, data1] = await api.staff.put.updateStaff(userId, staffData);
       const [res, data1] = [{status: 200}, []] //todo:remove mock
       if (res.status === 200) {
                 //const [res1, data] = await api.staff.get.allStaffm();
         const [res1, data] = [{status: 200}, 
           [
             {
-              user_id: "u1",
-              first_name: "Nagitha",
-              last_name: "Abeywickrema",
+              userId: "u1",
+              firstName: "Nagitha",
+              lastName: "Abeywickrema",
               email: "nagitha.18@uom.lk",
-              account_type: "Manager",
+              accountType: "Manager",
               role: "Manager",
-              branch_id: "b1",
-              branch_name: "Nugegoda Branch",
-              status: "available",
+              branchId: "b1",
+              branchName: "Nugegoda Branch",
+              status: "Available",
               birthday: "02/09/98",
-              mobile_number: "0891272786",
+              mobileNumber: "0891272786",
               nic: "9812771661V",
             }, 
             {
-              user_id: "u2",
-              first_name: "DonaldUpdated",
-              last_name: "TrumpUpdated",
+              userId: "u2",
+              firstName: "DonaldUpdated",
+              lastName: "TrumpUpdated",
               email: "donald.18@uom.lk",
-              account_type: "Waiter",
+              accountType: "Waiter",
               role: "Waiter",
-              branch_id: "b1",
-              branch_name: "Nugegoda Branch",
+              branchId: "b1",
+              branchName: "Nugegoda Branch",
               status: "unavailable",
               birthday: "02/09/98",
-              mobile_number: "0711272786",
+              mobileNumber: "0711272786",
               nic: "6512771661V",
             }
           ]
@@ -119,31 +119,31 @@ export default class staffThunk {
       const [res, data] = [{status: 200}, 
         [
           {
-          user_id: "u1",
-          first_name: "Nagitha",
-          last_name: "Abeywickrema",
+          userId: "u1",
+          firstName: "Nagitha",
+          lastName: "Abeywickrema",
           email: "nagitha.18@uom.lk",
-          account_type: "Manager",
+          accountType: "Manager",
           role: "Manager",
-          branch_id: "b1",
-          branch_name: "Nugegoda Branch",
-          status: "available",
+          branchId: "b1",
+          branchName: "Nugegoda Branch",
+          status: "Available",
           birthday: "02/09/98",
-          mobile_number: "0891272786",
+          mobileNumber: "0891272786",
           nic: "9812771661V",
         }, 
         {
-          user_id: "u2",
-          first_name: "Donald",
-          last_name: "Trump",
+          userId: "u2",
+          firstName: "Donald",
+          lastName: "Trump",
           email: "donald.18@uom.lk",
-          account_type: "Waiter",
+          accountType: "Waiter",
           role: "Waiter",
-          branch_id: "b1",
-          branch_name: "Nugegoda Branch",
+          branchId: "b1",
+          branchName: "Nugegoda Branch",
           status: "unavailable",
           birthday: "02/09/98",
-          mobile_number: "0711272786",
+          mobileNumber: "0711272786",
           nic: "6512771661V",
         }
       ]
@@ -177,7 +177,7 @@ export default class staffThunk {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
       //const [res, data] = await api.role.get.allRoles(query);//todo:cahnge
-      const [res, data] = [{status: 200}, [{role: "branch_manager", description: "Branch Manager"}, {role: "waiter", description: "Waiter"}]] //todo:remove mock
+      const [res, data] = [{status: 200}, [{role: "Branch Manager", description: "Branch Manager"}, {role: "Waiter", description: "Waiter"}]] //todo:remove mock
       if (res.status === 200) {
         dispatch(setRoles(data));
       }
@@ -205,41 +205,41 @@ export default class staffThunk {
   /**
    * Remove Staff
    */
-  static removeStaff(user_id) {
+  static removeStaff(userId) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.staff.remove.removeStaff(user_id);
+      //const [res, data1] = await api.staff.remove.removeStaff(userId);
       const [res, data1] = [{status: 200}, []] //todo:remove mock
       if (res.status === 200) {
         //const [res1, data] = await api.staff.get.allStaffm();
         let [res1, data] = [{status: 200}, 
           [
             {
-              user_id: "u1",
-              first_name: "Nagitha",
-              last_name: "Abeywickrema",
+              userId: "u1",
+              firstName: "Nagitha",
+              lastName: "Abeywickrema",
               email: "nagitha.18@uom.lk",
-              account_type: "Manager",
+              accountType: "Manager",
               role: "Manager",
-              branch_id: "b1",
-              branch_name: "Nugegoda Branch",
-              status: "available",
+              branchId: "b1",
+              branchName: "Nugegoda Branch",
+              status: "Available",
               birthday: "02/09/98",
-              mobile_number: "0891272786",
+              mobileNumber: "0891272786",
               nic: "9812771661V",
             }, 
             {
-              user_id: "u2",
-              first_name: "Donald",
-              last_name: "Trump",
+              userId: "u2",
+              firstName: "Donald",
+              lastName: "Trump",
               email: "donald.18@uom.lk",
-              account_type: "Waiter",
+              accountType: "Waiter",
               role: "Waiter",
-              branch_id: "b1",
-              branch_name: "Nugegoda Branch",
+              branchId: "b1",
+              branchName: "Nugegoda Branch",
               status: "unavailable",
               birthday: "02/09/98",
-              mobile_number: "0711272786",
+              mobileNumber: "0711272786",
               nic: "6512771661V",
             }
 
@@ -247,9 +247,9 @@ export default class staffThunk {
         ] //todo:remove mock
         console.log("before")
         console.log(data)
-        console.log(user_id)
+        console.log(userId)
         data = data.filter(function(obj) {
-          return obj.user_id !== user_id;
+          return obj.userId !== userId;
         });//todo:remove mock
         console.log("after")
         console.log(data)

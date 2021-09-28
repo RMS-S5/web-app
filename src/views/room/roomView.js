@@ -21,25 +21,25 @@ class RoomView extends Form {
     state = {
 
         data: {
-            room_number: "",
-            //branch_id : "", //todo: assign in backend
+            roomNumber: "",
+            //branchId : "", //todo: assign in backend
             capacity: "",
-            room_type: "",
+            roomType: "",
             price: "",
         },
         roomTypes: [],
         //status : ["Available" , "Not Available"],
-        room_number: "",
+        roomNumber: "",
         image: "",
         errors: {},
         btnDisable: false,
         spinner: false,
     };
 
-    getRoomByID = (room_number) => {
-        console.log(room_number, this.props.rooms);
+    getRoomByID = (roomNumber) => {
+        console.log(roomNumber, this.props.rooms);
         const room = this.props.rooms.find((item) => {
-            return item.room_number == room_number;
+            return item.roomNumber == roomNumber;
         });
         if (!room) {
             toast.error("Room Not found");
@@ -50,7 +50,7 @@ class RoomView extends Form {
 
     schema = {
         capacity: Joi.number().optional().label("Capacity"),
-        room_type: Joi.string().optional().label("Room Type"),
+        roomType: Joi.string().optional().label("Room Type"),
         price: Joi.number().optional().label("Price"),
     };
 
@@ -63,8 +63,8 @@ class RoomView extends Form {
             roomTypesData.forEach(
                 (item, index) => {
                     pairValue.push({
-                        value: item.room_type,
-                        label: humanize(item.room_type)
+                        value: item.roomType, //todo:solve snake case camel case issue
+                        label: item.roomType //todo:solve snake case camel case issue
                     })
                 }
             )
@@ -75,12 +75,12 @@ class RoomView extends Form {
             toast.error(res.message);
         }
 
-        const room = this.getRoomByID(this.props.match.params.room_number);
+        const room = this.getRoomByID(this.props.match.params.roomNumber);
         if (room) {
             const updateData = cleanQuery(room,
-                ["capacity", "room_type", "price"]); //todo: include status when implemented
-            const room_number = room.room_number;
-            this.setState({ data: { ...updateData }, room_number });
+                ["capacity", "roomType", "price"]); //todo: include status when implemented
+            const roomNumber = room.roomNumber;
+            this.setState({ data: { ...updateData }, roomNumber });
         }
     }
 
@@ -100,7 +100,7 @@ class RoomView extends Form {
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             <CLabel htmlFor="name">Room Number</CLabel>
-                                            <CInput id="name" readOnly value={this.state.room_number} />
+                                            <CInput id="name" readOnly value={this.state.roomNumber} />
                                         </CCol>
                                     </CRow>
                                     <CRow>
@@ -113,7 +113,7 @@ class RoomView extends Form {
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             {this.renderSelectWithLabelValue(
-                                                "room_type", "Room Type", this.state.roomTypes
+                                                "roomType", "Room Type", this.state.roomTypes
                                             )}
                                         </CCol>
                                     </CRow>
@@ -145,8 +145,8 @@ class RoomView extends Form {
             this.state.data.capacity
         )
         formData.append(
-            "room_type",
-            this.state.data.room_type
+            "roomType",
+            this.state.data.roomType
         )
         formData.append(
             "price",
@@ -158,7 +158,7 @@ class RoomView extends Form {
         }
         console.log("########") //test
 
-        const res = await this.props.updateRoom(this.state.room_number, formData);
+        const res = await this.props.updateRoom(this.state.roomNumber, formData);
 
         this.setState({ spinner: false });
         if (res.status === 200) {
@@ -178,7 +178,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     getAllRooms: () => dispatch(thunks.room.getAllRooms()),
     getAllRoomTypes: () => dispatch(thunks.roomType.getAllRoomTypes()),
-    updateRoom: (room_number, roomData) => dispatch(thunks.room.updateRoom(room_number, roomData))
+    updateRoom: (roomNumber, roomData) => dispatch(thunks.room.updateRoom(roomNumber, roomData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomView);

@@ -34,10 +34,10 @@ const RoomTypeTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
-    const handleRemoveRoomType = async (room_type) => {
+    const handleRemoveRoomType = async (roomType) => {
         setLoading(true);
-        console.log("remove room type:", room_type)
-        const res = await dispatch(thunks.roomType.removeRoomType(room_type)); //todo: add new method
+        console.log("remove room type:", roomType)
+        const res = await dispatch(thunks.roomType.removeRoomType(roomType)); //todo: add new method
         if (res.status !== 200) {
             toast.error(res.message);
         }
@@ -46,7 +46,7 @@ const RoomTypeTable = (props) => {
     }
 
     const fields = [
-        { key: "room_type", label: "Room Type", _style: { width: "30%" } },
+        { key: "roomType", label: "Room Type", _style: { width: "30%" } }, //todo:solve snake case camel case issue
         { key: "description", label: "Description", _style: { width: "10%" } },
         {
             key: "show_details",
@@ -91,7 +91,7 @@ const RoomTypeTable = (props) => {
                                                 shape="square"
                                                 size="sm"
                                                 onClick={() => {
-                                                    props.history.push(`/manager/room-type/update-room-type/${item.room_type}`);
+                                                    props.history.push(`/manager/room-type/update-room-type/${item.roomType}`);
                                                 }}
                                             >
                                                 Edit
@@ -108,7 +108,7 @@ const RoomTypeTable = (props) => {
                                                 shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    handleRemoveRoomType(item.room_type);
+                                                    handleRemoveRoomType(item.roomType);
                                                 }}
                                             >
                                                 Remove

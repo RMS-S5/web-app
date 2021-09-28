@@ -25,16 +25,16 @@ export default class customerReportThunk {
         {
           id: "cr1",
           description: "bad taste",
-          customer_name: "Saduni",
-          mobile_number: "01772665167",
-          user_id: "u1",
+          customerName: "Saduni",
+          mobileNumber: "01772665167",
+          userId: "u1",
         },
         {
           id: "cr2",
           description: "bad smell",
-          customer_name: "Sandun",
-          mobile_number: "01712341167",
-          user_id: "u2",
+          customerName: "Sandun",
+          mobileNumber: "01712341167",
+          userId: "u2",
         },
       ]
       ] //todo:remove mock

@@ -29,7 +29,7 @@ const MContent = () => {
                     userType={route.accountType}
                     render={(props) => (
                       <CFade>
-                        <route.component {...props} />
+                        <route.component {...{accountType: route.accountType, ...props}} />
                       </CFade>
                     )}
                   />

@@ -25,10 +25,10 @@ import humanize from "../../utils/humanize";
 class RoomAdd extends Form {
   state = {
     data: {
-      room_number : "",
-      //branch_id : "", //todo: assign in backend
+      roomNumber : "",
+      //branchId : "", //todo: assign in backend
       capacity : "",
-      room_type : "",
+      roomType : "",
       price : "",
     },
     roomTypes:[],
@@ -40,9 +40,9 @@ class RoomAdd extends Form {
   };
 
   schema = {
-    room_number: Joi.string().label("Room Number"),
+    roomNumber: Joi.number().label("Room Number"),
     capacity: Joi.number().label("Capacity"),
-    room_type: Joi.string().label("Room Type"),
+    roomType: Joi.string().label("Room Type"),
     price: Joi.number().label("Price"),
 
   };
@@ -56,8 +56,8 @@ class RoomAdd extends Form {
       roomTypesData.forEach(
           (item, index) => {
             pairValue.push({
-              value : item.room_type,
-              label : humanize(item.room_type)
+              value : item.roomType, //todo:solve snake case camel case issue
+              label : item.roomType //todo:solve snake case camel case issue
             })
           }
       )
@@ -85,7 +85,7 @@ class RoomAdd extends Form {
               <CForm onSubmit={this.handleSubmit}>
                 <CRow>
                   <CCol xs="12" md="6">
-                    {this.renderInput("room_number", "Room Number", "text", {
+                    {this.renderInput("roomNumber", "Room Number", "text", {
                       placeholder: "Enter room number",
                     })}
                   </CCol>
@@ -100,7 +100,7 @@ class RoomAdd extends Form {
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderSelectWithLabelValue(
-                        "room_type", "Room Type", this.state.roomTypes
+                        "roomType", "Room Type", this.state.roomTypes
                     )}
                   </CCol>
                 </CRow>
@@ -128,16 +128,16 @@ class RoomAdd extends Form {
     const formData = new FormData();
     // Update the formData object
     formData.append(
-        "room_number",
-        this.state.data.room_number
+        "roomNumber",
+        this.state.data.roomNumber
     )
     formData.append(
         "capacity",
         this.state.data.capacity
     )
     formData.append(
-        "room_type",
-        this.state.data.room_type
+        "roomType",
+        this.state.data.roomType
     )
     formData.append(
         "price",
@@ -149,13 +149,13 @@ class RoomAdd extends Form {
       console.log(pair[0]+ ', ' + pair[1]); 
     }
     console.log("########") //test
-    const res = await this.props.addRoom(formData);
+    const res = await this.props.addRoom(this.state.data);  //todo:formData
 
     this.setState({ spinner: false });
 
     if (res.status === 200) {
       toast.success(res.message)
-      this.props.history.push("/branch-manager/room");
+      this.props.history.push("/branch-manager/room/view-rooms");
     } else {
       if (res.status !== 200) toast.error(res.message);
     }

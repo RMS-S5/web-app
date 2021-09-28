@@ -24,23 +24,23 @@ export default class bookingThunk {
       [
         {
           id: "b1",
-          status: "placed",
-          placed_time: "2021-09-01 00:00:00",
-          branch_id: "b1",
-          total_amount: "34000",
-          customer_id: "u1",
-          customer_name: "Sandun Edirimuni",
+          status: "Placed",
+          placedTime: "2021-09-01 00:00:00",
+          branchId: "b1",
+          totalAmount: "34000",
+          customerId: "u1",
+          customerName: "Sandun Edirimuni",
           arrival: "2021-09-02 08:08:00",
           departure: "2021-09-02 20:20:00",
         },
         {
           id: "b2",
-          status: "completed",
-          placed_time: "2021-09-06 00:00:00",
-          branch_id: "b1",
-          total_amount: "90000",
-          customer_id: "u1",
-          customer_name: "Calvin Stafford",
+          status: "Completed",
+          placedTime: "2021-09-06 00:00:00",
+          branchId: "b1",
+          totalAmount: "90000",
+          customerId: "u1",
+          customerName: "Calvin Stafford",
           arrival: "2021-09-03 08:08:00",
           departure: "2021-09-03 20:20:00",
         },
@@ -64,135 +64,135 @@ export default class bookingThunk {
       [
         {
           id: "b1",
-          status: "completed",
-          placed_time: "2021-09-01 00:00:00",
-          branch_id: "b2",
-          total_amount: "34000"
+          status: "Completed",
+          placedTime: "2021-09-01 00:00:00",
+          branchId: "b2",
+          totalAmount: "34000"
         },
         {
           id: "b2",
-          status: "completed",
-          placed_time: "2021-09-06 00:00:00",
-          branch_id: "b1",
-          total_amount: "90000"
+          status: "Completed",
+          placedTime: "2021-09-06 00:00:00",
+          branchId: "b1",
+          totalAmount: "90000"
         },
         {
           id: "b3",
-          status: "completed",
-          placed_time: "2021-09-11 00:00:00",
-          branch_id: "b2",
-          total_amount: "43500"
+          status: "Completed",
+          placedTime: "2021-09-11 00:00:00",
+          branchId: "b2",
+          totalAmount: "43500"
         },
         {
           id: "b4",
-          status: "completed",
-          placed_time: "2021-09-16 00:00:00",
-          branch_id: "b1",
-          total_amount: "12300"
+          status: "Completed",
+          placedTime: "2021-09-16 00:00:00",
+          branchId: "b1",
+          totalAmount: "12300"
         },
         ,
         {
           id: "b5",
-          status: "completed",
-          placed_time: "2021-09-21 00:00:00",
-          branch_id: "b2",
-          total_amount: "76500"
+          status: "Completed",
+          placedTime: "2021-09-21 00:00:00",
+          branchId: "b2",
+          totalAmount: "76500"
         },
         ,
         {
           id: "b6",
-          status: "completed",
-          placed_time: "2021-09-26 00:00:00",
-          branch_id: "b1",
-          total_amount: "12000"
+          status: "Completed",
+          placedTime: "2021-09-26 00:00:00",
+          branchId: "b1",
+          totalAmount: "12000"
         },
         ,
         {
           id: "b7",
-          status: "completed",
-          placed_time: "2021-09-22 00:00:00",
-          branch_id: "b2",
-          total_amount: "32200"
+          status: "Completed",
+          placedTime: "2021-09-27 00:00:00",
+          branchId: "b2",
+          totalAmount: "32200"
         },
         ,
         {
           id: "b8",
-          status: "completed",
-          placed_time: "2021-09-22 04:00:00",
-          branch_id: "b1",
-          total_amount: "3200"
+          status: "Completed",
+          placedTime: "2021-09-27 04:00:00",
+          branchId: "b1",
+          totalAmount: "3200"
         },
         ,
         {
           id: "b9",
-          status: "completed",
-          placed_time: "2021-09-22 08:00:00",
-          branch_id: "b2",
-          total_amount: "9000"
+          status: "Completed",
+          placedTime: "2021-09-27 08:00:00",
+          branchId: "b2",
+          totalAmount: "9000"
         },
         ,
         {
           id: "b10",
-          status: "completed",
-          placed_time: "2021-09-22 12:12:00",
-          branch_id: "b1",
-          total_amount: "8000"
+          status: "Completed",
+          placedTime: "2021-09-27 12:12:00",
+          branchId: "b1",
+          totalAmount: "8000"
         },
         {
           id: "b11",
-          status: "completed",
-          placed_time: "2021-09-22 16:00:00",
-          branch_id: "b2",
-          total_amount: "54300"
+          status: "Completed",
+          placedTime: "2021-09-27 16:00:00",
+          branchId: "b2",
+          totalAmount: "54300"
         },
         {
           id: "b12",
-          status: "completed",
-          placed_time: "2021-09-22 20:00:00",
-          branch_id: "b1",
-          total_amount: "34500"
+          status: "Completed",
+          placedTime: "2021-09-27 20:00:00",
+          branchId: "b1",
+          totalAmount: "34500"
         },
         {
           id: "b13",
-          status: "completed",
-          placed_time: "2021-09-22 23:00:00",
-          branch_id: "b2",
-          total_amount: "54300"
+          status: "Completed",
+          placedTime: "2021-09-27 23:00:00",
+          branchId: "b2",
+          totalAmount: "54300"
         },
         {
           id: "b14",
-          status: "completed",
-          placed_time: "2021-09-22 13:00:00",
-          branch_id: "b1",
-          total_amount: "43200"
+          status: "Completed",
+          placedTime: "2021-09-27 13:00:00",
+          branchId: "b1",
+          totalAmount: "43200"
         },
         {
           id: "b15",
-          status: "completed",
-          placed_time: "2021-09-06 00:00:00",
-          branch_id: "b2",
-          total_amount: "32100"
+          status: "Completed",
+          placedTime: "2021-09-06 00:00:00",
+          branchId: "b2",
+          totalAmount: "32100"
         },
         {
           id: "b16",
-          status: "completed",
-          placed_time: "2021-09-16 00:00:00",
-          branch_id: "b1",
-          total_amount: "14500"
+          status: "Completed",
+          placedTime: "2021-09-16 00:00:00",
+          branchId: "b1",
+          totalAmount: "14500"
         },
         {
           id: "b17",
-          status: "completed",
-          placed_time: "2021-09-26 00:00:00",
-          branch_id: "b2",
-          total_amount: "12500"
+          status: "Completed",
+          placedTime: "2021-09-26 00:00:00",
+          branchId: "b2",
+          totalAmount: "12500"
         },
         {
           id: "b18",
-          status: "completed",
-          placed_time: "2021-09-1 00:00:00",
-          branch_id: "b1",
-          total_amount: "7000"
+          status: "Completed",
+          placedTime: "2021-09-1 00:00:00",
+          branchId: "b1",
+          totalAmount: "7000"
         },
       ]
       ] //todo:remove mock
@@ -220,30 +220,30 @@ export default class bookingThunk {
         [
           {
             id: "b1",
-            status: "accepted",
-            placed_time: "2021-09-01 00:00:00",
-            branch_id: "b1",
-            total_amount: "34000",
-            customer_id: "u1",
-            customer_name: "Sandun Edirimuni",
+            status: "Accepted",
+            placedTime: "2021-09-01 00:00:00",
+            branchId: "b1",
+            totalAmount: "34000",
+            customerId: "u1",
+            customerName: "Sandun Edirimuni",
             arrival: "2021-09-02 08:08:00",
             departure: "2021-09-02 20:20:00",
           },
           {
             id: "b2",
-            status: "completed",
-            placed_time: "2021-09-06 00:00:00",
-            branch_id: "b1",
-            total_amount: "90000",
-            customer_id: "u1",
-            customer_name: "Calvin Stafford",
+            status: "Completed",
+            placedTime: "2021-09-06 00:00:00",
+            branchId: "b1",
+            totalAmount: "90000",
+            customerId: "u1",
+            customerName: "Calvin Stafford",
             arrival: "2021-09-03 08:08:00",
             departure: "2021-09-03 20:20:00",
           },
         ]
         ] //todo:remove mock
         if (res1.status === 200) {
-          console.log("dispatched##")
+          //console.log("dispatched##")
           dispatch(setBookings(data));
         }
       }
@@ -265,30 +265,30 @@ export default class bookingThunk {
         [
           {
             id: "b1",
-            status: "rejected",
-            placed_time: "2021-09-01 00:00:00",
-            branch_id: "b1",
-            total_amount: "34000",
-            customer_id: "u1",
-            customer_name: "Sandun Edirimuni",
+            status: "Rejected",
+            placedTime: "2021-09-01 00:00:00",
+            branchId: "b1",
+            totalAmount: "34000",
+            customerId: "u1",
+            customerName: "Sandun Edirimuni",
             arrival: "2021-09-02 08:08:00",
             departure: "2021-09-02 20:20:00",
           },
           {
             id: "b2",
-            status: "completed",
-            placed_time: "2021-09-06 00:00:00",
-            branch_id: "b1",
-            total_amount: "90000",
-            customer_id: "u1",
-            customer_name: "Calvin Stafford",
+            status: "Completed",
+            placedTime: "2021-09-06 00:00:00",
+            branchId: "b1",
+            totalAmount: "90000",
+            customerId: "u1",
+            customerName: "Calvin Stafford",
             arrival: "2021-09-03 08:08:00",
             departure: "2021-09-03 20:20:00",
           },
         ]
         ] //todo:remove mock
         if (res1.status === 200) {
-          console.log("dispatched##")
+          //console.log("dispatched##")
           dispatch(setBookings(data));
         }
       }

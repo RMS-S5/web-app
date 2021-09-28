@@ -50,7 +50,7 @@ const FoodItemTable = (props) => {
     const fields = [
         { key: "id", label: "ID", _style: { width: "30%" } },
         { key: "name", label: "Name", _style: { width: "10%" } },
-        { key: "category_name", label: "Category", _style: { width: "10%" } },
+        { key: "categoryName", label: "Category", _style: { width: "10%" } },
         { key: "description", label: "Description", _style: { width: "10%" } },
         { key: "price", label: "Price", _style: { width: "10%" } },
         {
@@ -105,7 +105,7 @@ const FoodItemTable = (props) => {
                                 // status: (item) => ( 
                                 //     <td>
                                 //         <CBadge color={getBadge(item.status)} textColor={"white"}>  //todo: add availability
-                                //             {humanize(item.status)}
+                                //             {item.status}
                                 //         </CBadge>
                                 //     </td>
                                 // ),

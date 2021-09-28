@@ -50,14 +50,14 @@ export default class foodItemThunk {
           {
             id: "f1",
             name: "Cheese Burger",
-            category_name: "Burger",
+            categoryName: "Burger",
             description: "",
             price: "800",
           },
           {
             id: "f2",
             name: "Pepperoni Pizza",
-            category_name: "Pizza",
+            categoryName: "Pizza",
             description: "",
             price: "1200",
           }
@@ -87,14 +87,14 @@ export default class foodItemThunk {
         {
           id: "f1",
           name: "Cheese Burger",
-          category_name: "Burger",
+          categoryName: "Burger",
           description: "",
           price: "800",
         },
         {
           id: "f2",
           name: "Pepperoni Pizza",
-          category_name: "Pizza",
+          categoryName: "Pizza",
           description: "",
           price: "1200",
         }
@@ -126,7 +126,7 @@ export default class foodItemThunk {
           {
             id: "f2",
             name: "Pepperoni Pizza",
-            category_name: "Pizza",
+            categoryName: "Pizza",
             description: "",
             price: "1200",
           }

@@ -9,8 +9,8 @@ const BASE_URL_LOCAL = process.env.REACT_APP_BASE_URL_LOCAL;
 const FILE_URL_HEROKU = process.env.REACT_APP_FILE_URL_HEROKU;
 const FILE_URL_LOCAL = process.env.REACT_APP_FILE_URL_LOCAL;
 
-const DEFAULT_BASE_URL = BASE_URL_HEROKU;
-const DEFAULT_FILE_URL = FILE_URL_HEROKU;
+const DEFAULT_BASE_URL = BASE_URL_LOCAL;
+const DEFAULT_FILE_URL = FILE_URL_LOCAL;
 
 
 export const BACK_END_URL = {
@@ -121,25 +121,49 @@ export default {
     },
   },
 
-  product: {
+  roomType: {
     add: {
-      async product(productData) {
-        return ajaxResolver(axios.post(`/product/add-product`, productData, formDataConfig))
+      async roomType(roomTypeData) {
+        return ajaxResolver(axios.post(`/room/add-room-type`, roomTypeData))
       },
     },
     get: {
-      async allProducts(query) {
-        return ajaxResolver(axios.get(`/product/get-all-products`, { params: query }));
+      async allRoomTypes(query) {
+        return ajaxResolver(axios.get(`/room/room-types`, { params: query }));
       },
     },
     put : {
-      async updateProduct(pCode, data) {
-        return ajaxResolver(axios.put(`/product/update-product/${pCode}`, data, formDataConfig))
+      async updateRoomType(room_type, data) {
+        return ajaxResolver(axios.put(`/room-type/update-room-type/${room_type}`, data, formDataConfig))
       }
     },
     remove : {
-      async removeProduct(pCode) {
-        return ajaxResolver(axios.delete(`/product/remove-product/${pCode}`))
+      async removeRoomType(room_type) {
+        return ajaxResolver(axios.delete(`/room-type/remove-room-type/${room_type}`))
+      }
+      },
+  },
+
+  room: {
+    add: {
+      async room(roomData) {
+        
+        return ajaxResolver(axios.post(`/room/add-room`, roomData))
+      },
+    },
+    get: {
+      async allRooms(query) {
+        return ajaxResolver(axios.get(`/room/rooms`, { params: query }));
+      },
+    },
+    put : {
+      async updateRoom(room_number, data) {
+        return ajaxResolver(axios.put(`/room/update-room/${room_number}`, data, formDataConfig))
+      }
+    },
+    remove : {
+      async removeRoom(room_number) {
+        return ajaxResolver(axios.delete(`/room/remove-room/${room_number}`))
       }
       },
   },
@@ -166,31 +190,7 @@ export default {
       }
     }
   },
-  coupon: {
-    add: {
-      async coupon(couponData) {
-        return ajaxResolver(axios.post(`/order/generate-coupon`, couponData));
-      },
-    },
-    get: {
-      async allCoupons(query) {
-        return ajaxResolver(axios.get(`/order/get-coupons`, { params: query }));
-      },
-      async couponByCode(couponCode){
-        return ajaxResolver(axios.get(`/order/get-coupon/${couponCode}`))
-      }
-    },
-    put : {
-      async updateCoupon(couponCode,data) {
-        return ajaxResolver(axios.put(`/order/update-coupon/${couponCode}`, data))
-      }
-    },
-    remove : {
-      async removeCoupon(couponCode) {
-        return ajaxResolver(axios.delete(`/order/remove-coupon/${couponCode}`))
-      }
-    },
-  },
+
   order: {
     get: {
       async allOrders(query) {
@@ -207,7 +207,6 @@ export default {
     }
   },
 
-  //manager
   staff: {
     add: {
       async staff(staffData) {
@@ -277,26 +276,4 @@ export default {
     }
   },
 
-  roomType: {
-    add: {
-      async roomType(roomTypeData) {
-        return ajaxResolver(axios.post(`/room-type/add-room-type`, roomTypeData, formDataConfig))
-      },
-    },
-    get: {
-      async allRoomTypes(query) {
-        return ajaxResolver(axios.get(`/room-type/get-all-room-types`, { params: query }));
-      },
-    },
-    put : {
-      async updateRoomType(room_type, data) {
-        return ajaxResolver(axios.put(`/room-type/update-room-type/${room_type}`, data, formDataConfig))
-      }
-    },
-    remove : {
-      async removeRoomType(room_type) {
-        return ajaxResolver(axios.delete(`/room-type/remove-room-type/${room_type}`))
-      }
-      },
-  },
 };

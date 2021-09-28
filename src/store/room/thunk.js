@@ -23,7 +23,7 @@ export default class roomThunk {
       registerAccessToken(getState().user.tokens.access);
       const [res, data] = await api.room.add.room(roomData);
       if (res.status === 200) {
-        const [res1, data] = await api.room.get.allRoomsRooms();
+        const [res1, data] = await api.room.get.allRooms();
         if (res1.status === 200) {
           dispatch(setRooms(data));
         }
@@ -38,31 +38,31 @@ export default class roomThunk {
   /**
    * Update Room
    */
-  static updateRoom(user_id, roomData) {
+  static updateRoom(userId, roomData) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.room.put.updateRoom(user_id, roomData);
+      //const [res, data1] = await api.room.put.updateRoom(userId, roomData);
       const [res, data1] = [{ status: 200 }, []] //todo:remove mock
       if (res.status === 200) {
         //const [res1, data] = await api.room.get.allRooms();
         const [res1, data] = [{ status: 200 },
         [
           {
-            room_number: "42",
+            roomNumber: "42",
             capacity: "2",
-            room_type: "deluxe",
+            roomType: "deluxe",
             price: "20000",
           },
           {
-            room_number: "22",
+            roomNumber: "22",
             capacity: "3",
-            room_type: "vip",
+            roomType: "vip",
             price: "35900",
           }
         ]
         ] //todo:remove mock
         if (res1.status === 200) {
-          console.log("dispatched##")
+          //console.log("dispatched##")
           dispatch(setRooms(data));
         }
       }
@@ -79,23 +79,23 @@ export default class roomThunk {
   static getAllRooms(query) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data] = await api.room.get.allRooms(query);
-      const [res, data] = [{ status: 200 },
-      [
-        {
-          room_number: "42",
-          capacity: "2",
-          room_type: "deluxe",
-          price: "20000",
-        },
-        {
-          room_number: "22",
-          capacity: "3",
-          room_type: "vip",
-          price: "35900",
-        }
-      ]
-      ] //todo:remove mock
+      const [res, data] = await api.room.get.allRooms(query);
+      // const [res, data] = [{ status: 200 },
+      // [
+      //   {
+      //     roomNumber: "42",
+      //     capacity: "2",
+      //     roomType: "deluxe",
+      //     price: "20000",
+      //   },
+      //   {
+      //     roomNumber: "22",
+      //     capacity: "3",
+      //     roomType: "vip",
+      //     price: "35900",
+      //   }
+      // ]
+      //] //todo:remove mock
       if (res.status === 200) {
         dispatch(setRooms(data));
       }
@@ -111,32 +111,29 @@ export default class roomThunk {
   /**
    * Remove Room
    */
-  static removeRoom(user_id) {
+  static removeRoom(userId) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.room.remove.removeRoom(user_id);
+      //const [res, data1] = await api.room.remove.removeRoom(userId);
       const [res, data1] = [{ status: 200 }, []] //todo:remove mock
       if (res.status === 200) {
         //const [res1, data] = await api.room.get.allRooms();
         let [res1, data] = [{ status: 200 },
         [
           {
-            room_number: "22",
+            roomNumber: "22",
             capacity: "3",
-            room_type: "vip",
+            roomType: "vip",
             price: "35900",
           }
 
         ]
         ] //todo:remove mock
-        console.log("before")
-        console.log(data)
-        console.log(user_id)
+
         data = data.filter(function (obj) {
-          return obj.user_id !== user_id;
+          return obj.userId !== userId;
         });//todo:remove mock
-        console.log("after")
-        console.log(data)
+
         if (res1.status === 200) {
           dispatch(setRooms(data));
         }

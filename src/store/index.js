@@ -51,7 +51,6 @@ import categoryReducer , {
  * Thunk Actions
  */
 import userThunk from "./user/thunk";
-import productThunk from "./product/thunk";
 
 import staffThunk from "./staff/thunk";
 import roomTypeThunk from "./roomType/thunk";
@@ -130,7 +129,6 @@ export const actions = {
 
 export const thunks = {
   user: userThunk,
-  product : productThunk,
   
   staff : staffThunk,
   roomType: roomTypeThunk,

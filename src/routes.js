@@ -1,55 +1,5 @@
 import React from "react";
 
-// const Dashboard = React.lazy(() => import("./views/dashboard"));
-
-
-/**
- * Profile Components
- * @type {React.LazyExoticComponent<React.ComponentType<any>>}
- */
-const AdminProfile = React.lazy(() =>
-  import("./views/accountSettings/profile")
-);
-const AdminProfileEdit = React.lazy(() =>
-  import("./views/accountSettings/profileEdit")
-);
-const ChangePassword = React.lazy(() =>
-  import("./views/accountSettings/changePassword")
-);
-
-/**
- * User Management Components
- *
- */
-const AdminTable = React.lazy(() =>
-  import("./views/user/admin/adminTable"));
-const AdminView = React.lazy(() =>
-  import("./views/user/admin/adminView"));
-
-/**
- * Product Management Component
- */
-const CreateProduct = React.lazy(() =>
-  import("./views/product/addProduct"));
-const ProductTable = React.lazy(() =>
-  import("./views/product/productTable"));
-const ProductView = React.lazy(() =>
-  import("./views/product/productView"));
-
-
-/**
- * Category Management Component
- */
-const CreateCategory = React.lazy(() =>
-  import("./views/category/addCategory"));
-const CategoryTable = React.lazy(() =>
-  import("./views/category/categoryTable"));
-const CategoryView = React.lazy(() =>
-  import("./views/category/categoryView"));
-
-
-const Dashboard = React.lazy(() => import("./views/dashboard/index"))
-//////////////
 
 const MDashboard = React.lazy(() => import("./views/dashboard/MDashboard"))
 /**
@@ -119,67 +69,6 @@ const BookingTable = React.lazy(() =>
  import("./views/booking/bookingTable"));
 
 const routes = [
-  { path: "/admin/", exact: true, name: "Home" },
-  {
-    path: "/admin/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
-  },
-  {
-    path: "/admin/profile/edit",
-    name: "Edit",
-    component: AdminProfileEdit,
-  },
-  {
-    path: "/admin/profile",
-    name: "Profile",
-    component: AdminProfile,
-  },
-  {
-    path: "/admin/change-password",
-    name: "Change Password",
-    component: ChangePassword,
-  },
-  {
-    path: "/admin/view-admins",
-    name: "Admin Users",
-    component: AdminTable,
-  },
-  {
-    path: "/admin/view-admin/:userId",
-    name: "Admin User",
-    component: AdminView,
-  },
-  {
-    path: "/admin/product/add-product",
-    name: "Product",
-    component: CreateProduct,
-  },
-  {
-    path: "/admin/product/view-products",
-    name: "Product",
-    component: ProductTable,
-  },
-  {
-    path: "/admin/product/update-product/:pCode",
-    name: "Product",
-    component: ProductView,
-  },
-  {
-    path: "/admin/category/add-category",
-    name: "Category",
-    component: CreateCategory,
-  },
-  {
-    path: "/admin/category/view-categories",
-    name: "Category",
-    component: CategoryTable,
-  },
-  {
-    path: "/admin/category/update-category/:categoryId",
-    name: "Category",
-    component: CategoryView,
-  },
 
   //Manager routes
   { path: "/manager/", exact: true, name: "Home" },
@@ -187,51 +76,61 @@ const routes = [
     path: "/manager/dashboard",
     name: "Dashboard",
     component: MDashboard,
+    accountType: "manager",
   },
   {
     path: "/manager/profile",
     name: "Profile",
     component: ManagerProfile,
+    accountType: "manager",
   },
   {
     path: "/manager/staff/add-staff",
     name: "Staff",
     component: CreateStaff,
+    accountType: "manager",
   },
   {
     path: "/manager/staff/view-staffm",
     name: "Staff",
     component: StaffTable,
+    accountType: "manager",
   },
   {
-    path: "/manager/staff/update-staff/:user_id",
+    path: "/manager/staff/update-staff/:userId",
     name: "Staff",
     component: StaffView,
+    accountType: "manager",
   },
   {
     path: "/manager/room-type/add-room-type",
     name: "room-type",
     component: CreateRoomType,
+    accountType: "manager",
   },
   {
     path: "/manager/room-type/view-room-types",
     name: "room-type",
     component: RoomTypeTable,
+    accountType: "manager",
   },
   {
-    path: "/manager/room-type/update-room-type/:room_type",
+    path: "/manager/room-type/update-room-type/:roomType",
     name: "room-type",
     component: RoomTypeView,
+    accountType: "manager",
   },
   {
     path: "/manager/order/view-orders",
     name: "order",
     component: OrderTable,
+    accountType: "manager",
   },
   {
     path: "/manager/customer-report/view-customer-reports",
     name: "customer-report",
     component: CustomerReportTable,
+    accountType: "manager",
   },
 
   //Branch manager routes
@@ -240,66 +139,80 @@ const routes = [
     path: "/branch-manager/dashboard",
     name: "Dashboard",
     component: MDashboard,
+    accountType: "branch-manager",
   },
   {
     path: "/branch-manager/profile",
     name: "Profile",
     component: ManagerProfile,
+    accountType: "branch-manager",
   },
   {
     path: "/branch-manager/staff/add-staff",
     name: "Staff",
     component: CreateStaff,
+    accountType: "branch-manager",
   },
   {
     path: "/branch-manager/staff/view-staffm",
     name: "Staff",
     component: StaffTable,
+    accountType: "branch-manager",
   },
   {
-    path: "/branch-manager/staff/update-staff/:user_id",
+    path: "/branch-manager/staff/update-staff/:userId",
     name: "Staff",
     component: StaffView,
+    accountType: "branch-manager",
   },
   {
     path: "/branch-manager/room/add-room",
     name: "Room",
     component: CreateRoom,
+    accountType: "branch-manager",
   },
   {
     path: "/branch-manager/room/view-rooms",
     name: "Room",
     component: RoomTable,
+    accountType: "branch-manager",
   },
   {
-    path: "/branch-manager/room/update-room/:room_number", //todo:clairfy URL parameter passing
+    path: "/branch-manager/room/update-room/:roomNumber", //todo:clairfy URL parameter passing
     name: "Room",
     component: RoomView,
+    accountType: "branch-manager",
   },
   {
     path: "/branch-manager/food-item/add-food-item",
     name: "Food Item",
     component: CreateFoodItem,
+    accountType: "branch-manager",
   },
   {
     path: "/branch-manager/food-item/view-food-items",
     name: "Food Item",
     component: FoodItemTable,
+    accountType: "branch-manager",
   },
   {
     path: "/branch-manager/food-item/update-food-item/:id", //todo:clairfy URL parameter passing
     name: "Food Item",
     component: FoodItemView,
+    accountType: "branch-manager",
   },
   {
     path: "/branch-manager/booking/view-bookings",
     name: "Booking",
     component: BookingTable,
+    accountType: "branch-manager",
+    
   },
   {
     path: "/branch-manager/order/view-orders",
     name: "order",
     component: OrderTable,
+    accountType: "branch-manager",
   },
 ];
 

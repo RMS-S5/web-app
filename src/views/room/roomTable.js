@@ -36,10 +36,10 @@ const RoomTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
-    const handleRemoveRoom = async (room_number) => {
+    const handleRemoveRoom = async (roomNumber) => {
         setLoading(true);
-        console.log("remove satff member with room_number:", room_number)
-        const res = await dispatch(thunks.room.removeRoom(room_number)); //todo: add new method
+        console.log("remove satff member with roomNumber:", roomNumber)
+        const res = await dispatch(thunks.room.removeRoom(roomNumber)); //todo: add new method
         if (res.status !== 200) {
             toast.error(res.message);
         }
@@ -48,9 +48,9 @@ const RoomTable = (props) => {
     }
 
     const fields = [
-        { key: "room_number", label: "Room Number", _style: { width: "30%" } },
+        { key: "roomNumber", label: "Room Number", _style: { width: "30%" } }, //todo:solve snake case camel case issue
         { key: "capacity", label: "Capacity", _style: { width: "10%" } },
-        { key: "room_type", label: "Room Type", _style: { width: "10%" } }, //todo:humanize room type
+        { key: "roomType", label: "Room Type", _style: { width: "10%" } }, 
         { key: "price", label: "Price", _style: { width: "10%" } },
         {
             key: "show_details",
@@ -95,7 +95,7 @@ const RoomTable = (props) => {
                                                 shape="square"
                                                 size="sm"
                                                 onClick={() => {
-                                                    props.history.push(`/branch-manager/room/update-room/${item.room_number}`);
+                                                    props.history.push(`/branch-manager/room/update-room/${item.roomNumber}`);
                                                 }}
                                             >
                                                 Edit
@@ -112,7 +112,7 @@ const RoomTable = (props) => {
                                                 shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    handleRemoveRoom(item.room_number);
+                                                    handleRemoveRoom(item.roomNumber);
                                                 }}
                                             >
                                                 Remove

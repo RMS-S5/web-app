@@ -25,7 +25,7 @@ class FoodItemAdd extends Form {
   state = {
     data: {
       name : "",
-      category_id : "",
+      categoryId : "",
       description : "",
       price : "",
     },
@@ -40,7 +40,7 @@ class FoodItemAdd extends Form {
 
   schema = {
     name: Joi.string().label("Name"),
-    category_id: Joi.string().label("Category ID"),
+    categoryId: Joi.string().label("Category ID"),
     description: Joi.string().label("Description"),
     price: Joi.number().label("Price"),
 
@@ -55,8 +55,8 @@ class FoodItemAdd extends Form {
       categoriesData.forEach(
           (item, index) => {
             pairValue.push({
-              value : item.category_id,
-              label : item.category_name
+              value : item.categoryId,
+              label : item.categoryName
             })
           }
       )
@@ -93,7 +93,7 @@ class FoodItemAdd extends Form {
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderSelectWithLabelValue(
-                        "category_id", "Category", this.state.categories
+                        "categoryId", "Category", this.state.categories
                     )}
                   </CCol>
                 </CRow>
@@ -146,8 +146,8 @@ class FoodItemAdd extends Form {
         this.state.data.name
     )
     formData.append(
-        "category_id",
-        this.state.data.category_id
+        "categoryId",
+        this.state.data.categoryId
     )
     formData.append(
         "description",

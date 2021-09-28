@@ -37,30 +37,30 @@ const OrderTable = (props) => {
     }, []);
 
     const fields = [
-        { key: "order_id", label: "Order ID", _style: { width: "30%" } },
-        { key: "customer_name", label: "Customer", _style: { width: "10%" } },
-        { key: "total_amount", label: "Total Amount", _style: { width: "10%" } },
-        { key: "table_number", label: "Table Number", _style: { width: "10%" } },
-        { key: "branch_name", label: "Branch", _style: { width: "10%" } },
-        { key: "order_status", label: "Status", _style: { width: "10%" } },
-        { key: "placed_time", label: "Placed Time", _style: { width: "10%" } },
-        { key: "waiter_name", label: "Waiter", _style: { width: "10%" } },
-        { key: "kitchen_staff_name", label: "Kitchen Staff Member", _style: { width: "10%" } },
+        { key: "orderId", label: "Order ID", _style: { width: "30%" } },
+        { key: "customerName", label: "Customer", _style: { width: "10%" } },
+        { key: "totalAmount", label: "Total Amount", _style: { width: "10%" } },
+        { key: "tableNumber", label: "Table Number", _style: { width: "10%" } },
+        { key: "branchName", label: "Branch", _style: { width: "10%" } },
+        { key: "orderStatus", label: "Status", _style: { width: "10%" } },
+        { key: "placedTime", label: "Placed Time", _style: { width: "10%" } },
+        { key: "waiterName", label: "Waiter", _style: { width: "10%" } },
+        { key: "kitchenStaffName", label: "Kitchen Staff Member", _style: { width: "10%" } },
     ];
 
     const getBadge = (status) => {
         switch (status) {
-            case "placed":
+            case "Placed":
                 return "warning";
-            case "preparing":
+            case "Preparing":
                 return "primary";
-            case "prepared":
+            case "Prepared":
                 return "primary";
-            case "waiter_assigned":
+            case "Waiter Assigned":
                 return "primary";
-            case "served":
+            case "Served":
                 return "success";
-            case "rejected":
+            case "Rejected":
                 return "danger";
             default:
                 return "light";
@@ -87,8 +87,8 @@ const OrderTable = (props) => {
                             scopedSlots={{
                                 order_status: (item) => (
                                     <td>
-                                        <CBadge color={getBadge(item.order_status)} textColor={"white"}> {/*getBadge(item.status) //todo: add order state*/}
-                                            {humanize(item.order_status)}
+                                        <CBadge color={getBadge(item.orderStatus)} textColor={"white"}> {/*getBadge(item.status) //todo: add order state*/}
+                                            {item.orderStatus}
                                         </CBadge>
                                     </td>
                                 ),

@@ -21,7 +21,7 @@ class FoodItemView extends Form {
 
         data: {
             name: "",
-            category_id: "",
+            categoryId: "",
             description: "",
             price: "",
         },
@@ -47,7 +47,7 @@ class FoodItemView extends Form {
 
     schema = {
         name: Joi.string().optional().label("Name"),
-        category_id: Joi.string().optional().label("Category ID"),
+        categoryId: Joi.string().optional().label("Category ID"),
         description: Joi.string().optional().label("Description"),
         price: Joi.number().optional().label("Price"),
 
@@ -62,8 +62,8 @@ class FoodItemView extends Form {
             categoriesData.forEach(
                 (item, index) => {
                     pairValue.push({
-                        value: item.category_id,
-                        label: item.category_name
+                        value: item.categoryId,
+                        label: item.categoryName
                     })
                 }
             )
@@ -76,7 +76,7 @@ class FoodItemView extends Form {
         const foodItem = this.getFoodItemByID(this.props.match.params.id);
         if (foodItem) {
             const updateData = cleanQuery(foodItem,
-                ["name", "category_id", "description", "price"]); //todo: include status when implemented
+                ["name", "categoryId", "description", "price"]); //todo: include status when implemented
             const id = foodItem.id;
             this.setState({ data: { ...updateData }, id });
         }
@@ -111,7 +111,7 @@ class FoodItemView extends Form {
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             {this.renderSelectWithLabelValue(
-                                                "category_id", "Category", this.state.categories
+                                                "categoryId", "Category", this.state.categories
                                             )}
                                         </CCol>
                                     </CRow>
@@ -169,8 +169,8 @@ class FoodItemView extends Form {
             this.state.data.name
         )
         formData.append(
-            "category_id",
-            this.state.data.category_id
+            "categoryId",
+            this.state.data.categoryId
         )
         formData.append(
             "description",
