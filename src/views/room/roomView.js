@@ -21,8 +21,6 @@ class RoomView extends Form {
     state = {
 
         data: {
-            roomNumber: "",
-            //branchId : "", //todo: assign in backend
             capacity: "",
             roomType: "",
             price: "",
@@ -30,6 +28,7 @@ class RoomView extends Form {
         roomTypes: [],
         //status : ["Available" , "Not Available"],
         roomNumber: "",
+        //branchId: "", //assigned in backend
         image: "",
         errors: {},
         btnDisable: false,
@@ -158,11 +157,11 @@ class RoomView extends Form {
         }
         console.log("########") //test
 
-        const res = await this.props.updateRoom(this.state.roomNumber, formData);
+        const res = await this.props.updateRoom(this.state.roomNumber, this.state.data);
 
         this.setState({ spinner: false });
         if (res.status === 200) {
-            this.props.history.push("/branch-manager/room/view-rooms");
+            this.props.history.push("/branch-manager/room/view-rooms"); //todo:formData
         } else {
 
             toast.error(res.message);

@@ -38,31 +38,13 @@ export default class roomThunk {
   /**
    * Update Room
    */
-  static updateRoom(userId, roomData) {
+  static updateRoom(roomNumber, roomData) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.room.put.updateRoom(userId, roomData);
-      const [res, data1] = [{ status: 200 }, []] //todo:remove mock
+      const [res, data1] = await api.room.put.updateRoom(roomNumber, roomData);
       if (res.status === 200) {
-        //const [res1, data] = await api.room.get.allRooms();
-        const [res1, data] = [{ status: 200 },
-        [
-          {
-            roomNumber: "42",
-            capacity: "2",
-            roomType: "deluxe",
-            price: "20000",
-          },
-          {
-            roomNumber: "22",
-            capacity: "3",
-            roomType: "vip",
-            price: "35900",
-          }
-        ]
-        ] //todo:remove mock
+        const [res1, data] = await api.room.get.allRooms();
         if (res1.status === 200) {
-          //console.log("dispatched##")
           dispatch(setRooms(data));
         }
       }
@@ -80,22 +62,6 @@ export default class roomThunk {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
       const [res, data] = await api.room.get.allRooms(query);
-      // const [res, data] = [{ status: 200 },
-      // [
-      //   {
-      //     roomNumber: "42",
-      //     capacity: "2",
-      //     roomType: "deluxe",
-      //     price: "20000",
-      //   },
-      //   {
-      //     roomNumber: "22",
-      //     capacity: "3",
-      //     roomType: "vip",
-      //     price: "35900",
-      //   }
-      // ]
-      //] //todo:remove mock
       if (res.status === 200) {
         dispatch(setRooms(data));
       }
@@ -114,25 +80,10 @@ export default class roomThunk {
   static removeRoom(userId) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.room.remove.removeRoom(userId);
-      const [res, data1] = [{ status: 200 }, []] //todo:remove mock
+      const [res, data1] = await api.room.remove.removeRoom(userId);
+
       if (res.status === 200) {
-        //const [res1, data] = await api.room.get.allRooms();
-        let [res1, data] = [{ status: 200 },
-        [
-          {
-            roomNumber: "22",
-            capacity: "3",
-            roomType: "vip",
-            price: "35900",
-          }
-
-        ]
-        ] //todo:remove mock
-
-        data = data.filter(function (obj) {
-          return obj.userId !== userId;
-        });//todo:remove mock
+        const [res1, data] = await api.room.get.allRooms();
 
         if (res1.status === 200) {
           dispatch(setRooms(data));

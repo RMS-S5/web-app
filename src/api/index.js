@@ -107,21 +107,13 @@ export default {
       },
     },
     put: {
-      async updateRoomType(room_type, data) {
-        return ajaxResolver(
-          axios.put(
-            `/room-type/update-room-type/${room_type}`,
-            data,
-            formDataConfig
-          )
-        );
+      async updateRoomType(roomType, data) {
+        return ajaxResolver(axios.put(`/room/update-room-type/${roomType}`, data));
       },
     },
     remove: {
-      async removeRoomType(room_type) {
-        return ajaxResolver(
-          axios.delete(`/room-type/remove-room-type/${room_type}`)
-        );
+      async removeRoomType(roomType) {
+        return ajaxResolver(axios.put(`/room/remove-room-type/${roomType}`));
       },
     },
   },
@@ -138,15 +130,15 @@ export default {
       },
     },
     put: {
-      async updateRoom(room_number, data) {
+      async updateRoom(roomNumber, roomData) {
         return ajaxResolver(
-          axios.put(`/room/update-room/${room_number}`, data, formDataConfig)
+          axios.put(`/room/update-room/${roomNumber}`, roomData)
         );
       },
     },
     remove: {
       async removeRoom(room_number) {
-        return ajaxResolver(axios.delete(`/room/remove-room/${room_number}`));
+        return ajaxResolver(axios.put(`/room/remove-room/${room_number}`));
       },
     },
   },

@@ -12,8 +12,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import humanize from "../../utils/humanize";
-import { thunks , cleanQuery} from "../../store/index";
-import {getAllRooms} from "../../store/room/select";
+import { thunks, cleanQuery } from "../../store/index";
+import { getAllRooms } from "../../store/room/select";
 
 
 const RoomTable = (props) => {
@@ -28,7 +28,7 @@ const RoomTable = (props) => {
         if (res.status !== 200) {
             toast.error(res.message);
         }
-        
+
         setLoading(false);
     }, []);
 
@@ -42,15 +42,16 @@ const RoomTable = (props) => {
         const res = await dispatch(thunks.room.removeRoom(roomNumber)); //todo: add new method
         if (res.status !== 200) {
             toast.error(res.message);
+        } else {
+            toast.success("Room removed successfully");
         }
-        toast.success("Room removed successfully");
         setLoading(false);
     }
 
     const fields = [
         { key: "roomNumber", label: "Room Number", _style: { width: "30%" } }, //todo:solve snake case camel case issue
         { key: "capacity", label: "Capacity", _style: { width: "10%" } },
-        { key: "roomType", label: "Room Type", _style: { width: "10%" } }, 
+        { key: "roomType", label: "Room Type", _style: { width: "10%" } },
         { key: "price", label: "Price", _style: { width: "10%" } },
         {
             key: "show_details",
