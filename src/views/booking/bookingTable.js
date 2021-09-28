@@ -60,8 +60,8 @@ const BookingTable = (props) => {
 
     const fields = [
         { key: "id", label: "ID", _style: { width: "30%" } },
-        { key: "customer_id", label: "Customer ID", _style: { width: "10%" } },
-        { key: "customer_name", label: "Customer Name", _style: { width: "10%" } },
+        { key: "customerId", label: "Customer ID", _style: { width: "10%" } },
+        { key: "customerName", label: "Customer Name", _style: { width: "10%" } },
         { key: "arrival", label: "Arrival", _style: { width: "10%" } },
         { key: "departure", label: "Departure", _style: { width: "10%" } },
         { key: "status", label: "Status", _style: { width: "10%" } },
@@ -83,17 +83,17 @@ const BookingTable = (props) => {
 
     const getBadge = (status) => {
         switch (status) {
-            case "placed":
+            case "Placed":
                 return "warning";
-            case "accepted":
+            case "Accepted":
                 return "primary";
-            case "lodged":
+            case "Lodged":
                 return "primary";
-            case "completed":
+            case "Completed":
                 return "success";
-            case "rejected":
+            case "Rejected":
                 return "danger";
-            case "expired":
+            case "Expired":
                 return "danger";
             default:
                 return "light";
@@ -121,7 +121,7 @@ const BookingTable = (props) => {
                                 status: (item) => (
                                     <td>
                                         <CBadge color={getBadge(item.status)} textColor={"white"}> {/*getBadge(item.status) //todo: add booking state*/}
-                                            {humanize(item.status)}
+                                            {item.status}
                                         </CBadge>
                                     </td>
                                 ),

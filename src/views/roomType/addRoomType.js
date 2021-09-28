@@ -22,7 +22,7 @@ import CIcon from "@coreui/icons-react";
 class RoomTypeAdd extends Form {
   state = {
     data: {
-      room_type: "",
+      roomType: "",
       description : "",
     },
     errors: {},
@@ -33,7 +33,7 @@ class RoomTypeAdd extends Form {
   };
 
   schema = {
-    room_type: Joi.string().label("Room Type"),
+    roomType: Joi.string().label("Room Type"),
     description: Joi.string().label("Description"),
   };
 
@@ -58,7 +58,7 @@ class RoomTypeAdd extends Form {
               <CForm onSubmit={this.handleSubmit}>
                 <CRow>
                   <CCol xs="12" md="6">
-                    {this.renderInput("room_type", "Room Type", "text", {
+                    {this.renderInput("roomType", "Room Type", "text", {
                       placeholder: "Enter room type",
                     })}
                   </CCol>
@@ -87,8 +87,8 @@ class RoomTypeAdd extends Form {
     const formData = new FormData();
     // Update the formData object
     formData.append(
-        "room_type",
-        this.state.data.room_type
+        "roomType",
+        this.state.data.roomType
     );
     formData.append(
         "description",

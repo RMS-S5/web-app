@@ -39,9 +39,9 @@ const CustomerReportTable = (props) => {
     const fields = [
         { key: "id", label: "Order ID", _style: { width: "30%" } },
         { key: "description", label: "Customer", _style: { width: "10%" } },
-        { key: "customer_name", label: "Total Amount", _style: { width: "10%" } },
-        { key: "mobile_number", label: "Table Number", _style: { width: "10%" } },
-        { key: "user_id", label: "Branch", _style: { width: "10%" } },
+        { key: "customerName", label: "Total Amount", _style: { width: "10%" } },
+        { key: "mobileNumber", label: "Table Number", _style: { width: "10%" } },
+        { key: "userId", label: "Branch", _style: { width: "10%" } },
     ];
 
     return (

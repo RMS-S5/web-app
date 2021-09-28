@@ -97,7 +97,7 @@ const routes = [
     accountType: "manager",
   },
   {
-    path: "/manager/staff/update-staff/:user_id",
+    path: "/manager/staff/update-staff/:userId",
     name: "Staff",
     component: StaffView,
     accountType: "manager",
@@ -115,7 +115,7 @@ const routes = [
     accountType: "manager",
   },
   {
-    path: "/manager/room-type/update-room-type/:room_type",
+    path: "/manager/room-type/update-room-type/:roomType",
     name: "room-type",
     component: RoomTypeView,
     accountType: "manager",
@@ -160,7 +160,7 @@ const routes = [
     accountType: "branch-manager",
   },
   {
-    path: "/branch-manager/staff/update-staff/:user_id",
+    path: "/branch-manager/staff/update-staff/:userId",
     name: "Staff",
     component: StaffView,
     accountType: "branch-manager",
@@ -178,7 +178,7 @@ const routes = [
     accountType: "branch-manager",
   },
   {
-    path: "/branch-manager/room/update-room/:room_number", //todo:clairfy URL parameter passing
+    path: "/branch-manager/room/update-room/:roomNumber", //todo:clairfy URL parameter passing
     name: "Room",
     component: RoomView,
     accountType: "branch-manager",

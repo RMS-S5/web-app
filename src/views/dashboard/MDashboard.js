@@ -137,9 +137,9 @@ const MDashboard = (props) => {
 
 
     monthlyCompletedData.forEach((element) => {
-      let elementDate = new Date(element.placed_time);
+      let elementDate = new Date(element.placedTime);
       graphData.monthly = graphData.monthly + 1;
-      graphData.monthlyRevenue = graphData.monthlyRevenue + parseInt(element.total_amount)
+      graphData.monthlyRevenue = graphData.monthlyRevenue + parseInt(element.totalAmount)
       for (let i = 0; i < dSlots.length - 1; i++) {
         // console.log("######");
         // console.log("i:", i);
@@ -154,7 +154,7 @@ const MDashboard = (props) => {
         if (dSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < dSlots[i + 1].getTime()) {
           graphData.monthlyDataSet[i] = graphData.monthlyDataSet[i] + 1;
           for (let j = 0; j < branchIds.length; j++) {
-            if (element.branch_id === branchIds[j]) {
+            if (element.branchId === branchIds[j]) {
               monthlyBranchDataSets[branchIds[j]][i] += 1;
               break;
             }
@@ -165,7 +165,7 @@ const MDashboard = (props) => {
 
       if (elementDate.getDate() === thisDate) {
         graphData.daily = graphData.daily + 1;
-        graphData.dailyRevenue = graphData.dailyRevenue + parseInt(element.total_amount)
+        graphData.dailyRevenue = graphData.dailyRevenue + parseInt(element.totalAmount)
 
         for (let i = 0; i < tSlots.length - 1; i++) {
           // console.log("######");
@@ -181,7 +181,7 @@ const MDashboard = (props) => {
           if (tSlots[i].getTime() <= elementDate.getTime() && elementDate.getTime() < tSlots[i + 1].getTime()) {
             graphData.dailyDataSet[i] = graphData.dailyDataSet[i] + 1;
             for (let j = 0; j < branchIds.length; j++) {
-              if (element.branch_id === branchIds[j]) {
+              if (element.branchId === branchIds[j]) {
                 dailyBranchDataSets[branchIds[j]][i] += 1;
                 break;
               }

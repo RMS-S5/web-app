@@ -23,26 +23,26 @@ export default class orderThunk {
       const [res, data] = [{ status: 200 },
       [
         {
-          order_id: "o1",
-          customer_name: "Samuel Jackson",
-          total_amount: "1200",
-          table_number: "4A",
-          branch_name: "Nugegoda Branch",
-          order_status: "served",
-          placed_time: "2021-09-01 00:00:00",
-          waiter_name: "Manuel",
-          kitchen_staff_name: "Sandaru",
+          orderId: "o1",
+          customerName: "Samuel Jackson",
+          totalAmount: "1200",
+          tableNumber: "4A",
+          branchName: "Nugegoda Branch",
+          orderStatus: "Served",
+          placedTime: "2021-09-01 00:00:00",
+          waiterName: "Manuel",
+          kitchenStaffName: "Sandaru",
         },
         {
-          order_id: "o2",
-          customer_name: "Samuel Jackson",
-          total_amount: "1200",
-          table_number: "4A",
-          branch_name: "Nugegoda Branch",
-          order_status: "served",
-          placed_time: "2021-09-05 00:00:00",
-          waiter_name: "Sandun",
-          kitchen_staff_name: "Vinura",
+          orderId: "o2",
+          customerName: "Samuel Jackson",
+          totalAmount: "1200",
+          tableNumber: "4A",
+          branchName: "Nugegoda Branch",
+          orderStatus: "Served",
+          placedTime: "2021-09-05 00:00:00",
+          waiterName: "Sandun",
+          kitchenStaffName: "Vinura",
         },
       ]
       ] //todo:remove mock
@@ -63,136 +63,136 @@ export default class orderThunk {
       const [res, data] = [{ status: 200 },
       [
         {
-          order_id: "o1",
-          order_status: "served",
-          placed_time: "2021-09-01 00:00:00",
-          branch_id: "b1",
-          total_amount: "1200"
+          orderId: "o1",
+          orderStatus: "Served",
+          placedTime: "2021-09-01 00:00:00",
+          branchId: "b1",
+          totalAmount: "1200"
         },
         {
-          order_id: "o2",
-          order_status: "served",
-          placed_time: "2021-09-06 00:00:00",
-          branch_id: "b2",
-          total_amount: "300"
+          orderId: "o2",
+          orderStatus: "Served",
+          placedTime: "2021-09-06 00:00:00",
+          branchId: "b2",
+          totalAmount: "300"
         },
         {
-          order_id: "o3",
-          order_status: "served",
-          placed_time: "2021-09-11 00:00:00",
-          branch_id: "b1",
-          total_amount: "4200"
+          orderId: "o3",
+          orderStatus: "Served",
+          placedTime: "2021-09-11 00:00:00",
+          branchId: "b1",
+          totalAmount: "4200"
         },
         {
-          order_id: "o4",
-          order_status: "served",
-          placed_time: "2021-09-16 00:00:00",
-          branch_id: "b2",
-          total_amount: "6600"
-        },
-        ,
-        {
-          order_id: "o5",
-          order_status: "served",
-          placed_time: "2021-09-21 00:00:00",
-          branch_id: "b1",
-          total_amount: "1200"
+          orderId: "o4",
+          orderStatus: "Served",
+          placedTime: "2021-09-16 00:00:00",
+          branchId: "b2",
+          totalAmount: "6600"
         },
         ,
         {
-          order_id: "o6",
-          order_status: "served",
-          placed_time: "2021-09-26 00:00:00",
-          branch_id: "b2",
-          total_amount: "8700"
+          orderId: "o5",
+          orderStatus: "Served",
+          placedTime: "2021-09-21 00:00:00",
+          branchId: "b1",
+          totalAmount: "1200"
         },
         ,
         {
-          order_id: "o7",
-          order_status: "served",
-          placed_time: "2021-09-22 00:00:00",
-          branch_id: "b1",
-          total_amount: "6700"
+          orderId: "o6",
+          orderStatus: "Served",
+          placedTime: "2021-09-26 00:00:00",
+          branchId: "b2",
+          totalAmount: "8700"
         },
         ,
         {
-          order_id: "o8",
-          order_status: "served",
-          placed_time: "2021-09-22 04:00:00",
-          branch_id: "b2",
-          total_amount: "500"
+          orderId: "o7",
+          orderStatus: "Served",
+          placedTime: "2021-09-27 00:00:00",
+          branchId: "b1",
+          totalAmount: "6700"
         },
         ,
         {
-          order_id: "o9",
-          order_status: "served",
-          placed_time: "2021-09-22 08:00:00",
-          branch_id: "b1",
-          total_amount: "4500"
+          orderId: "o8",
+          orderStatus: "Served",
+          placedTime: "2021-09-27 04:00:00",
+          branchId: "b2",
+          totalAmount: "500"
         },
         ,
         {
-          order_id: "o10",
-          order_status: "served",
-          placed_time: "2021-09-22 12:12:00",
-          branch_id: "b2",
-          total_amount: "4500"
+          orderId: "o9",
+          orderStatus: "Served",
+          placedTime: "2021-09-27 08:00:00",
+          branchId: "b1",
+          totalAmount: "4500"
+        },
+        ,
+        {
+          orderId: "o10",
+          orderStatus: "Served",
+          placedTime: "2021-09-27 12:12:00",
+          branchId: "b2",
+          totalAmount: "4500"
         },
         {
-          order_id: "o11",
-          order_status: "served",
-          placed_time: "2021-09-22 16:00:00",
-          branch_id: "b1",
-          total_amount: "3200"
+          orderId: "o11",
+          orderStatus: "Served",
+          placedTime: "2021-09-27 16:00:00",
+          branchId: "b1",
+          totalAmount: "3200"
         },
         {
-          order_id: "o12",
-          order_status: "served",
-          placed_time: "2021-09-22 20:00:00",
-          branch_id: "b2",
-          total_amount: "3200"
+          orderId: "o12",
+          orderStatus: "Served",
+          placedTime: "2021-09-27 20:00:00",
+          branchId: "b2",
+          totalAmount: "3200"
         },
         {
-          order_id: "o13",
-          order_status: "served",
-          placed_time: "2021-09-22 23:00:00",
-          branch_id: "b1",
-          total_amount: "2500"
+          orderId: "o13",
+          orderStatus: "Served",
+          placedTime: "2021-09-27 23:00:00",
+          branchId: "b1",
+          totalAmount: "2500"
         },
         {
-          order_id: "o14",
-          order_status: "served",
-          placed_time: "2021-09-22 13:00:00",
-          branch_id: "b2",
-          total_amount: "2500"
+          orderId: "o14",
+          orderStatus: "Served",
+          placedTime: "2021-09-27 13:00:00",
+          branchId: "b2",
+          totalAmount: "2500"
         },
         {
-          order_id: "o15",
-          order_status: "served",
-          placed_time: "2021-09-06 00:00:00",
-          branch_id: "b1",
-          total_amount: "8500"
+          orderId: "o15",
+          orderStatus: "Served",
+          placedTime: "2021-09-06 00:00:00",
+          branchId: "b1",
+          totalAmount: "8500"
         },
         {
-          order_id: "o16",
-          order_status: "served",
-          placed_time: "2021-09-16 00:00:00",
-          branch_id: "b2",
-          total_amount: "5600"
+          orderId: "o16",
+          orderStatus: "Served",
+          placedTime: "2021-09-16 00:00:00",
+          branchId: "b2",
+          totalAmount: "5600"
         },
         {
-          order_id: "o17",
-          order_status: "served",
-          placed_time: "2021-09-26 00:00:00",
-          branch_id: "b1",
-          total_amount: "400"
+          orderId: "o17",
+          orderStatus: "Served",
+          placedTime: "2021-09-26 00:00:00",
+          branchId: "b1",
+          totalAmount: "400"
         },
         {
-          order_id: "o18",
-          order_status: "served",
-          placed_time: "2021-09-1 00:00:00",
-          branch_id: "b2",
-          total_amount: "800"
+          orderId: "o18",
+          orderStatus: "Served",
+          placedTime: "2021-09-1 00:00:00",
+          branchId: "b2",
+          totalAmount: "800"
         },
       ]
       ] //todo:remove mock

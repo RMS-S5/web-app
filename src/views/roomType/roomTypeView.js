@@ -21,17 +21,17 @@ class RoomTypeView extends Form {
         data: {
             description : "",
         },
-        room_type : "",
+        roomType : "",
         errors: {},
         btnDisable: false,
         spinner: false,
     };
 
-    getRoomTypeByID = (room_type) => {
+    getRoomTypeByID = (roomType_pk) => {
         console.log("#######"); //test
-        console.log(room_type, this.props.roomTypes);
+        console.log(roomType_pk, this.props.roomTypes);
         const roomType = this.props.roomTypes.find((item) => {
-            return item.room_type == room_type;
+            return item.roomType == roomType_pk;
         });
         if (!roomType) {
             toast.error("Room Type Not found");
@@ -55,13 +55,13 @@ class RoomTypeView extends Form {
             toast.error(res.message);
         } 
         
-        console.log("room_type",this.props.match.params)
-        const roomType = this.getRoomTypeByID(this.props.match.params.room_type);
+        console.log("roomType",this.props.match.params)
+        const roomType = this.getRoomTypeByID(this.props.match.params.roomType);
         if (roomType) {
             const updateData = cleanQuery(roomType,
                 ["description"]);
-            const room_type= roomType.room_type;
-            this.setState({data : {...updateData}, room_type});
+            const roomType= roomType.roomType;
+            this.setState({data : {...updateData}, roomType});
         }
 
     }
@@ -82,7 +82,7 @@ class RoomTypeView extends Form {
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             <CLabel htmlFor="name">Room Type</CLabel>
-                                            <CInput id="name" readOnly value={this.state.room_type} />
+                                            <CInput id="name" readOnly value={this.state.roomType} />
                                         </CCol>
                                     </CRow>
                                     <CRow>
@@ -119,7 +119,7 @@ class RoomTypeView extends Form {
         }
         console.log("########") //test
 
-        const res = await this.props.updateRoomType(this.state.room_type, formData);
+        const res = await this.props.updateRoomType(this.state.roomType, formData);
 
         this.setState({ spinner: false });
         if (res.status === 200) {
@@ -137,7 +137,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     getAllRoomTypes : () => dispatch(thunks.roomType.getAllRoomTypes()) ,
-    updateRoomType : (room_type, roomTypeData) => dispatch(thunks.roomType.updateRoomType(room_type, roomTypeData))
+    updateRoomType : (roomType, roomTypeData) => dispatch(thunks.roomType.updateRoomType(roomType, roomTypeData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomTypeView);

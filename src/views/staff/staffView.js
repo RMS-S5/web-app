@@ -19,30 +19,30 @@ class StaffView extends Form {
     state = {
 
         data: {
-            first_name: "",
-            last_name: "",
+            firstName: "",
+            lastName: "",
             email : "",
-            account_type : "",
+            accountType : "",
             role : "",
-            branch_id : "",
+            branchId : "",
             birthday : "",
-            mobile_number : "",
+            mobileNumber : "",
             nic : "",
         },
         branches : [],
         roles : [],
         //status : ["Available" , "Not Available"],
-        user_id : "",
+        userId : "",
         image : "",
         errors: {},
         btnDisable: false,
         spinner: false,
     };
 
-    getStaffByID = (user_id) => {
-        console.log(user_id, this.props.staffm);
+    getStaffByID = (userId) => {
+        console.log(userId, this.props.staffm);
         const staff = this.props.staffm.find((item) => {
-            return item.user_id == user_id;
+            return item.userId == userId;
         });
         if (!staff) {
             toast.error("Staff Not found");
@@ -53,14 +53,14 @@ class StaffView extends Form {
 
     schema = {
         //status: Joi.string().optional().label("Staff Status"),
-        first_name: Joi.string().optional().label("First Name"),
-        last_name: Joi.string().optional().label("Last Name"),
+        firstName: Joi.string().optional().label("First Name"),
+        lastName: Joi.string().optional().label("Last Name"),
         email: Joi.string().optional().email({ tlds: { allow: false } }).label("Email"),
-        account_type: Joi.string().optional().label("Account Type"),
+        accountType: Joi.string().optional().label("Account Type"),
         role: Joi.string().optional().label("Role"),
-        branch_id: Joi.string().optional().label("Branch ID"),
+        branchId: Joi.string().optional().label("Branch ID"),
         birthday: Joi.date().optional().label("Birthday"),
-        mobile_number: Joi.string().optional().label("Mobile Number"),
+        mobileNumber: Joi.string().optional().label("Mobile Number"),
         nic: Joi.string().optional().label("NIC"),
     };
 
@@ -97,12 +97,12 @@ class StaffView extends Form {
             toast.error(res.message);
         }
 
-        const staff = this.getStaffByID(this.props.match.params.user_id);
+        const staff = this.getStaffByID(this.props.match.params.userId);
         if (staff) {
             const updateData = cleanQuery(staff,
-                ["first_name", "last_name", "email","account_type", "role", "branch_id", "birthday", "mobile_number", "nic"]); //todo: include status when implemented
-            const user_id= staff.user_id;
-            this.setState({data : {...updateData}, user_id});
+                ["firstName", "lastName", "email","accountType", "role", "branchId", "birthday", "mobileNumber", "nic"]); //todo: include status when implemented
+            const userId= staff.userId;
+            this.setState({data : {...updateData}, userId});
         }
     }
 
@@ -122,19 +122,19 @@ class StaffView extends Form {
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             <CLabel htmlFor="name">User ID</CLabel>
-                                            <CInput id="name" readOnly value={this.state.user_id} />
+                                            <CInput id="name" readOnly value={this.state.userId} />
                                         </CCol>
                                     </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
-                                            {this.renderInput("first_name", "First Name", "text", {
+                                            {this.renderInput("firstName", "First Name", "text", {
                                                 placeholder: "Enter first name",
                                             }, false)}
                                         </CCol>
                                     </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
-                                            {this.renderInput("last_name", "Last Name", "text", {
+                                            {this.renderInput("lastName", "Last Name", "text", {
                                                 placeholder: "Enter last name",
                                             }, false)}
                                         </CCol>
@@ -148,7 +148,7 @@ class StaffView extends Form {
                                     </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
-                                            {this.renderInput("account_type", "Account Type", "text", {
+                                            {this.renderInput("accountType", "Account Type", "text", {
                                                 placeholder: "Enter account type",
                                             },false)}
                                         </CCol>
@@ -163,7 +163,7 @@ class StaffView extends Form {
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             {this.renderSelectWithLabelValue(
-                                                "branch_id", "Branch", this.state.branches
+                                                "branchId", "Branch", this.state.branches
                                             )}
                                         </CCol>
                                     </CRow>
@@ -176,7 +176,7 @@ class StaffView extends Form {
                                     </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
-                                            {this.renderInput("mobile_number", "Mobile Number", "text", {
+                                            {this.renderInput("mobileNumber", "Mobile Number", "text", {
                                                 placeholder: "Enter mobile number",
                                             })}
                                         </CCol>
@@ -224,16 +224,16 @@ class StaffView extends Form {
             this.state.image
         );
         // formData.append(
-        //     "user_id",
-        //     this.state.data.user_id
+        //     "userId",
+        //     this.state.data.userId
         // )
         formData.append(
-            "first_name",
-            this.state.data.first_name
+            "firstName",
+            this.state.data.firstName
         )
         formData.append(
-            "last_name",
-            this.state.data.last_name
+            "lastName",
+            this.state.data.lastName
         )
         formData.append(
             "email",
@@ -244,16 +244,16 @@ class StaffView extends Form {
             this.state.data.role
         )
         formData.append(
-            "branch_id",
-            this.state.data.branch_id //todo:branch must have an id property
+            "branchId",
+            this.state.data.branchId //todo:branch must have an id property
         )
         formData.append(
             "birthday",
             this.state.data.birthday
         )
         formData.append(
-            "mobile_number",
-            this.state.data.mobile_number
+            "mobileNumber",
+            this.state.data.mobileNumber
         )
         console.log("########") //test
         for (var pair of formData.entries()) {
@@ -261,7 +261,7 @@ class StaffView extends Form {
         }
         console.log("########") //test
 
-        const res = await this.props.updateStaff(this.state.user_id, formData);
+        const res = await this.props.updateStaff(this.state.userId, formData);
 
         this.setState({ spinner: false });
         if (res.status === 200) {
@@ -283,7 +283,7 @@ const mapDispatchToProps = (dispatch) => ({
     getAllStaffm : () => dispatch(thunks.staff.getAllStaffm()) ,
     getAllBranches : () => dispatch(thunks.staff.getAllBranches()),
     getAllRoles : () => dispatch(thunks.staff.getAllRoles()),
-    updateStaff : (user_id, staffData) => dispatch(thunks.staff.updateStaff(user_id, staffData))
+    updateStaff : (userId, staffData) => dispatch(thunks.staff.updateStaff(userId, staffData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaffView);
