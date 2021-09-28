@@ -107,8 +107,8 @@ class Login extends Form {
                     <CRow className="text-center justify-content-center mt-2">
                       <div>
                         <p style={{ fontWeight: "bold" }}>
-                          If you are not a user already, please register to
-                          Ozarro Clothing.
+                          If you are not a user already, please register to HRMS
+                          System.
                         </p>
                         <Link to="/home/register">
                           <CButton color="primary" className="mt-1">
@@ -145,8 +145,8 @@ class Login extends Form {
 
     if (res.status === 200) {
       if (this.state.rememberMe) {
-        localStorage.setItem("rms-access-token", this.props.accessToken);
-        localStorage.setItem("rms-refresh-token", this.props.refreshToken);
+        localStorage.setItem("hrms-access-token", this.props.accessToken);
+        localStorage.setItem("hrms-refresh-token", this.props.refreshToken);
       }
       this.props.history.push("/customer");
     } else {

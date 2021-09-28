@@ -9,6 +9,7 @@ import {
   CInputGroupText,
   CInvalidFeedback,
   CLabel,
+  CCardBody,
   CRow,
   CSelect,
 } from "@coreui/react";
@@ -19,11 +20,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardContainer from "../../components/common/CardContainer";
 import Form from "../../components/common/NewForm";
+import api from "../../api/index";
 import { thunks } from "../../store/index";
-//import {getAllCategories} from "../../store/product/select"; //todo:change
-import { getAllBranches } from "../../store/staff/select";
-import { getAllRoles } from "../../store/staff/select";
-import CIcon from "@coreui/icons-react";
+import { getAllBookings } from "../../store/customer/select";
+import { getUserData } from "../../store/user/select";
 
 class Bookingform extends Form {
   state = {
@@ -31,6 +31,9 @@ class Bookingform extends Form {
       answer: "",
       question: "",
     },
+    previousBookings: [],
+    currentUser: [],
+    fields: ["customerId", "bookingId", "arrival", "departure", "active"],
     errors: {},
     btnDisable: false,
     spinner: false,
@@ -57,7 +60,32 @@ class Bookingform extends Form {
     nic: Joi.string().label("NIC"),
   };
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    console.log(this.props.currentUser.userId);
+    const res = await this.props.getAllBookings(this.props.currentUser.userId);
+    console.log(res);
+    // if (res.status === 200) {
+    //   console.log(this.props.previousBookings);
+    //   console.log(this.props);
+    //   this.state.previousBookings = this.props.previousBookings;
+    // const category = this.getCategoryById(this.props.match.params.categoryId);
+    // if (category) {
+    //   const categoryId = this.props.match.params.categoryId;
+    //   const updateData = cleanQuery(category, [
+    //     "status",
+    //     "name",
+    //     "description",
+    //   ]);
+    //   this.setState({ data: { ...updateData }, categoryId });
+    // } else {
+    //   this.setState({ loading: false, error: true });
+    //   toast.error("Category not found");
+    // }
+    // } else {
+    //   this.setState({ loading: false, error: true });
+    // toast.error(res.message);
+    // }
+  }
 
   componentWillUnmount() {
     toast.dismiss();
@@ -68,28 +96,22 @@ class Bookingform extends Form {
       <CContainer>
         <CRow>
           <CCol>
-            <CardContainer error={this.state.error} header="Ask Questions">
-              <CForm onSubmit={this.handleSubmit}>
-                <CRow>
-                  <CCol xs="12" md="6">
-                    {this.renderInput("question", "Question", "text", {
-                      placeholder: "type your question",
-                    })}
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs="12" md="6">
-                    {this.renderInput("answer", "Answer", "text", {
-                      placeholder: "",
-                      disabled: true,
-                    })}
-                  </CCol>
-                </CRow>
-
-                <CRow>
-                  <CCol>{this.renderButton("Send", "success", "danger")}</CCol>
-                </CRow>
-              </CForm>
+            <CardContainer error={this.state.error} header="Previous Bookings">
+              {/* <table className="table">
+                <thead>
+                  {console.log(this.state.previousBookings)}
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Booking id</th>
+                    <th scope="col">Arrival</th>
+                    <th scope="col">Departure</th>
+                    <th scope="col">Active</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table> */}
             </CardContainer>
           </CCol>
         </CRow>
@@ -117,13 +139,15 @@ class Bookingform extends Form {
 }
 
 const mapStateToProps = (state) => ({
-  //categories: getAllCategories(state),
+  currentUser: getUserData(state),
+  // previousBookings: getAllBookings(state),
   // branches: getAllBranches(state),
   // roles: getAllRoles(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // getAllCategories : () => dispatch(thunks.product.getAllCategory()),
+  getAllBookings: (customerId) =>
+    dispatch(thunks.customer.getAllPreviousBookings(customerId)),
   // addProduct : (productData) => dispatch(thunks.product.addProduct(productData))
   // getAllBranches : () => dispatch(thunks.staff.getAllBranches()),
   // getAllRoles : () => dispatch(thunks.staff.getAllRoles()),

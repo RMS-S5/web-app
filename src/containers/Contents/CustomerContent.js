@@ -36,7 +36,7 @@ const CustomerContent = () => {
                 )
               );
             })}
-            <Redirect from="/manager" to="/manager/dashboard" />{" "}
+            <Redirect from="/customer" to="/customer" />{" "}
             {/*todo:update routes*/}
           </Switch>
         </Suspense>

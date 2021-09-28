@@ -46,6 +46,7 @@ export default class userThunk {
   static checkToken() {
     return (dispatch, getState) => {
       const accessToken = localStorage.getItem("hrms-access-token");
+      console.log(accessToken);
       if (!accessToken) return;
       const payload = jwtDecode(accessToken);
       if (!payload) return;

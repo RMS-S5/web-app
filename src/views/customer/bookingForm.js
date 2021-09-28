@@ -24,6 +24,10 @@ import { thunks } from "../../store/index";
 import { getAllBranches } from "../../store/staff/select";
 import { getAllRoles } from "../../store/staff/select";
 import CIcon from "@coreui/icons-react";
+import { current } from "immer";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData } from "../../store/user/select";
+import user from "../../store/user";
 
 class AskQuestions extends Form {
   state = {
@@ -34,6 +38,7 @@ class AskQuestions extends Form {
       mobile_number: "",
       nic: "",
       isPaid: false,
+      amount: 500,
     },
     //image : "",
     //categories : [],
@@ -60,6 +65,7 @@ class AskQuestions extends Form {
     last_name: Joi.string().label("Last Name"),
     email: Joi.string().label("Email"),
     isPaid: Joi.boolean().label("isPaid"),
+    amount: Joi.number().label("Amount"),
 
     mobile_number: Joi.string().label("Mobile Number"),
     nic: Joi.string().label("NIC"),
@@ -134,6 +140,7 @@ class AskQuestions extends Form {
 
   async callServer() {
     this.setState({ spinner: true });
+    // const userData = useSelector(getUserData);
     const self = this;
     var payment = {
       sandbox: true,
@@ -142,21 +149,21 @@ class AskQuestions extends Form {
       cancel_url: undefined, // Important
       notify_url: "http://sample.com/notify",
       order_id: "ItemNo12345",
-      items: "Door bell wireles",
-      amount: "31.00",
+      items: "Room Bookings",
+      amount: this.state.data.amount,
       currency: "LKR",
-      first_name: "Saman",
-      last_name: "Perera",
-      email: "samanp@gmail.com",
+      first_name: "nuwan",
+      last_name: "abenayake",
+      email: "nuwan@gmail.com",
       phone: "0771234567",
       address: "No.1, Galle Road",
       city: "Colombo",
       country: "Sri Lanka",
-      delivery_address: "No. 46, Galle road, Kalutara South",
-      delivery_city: "Kalutara",
-      delivery_country: "Sri Lanka",
-      custom_1: "",
-      custom_2: "",
+      // delivery_address: "No. 46, Galle road, Kalutara South",
+      // delivery_city: "Kalutara",
+      // delivery_country: "Sri Lanka",
+      // custom_1: "",
+      // custom_2: "",
     };
     payhere.onCompleted = function onCompleted(orderId) {
       console.log("Payment completed. OrderID:" + orderId);

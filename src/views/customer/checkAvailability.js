@@ -29,14 +29,6 @@ import CIcon from "@coreui/icons-react";
 class CheckAvailability extends Form {
   state = {
     data: {
-      // pCode : "",
-      // categoryId : "",
-      // pName : "",
-      // color : "",
-      // size : "",
-      // stock : "",
-      // price : "",
-      // description : "",
       arrival: "",
       departure: "",
       branch_id: "",
@@ -79,27 +71,6 @@ class CheckAvailability extends Form {
   };
 
   schema = {
-    // pCode: Joi.string().label("Product Code"),
-    // pName: Joi.string().label("Product Name"),
-    // categoryId: Joi.number().label("Category Id"),
-    // stock: Joi.number().label("Stock"),
-    // price: Joi.number().label("Price"),
-    // color: Joi.string().label("Color"),
-    // size: Joi.string().label("Size"),
-    // description: Joi.string().label("Description"),
-    // status: Joi.string().label("Available"),
-    //   user_id: Joi.string().label("User ID"),
-    //   first_name: Joi.string().label("First Name"),
-    //   last_name: Joi.string().label("Last Name"),
-    //   email: Joi.string().label("Email"),
-    //   password: Joi.string().label("Password"),
-    //   account_type: Joi.string().label("Account Type"),
-    //   role: Joi.string().label("Role"),
-    //   branch_id: Joi.string().label("Branch ID"),
-    //   birthday: Joi.string().label("Birthday"),
-    //   mobile_number: Joi.string().label("Mobile Number"),
-    //     nic: Joi.string().label("NIC"),
-
     roomType: Joi.string().label("Room Type"),
     numberOfRooms: Joi.number().label("number of rooms"),
     numberOfTypes: Joi.number()

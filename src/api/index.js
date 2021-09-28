@@ -96,7 +96,15 @@ export default {
       },
     },
   },
-
+  booking: {
+    get: {
+      async previousBookings(query) {
+        return ajaxResolver(
+          axios.get(`/booking/get-previous-bookings/${query}`)
+        );
+      },
+    },
+  },
   roomType: {
     get: {
       async allRoomTypes(query) {

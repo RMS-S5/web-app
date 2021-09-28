@@ -41,7 +41,7 @@ const Sidebar = () => {
         <img
           className="c-sidebar-brand-full"
           src={"/img/hrms-logo.png"}
-          alt={"ozarro logo"}
+          alt={"Hrms Logo"}
           style={{ width: "130px" }}
         />
         <p

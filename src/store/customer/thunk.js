@@ -25,6 +25,23 @@ export default class customerThunk {
       return res;
     };
   }
+  /**
+   * --------------------Getters----------------------------------------
+   */
+  /**
+   * Get All previous bookings
+   */
+  static getAllPreviousBookings(query) {
+    console.log(query);
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      const [res, data] = await api.booking.get.previousBookings(query);
+      if (res.status === 200) {
+        dispatch(setBookings(data));
+      }
+      return res;
+    };
+  }
 
   //   /**
   //    * ------------------Update------------------------------
