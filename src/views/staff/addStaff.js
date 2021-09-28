@@ -1,4 +1,3 @@
-
 import {
   CCol,
   CContainer,
@@ -6,9 +5,12 @@ import {
   CFormGroup,
   CInput,
   CInputGroup,
-  CInputGroupPrepend, CInputGroupText, CInvalidFeedback,
+  CInputGroupPrepend,
+  CInputGroupText,
+  CInvalidFeedback,
   CLabel,
-  CRow, CSelect
+  CRow,
+  CSelect,
 } from "@coreui/react";
 import Joi from "joi";
 import React from "react";
@@ -19,8 +21,8 @@ import CardContainer from "../../components/common/CardContainer";
 import Form from "../../components/common/NewForm";
 import { thunks } from "../../store/index";
 //import {getAllCategories} from "../../store/product/select"; //todo:change
-import {getAllBranches} from "../../store/staff/select";
-import {getAllRoles} from "../../store/staff/select";
+import { getAllBranches } from "../../store/staff/select";
+import { getAllRoles } from "../../store/staff/select";
 import CIcon from "@coreui/icons-react";
 import humanize from "../../utils/humanize";
 
@@ -36,21 +38,21 @@ class StaffAdd extends Form {
       // price : "",
       // description : "",
       //userId : "",
-      firstName : "",
-      lastName : "",
-      email : "",
-      password : "",
-      accountType : "",
-      role : "",
-      branchId : "",
-      birthday : "",
-      mobileNumber : "",
-      nic : "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      accountType: "",
+      role: "",
+      branchId: "",
+      birthday: "",
+      mobileNumber: "",
+      nic: "",
     },
     //image : "",
     //categories : [],
-    branches:[],
-    roles:[],
+    branches: [],
+    roles: [],
     errors: {},
     btnDisable: false,
     spinner: false,
@@ -71,7 +73,9 @@ class StaffAdd extends Form {
     //userId: Joi.string().label("User ID"),
     firstName: Joi.string().label("First Name"),
     lastName: Joi.string().label("Last Name"),
-    email: Joi.string().email({ tlds: { allow: false } }).label("Email"),
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .label("Email"),
     password: Joi.string().label("Password"),
     accountType: Joi.string().label("Account Type"),
     role: Joi.string().label("Role"),
@@ -79,7 +83,6 @@ class StaffAdd extends Form {
     birthday: Joi.date().less("now").label("Birthday"),
     mobileNumber: Joi.string().label("Mobile Number"),
     nic: Joi.string().label("NIC"),
-
   };
 
   async componentDidMount() {
@@ -106,15 +109,13 @@ class StaffAdd extends Form {
     if (res.status === 200) {
       const branchesData = this.props.branches;
       let pairValue = [];
-      branchesData.forEach(
-          (item, index) => {
-            pairValue.push({
-              value : item.id,
-              label : item.name
-            })
-          }
-      )
-      this.setState({ branches:pairValue,loading: false });
+      branchesData.forEach((item, index) => {
+        pairValue.push({
+          value: item.id,
+          label: item.name,
+        });
+      });
+      this.setState({ branches: pairValue, loading: false });
     } else {
       this.setState({ loading: false, error: false }); //todo:set error to true
       toast.error(res.message);
@@ -123,17 +124,15 @@ class StaffAdd extends Form {
     res = await this.props.getAllRoles();
     if (res.status === 200) {
       const rolesData = this.props.roles;
-      
+
       let pairValue = [];
-      rolesData.forEach(
-          (item, index) => {
-            pairValue.push({
-              value : item.role,
-              label : item.role
-            })
-          }
-      )
-      this.setState({ roles:pairValue,loading: false });
+      rolesData.forEach((item, index) => {
+        pairValue.push({
+          value: item.role,
+          label: item.role,
+        });
+      });
+      this.setState({ roles: pairValue, loading: false });
     } else {
       this.setState({ loading: false, error: false }); //todo:set error to true
       toast.error(res.message);
@@ -200,14 +199,18 @@ class StaffAdd extends Form {
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderSelectWithLabelValue(
-                        "role", "Role", this.state.roles
+                      "role",
+                      "Role",
+                      this.state.roles
                     )}
                   </CCol>
                 </CRow>
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderSelectWithLabelValue(
-                        "branchId", "Branch", this.state.branches
+                      "branchId",
+                      "Branch",
+                      this.state.branches
                     )}
                   </CCol>
                 </CRow>
@@ -235,10 +238,14 @@ class StaffAdd extends Form {
 
                 <CRow>
                   <CCol xs="12" md="6">
-                    {this.renderImageInput("image", "Profile Image", "file", {
-                      placeholder: "Upload profile image",
-                    },
-                    true,
+                    {this.renderImageInput(
+                      "image",
+                      "Profile Image",
+                      "file",
+                      {
+                        placeholder: "Upload profile image",
+                      },
+                      true
                     )}
                   </CCol>
                 </CRow>
@@ -258,59 +265,37 @@ class StaffAdd extends Form {
 
     const formData = new FormData();
     // Update the formData object
-    formData.append(
-        "image",
-        this.state.image
-    );
+    formData.append("image", this.state.image);
     // formData.append(
     //     "userId",
     //     this.state.data.userId
     // )
+    formData.append("firstName", this.state.data.firstName);
+    formData.append("lastName", this.state.data.lastName);
+    formData.append("email", this.state.data.email);
+    formData.append("password", this.state.data.password);
+    formData.append("role", this.state.data.role);
     formData.append(
-        "firstName",
-        this.state.data.firstName
-    )
-    formData.append(
-        "lastName",
-        this.state.data.lastName
-    )
-    formData.append(
-        "email",
-        this.state.data.email
-    )
-    formData.append(
-        "password",
-        this.state.data.password
-    )
-    formData.append(
-        "role",
-        this.state.data.role
-    )
-    formData.append(
-        "branchId",
-        this.state.data.branchId //todo:branch must have an id property
-    )
-    formData.append(
-        "birthday",
-        this.state.data.birthday
-    )
-    formData.append(
-        "mobileNumber",
-        this.state.data.mobileNumber
-    )
+      "branchId",
+      this.state.data.branchId //todo:branch must have an id property
+    );
+    formData.append("birthday", this.state.data.birthday);
+    formData.append("mobileNumber", this.state.data.mobileNumber);
 
-    console.log("########") //test
+    console.log("########"); //test
     for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
+      console.log(pair[0] + ", " + pair[1]);
     }
-    console.log("########") //test
+    console.log("########"); //test
     const res = await this.props.addStaff(this.state.data); //todo:formData
 
     this.setState({ spinner: false });
 
     if (res.status === 200) {
-      toast.success(res.message)
-      this.props.history.push("/"+this.props.accountType+"/staff/view-staffm");
+      toast.success(res.message);
+      this.props.history.push(
+        "/" + this.props.accountType + "/staff/view-staffm"
+      );
     } else {
       if (res.status !== 200) toast.error(res.message);
     }
@@ -326,10 +311,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   // getAllCategories : () => dispatch(thunks.product.getAllCategory()),
   // addProduct : (productData) => dispatch(thunks.product.addProduct(productData))
-  getAllBranches : () => dispatch(thunks.staff.getAllBranches()),
-  getAllRoles : () => dispatch(thunks.staff.getAllRoles()),
-  addStaff : (staffData) => dispatch(thunks.staff.addStaff(staffData))
-
+  getAllBranches: () => dispatch(thunks.staff.getAllBranches()),
+  getAllRoles: () => dispatch(thunks.staff.getAllRoles()),
+  addStaff: (staffData) => dispatch(thunks.staff.addStaff(staffData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaffAdd);

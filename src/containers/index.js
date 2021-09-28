@@ -21,4 +21,31 @@ import BMHeaderDropdown from "./HeaderDropdowns/BMHeaderDropdown";
 import BMLayout from "./Layouts/BMLayout";
 import BMSidebar from "./Sidebars/BMSidebar";
 
-export { MContent, MFooter, MHeader, MHeaderDropdown, MLayout, MSidebar, BMContent, BMFooter, BMHeader, BMHeaderDropdown, BMLayout, BMSidebar };
+//Customer containers
+import CustomerContent from "./Contents/CustomerContent";
+import CustomerFooter from "./Footers/CustomerFooter";
+import CustomerHeader from "./Headers/CustomerHeader";
+import CustomerHeaderDropdown from "./HeaderDropdowns/CustomerHeaderDropdown";
+import CustomerLayout from "./Layouts/CustomerLayout";
+import CustomerSidebar from "./Sidebars/CustomerSidebar";
+
+export {
+  MContent,
+  MFooter,
+  MHeader,
+  MHeaderDropdown,
+  MLayout,
+  MSidebar,
+  BMContent,
+  BMFooter,
+  BMHeader,
+  BMHeaderDropdown,
+  BMLayout,
+  BMSidebar,
+  CustomerContent,
+  CustomerFooter,
+  CustomerHeader,
+  CustomerHeaderDropdown,
+  CustomerLayout,
+  CustomerSidebar,
+};

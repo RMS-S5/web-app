@@ -134,7 +134,7 @@ export default function Navbar(props) {
                     transition: "all .15s ease",
                     textDecoration: "none",
                   }}
-                  onClick={() => window.location = "/auth/login"}
+                  onClick={() => (window.location = "/auth/login")}
                 >
                   <i className="fas fa-sign-in-alt"></i> Login
                 </button>
@@ -153,7 +153,7 @@ export default function Navbar(props) {
                     transition: "all .15s ease",
                     textDecoration: "none",
                   }}
-                  onClick={() => window.location = "/auth/register"}
+                  onClick={() => (window.location = "/auth/register")}
                 >
                   <i className="fas fa-user-plus"></i> Sign Up
                 </button>

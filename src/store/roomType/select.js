@@ -1,7 +1,6 @@
 import { createDraftSafeSelector } from "@reduxjs/toolkit";
 
 export const getAllRoomTypes = createDraftSafeSelector(
-    (state) => state.roomType,
-    (roomType) => roomType.roomTypes
+  (state) => state.roomType,
+  (roomType) => roomType.roomTypes
 );
-

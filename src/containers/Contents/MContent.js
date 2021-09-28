@@ -29,14 +29,17 @@ const MContent = () => {
                     userType={route.accountType}
                     render={(props) => (
                       <CFade>
-                        <route.component {...{accountType: route.accountType, ...props}} />
+                        <route.component
+                          {...{ accountType: route.accountType, ...props }}
+                        />
                       </CFade>
                     )}
                   />
                 )
               );
             })}
-            <Redirect from="/manager" to="/manager/dashboard" /> {/*todo:update routes*/}
+            <Redirect from="/manager" to="/manager/dashboard" />{" "}
+            {/*todo:update routes*/}
           </Switch>
         </Suspense>
       </CContainer>

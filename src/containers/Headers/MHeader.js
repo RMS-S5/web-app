@@ -56,9 +56,9 @@ const MHeader = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto"></CHeaderNav>
 
-        {/*<CHeaderNav className="px-3">*/}
-        {/*    Hy {(userData) ? userData.name : ''}*/}
-        {/*</CHeaderNav>*/}
+      {/*<CHeaderNav className="px-3">*/}
+      {/*    Hy {(userData) ? userData.name : ''}*/}
+      {/*</CHeaderNav>*/}
 
       <CHeaderNav className="px-3">
         <MHeaderDropdown />

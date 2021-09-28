@@ -17,7 +17,12 @@ const loading = (
 // const Layout = React.lazy(() => import("./containers/Layout"));
 const MLayout = React.lazy(() => import("./containers/Layouts/MLayout"));
 const BMLayout = React.lazy(() => import("./containers/Layouts/BMLayout"));
-const Auth = React.lazy(() => import("./views/pages/auth"));
+// const Auth = React.lazy(() => import("./views/pages/auth"));
+// const Layout = React.lazy(() => import("./containers/Layout"));
+const CustomerLayout = React.lazy(() =>
+  import("./containers/Layouts/CustomerLayout")
+);
+const Home = React.lazy(() => import("./views/pages/home"));
 
 function App() {
   const dispatch = useDispatch();
@@ -40,30 +45,45 @@ function App() {
             render={(props) => <div>500 Component</div>}
           />
           <Route
-            path="/admin/auth"
-            name="Auth Page"
-            render={(props) => <Auth {...props} />}
+            path="/home"
+            name="Home"
+            render={(props) => <Home {...props} />}
           />
-
           {/* <Route
-            path="/order"
-            name="Order Page"
-            render={(props) => <Order {...props} />}
+            path="/"
+            name="Home Page"
+            render={(props) => <Home {...props} />}
           /> */}
           {/* <ProtectedRoute
+          
+          <ProtectedRoute
             isLoggedIn={false}
-            path="/admin"
+            path="/user"
             name="Home"
-            render={(props) => <Layout {...props} />}
+            render={(props) => <MLayout {...props} />}
           />
-          <Redirect from="/" to="/admin" /> */}
           <ProtectedRoute
             isLoggedIn={false}
             path="/manager"
             name="Home"
             render={(props) => <MLayout {...props} />}
           />
-          <Redirect from="/" to="/manager" />
+          {/* <Redirect from="/" to="/manager" /> */}
+          {/* todo:update routes */}
+          <ProtectedRoute
+            isLoggedIn={false}
+            path="/customer"
+            name="Home"
+            render={(props) => <CustomerLayout {...props} />}
+          />
+          <Redirect from="/" to="/customer" />
+          {/* <ProtectedRoute
+            isLoggedIn={false}
+            path="/manager"
+            name="Home"
+            render={(props) => <MLayout {...props} />}
+          /> */}
+          {/* <Redirect from="/" to="/manager" /> */}
           {/* <ProtectedRoute
             isLoggedIn={false}
             path="/branch-manager"
@@ -71,6 +91,8 @@ function App() {
             render={(props) => <BMLayout {...props} />}
           />
           <Redirect from="/" to="/branch-manager" /> */}
+
+          {/* todo:update routes */}
         </Switch>
       </React.Suspense>
       <ToastContainer

@@ -20,7 +20,6 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const show = useSelector(getSidebarShow);
   const accountType = useSelector(getAccountType);
-  
 
   let navItems = navigation.filter((item) => {
     if (item.accountType) {
@@ -54,7 +53,7 @@ const Sidebar = () => {
             src={"/img/icon-rest.jpg"}
             alt={"rest logo"}
             style={{ width: "30px" }}
-        />
+          />
         </p>
       </CSidebarBrand>
       <CSidebarNav>

@@ -1,26 +1,21 @@
 import React from "react";
 
-
-const MDashboard = React.lazy(() => import("./views/dashboard/MDashboard"))
+const MDashboard = React.lazy(() => import("./views/dashboard/MDashboard"));
 /**
  * Staff Management Component
  */
-const CreateStaff = React.lazy(() =>
-  import("./views/staff/addStaff"));
-const StaffTable = React.lazy(() =>
-  import("./views/staff/staffTable"));
-const StaffView = React.lazy(() =>
-  import("./views/staff/staffView"));
+const CreateStaff = React.lazy(() => import("./views/staff/addStaff"));
+const StaffTable = React.lazy(() => import("./views/staff/staffTable"));
+const StaffView = React.lazy(() => import("./views/staff/staffView"));
 
 /**
-* Room Type Management Component
-*/
-const CreateRoomType = React.lazy(() =>
-  import("./views/roomType/addRoomType"));
+ * Room Type Management Component
+ */
+const CreateRoomType = React.lazy(() => import("./views/roomType/addRoomType"));
 const RoomTypeTable = React.lazy(() =>
-  import("./views/roomType/roomTypeTable"));
-const RoomTypeView = React.lazy(() =>
-  import("./views/roomType/roomTypeView"));
+  import("./views/roomType/roomTypeTable")
+);
+const RoomTypeView = React.lazy(() => import("./views/roomType/roomTypeView"));
 
 /**
  * Manager Profile Components
@@ -29,47 +24,54 @@ const ManagerProfile = React.lazy(() =>
   import("./views/accountSettings/profile")
 );
 
+/**
+ * Order Management Component
+ */
+const OrderTable = React.lazy(() => import("./views/order/orderTable"));
 
 /**
-* Order Management Component
-*/
-const OrderTable = React.lazy(() =>
-  import("./views/order/orderTable"));
-
-/**
-* Customer Report Management Component
-*/
+ * Customer Report Management Component
+ */
 const CustomerReportTable = React.lazy(() =>
-  import("./views/customerReport/customerReportTable"));
+  import("./views/customerReport/customerReportTable")
+);
 
 /**
  * Room Management Component
  */
- const CreateRoom = React.lazy(() =>
- import("./views/room/addRoom"));
-const RoomTable = React.lazy(() =>
- import("./views/room/roomTable"));
-const RoomView = React.lazy(() =>
- import("./views/room/roomView"));
+const CreateRoom = React.lazy(() => import("./views/room/addRoom"));
+const RoomTable = React.lazy(() => import("./views/room/roomTable"));
+const RoomView = React.lazy(() => import("./views/room/roomView"));
 
- /**
+/**
  * Food Item Management Component
  */
-  const CreateFoodItem = React.lazy(() =>
-  import("./views/foodItem/addFoodItem"));
- const FoodItemTable = React.lazy(() =>
-  import("./views/foodItem/foodItemTable"));
- const FoodItemView = React.lazy(() =>
-  import("./views/foodItem/foodItemView"));
+const CreateFoodItem = React.lazy(() => import("./views/foodItem/addFoodItem"));
+const FoodItemTable = React.lazy(() =>
+  import("./views/foodItem/foodItemTable")
+);
+const FoodItemView = React.lazy(() => import("./views/foodItem/foodItemView"));
 
 /**
  * Booking Management Component
  */
-const BookingTable = React.lazy(() =>
- import("./views/booking/bookingTable"));
-
+const BookingTable = React.lazy(() => import("./views/booking/bookingTable"));
+//////////////
+/**
+ * Customer Management Component
+ */
+const CheckAvailability = React.lazy(() =>
+  import("./views/customer/checkAvailability")
+);
+const Bookingform = React.lazy(() => import("./views/customer/bookingForm"));
+const AskQuestions = React.lazy(() => import("./views/customer/askQuestions"));
+const ViewRoomCategories = React.lazy(() =>
+  import("./views/customer/viewRoomCategories")
+);
+const PreviousBookings = React.lazy(() =>
+  import("./views/customer/previousBookings")
+);
 const routes = [
-
   //Manager routes
   { path: "/manager/", exact: true, name: "Home" },
   {
@@ -206,13 +208,42 @@ const routes = [
     name: "Booking",
     component: BookingTable,
     accountType: "branch-manager",
-    
   },
   {
     path: "/branch-manager/order/view-orders",
     name: "order",
     component: OrderTable,
     accountType: "branch-manager",
+  },
+  {
+    path: "/customer/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+  },
+  {
+    path: "/customer/check-availability",
+    name: "Check Availability",
+    component: CheckAvailability,
+  },
+  {
+    path: "/customer/booking-form",
+    name: "Booking form",
+    component: Bookingform,
+  },
+  {
+    path: "/customer/ask-questions",
+    name: "Ask Questions",
+    component: AskQuestions,
+  },
+  {
+    path: "/customer/view-room-categories",
+    name: "Room Categories",
+    component: ViewRoomCategories,
+  },
+  {
+    path: "/customer/previous-bookings",
+    name: "Previous bookings",
+    component: PreviousBookings,
   },
 ];
 

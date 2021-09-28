@@ -2,8 +2,7 @@ import { /*createAsyncThunk,*/ createSlice } from "@reduxjs/toolkit";
 //import api from "../../api"
 
 const initialState = {
-  roomTypes : [] 
-
+  roomTypes: [],
 };
 
 /**
@@ -17,15 +16,12 @@ const roomTypeSlice = createSlice({
     setRoomTypes(state, action) {
       state.roomTypes = action.payload;
     },
-
   },
 });
 
 /**
  * Exports
  */
-export const {
-    setRoomTypes
-} = roomTypeSlice.actions;
+export const { setRoomTypes } = roomTypeSlice.actions;
 
 export default roomTypeSlice.reducer;

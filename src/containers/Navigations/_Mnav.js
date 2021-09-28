@@ -1,7 +1,8 @@
 import CIcon from "@coreui/icons-react";
 import React from "react";
 
-const _Mnav = [ //todo:add account type to each item if needed
+const _Mnav = [
+  //todo:add account type to each item if needed
   {
     _tag: "CSidebarNavItem",
     name: "Dashboard",
@@ -17,7 +18,6 @@ const _Mnav = [ //todo:add account type to each item if needed
     name: "Add Staff",
     to: "/manager/staff/add-staff",
     icon: "cil-user",
-
   },
   {
     _tag: "CSidebarNavItem",
@@ -94,7 +94,6 @@ const _Mnav = [ //todo:add account type to each item if needed
     to: "/manager/customer-report/view-customer-reports",
     icon: "cil-warning",
   },
-  
 ];
 
 export default _Mnav;

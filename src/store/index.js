@@ -7,45 +7,28 @@ import userReducer, {
   setTokenData,
   setUserData,
   updateProfileData,
-    setAdmins
 } from "./user";
 
-import staffReducer , {
-  setBranches,
-  setRoles,
-  setStaffm
-} from "./staff";
+import staffReducer, { setBranches, setRoles, setStaffm } from "./staff";
 
-import roomTypeReducer , {
-  setRoomTypes
-} from "./roomType";
+import roomTypeReducer, { setRoomTypes } from "./roomType";
 
-import orderReducer , {
-  setMonthlyCompletedOrders,
-  setOrders,
-} from "./order";
+import orderReducer, { setMonthlyCompletedOrders, setOrders } from "./order";
 
-import bookingReducer , {
+import bookingReducer, {
   setMonthlyCompletedBookings,
   setBookings,
 } from "./booking";
 
-import customerReportReducer , {
-  setCustomerReports,
-} from "./customerReport";
+import customerReportReducer, { setCustomerReports } from "./customerReport";
 
-import roomReducer , {
-  setRooms
-} from "./room";
+import roomReducer, { setRooms } from "./room";
 
-import foodItemReducer , {
-  setFoodItems
-} from "./foodItem";
+import foodItemReducer, { setFoodItems } from "./foodItem";
 
-import categoryReducer , {
-  setCategories
-} from "./category";
+import categoryReducer, { setCategories } from "./category";
 
+import customerReducer, { setBookings, setAccountLevel } from "./customer";
 
 /**
  * Thunk Actions
@@ -61,19 +44,24 @@ import roomThunk from "./room/thunk";
 import foodItemThunk from "./foodItem/thunk";
 import categoryThunk from "./category/thunk";
 
+import staffThunk from "./staff/thunk";
+import customerThunk from "./customer/thunk";
+import roomTypeThunk from "./roomType/thunk";
+
 const store = configureStore({
   reducer: {
     ui: uiReducer,
     user: userReducer,
-    
-    staff : staffReducer,
-    roomType : roomTypeReducer,
-    order : orderReducer,
-    booking : bookingReducer,
-    customerReport : customerReportReducer,
-    room : roomReducer,
-    foodItem : foodItemReducer,
-    category : categoryReducer,
+
+    staff: staffReducer,
+    roomType: roomTypeReducer,
+    order: orderReducer,
+    booking: bookingReducer,
+    customerReport: customerReportReducer,
+    room: roomReducer,
+    foodItem: foodItemReducer,
+    category: categoryReducer,
+    customer: customerReducer,
   },
 
   middleware: getDefaultMiddleware({
@@ -94,69 +82,68 @@ export const actions = {
     setTokenData,
     setProfileData,
     updateProfileData,
-    setAdmins
   },
 
-  staff : {
+  staff: {
     setBranches,
     setRoles,
-    setStaffm
+    setStaffm,
   },
-  roomType : {
-    setRoomTypes
+  roomType: {
+    setRoomTypes,
   },
-  order : {
+  order: {
     setMonthlyCompletedOrders,
     setOrders,
   },
-  booking : {
+  booking: {
     setMonthlyCompletedBookings,
     setBookings,
   },
-  customerReport : {
-    setCustomerReports
+  customerReport: {
+    setCustomerReports,
   },
-  room : {
-    setRooms
+  room: {
+    setRooms,
   },
-  foodItem : {
-    setFoodItems
+  foodItem: {
+    setFoodItems,
   },
-  category : {
-    setCategories
+  category: {
+    setCategories,
+  },
+  customer: {
+    setAccountLevel,
+    setBookings,
   },
 };
 
 export const thunks = {
   user: userThunk,
-  
-  staff : staffThunk,
-  roomType: roomTypeThunk,
-  order : orderThunk,
-  booking : bookingThunk,
-  customerReport : customerReportThunk,
-  room : roomThunk,
-  foodItem : foodItemThunk,
-  category : categoryThunk,
-};
 
+  staff: staffThunk,
+  roomType: roomTypeThunk,
+  order: orderThunk,
+  booking: bookingThunk,
+  customerReport: customerReportThunk,
+  room: roomThunk,
+  foodItem: foodItemThunk,
+  category: categoryThunk,
+  customer: customerThunk,
+};
 
 /**
  * Helper Function
  */
-export function cleanQuery(query , fields = null) {
-  const qClone = {...query}
-  Object.keys(qClone).forEach(
-      (k) => {
-        if (fields === null || fields.includes(k) ) {
-          (qClone[k] === null || qClone[k] === undefined) && delete qClone[k]
-        } else {
-          delete qClone[k]
-        }
+export function cleanQuery(query, fields = null) {
+  const qClone = { ...query };
+  Object.keys(qClone).forEach((k) => {
+    if (fields === null || fields.includes(k)) {
+      (qClone[k] === null || qClone[k] === undefined) && delete qClone[k];
+    } else {
+      delete qClone[k];
+    }
+  });
 
-      }
-  )
-
-  return qClone
+  return qClone;
 }
-
