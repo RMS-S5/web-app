@@ -28,7 +28,10 @@ import foodItemReducer, { setFoodItems } from "./foodItem";
 
 import categoryReducer, { setCategories } from "./category";
 
-import customerReducer, { setBookings, setAccountLevel } from "./customer";
+import customerReducer, {
+  setCustomerBookings,
+  setAccountLevel,
+} from "./customer";
 
 /**
  * Thunk Actions
@@ -44,9 +47,7 @@ import roomThunk from "./room/thunk";
 import foodItemThunk from "./foodItem/thunk";
 import categoryThunk from "./category/thunk";
 
-import staffThunk from "./staff/thunk";
 import customerThunk from "./customer/thunk";
-import roomTypeThunk from "./roomType/thunk";
 
 const store = configureStore({
   reducer: {
@@ -114,7 +115,7 @@ export const actions = {
   },
   customer: {
     setAccountLevel,
-    setBookings,
+    setCustomerBookings,
   },
 };
 

@@ -2,7 +2,7 @@ import jwtDecode from "jwt-decode";
 import _ from "lodash";
 import api, { registerAccessToken } from "./../../api";
 
-import { setBookings, setAccountLevel } from "./index";
+import { setCustomerBookings, setAccountLevel } from "./index";
 
 export default class customerThunk {
   /**
@@ -19,7 +19,7 @@ export default class customerThunk {
       if (res.status === 200) {
         const [res1, data] = await api.customer.get.allBookings();
         if (res1.status === 200) {
-          dispatch(setBookings(data));
+          dispatch(setCustomerBookings(data));
         }
       }
       return res;
@@ -37,7 +37,7 @@ export default class customerThunk {
       registerAccessToken(getState().user.tokens.access);
       const [res, data] = await api.booking.get.previousBookings(query);
       if (res.status === 200) {
-        dispatch(setBookings(data));
+        dispatch(setCustomerBookings(data));
       }
       return res;
     };

@@ -215,11 +215,11 @@ const routes = [
     component: OrderTable,
     accountType: "branch-manager",
   },
-  {
-    path: "/customer/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
-  },
+  // {
+  //   path: "/customer/dashboard",
+  //   name: "Dashboard",
+  //   component: Dashboard,
+  // },
   {
     path: "/customer/check-availability",
     name: "Check Availability",

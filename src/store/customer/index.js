@@ -14,7 +14,7 @@ const customerSlice = createSlice({
   initialState,
 
   reducers: {
-    setBookings(state, action) {
+    setCustomerBookings(state, action) {
       state.bookings = action.payload;
     },
 
@@ -27,6 +27,6 @@ const customerSlice = createSlice({
 /**
  * Exports
  */
-export const { setBookings, setAccountLevel } = customerSlice.actions;
+export const { setCustomerBookings, setAccountLevel } = customerSlice.actions;
 
 export default customerSlice.reducer;

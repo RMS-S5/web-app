@@ -49,7 +49,7 @@ const CustomerHeader = () => {
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
         <img
           src={"/img/hrms-logo.png"}
-          alt={"ozarro logo"}
+          alt={"hrms logo"}
           style={{ width: "130px" }}
         />
       </CHeaderBrand>

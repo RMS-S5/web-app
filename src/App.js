@@ -49,48 +49,29 @@ function App() {
             name="Home"
             render={(props) => <Home {...props} />}
           />
-          {/* <Route
-            path="/"
-            name="Home Page"
-            render={(props) => <Home {...props} />}
-          /> */}
-          {/* <ProtectedRoute
-          
-          <ProtectedRoute
-            isLoggedIn={false}
-            path="/user"
-            name="Home"
-            render={(props) => <MLayout {...props} />}
-          />
-          <ProtectedRoute
-            isLoggedIn={false}
-            path="/manager"
-            name="Home"
-            render={(props) => <MLayout {...props} />}
-          />
-          {/* <Redirect from="/" to="/manager" /> */}
-          {/* todo:update routes */}
-          <ProtectedRoute
-            isLoggedIn={false}
-            path="/customer"
-            name="Home"
-            render={(props) => <CustomerLayout {...props} />}
-          />
-          <Redirect from="/" to="/customer" />
+
           {/* <ProtectedRoute
             isLoggedIn={false}
             path="/manager"
             name="Home"
             render={(props) => <MLayout {...props} />}
-          /> */}
-          {/* <Redirect from="/" to="/manager" /> */}
-          {/* <ProtectedRoute
+          />
+          <Redirect from="/" to="/manager" /> */}
+          <ProtectedRoute
             isLoggedIn={false}
             path="/branch-manager"
             name="Home"
             render={(props) => <BMLayout {...props} />}
           />
-          <Redirect from="/" to="/branch-manager" /> */}
+          <Redirect from="/" to="/branch-manager" />
+
+          {/* <ProtectedRoute
+            isLoggedIn={false}
+            path="/customer"
+            name="Home"
+            render={(props) => <CustomerLayout {...props} />}
+          />
+          <Redirect from="/" to="/customer" /> */}
 
           {/* todo:update routes */}
         </Switch>
