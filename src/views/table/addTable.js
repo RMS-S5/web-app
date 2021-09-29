@@ -20,14 +20,13 @@ import "react-toastify/dist/ReactToastify.css";
 import CardContainer from "../../components/common/CardContainer";
 import Form from "../../components/common/NewForm";
 import { thunks } from "../../store/index";
-//import {getAllCategories} from "../../store/product/select"; //todo:change
 import CIcon from "@coreui/icons-react";
 import humanize from "../../utils/humanize";
 
-class BranchAdd extends Form {
+class TableAdd extends Form {
   state = {
     data: {
-      branchName: "",
+      tableNumber: "",
     },
     errors: {},
     btnDisable: false,
@@ -37,7 +36,7 @@ class BranchAdd extends Form {
   };
 
   schema = {
-    branchName: Joi.string().label("Branch Name"),
+    tableNumber: Joi.number().label("Table Number"),
   };
 
   componentWillUnmount() {
@@ -52,13 +51,13 @@ class BranchAdd extends Form {
             <CardContainer
               error={this.state.error}
               loading={this.state.loading}
-              header="Add Branch"
+              header="Add Table"
             >
               <CForm onSubmit={this.handleSubmit}>
                 <CRow>
                   <CCol xs="12" md="6">
-                    {this.renderInput("branchName", "Branch Name", "text", {
-                      placeholder: "Enter branch name",
+                    {this.renderInput("tableNumber", "Table Number", "text", {
+                      placeholder: "Enter table number",
                     })}
                   </CCol>
                 </CRow>                
@@ -78,21 +77,21 @@ class BranchAdd extends Form {
 
     const formData = new FormData();
     // Update the formData object
-    formData.append("branchName", this.state.data.branchName);
+    formData.append("tableNumber", this.state.data.tableNumber);
 
     console.log("########"); //test
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
     console.log("########"); //test
-    const res = await this.props.addBranch(this.state.data); //todo:formData
+    const res = await this.props.addTable(this.state.data); //todo:formData
 
     this.setState({ spinner: false });
 
     if (res.status === 200) {
       toast.success(res.message);
       this.props.history.push(
-        "/manager/branch/view-branches"
+        "/branch-manager/table/view-tables"
       );
     } else {
       if (res.status !== 200) toast.error(res.message);
@@ -105,7 +104,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addBranch: (branchData) => dispatch(thunks.staff.addBranch(branchData)),
+  addTable: (tableData) => dispatch(thunks.table.addTable(tableData)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BranchAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(TableAdd);

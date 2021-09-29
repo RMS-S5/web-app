@@ -141,6 +141,43 @@ export default {
       },
     },
   },
+
+  table: {
+    add: {
+      async table(tableData) {
+        return ajaxResolver(axios.post(`/table/add-table`, tableData));
+      },
+    },
+    get: {
+      async allTables(query) {
+        return ajaxResolver(axios.get(`/table/tables`, { params: query }));
+      },
+    },
+    remove: {
+      async removeTable(tableNumber) {
+        return ajaxResolver(axios.put(`/table/remove-table/${tableNumber}`));
+      },
+    },
+  },
+
+  branch: {
+    add: {
+      async branch(branchData) {
+        return ajaxResolver(axios.post(`/branch/add-branch`, branchData));
+      },
+    },
+    get: {
+      async allBranches(query) {
+        return ajaxResolver(axios.get(`/branch/branches`, { params: query }));
+      },
+    },
+    remove: {
+      async removeBranch(branchId) {
+        return ajaxResolver(axios.put(`/branch/remove-branch/${branchId}`));
+      },
+    },
+  },
+
   booking: {
     get: {
       async previousBookings(query) {
@@ -194,24 +231,6 @@ export default {
     remove: {
       async removeStaff(userId) {
         return ajaxResolver(axios.delete(`/staff/remove-staff/${userId}`));
-      },
-    },
-  },
-
-  branch: {
-    add: {
-      async branch(branchData) {
-        return ajaxResolver(axios.post(`/branch/add-branch`, branchData));
-      },
-    },
-    get: {
-      async allBranches(query) {
-        return ajaxResolver(axios.get(`/branch/branches`, { params: query }));
-      },
-    },
-    remove: {
-      async removeBranch(branchId) {
-        return ajaxResolver(axios.put(`/branch/remove-branch/${branchId}`));
       },
     },
   },

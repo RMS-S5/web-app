@@ -43,7 +43,7 @@ const _Mnav = [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Room Type Management"],
+    _children: ["Branch Management"],
   },
   {
     _tag: "CSidebarNavItem",

@@ -13,16 +13,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import humanize from "../../utils/humanize";
 import { thunks, cleanQuery } from "../../store/index";
-import { getAllBranches } from "../../store/staff/select";
+import { getAllTables } from "../../store/table/select";
 
-const BranchTable = (props) => {
+const TableTable = (props) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const branches = useSelector(getAllBranches);
+  const tables = useSelector(getAllTables);
 
   useEffect(async () => {
     setLoading(true);
-    const res = await dispatch(thunks.branch.getAllBranches());
+    const res = await dispatch(thunks.table.getAllTables());
     console.log("props:", props);
     if (res.status !== 200) {
       toast.error(res.message);
@@ -35,20 +35,21 @@ const BranchTable = (props) => {
     return () => toast.dismiss();
   }, []);
 
-  const handleRemoveBranch = async (branchId) => {
+  const handleRemoveTable = async (tableNumber) => {
     setLoading(true);
-    console.log("remove branch with branchId:", branchId);
-    const res = await dispatch(thunks.staff.removeBranch(branchId)); //todo: add new method
+    console.log("remove table with tableNumber:", tableNumber);
+    const res = await dispatch(thunks.table.removeTable(tableNumber)); //todo: add new method
     if (res.status !== 200) {
       toast.error(res.message);
     }
-    toast.success("Branch removed successfully");
+    toast.success("Table removed successfully");
     setLoading(false);
   };
 
   const fields = [
-    { key: "branchId", label: "Branch ID", _style: { width: "30%" } },
-    { key: "branchName", label: "Branch Name", _style: { width: "10%" } },
+    { key: "tableNumber", label: "Table Number", _style: { width: "30%" } },
+    { key: "verificationCode", label: "Verification Code", _style: { width: "10%" } },
+    { key: "lastUpdateTime", label: "Last Update Time", _style: { width: "10%" } },
     {
       key: "remove_item", //todo:change name
       label: "",
@@ -63,10 +64,10 @@ const BranchTable = (props) => {
     <CRow>
       <CCol>
         <CCard>
-          <CCardHeader>Branch</CCardHeader>
+          <CCardHeader>Table</CCardHeader>
           <CCardBody>
             <CDataTable
-              items={branches}
+              items={tables}
               fields={fields}
               columnFilter
               footer
@@ -86,7 +87,7 @@ const BranchTable = (props) => {
                         shape="rounded-pill"
                         size="sm"
                         onClick={() => {
-                          handleRemoveBranch(item.branchId);
+                          handleRemoveTable(item.tableNumber);
                         }}
                       >
                         Remove
@@ -103,4 +104,4 @@ const BranchTable = (props) => {
   );
 };
 
-export default BranchTable;
+export default TableTable;

@@ -3,7 +3,7 @@ import React from "react";
 
 
 
-const _BMnav = [ //todo:add account type to each item if needed
+const _BMnav = [ //todo:prioritize each sidebar element based on uasge
   {
     _tag: "CSidebarNavItem",
     name: "Dashboard",
@@ -68,6 +68,22 @@ const _BMnav = [ //todo:add account type to each item if needed
     name: "View Bookings",
     to: "/branch-manager/booking/view-bookings",
     icon: "cil-list",
+  },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Table Management"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Add Table",
+    to: "/branch-manager/table/add-table",
+    icon: "cil-building",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "View Tables",
+    to: "/branch-manager/table/view-tables",
+    icon: "cil-library",
   },
   {
     _tag: "CSidebarNavTitle",

@@ -2,20 +2,20 @@ import { /*createAsyncThunk,*/ createSlice } from "@reduxjs/toolkit";
 //import api from "../../api"
 
 const initialState = {
-  rooms: [],
+  tables: [],
 
 };
 
 /**
- * Room Slice
+ * Table Slice
  */
-const roomSlice = createSlice({
-  name: "room",
+const tableSlice = createSlice({
+  name: "table",
   initialState,
 
   reducers: {
-    setRooms(state, action) {
-      state.rooms = action.payload;
+    setTables(state, action) {
+      state.tables = action.payload;
     },
 
   },
@@ -25,7 +25,7 @@ const roomSlice = createSlice({
  * Exports
  */
 export const {
-    setRooms
-} = roomSlice.actions;
+    setTables
+} = tableSlice.actions;
 
-export default roomSlice.reducer;
+export default tableSlice.reducer;

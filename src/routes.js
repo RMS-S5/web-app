@@ -78,6 +78,12 @@ const PreviousBookings = React.lazy(() =>
  const CreateBranch = React.lazy(() => import("./views/branch/addBranch"));
  const BranchTable = React.lazy(() => import("./views/branch/branchTable"));
 
+ /**
+ * Table Management Component
+ */
+  const CreateTable = React.lazy(() => import("./views/table/addTable"));
+  const TableTable = React.lazy(() => import("./views/table/tableTable"));
+
 const routes = [
   //Manager routes
   { path: "/manager/", exact: true, name: "Home" },
@@ -152,6 +158,18 @@ const routes = [
     name: "Branch",
     component: BranchTable,
     accountType: "manager",
+  },
+  {
+    path: "/branch-manager/table/add-table",
+    name: "Table",
+    component: CreateTable,
+    accountType: "branch-manager",
+  },
+  {
+    path: "/branch-manager/table/view-tables",
+    name: "Table",
+    component: TableTable,
+    accountType: "branch-manager",
   },
 
   //Branch manager routes
