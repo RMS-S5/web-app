@@ -32,41 +32,7 @@ export default class categoryThunk {
     }
   }
 
-  /**
-   * ------------------Update------------------------------
-   */
-  /**
-   * Update Category
-   */
-  static updateCategory(categoryId, categoryData) {
-    return async (dispatch, getState) => {
-      registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.category.put.updateCategory(categoryId, categoryData);
-      const [res, data1] = [{ status: 200 }, []] //todo:remove mock
-      if (res.status === 200) {
-        //const [res1, data] = await api.category.get.allCategories();
-        const [res1, data] = [{ status: 200 },
-        [
-          {
-            categoryId: "c1",
-            categoryName: "Burgers",
-            description: "",
-          },
-          {
-            categoryId: "c1",
-            categoryName: "Pizza",
-            description: "",
-          }
-        ]
-        ] //todo:remove mock
-        if (res1.status === 200) {
-          console.log("dispatched##")
-          dispatch(setCategories(data));
-        }
-      }
-      return res;
-    }
-  }
+  
 
   /**
    * --------------------Getters----------------------------------------
@@ -77,21 +43,7 @@ export default class categoryThunk {
   static getAllCategories(query) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data] = await api.category.get.allCategories(query);
-      const [res, data] = [{ status: 200 },
-      [
-        {
-          categoryId: "c1",
-          categoryName: "Burgers",
-          description: "",
-        },
-        {
-          categoryId: "c1",
-          categoryName: "Pizza",
-          description: "",
-        }
-      ]
-      ] //todo:remove mock
+      const [res, data] = await api.category.get.allCategories(query);      
       if (res.status === 200) {
         dispatch(setCategories(data));
       }
@@ -108,25 +60,10 @@ export default class categoryThunk {
   static removeCategory(categoryId) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.category.remove.removeCategory(categoryId);
-      const [res, data1] = [{ status: 200 }, []] //todo:remove mock
+      const [res, data1] = await api.category.remove.removeCategory(categoryId);
       if (res.status === 200) {
-        //const [res1, data] = await api.category.get.allCategories();
-        let [res1, data] = [{ status: 200 },
-        [
-          {
-            categoryId: "c1",
-            categoryName: "Burgers",
-            description: "",
-          },
-          {
-            categoryId: "c1",
-            categoryName: "Pizza",
-            description: "",
-          }
-
-        ]
-        ] //todo:remove mock
+        const [res1, data] = await api.category.get.allCategories();
+        
         if (res1.status === 200) {
           dispatch(setCategories(data));
         }

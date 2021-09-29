@@ -178,6 +178,24 @@ export default {
     },
   },
 
+  category: {
+    add: {
+      async category(categoryData) {
+        return ajaxResolver(axios.post(`/category/add-category`, categoryData));
+      },
+    },
+    get: {
+      async allCategories(query) {
+        return ajaxResolver(axios.get(`/category/categories`, { params: query }));
+      },
+    },
+    remove: {
+      async removeCategory(categoryId) {
+        return ajaxResolver(axios.put(`/category/remove-category/${categoryId}`));
+      },
+    },
+  },
+
   booking: {
     get: {
       async previousBookings(query) {

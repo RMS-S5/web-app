@@ -75,14 +75,21 @@ const PreviousBookings = React.lazy(() =>
 /**
  * Branch Management Component
  */
- const CreateBranch = React.lazy(() => import("./views/branch/addBranch"));
- const BranchTable = React.lazy(() => import("./views/branch/branchTable"));
+const CreateBranch = React.lazy(() => import("./views/branch/addBranch"));
+const BranchTable = React.lazy(() => import("./views/branch/branchTable"));
 
- /**
- * Table Management Component
- */
-  const CreateTable = React.lazy(() => import("./views/table/addTable"));
-  const TableTable = React.lazy(() => import("./views/table/tableTable"));
+/**
+* Table Management Component
+*/
+const CreateTable = React.lazy(() => import("./views/table/addTable"));
+const TableTable = React.lazy(() => import("./views/table/tableTable"));
+
+/**
+* Category Management Component
+*/
+const CreateCategory = React.lazy(() => import("./views/category/addCategory"));
+const CategoryTable = React.lazy(() => import("./views/category/categoryTable"));
+
 
 const routes = [
   //Manager routes
@@ -146,6 +153,18 @@ const routes = [
     name: "customer-report",
     component: CustomerReportTable,
     accountType: "manager",
+  },
+  {
+    path: "/manager/category/add-category",
+    name: "Category",
+    component: CreateCategory,
+    accountType: "manager",
+  },
+  {
+    path: "/manager/category/view-categories",
+    name: "Category",
+    component: CategoryTable,
+    accountType: "manager", 
   },
   {
     path: "/manager/branch/add-branch",
