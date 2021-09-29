@@ -41,6 +41,22 @@ const _Mnav = [
     to: "/manager/room-type/view-room-types",
     icon: "cil-library",
   },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Room Type Management"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Add Branch",
+    to: "/manager/branch/add-branch",
+    icon: "cil-building",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "View Branches",
+    to: "/manager/branch/view-branches",
+    icon: "cil-library",
+  },
   // {
   //   _tag: "CSidebarNavTitle",
   //   _children: ["Other"],

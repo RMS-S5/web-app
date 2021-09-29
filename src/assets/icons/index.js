@@ -139,7 +139,8 @@ import {
     cilAirplaneModeOff,
     cilFastfood,
     cilStorage,
-    cilBed
+    cilBed,
+    
 } from "@coreui/icons";
 import { logo } from "./logo";
 import { logoNegative } from "./logo-negative";

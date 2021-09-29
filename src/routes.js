@@ -71,6 +71,13 @@ const ViewRoomCategories = React.lazy(() =>
 const PreviousBookings = React.lazy(() =>
   import("./views/customer/previousBookings")
 );
+
+/**
+ * Branch Management Component
+ */
+ const CreateBranch = React.lazy(() => import("./views/branch/addBranch"));
+ const BranchTable = React.lazy(() => import("./views/branch/branchTable"));
+
 const routes = [
   //Manager routes
   { path: "/manager/", exact: true, name: "Home" },
@@ -132,6 +139,18 @@ const routes = [
     path: "/manager/customer-report/view-customer-reports",
     name: "customer-report",
     component: CustomerReportTable,
+    accountType: "manager",
+  },
+  {
+    path: "/manager/branch/add-branch",
+    name: "Branch",
+    component: CreateBranch,
+    accountType: "manager",
+  },
+  {
+    path: "/manager/branch/view-branches",
+    name: "Branch",
+    component: BranchTable,
     accountType: "manager",
   },
 

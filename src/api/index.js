@@ -132,13 +132,12 @@ export default {
     put: {
       async updateRoom(roomNumber, roomData) {
         return ajaxResolver(
-          axios.put(`/room/update-room/${roomNumber}`, roomData)
-        );
+          axios.put(`/room/update-room/${roomNumber}`, roomData));
       },
     },
     remove: {
-      async removeRoom(room_number) {
-        return ajaxResolver(axios.put(`/room/remove-room/${room_number}`));
+      async removeRoom(roomNumber) {
+        return ajaxResolver(axios.put(`/room/remove-room/${roomNumber}`));
       },
     },
   },
@@ -186,15 +185,15 @@ export default {
       },
     },
     put: {
-      async updateStaff(user_id, data) {
+      async updateStaff(userId, data) {
         return ajaxResolver(
-          axios.put(`/staff/update-staff/${user_id}`, data, formDataConfig)
+          axios.put(`/staff/update-staff/${userId}`, data, formDataConfig)
         );
       },
     },
     remove: {
-      async removeStaff(user_id) {
-        return ajaxResolver(axios.delete(`/staff/remove-staff/${user_id}`));
+      async removeStaff(userId) {
+        return ajaxResolver(axios.delete(`/staff/remove-staff/${userId}`));
       },
     },
   },
@@ -202,24 +201,17 @@ export default {
   branch: {
     add: {
       async branch(branchData) {
-        return ajaxResolver(axios.post(`/product/add-branch`, branchData));
+        return ajaxResolver(axios.post(`/branch/add-branch`, branchData));
       },
     },
     get: {
       async allBranches(query) {
-        return ajaxResolver(
-          axios.get(`/product/get-branches`, { params: query })
-        );
-      },
-    },
-    put: {
-      async updateBranch(id, data) {
-        return ajaxResolver(axios.put(`/product/update-branch/${id}`, data));
+        return ajaxResolver(axios.get(`/branch/branches`, { params: query }));
       },
     },
     remove: {
-      async removeBranch(id) {
-        return ajaxResolver(axios.delete(`/product/remove-branch/${id}`));
+      async removeBranch(branchId) {
+        return ajaxResolver(axios.put(`/branch/remove-branch/${branchId}`));
       },
     },
   },
