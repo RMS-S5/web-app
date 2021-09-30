@@ -51,8 +51,7 @@ const StaffTable = (props) => {
     { key: "firstName", label: "First Name", _style: { width: "10%" } },
     { key: "lastName", label: "Last Name", _style: { width: "10%" } },
     { key: "email", label: "Email", _style: { width: "10%" } },
-    { key: "accountType", label: "Account Type", _style: { width: "10%" } }, //todo:remove
-    { key: "role", label: "Role", _style: { width: "10%" } },
+    { key: "accountType", label: "Account Type", _style: { width: "10%" } },
     { key: "branchName", label: "Branch", _style: { width: "10%" } },
     { key: "status", label: "Status", _style: { width: "10%" } },
     { key: "birthday", label: "Birthday", _style: { width: "10%" } },

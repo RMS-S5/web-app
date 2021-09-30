@@ -22,7 +22,7 @@ const BranchTable = (props) => {
 
   useEffect(async () => {
     setLoading(true);
-    const res = await dispatch(thunks.branch.getAllBranches());
+    const res = await dispatch(thunks.staff.getAllBranches());
     console.log("props:", props);
     if (res.status !== 200) {
       toast.error(res.message);

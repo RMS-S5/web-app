@@ -41,8 +41,9 @@ const CategoryTable = (props) => {
     const res = await dispatch(thunks.category.removeCategory(categoryId)); //todo: add new method
     if (res.status !== 200) {
       toast.error(res.message);
+    } else {
+      toast.success("Category removed successfully");
     }
-    toast.success("Category removed successfully");
     setLoading(false);
   };
 
@@ -58,7 +59,7 @@ const CategoryTable = (props) => {
     //   filter: false,
     // },
     {
-      key: "remove_item", 
+      key: "remove_item",
       label: "",
       _style: { width: "1%" },
       sorter: false,

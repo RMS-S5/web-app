@@ -32,7 +32,7 @@ class TableAdd extends Form {
     btnDisable: false,
     spinner: false,
     error: false,
-    loading: true,
+    loading: false,
   };
 
   schema = {

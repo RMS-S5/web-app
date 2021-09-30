@@ -17,7 +17,7 @@ import Form from "../../components/common/NewForm";
 import { thunks, cleanQuery } from "../../store/index";
 import {
   getAllBranches,
-  getAllRoles,
+  getAllAccountTypes,
   getAllStaffm,
 } from "../../store/staff/select";
 
@@ -28,14 +28,13 @@ class StaffView extends Form {
       lastName: "",
       email: "",
       accountType: "",
-      role: "",
       branchId: "",
       birthday: "",
       mobileNumber: "",
       nic: "",
     },
     branches: [],
-    roles: [],
+    accountTypes: [],
     //status : ["Available" , "Not Available"],
     userId: "",
     image: "",
@@ -65,7 +64,6 @@ class StaffView extends Form {
       .email({ tlds: { allow: false } })
       .label("Email"),
     accountType: Joi.string().optional().label("Account Type"),
-    role: Joi.string().optional().label("Role"),
     branchId: Joi.string().optional().label("Branch ID"),
     birthday: Joi.date().optional().label("Birthday"),
     mobileNumber: Joi.string().optional().label("Mobile Number"),
@@ -75,10 +73,10 @@ class StaffView extends Form {
   async componentDidMount() {
     const res = await this.props.getAllBranches();
     const res1 = await this.props.getAllStaffm();
-    const res2 = await this.props.getAllRoles();
+    const res2 = await this.props.getAllAccountTypes();
     if (res.status === 200 && res1.status === 200 && res2.status === 200) {
       const branchesData = this.props.branches;
-      const rolesData = this.props.roles;
+      const accountTypesData = this.props.accountTypes;
       let pairValue = [];
       branchesData.forEach((item, index) => {
         pairValue.push({
@@ -89,13 +87,13 @@ class StaffView extends Form {
       this.setState({ branches: pairValue, loading: false });
 
       let pairValue1 = [];
-      rolesData.forEach((item, index) => {
+      accountTypesData.forEach((item, index) => {
         pairValue1.push({
-          value: item.role,
+          value: item.accountType,
           label: item.description,
         });
       });
-      this.setState({ roles: pairValue1, loading: false });
+      this.setState({ accountTypes: pairValue1, loading: false });
     } else {
       this.setState({ loading: false, error: true });
       toast.error(res.message);
@@ -108,7 +106,6 @@ class StaffView extends Form {
         "lastName",
         "email",
         "accountType",
-        "role",
         "branchId",
         "birthday",
         "mobileNumber",
@@ -179,23 +176,10 @@ class StaffView extends Form {
                   </CRow>
                   <CRow>
                     <CCol xs="12" md="6">
-                      {this.renderInput(
+                      {this.renderSelectWithLabelValue(
                         "accountType",
                         "Account Type",
-                        "text",
-                        {
-                          placeholder: "Enter account type",
-                        },
-                        false
-                      )}
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs="12" md="6">
-                      {this.renderSelectWithLabelValue(
-                        "role",
-                        "Role",
-                        this.state.roles
+                        this.state.accountTypes
                       )}
                     </CCol>
                   </CRow>
@@ -278,7 +262,7 @@ class StaffView extends Form {
     formData.append("firstName", this.state.data.firstName);
     formData.append("lastName", this.state.data.lastName);
     formData.append("email", this.state.data.email);
-    formData.append("role", this.state.data.role);
+    formData.append("accountType", this.state.data.accountType);
     formData.append(
       "branchId",
       this.state.data.branchId //todo:branch must have an id property
@@ -307,13 +291,13 @@ class StaffView extends Form {
 const mapStateToProps = (state) => ({
   staffm: getAllStaffm(state),
   branches: getAllBranches(state),
-  roles: getAllRoles(state),
+  accountTypes: getAllAccountTypes(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getAllStaffm: () => dispatch(thunks.staff.getAllStaffm()),
   getAllBranches: () => dispatch(thunks.staff.getAllBranches()),
-  getAllRoles: () => dispatch(thunks.staff.getAllRoles()),
+  getAllAccountTypes: () => dispatch(thunks.staff.getAllAccountTypes()),
   updateStaff: (userId, staffData) =>
     dispatch(thunks.staff.updateStaff(userId, staffData)),
 });

@@ -141,6 +141,7 @@ import {
     cilStorage,
     cilBed,
     cilBurger,
+    cilWindow,
     
 } from "@coreui/icons";
 import { logo } from "./logo";
@@ -267,7 +268,8 @@ export const icons = Object.assign(
     cilFastfood,
     cilStorage,
     cilBed,
-    cilBurger
+    cilBurger,
+    cilWindow
   },
   {
     cifUs,

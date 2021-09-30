@@ -140,7 +140,7 @@ class FoodItemAdd extends Form {
             <CardContainer
               error={this.state.error}
               loading={this.state.loading}
-              header="Food Variants"
+              header="Food Variants (Optional)"
             >
               <CRow>
                 <CCol>

@@ -22,6 +22,7 @@ const TableTable = (props) => {
 
   useEffect(async () => {
     setLoading(true);
+    console.log("props:##");
     const res = await dispatch(thunks.table.getAllTables());
     console.log("props:", props);
     if (res.status !== 200) {
