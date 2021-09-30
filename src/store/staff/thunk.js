@@ -2,7 +2,7 @@ import jwtDecode from "jwt-decode";
 import _ from "lodash";
 import api, { registerAccessToken } from "./../../api";
 
-import { setBranches, setRoles, setStaffm } from "./index";
+import { setBranches, setAccountTypes, setStaffm } from "./index";
 
 export default class staffThunk {
   /**
@@ -71,7 +71,6 @@ export default class staffThunk {
               lastName: "Abeywickrema",
               email: "nagitha.18@uom.lk",
               accountType: "Manager",
-              role: "Manager",
               branchId: "b1",
               branchName: "Nugegoda Branch",
               status: "Available",
@@ -85,7 +84,6 @@ export default class staffThunk {
               lastName: "TrumpUpdated",
               email: "donald.18@uom.lk",
               accountType: "Waiter",
-              role: "Waiter",
               branchId: "b1",
               branchName: "Nugegoda Branch",
               status: "unavailable",
@@ -113,7 +111,7 @@ export default class staffThunk {
   static getAllStaffm(query) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data] = await api.staff.get.allStaffm(query);
+      // const [res, data] = await api.staff.get.allStaffm(query);
       const [res, data] = [
         { status: 200 },
         [
@@ -123,7 +121,6 @@ export default class staffThunk {
             lastName: "Abeywickrema",
             email: "nagitha.18@uom.lk",
             accountType: "Manager",
-            role: "Manager",
             branchId: "b1",
             branchName: "Nugegoda Branch",
             status: "Available",
@@ -137,7 +134,6 @@ export default class staffThunk {
             lastName: "Trump",
             email: "donald.18@uom.lk",
             accountType: "Waiter",
-            role: "Waiter",
             branchId: "b1",
             branchName: "Nugegoda Branch",
             status: "unavailable",
@@ -169,21 +165,21 @@ export default class staffThunk {
   }
 
   /**
-   * get all roles
+   * get all account types
    */
-  static getAllRoles(query) {
+  static getAllAccountTypes(query) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data] = await api.role.get.allRoles(query);//todo:cahnge
+      //const [res, data] = await api.accountType.get.allAccountTypes(query);//todo:cahnge
       const [res, data] = [
         { status: 200 },
         [
-          { role: "Branch Manager", description: "Branch Manager" },
-          { role: "Waiter", description: "Waiter" },
+          { accountType: "Branch Manager", description: "Branch Manager" },
+          { accountType: "Waiter", description: "Waiter" },
         ],
       ]; //todo:remove mock
       if (res.status === 200) {
-        dispatch(setRoles(data));
+        dispatch(setAccountTypes(data));
       }
       return res;
     };
@@ -192,12 +188,12 @@ export default class staffThunk {
   // /**
   //  * get all categories
   //  */
-  //  static getAllRoles(query) {
+  //  static getAllAccountTypes(query) {
   //   return async (dispatch, getState) => {
   //     registerAccessToken(getState().user.tokens.access);
-  //     const [res, data] = await api.role.get.allRoles(query);
+  //     const [res, data] = await api.accountType.get.allAccountTypes(query);
   //     if (res.status === 200) {
-  //       dispatch(setRoles(data));
+  //       dispatch(setAccountTypes(data));
   //     }
   //     return res;
   //   }
@@ -225,7 +221,6 @@ export default class staffThunk {
               lastName: "Abeywickrema",
               email: "nagitha.18@uom.lk",
               accountType: "Manager",
-              role: "Manager",
               branchId: "b1",
               branchName: "Nugegoda Branch",
               status: "Available",
@@ -239,7 +234,6 @@ export default class staffThunk {
               lastName: "Trump",
               email: "donald.18@uom.lk",
               accountType: "Waiter",
-              role: "Waiter",
               branchId: "b1",
               branchName: "Nugegoda Branch",
               status: "unavailable",

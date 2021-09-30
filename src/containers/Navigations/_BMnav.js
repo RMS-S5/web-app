@@ -12,20 +12,19 @@ const _BMnav = [ //todo:prioritize each sidebar element based on uasge
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Staff Management"],
+    _children: ["Food Item Management"],
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Add Staff",
-    to: "/branch-manager/staff/add-staff",
-    icon: "cil-user",
-
+    name: "Add Food Item",
+    to: "/branch-manager/food-item/add-food-item",
+    icon: "cilFastfood", 
   },
   {
     _tag: "CSidebarNavItem",
-    name: "View Staff",
-    to: "/branch-manager/staff/view-staffm",
-    icon: "cil-people",
+    name: "View Food Items",
+    to: "/branch-manager/food-item/view-food-items",
+    icon: "cil-list",
   },
   {
     _tag: "CSidebarNavTitle",
@@ -45,19 +44,19 @@ const _BMnav = [ //todo:prioritize each sidebar element based on uasge
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Food Item Management"],
+    _children: ["Table Management"],
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Add Food Item",
-    to: "/branch-manager/food-item/add-food-item",
-    icon: "cilFastfood", 
+    name: "Add Table",
+    to: "/branch-manager/table/add-table",
+    icon: "cil-window",
   },
   {
     _tag: "CSidebarNavItem",
-    name: "View Food Items",
-    to: "/branch-manager/food-item/view-food-items",
-    icon: "cil-list",
+    name: "View Tables",
+    to: "/branch-manager/table/view-tables",
+    icon: "cil-library",
   },
   {
     _tag: "CSidebarNavTitle",
@@ -69,22 +68,7 @@ const _BMnav = [ //todo:prioritize each sidebar element based on uasge
     to: "/branch-manager/booking/view-bookings",
     icon: "cil-list",
   },
-  {
-    _tag: "CSidebarNavTitle",
-    _children: ["Table Management"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Add Table",
-    to: "/branch-manager/table/add-table",
-    icon: "cil-building",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "View Tables",
-    to: "/branch-manager/table/view-tables",
-    icon: "cil-library",
-  },
+
   {
     _tag: "CSidebarNavTitle",
     _children: ["Orders"],
@@ -95,6 +79,26 @@ const _BMnav = [ //todo:prioritize each sidebar element based on uasge
     to: "/branch-manager/order/view-orders",
     icon: "cil-list",
   },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Staff Management"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Add Staff",
+    to: "/branch-manager/staff/add-staff",
+    icon: "cil-user",
+
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "View Staff",
+    to: "/branch-manager/staff/view-staffm",
+    icon: "cil-people",
+  },
+
+
+
   
   
 ];

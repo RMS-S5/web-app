@@ -10,7 +10,7 @@ export const getAllBranches = createDraftSafeSelector(
     (staff) => staff.branches
 );
 
-export const getAllRoles = createDraftSafeSelector(
+export const getAllAccountTypes = createDraftSafeSelector(
     (state) => state.staff,
-    (staff) => staff.roles
+    (staff) => staff.accountTypes
 );

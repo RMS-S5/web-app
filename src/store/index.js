@@ -9,7 +9,7 @@ import userReducer, {
   updateProfileData,
 } from "./user";
 
-import staffReducer, { setBranches, setRoles, setStaffm } from "./staff";
+import staffReducer, { setBranches, setAccountTypes, setStaffm } from "./staff";
 
 import roomTypeReducer, { setRoomTypes } from "./roomType";
 
@@ -91,7 +91,7 @@ export const actions = {
 
   staff: {
     setBranches,
-    setRoles,
+    setAccountTypes,
     setStaffm,
   },
   roomType: {

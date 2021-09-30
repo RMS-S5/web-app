@@ -67,12 +67,12 @@ class FoodVariantForm extends Form {
                     <CCol xs="12" md="6">
                         {this.renderInput("variant_name", "Variant Name", "text", {
                             placeholder: "Enter variant name",
-                        })}
+                        }, true)}
                     </CCol>
                     <CCol xs="12" md="6">
                         {this.renderInput("price", "Price", "text", {
                             placeholder: "Enter price",
-                        })}
+                        }, true)}
                     </CCol>
                 </CRow>
                 <CRow>

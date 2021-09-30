@@ -145,12 +145,12 @@ export default {
   table: {
     add: {
       async table(tableData) {
-        return ajaxResolver(axios.post(`/table/add-table`, tableData));
+        return ajaxResolver(axios.post(`/branch/add-table`, tableData));
       },
     },
     get: {
       async allTables(query) {
-        return ajaxResolver(axios.get(`/table/tables`, { params: query }));
+        return ajaxResolver(axios.get(`/branch/branch-tables`, { params: query }));
       },
     },
     remove: {
@@ -181,7 +181,7 @@ export default {
   category: {
     add: {
       async category(categoryData) {
-        return ajaxResolver(axios.post(`/category/add-category`, categoryData));
+        return ajaxResolver(axios.post(`/food-item/add-category`, categoryData));
       },
     },
     get: {
@@ -191,7 +191,7 @@ export default {
     },
     remove: {
       async removeCategory(categoryId) {
-        return ajaxResolver(axios.put(`/category/remove-category/${categoryId}`));
+        return ajaxResolver(axios.delete(`/food-item/remove-category/${categoryId}`));
       },
     },
   },
