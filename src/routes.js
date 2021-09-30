@@ -254,7 +254,7 @@ const routes = [
     accountType: "branch-manager",
   },
   {
-    path: "/branch-manager/food-item/update-food-item/:id", //todo:clairfy URL parameter passing
+    path: "/branch-manager/food-item/update-food-item/:foodItemId", //todo:clairfy URL parameter passing
     name: "Food Item",
     component: FoodItemView,
     accountType: "branch-manager",

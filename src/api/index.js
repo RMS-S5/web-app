@@ -186,12 +186,36 @@ export default {
     },
     get: {
       async allCategories(query) {
-        return ajaxResolver(axios.get(`/category/categories`, { params: query }));
+        return ajaxResolver(axios.get(`/food-item/categories-all`, { params: query }));
       },
     },
     remove: {
       async removeCategory(categoryId) {
         return ajaxResolver(axios.put(`/category/remove-category/${categoryId}`));
+      },
+    },
+  },
+
+  foodItem: {
+    add: {
+      async foodItem(foodItemData) {
+        return ajaxResolver(axios.post(`/food-item/add-food-item`, foodItemData));
+      },
+    },
+    get: {
+      async allFoodItems(query) {
+        return ajaxResolver(axios.get(`/food-item/food-items-all`, { params: query }));
+      },
+    },
+    put: {
+      async updateFoodItem(foodItemId, foodItemData) {
+        return ajaxResolver(
+          axios.put(`/food-item/update-food-item/${foodItemId}`, foodItemData));
+      },
+    },
+    remove: {
+      async removeFoodItem(foodItemId) {
+        return ajaxResolver(axios.delete(`/food-item/remove-food-item/${foodItemId}`));
       },
     },
   },

@@ -40,6 +40,7 @@ class CategoryAdd extends Form {
 
   schema = {
     categoryName: Joi.string().label("Category Name"),
+    description: Joi.string().label("Description"),
   };
 
   componentWillUnmount() {

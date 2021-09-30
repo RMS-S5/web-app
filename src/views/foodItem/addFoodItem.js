@@ -7,7 +7,8 @@ import {
   CInputGroup,
   CInputGroupPrepend, CInputGroupText, CInvalidFeedback,
   CLabel,
-  CRow, CSelect
+  CRow, CSelect,
+  CButton, CSpinner,
 } from "@coreui/react";
 import Joi from "joi";
 import React from "react";
@@ -16,21 +17,23 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardContainer from "../../components/common/CardContainer";
 import Form from "../../components/common/NewForm";
+import FoodVariantForm from "./foodVariantForm";
 import { thunks } from "../../store/index";
-import {getAllCategories} from "../../store/category/select";
+import { getAllCategories } from "../../store/category/select";
 import CIcon from "@coreui/icons-react";
 import humanize from "../../utils/humanize";
 
 class FoodItemAdd extends Form {
   state = {
     data: {
-      name : "",
-      categoryId : "",
-      description : "",
-      price : "",
+      name: "",
+      categoryId: "",
+      description: "",
+      price: "",
     },
-    image : "",
-    categories:[],
+    foodVariants: [],
+    image: "",
+    categories: [],
     errors: {},
     btnDisable: false,
     spinner: false,
@@ -53,14 +56,14 @@ class FoodItemAdd extends Form {
       const categoriesData = this.props.categories;
       let pairValue = [];
       categoriesData.forEach(
-          (item, index) => {
-            pairValue.push({
-              value : item.categoryId,
-              label : item.categoryName
-            })
-          }
+        (item, index) => {
+          pairValue.push({
+            value: item.categoryId,
+            label: item.categoryName
+          })
+        }
       )
-      this.setState({ categories:pairValue,loading: false });
+      this.setState({ categories: pairValue, loading: false });
     } else {
       this.setState({ loading: false, error: false }); //todo:set error to true
       toast.error(res.message);
@@ -70,6 +73,13 @@ class FoodItemAdd extends Form {
 
   componentWillUnmount() {
     toast.dismiss();
+  }
+
+  // handleAddVariant = () => {
+  //   this.state
+  // }
+  handleAddVariant(something) {
+    console.log(something);
   }
 
   render() {
@@ -93,7 +103,7 @@ class FoodItemAdd extends Form {
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderSelectWithLabelValue(
-                        "categoryId", "Category", this.state.categories
+                      "categoryId", "Category", this.state.categories
                     )}
                   </CCol>
                 </CRow>
@@ -111,13 +121,12 @@ class FoodItemAdd extends Form {
                     })}
                   </CCol>
                 </CRow>
-
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderImageInput("image", "Food Item Image", "file", {
                       placeholder: "Upload Food Item image",
                     },
-                    true,
+                      true,
                     )}
                   </CCol>
                 </CRow>
@@ -127,8 +136,23 @@ class FoodItemAdd extends Form {
               </CForm>
             </CardContainer>
           </CCol>
+          <CCol>
+            <CardContainer
+              error={this.state.error}
+              loading={this.state.loading}
+              header="Food Variants"
+            >
+              <CRow>
+                <CCol>
+                  <FoodVariantForm foodVariants={this.state.foodVariants} onAdd={this.handleAddVariant}>
+                  </FoodVariantForm>
+                </CCol>
+              </CRow>
+            </CardContainer>
+
+          </CCol>
         </CRow>
-      </CContainer>
+      </CContainer >
     );
   }
 
@@ -138,32 +162,33 @@ class FoodItemAdd extends Form {
     const formData = new FormData();
     // Update the formData object
     formData.append(
-        "image",
-        this.state.image
+      "image",
+      this.state.image
     );
     formData.append(
-        "name",
-        this.state.data.name
+      "name",
+      this.state.data.name
     )
     formData.append(
-        "categoryId",
-        this.state.data.categoryId
+      "categoryId",
+      this.state.data.categoryId
     )
     formData.append(
-        "description",
-        this.state.data.description
+      "description",
+      this.state.data.description
     )
     formData.append(
-        "price",
-        this.state.data.price
+      "price",
+      this.state.data.price
     )
 
+    //console.log("foodVariants:", this.state.foodVariants)
     console.log("########") //test
     for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
+      console.log(pair[0] + ', ' + pair[1]);
     }
     console.log("########") //test
-    const res = await this.props.addFoodItem(formData);
+    const res = await this.props.addFoodItem({...this.state.data,foodVariants: this.state.foodVariants});
 
     this.setState({ spinner: false });
 
@@ -181,8 +206,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getAllCategories : () => dispatch(thunks.category.getAllCategories()),
-  addFoodItem : (foodItemData) => dispatch(thunks.foodItem.addFoodItem(foodItemData))
+  getAllCategories: () => dispatch(thunks.category.getAllCategories()),
+  addFoodItem: (foodItemData) => dispatch(thunks.foodItem.addFoodItem(foodItemData))
 
 });
 
