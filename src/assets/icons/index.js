@@ -139,7 +139,9 @@ import {
     cilAirplaneModeOff,
     cilFastfood,
     cilStorage,
-    cilBed
+    cilBed,
+    cilBurger,
+    
 } from "@coreui/icons";
 import { logo } from "./logo";
 import { logoNegative } from "./logo-negative";
@@ -264,7 +266,8 @@ export const icons = Object.assign(
     cilAirplaneModeOff,
     cilFastfood,
     cilStorage,
-    cilBed
+    cilBed,
+    cilBurger
   },
   {
     cifUs,

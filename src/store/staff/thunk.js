@@ -29,22 +29,25 @@ export default class staffThunk {
     };
   }
 
-  // /**
-  //  * Add Category
-  //  */
-  // static addCategory(categoryData) {
-  //   return async (dispatch, getState) => {
-  //     registerAccessToken(getState().user.tokens.access);
-  //     const [res, data] = await api.category.add.category(categoryData);
-  //     if (res.status === 200) {
-  //       const [res1, data] = await api.category.get.allCategories();
-  //       if (res1.status === 200) {
-  //         dispatch(setCategories(data));
-  //       }
-  //     }
-  //     return res;
-  //   }
-  // }
+  /**
+   * Add Branch
+   */
+   static addBranch(branchData) {
+    console.log("########"); //test
+    console.log("branchData", branchData); //test
+    console.log("########"); //test
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      const [res, data] = await api.branch.add.branch(branchData);
+      if (res.status === 200) {
+        const [res1, data] = await api.branch.get.allBranches();
+        if (res1.status === 200) {
+          dispatch(setBranches(data));
+        }
+      }
+      return res;
+    };
+  }
 
   /**
    * ------------------Update------------------------------
@@ -157,14 +160,7 @@ export default class staffThunk {
   static getAllBranches(query) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data] = await api.branch.get.allBranches(query);//todo:cahnge
-      const [res, data] = [
-        { status: 200 },
-        [
-          { id: "b1", name: "Nugegoda Branch" },
-          { id: "b2", name: "Panadura Branch" },
-        ],
-      ]; //todo:remove mock
+      const [res, data] = await api.branch.get.allBranches(query);//todo:cahnge
       if (res.status === 200) {
         dispatch(setBranches(data));
       }
@@ -269,20 +265,20 @@ export default class staffThunk {
     };
   }
 
-  // /**
-  //  * Remove Category
-  //  */
-  // static removeCategory(categoryId) {
-  //   return async (dispatch, getState) => {
-  //     registerAccessToken(getState().user.tokens.access);
-  //     const [res] = await api.category.remove.removeCategory(categoryId);
-  //     if (res.status === 200) {
-  //       const [res1, data] = await api.category.get.allCategories();
-  //       if (res1.status === 200) {
-  //         dispatch(setCategories(data));
-  //       }
-  //     }
-  //     return res;
-  //   }
-  // }
+  /**
+   * Remove Branch
+   */
+   static removeBranch(branchId) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      const [res, data1] = await api.branch.remove.removeBranch(branchId);
+      if (res.status === 200) {
+        const [res1, data] = await api.branch.get.allBranches();
+        if (res1.status === 200) {
+          dispatch(setBranches(data));
+        }
+      }
+      return res;
+    };
+  }
 }

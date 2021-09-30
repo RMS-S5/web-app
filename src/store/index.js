@@ -33,6 +33,8 @@ import customerReducer, {
   setAccountLevel,
 } from "./customer";
 
+import tableReducer, { setTables } from "./table";
+
 /**
  * Thunk Actions
  */
@@ -46,6 +48,7 @@ import customerReportThunk from "./customerReport/thunk";
 import roomThunk from "./room/thunk";
 import foodItemThunk from "./foodItem/thunk";
 import categoryThunk from "./category/thunk";
+import tableThunk from "./table/thunk";
 
 import customerThunk from "./customer/thunk";
 
@@ -63,6 +66,7 @@ const store = configureStore({
     foodItem: foodItemReducer,
     category: categoryReducer,
     customer: customerReducer,
+    table: tableReducer,
   },
 
   middleware: getDefaultMiddleware({
@@ -117,6 +121,9 @@ export const actions = {
     setAccountLevel,
     setCustomerBookings,
   },
+  table: {
+    setTables,
+  },
 };
 
 export const thunks = {
@@ -131,6 +138,7 @@ export const thunks = {
   foodItem: foodItemThunk,
   category: categoryThunk,
   customer: customerThunk,
+  table: tableThunk,
 };
 
 /**

@@ -71,6 +71,26 @@ const ViewRoomCategories = React.lazy(() =>
 const PreviousBookings = React.lazy(() =>
   import("./views/customer/previousBookings")
 );
+
+/**
+ * Branch Management Component
+ */
+const CreateBranch = React.lazy(() => import("./views/branch/addBranch"));
+const BranchTable = React.lazy(() => import("./views/branch/branchTable"));
+
+/**
+* Table Management Component
+*/
+const CreateTable = React.lazy(() => import("./views/table/addTable"));
+const TableTable = React.lazy(() => import("./views/table/tableTable"));
+
+/**
+* Category Management Component
+*/
+const CreateCategory = React.lazy(() => import("./views/category/addCategory"));
+const CategoryTable = React.lazy(() => import("./views/category/categoryTable"));
+
+
 const routes = [
   //Manager routes
   { path: "/manager/", exact: true, name: "Home" },
@@ -133,6 +153,42 @@ const routes = [
     name: "customer-report",
     component: CustomerReportTable,
     accountType: "manager",
+  },
+  {
+    path: "/manager/category/add-category",
+    name: "Category",
+    component: CreateCategory,
+    accountType: "manager",
+  },
+  {
+    path: "/manager/category/view-categories",
+    name: "Category",
+    component: CategoryTable,
+    accountType: "manager", 
+  },
+  {
+    path: "/manager/branch/add-branch",
+    name: "Branch",
+    component: CreateBranch,
+    accountType: "manager",
+  },
+  {
+    path: "/manager/branch/view-branches",
+    name: "Branch",
+    component: BranchTable,
+    accountType: "manager",
+  },
+  {
+    path: "/branch-manager/table/add-table",
+    name: "Table",
+    component: CreateTable,
+    accountType: "branch-manager",
+  },
+  {
+    path: "/branch-manager/table/view-tables",
+    name: "Table",
+    component: TableTable,
+    accountType: "branch-manager",
   },
 
   //Branch manager routes
@@ -198,7 +254,7 @@ const routes = [
     accountType: "branch-manager",
   },
   {
-    path: "/branch-manager/food-item/update-food-item/:id", //todo:clairfy URL parameter passing
+    path: "/branch-manager/food-item/update-food-item/:foodItemId", //todo:clairfy URL parameter passing
     name: "Food Item",
     component: FoodItemView,
     accountType: "branch-manager",

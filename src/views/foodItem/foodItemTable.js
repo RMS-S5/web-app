@@ -7,6 +7,7 @@ import {
     CCol,
     CDataTable,
     CRow,
+    
 } from "@coreui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,21 +37,24 @@ const FoodItemTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
-    const handleRemoveFoodItem = async (id) => {
+    const handleRemoveFoodItem = async (foodItemId) => {
         setLoading(true);
-        console.log("remove satff member with id:", id)
-        const res = await dispatch(thunks.foodItem.removeFoodItem(id)); //todo: add new method
+        console.log("remove satff member with foodItemId:", foodItemId)
+        const res = await dispatch(thunks.foodItem.removeFoodItem(foodItemId)); //todo: add new method
+        console.log("res.status",res.status)
+        console.log("res.message",res.message)
         if (res.status !== 200) {
             toast.error(res.message);
+        } else {
+            toast.success("Food Item removed successfully");
         }
-        toast.success("Food Item removed successfully");
         setLoading(false);
     }
 
     const fields = [
-        { key: "id", label: "ID", _style: { width: "30%" } },
+        //{ key: "foodItemId", label: "ID", _style: { width: "30%" } },
         { key: "name", label: "Name", _style: { width: "10%" } },
-        { key: "categoryName", label: "Category", _style: { width: "10%" } },
+        //{ key: "categoryName", label: "Category", _style: { width: "10%" } },
         { key: "description", label: "Description", _style: { width: "10%" } },
         { key: "price", label: "Price", _style: { width: "10%" } },
         {
@@ -118,7 +122,7 @@ const FoodItemTable = (props) => {
                                                 shape="square"
                                                 size="sm"
                                                 onClick={() => {
-                                                    props.history.push(`/branch-manager/food-item/update-food-item/${item.id}`);
+                                                    props.history.push(`/branch-manager/food-item/update-food-item/${item.foodItemId}`);
                                                 }}
                                             >
                                                 Edit
@@ -135,7 +139,7 @@ const FoodItemTable = (props) => {
                                                 shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    handleRemoveFoodItem(item.id);
+                                                    handleRemoveFoodItem(item.foodItemId);
                                                 }}
                                             >
                                                 Remove
