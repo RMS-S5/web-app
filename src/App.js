@@ -57,23 +57,21 @@ function App() {
             render={(props) => <MLayout {...props} />}
           />
           <Redirect from="/" to="/manager" /> */}
-          <ProtectedRoute
+          {/* <ProtectedRoute
             isLoggedIn={false}
             path="/branch-manager"
             name="Home"
             render={(props) => <BMLayout {...props} />}
           />
-          <Redirect from="/" to="/branch-manager" />
+          <Redirect from="/" to="/branch-manager" /> */}
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
             isLoggedIn={false}
             path="/customer"
             name="Home"
             render={(props) => <CustomerLayout {...props} />}
           />
-          <Redirect from="/" to="/customer" /> */}
-
-          {/* todo:update routes */}
+          <Redirect from="/" to="/customer" />
         </Switch>
       </React.Suspense>
       <ToastContainer

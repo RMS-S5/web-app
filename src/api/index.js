@@ -93,6 +93,16 @@ export default {
       async userData() {
         return ajaxResolver(axios.get("/user/get-profile"));
       },
+      async customerById(data) {
+        return ajaxResolver(axios.get(`/user/get-user-by-id/${data}`));
+      },
+    },
+  },
+  report: {
+    add: {
+      async customerReport(reportData) {
+        return ajaxResolver(axios.post(`/report/add-new-report`, reportData));
+      },
     },
   },
   roomType: {
@@ -158,6 +168,13 @@ export default {
         );
       },
     },
+    add: {
+      async newBooking(bookingData) {
+        return ajaxResolver(
+          axios.post(`/booking/add-new-booking`, bookingData)
+        );
+      },
+    },
   },
 
   order: {
@@ -217,6 +234,14 @@ export default {
       async allBranches(query) {
         return ajaxResolver(
           axios.get(`/product/get-branches`, { params: query })
+        );
+      },
+      async allBrachesCustomer(query) {
+        return ajaxResolver(axios.get(`/branch/get-all-branches-customer`));
+      },
+      async allAvailableRoomsByBranch(query) {
+        return ajaxResolver(
+          axios.get(`/branch/get-available-rooms-by-branch/${query}`)
         );
       },
     },

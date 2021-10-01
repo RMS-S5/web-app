@@ -21,29 +21,30 @@ import CardContainer from "../../components/common/CardContainer";
 import Form from "../../components/common/NewForm";
 import { thunks } from "../../store/index";
 //import {getAllCategories} from "../../store/product/select"; //todo:change
-//   import {getAllBranches} from "../../store/staff/select";
+import { getBookingBranchData } from "../../store/newBooking/select";
 //   import {getAllRoles} from "../../store/staff/select";
 import { userData } from "../../store/user/select";
 import CIcon from "@coreui/icons-react";
+import api from "../../api";
 
 class CheckAvailability extends Form {
   state = {
     data: {
       arrival: "",
       departure: "",
-      branch_id: "",
+      branchId: "",
 
-      roomType0: "",
-      numberOfRooms0: 0,
-      roomType1: "",
-      numberOfRooms1: 0,
-      roomType2: "",
-      numberOfRooms2: 0,
-      roomType3: "",
-      numberOfRooms3: 0,
-      seletedTypes: [],
-      numberOfTypes: 1,
-      maxRoomTypes: 4,
+      // roomType0: "",
+      // numberOfRooms0: 0,
+      // roomType1: "",
+      // numberOfRooms1: 0,
+      // roomType2: "",
+      // numberOfRooms2: 0,
+      // roomType3: "",
+      // numberOfRooms3: 0,
+      // seletedTypes: [],
+      // numberOfTypes: 1,
+      // maxRoomTypes: 4,
     },
     roomTypes: [
       "Single Room",
@@ -56,12 +57,7 @@ class CheckAvailability extends Form {
       "Executive Floor",
     ],
     prices: [30, 20, 40, 70, 20, 10, 10, 20],
-    branches: [
-      "Main Branch - Horana",
-      "Malabe Branch",
-      "Thalawathugoda Branch",
-      "Kiribathgoda Branch",
-    ],
+    branches: [],
     roomDetails: [],
     errors: {},
     btnDisable: false,
@@ -71,45 +67,59 @@ class CheckAvailability extends Form {
   };
 
   schema = {
-    roomType: Joi.string().label("Room Type"),
-    numberOfRooms: Joi.number().label("number of rooms"),
-    numberOfTypes: Joi.number()
-      .integer()
-      .min(1)
-      .max(4)
-      .label("number of rooms"),
-    branch_id: Joi.string().label("Branch ID"),
+    // roomType: Joi.string().label("Room Type"),
+    // numberOfRooms: Joi.number().label("number of rooms"),
+    // numberOfTypes: Joi.number()
+    //   .integer()
+    //   .min(1)
+    //   .max(4)
+    //   .label("number of rooms"),
+    branchId: Joi.string().label("Branch ID"),
     arrival: Joi.string().label("Arrival"),
     departure: Joi.string().label("Departure"),
-    seletedTypes: Joi.array().items(Joi.string().allow("")),
-    maxRoomTypes: Joi.number().integer().label("number of rooms"),
-    roomType0: Joi.string().label("Room type"),
-    roomType1: Joi.string().allow("").label("Room type"),
-    roomType2: Joi.string().allow("").label("Room type"),
-    roomType3: Joi.string().allow("").label("Room type"),
-    numberOfRooms0: Joi.number()
-      .integer()
-      .min(1)
-      .max(5)
-      .label("number of rooms"),
-    numberOfRooms1: Joi.number()
-      .integer()
-      .min(0)
-      .max(5)
-      .label("number of rooms"),
-    numberOfRooms2: Joi.number()
-      .integer()
-      .min(0)
-      .max(5)
-      .label("number of rooms"),
-    numberOfRooms3: Joi.number()
-      .integer()
-      .min(0)
-      .max(5)
-      .label("number of rooms"),
+    // seletedTypes: Joi.array().items(Joi.string().allow("")),
+    // maxRoomTypes: Joi.number().integer().label("number of rooms"),
+    // roomType0: Joi.string().label("Room type"),
+    // roomType1: Joi.string().allow("").label("Room type"),
+    // roomType2: Joi.string().allow("").label("Room type"),
+    // roomType3: Joi.string().allow("").label("Room type"),
+    // numberOfRooms0: Joi.number()
+    //   .integer()
+    //   .min(1)
+    //   .max(5)
+    //   .label("number of rooms"),
+    // numberOfRooms1: Joi.number()
+    //   .integer()
+    //   .min(0)
+    //   .max(5)
+    //   .label("number of rooms"),
+    // numberOfRooms2: Joi.number()
+    //   .integer()
+    //   .min(0)
+    //   .max(5)
+    //   .label("number of rooms"),
+    // numberOfRooms3: Joi.number()
+    //   .integer()
+    //   .min(0)
+    //   .max(5)
+    //   .label("number of rooms"),
   };
 
   async componentDidMount() {
+    const res = await api.branch.get.allBrachesCustomer();
+    if (res) {
+      let pairValue = [];
+      res[1].forEach((item, index) => {
+        pairValue.push({
+          value: item.branchId,
+          label: item.branchName,
+        });
+      });
+      this.setState({ branches: pairValue, loading: false });
+    } else {
+      this.setState({ error: true });
+    }
+
     //dispatch the event to get the categories
     //set to the local states
     //const res = await this.props.getAllCategories();
@@ -195,11 +205,11 @@ class CheckAvailability extends Form {
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderSelectWithLabelValue(
-                      "branch_id",
+                      "branchId",
                       "Branch",
                       this.state.branches
                     )}
-                    {console.log(this.state.data.branch_id)}
+                    {console.log(this.state.data.branchId)}
                   </CCol>
                 </CRow>
                 <CRow>
@@ -209,7 +219,6 @@ class CheckAvailability extends Form {
                     })}
                   </CCol>
                 </CRow>
-
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderInput("departure", "Departure", "date", {
@@ -217,8 +226,7 @@ class CheckAvailability extends Form {
                     })}
                   </CCol>
                 </CRow>
-
-                <CRow>
+                {/* <CRow>
                   <CCol xs="12" md="6">
                     {this.renderSelectWithLabelValue(
                       "numberOfTypes",
@@ -239,7 +247,7 @@ class CheckAvailability extends Form {
                       this.state.roomTypes
                     )}
                     {/* {console.log(this.state.data.roomType0)} */}
-                  </CCol>
+                {/* </CCol>
                   <CCol xs="12" md="6">
                     {this.renderInput(
                       "numberOfRooms0",
@@ -250,11 +258,11 @@ class CheckAvailability extends Form {
                       }
                     )}
                     {/* {console.log(this.state.data.numberOfRooms0)} */}
-                  </CCol>
+                {/* </CCol>
 
                   {this.AddToRoomDetails(0)}
                 </CRow>
-                {this.AddMoreRooms()}
+                {this.AddMoreRooms()} */}
 
                 {/* <CRow>
                   <CCol xs="12" md="6">
@@ -265,14 +273,9 @@ class CheckAvailability extends Form {
                     )}
                   </CCol>
                 </CRow> */}
-
                 <CRow>
                   <CCol>
-                    {this.renderButton(
-                      "Check Availability",
-                      "success",
-                      "danger"
-                    )}
+                    {this.renderButton("Show Rooms", "success", "danger")}
                   </CCol>
                 </CRow>
               </CForm>
@@ -283,77 +286,77 @@ class CheckAvailability extends Form {
     );
   }
 
-  AddMoreRooms() {
-    console.log(this.state.data.numberOfTypes);
-    if (this.state.data.numberOfTypes > 1) {
-      let rows = [];
-      for (let i = 1; i < this.state.data.numberOfTypes; i++) {
-        rows.push(
-          <CRow key={i}>
-            <CCol xs="12" md="6">
-              {this.renderSelectWithLabelValue(
-                "roomType" + i,
-                "Room Type",
-                this.state.roomTypes.filter(
-                  (item) =>
-                    !this.state.data.seletedTypes
-                      .splice(i, i + 1)
-                      .includes(item)
-                )
-              )}
-              {console.log("roomType" + i)}
-            </CCol>
-            <CCol xs="12" md="6">
-              {this.renderInput(
-                "numberOfRooms" + i,
-                "Number of Rooms",
-                "number",
-                {
-                  placeholder: "number of rooms", // todo:remove since id is autogenerated
-                }
-              )}
-            </CCol>
+  // AddMoreRooms() {
+  //   console.log(this.state.data.numberOfTypes);
+  //   if (this.state.data.numberOfTypes > 1) {
+  //     let rows = [];
+  //     for (let i = 1; i < this.state.data.numberOfTypes; i++) {
+  //       rows.push(
+  //         <CRow key={i}>
+  //           <CCol xs="12" md="6">
+  //             {this.renderSelectWithLabelValue(
+  //               "roomType" + i,
+  //               "Room Type",
+  //               this.state.roomTypes.filter(
+  //                 (item) =>
+  //                   !this.state.data.seletedTypes
+  //                     .splice(i, i + 1)
+  //                     .includes(item)
+  //               )
+  //             )}
+  //             {console.log("roomType" + i)}
+  //           </CCol>
+  //           <CCol xs="12" md="6">
+  //             {this.renderInput(
+  //               "numberOfRooms" + i,
+  //               "Number of Rooms",
+  //               "number",
+  //               {
+  //                 placeholder: "number of rooms", // todo:remove since id is autogenerated
+  //               }
+  //             )}
+  //           </CCol>
 
-            {this.AddToRoomDetails(i)}
-          </CRow>
-        );
-      }
+  //           {this.AddToRoomDetails(i)}
+  //         </CRow>
+  //       );
+  //     }
 
-      return <React.Fragment>{rows}</React.Fragment>;
-    }
-  }
+  //     return <React.Fragment>{rows}</React.Fragment>;
+  //   }
+  // }
 
-  AddToRoomDetails(index) {
-    this.state.data.seletedTypes = [
-      this.state.data.roomType0,
-      this.state.data.roomType1,
-      this.state.data.roomType2,
-      this.state.data.roomType3,
-    ];
-    let type = "roomType" + index;
-    let rooms = "numberOfRooms" + index;
-    // console.log(this.state.data);
-    // console.log(type);
-    // console.log(this.state.data[type]);
-    // console.log(this.state.data[rooms]);
-    this.state.roomDetails[index] = {
-      roomType: this.state.data[type],
-      numberOfRooms: this.state.data[rooms],
-    };
-    console.log(this.state.roomDetails);
-    return;
-  }
+  // AddToRoomDetails(index) {
+  //   this.state.data.seletedTypes = [
+  //     this.state.data.roomType0,
+  //     this.state.data.roomType1,
+  //     this.state.data.roomType2,
+  //     this.state.data.roomType3,
+  //   ];
+  //   let type = "roomType" + index;
+  //   let rooms = "numberOfRooms" + index;
+  //   // console.log(this.state.data);
+  //   // console.log(type);
+  //   // console.log(this.state.data[type]);
+  //   // console.log(this.state.data[rooms]);
+  //   this.state.roomDetails[index] = {
+  //     roomType: this.state.data[type],
+  //     numberOfRooms: this.state.data[rooms],
+  //   };
+  //   console.log(this.state.roomDetails);
+  //   return;
+  // }
 
   async callServer() {
     this.setState({ spinner: true });
     console.log("server");
 
-    const formData = new FormData();
-    // Update the formData object
-    formData.append("arrival", this.state.data.arrival);
-    formData.append("departure", this.state.data.departure);
-    formData.append("branch", this.state.data.branch_id);
-    formData.append("roomData", this.state.roomDetails);
+    // const formData = new FormData();
+    // // Update the formData object
+    // formData.append("arrival", this.state.data.arrival);
+    // formData.append("departure", this.state.data.departure);
+    // formData.append("branch", this.state.data.branch_id);
+    // formData.append("roomData", this.state.roomDetails);
 
     //const res = await this.props.checkAvailability(formData);
     if (
@@ -362,14 +365,23 @@ class CheckAvailability extends Form {
           new Date(this.state.data.arrival).toString()) &&
       new Date(this.state.data.arrival) < new Date(this.state.data.departure)
     ) {
-      const res = { status: 200 }; //await this.props.checkAvailability(formData);
-      this.setState({ spinner: false });
-      if (res.status === 200) {
-        toast.success("rooms are available");
-        this.props.history.push("/customer/booking-form");
-      } else {
-        if (res.status !== 200) toast.error("rooms are not available");
-      }
+      // const res = { status: 200 }; //await this.props.checkAvailability(formData);
+      // this.props.push(this.state.data.branchId);
+      toast.success("rooms are available");
+      // this.props.saveBookingBranchData({
+      //   arrival: this.state.data.arrival,
+      //   departure: this.state.data.departure,
+      //   branchId: this.state.data.branchId,
+      // });
+      // console.log(this.props);
+      this.props.history.push({
+        pathname: "/customer/add-booking-rooms",
+        bookingBranchData: {
+          arrival: this.state.data.arrival,
+          departure: this.state.data.departure,
+          branchId: this.state.data.branchId,
+        },
+      });
     } else {
       this.setState({ spinner: false });
       toast.error("Dates are invalid");
@@ -378,13 +390,16 @@ class CheckAvailability extends Form {
 }
 
 const mapStateToProps = (state) => ({
-  // roomTypes: getAllRoomTypes(state),
+  //  roomTypes: getAllRoomTypes(state),
+  // bookingData: getBookingBranchData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   //   getAllRoomTypes: () => dispatch(thunks.roomTypes.getAllRoomTypes()),
   //  checkAvailability: (roomData) =>
   //     dispatch(thunks.roomType.checkAvailability(roomData)),
+  // saveBookingBranchData: (bookingData) =>
+  //   dispatch(thunks.newBooking.setBookingBrData(bookingData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckAvailability);

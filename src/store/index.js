@@ -22,7 +22,7 @@ import bookingReducer, {
 
 import customerReportReducer, { setCustomerReports } from "./customerReport";
 
-import roomReducer, { setRooms } from "./room";
+import roomReducer, { setRooms, setAllAvailableRooms } from "./room";
 
 import foodItemReducer, { setFoodItems } from "./foodItem";
 
@@ -32,6 +32,11 @@ import customerReducer, {
   setCustomerBookings,
   setAccountLevel,
 } from "./customer";
+
+import newBookingReducer, {
+  setBookingBrachData,
+  setBookingRoomData,
+} from "./newBooking";
 
 /**
  * Thunk Actions
@@ -46,7 +51,7 @@ import customerReportThunk from "./customerReport/thunk";
 import roomThunk from "./room/thunk";
 import foodItemThunk from "./foodItem/thunk";
 import categoryThunk from "./category/thunk";
-
+import newBookingThunk from "./newBooking/thunk";
 import customerThunk from "./customer/thunk";
 
 const store = configureStore({
@@ -63,6 +68,7 @@ const store = configureStore({
     foodItem: foodItemReducer,
     category: categoryReducer,
     customer: customerReducer,
+    newBooking: newBookingReducer,
   },
 
   middleware: getDefaultMiddleware({
@@ -106,6 +112,7 @@ export const actions = {
   },
   room: {
     setRooms,
+    setAllAvailableRooms,
   },
   foodItem: {
     setFoodItems,
@@ -116,6 +123,10 @@ export const actions = {
   customer: {
     setAccountLevel,
     setCustomerBookings,
+  },
+  newBooking: {
+    setBookingBrachData,
+    setBookingRoomData,
   },
 };
 
@@ -131,6 +142,7 @@ export const thunks = {
   foodItem: foodItemThunk,
   category: categoryThunk,
   customer: customerThunk,
+  newBooking: newBookingThunk,
 };
 
 /**

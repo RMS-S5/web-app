@@ -71,6 +71,14 @@ const ViewRoomCategories = React.lazy(() =>
 const PreviousBookings = React.lazy(() =>
   import("./views/customer/previousBookings")
 );
+const CustomerViewRooms = React.lazy(() =>
+  import("./views/customer/viewRooms")
+);
+const CustomerReport = React.lazy(() =>
+  import("./views/customer/customerReport")
+);
+const CustomerRatings = React.lazy(() => import("./views/customer/addRatings"));
+
 const routes = [
   //Manager routes
   { path: "/manager/", exact: true, name: "Home" },
@@ -244,6 +252,21 @@ const routes = [
     path: "/customer/previous-bookings",
     name: "Previous bookings",
     component: PreviousBookings,
+  },
+  {
+    path: "/customer/add-booking-rooms",
+    name: "Adding Rooms",
+    component: CustomerViewRooms,
+  },
+  {
+    path: "/customer/report-a-problem",
+    name: "Customer Report",
+    component: CustomerReport,
+  },
+  {
+    path: "/customer/add-a-review",
+    name: "Customer Rating",
+    component: CustomerRatings,
   },
 ];
 

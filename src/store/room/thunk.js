@@ -2,12 +2,9 @@ import jwtDecode from "jwt-decode";
 import _ from "lodash";
 import api, { registerAccessToken } from "../../api";
 
-import {
-  setRooms
-} from "./index";
+import { setAllAvailableRooms, setRooms } from "./index";
 
 export default class roomThunk {
-
   /**
    * ------------------Add------------------------------
    */
@@ -16,9 +13,9 @@ export default class roomThunk {
    * Add Room
    */
   static addRoom(roomData) {
-    console.log("########") //test
-    console.log("roomData", roomData) //test
-    console.log("########") //test
+    console.log("########"); //test
+    console.log("roomData", roomData); //test
+    console.log("########"); //test
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
       const [res, data] = await api.room.add.room(roomData);
@@ -29,7 +26,7 @@ export default class roomThunk {
         }
       }
       return res;
-    }
+    };
   }
 
   /**
@@ -42,32 +39,33 @@ export default class roomThunk {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
       //const [res, data1] = await api.room.put.updateRoom(userId, roomData);
-      const [res, data1] = [{ status: 200 }, []] //todo:remove mock
+      const [res, data1] = [{ status: 200 }, []]; //todo:remove mock
       if (res.status === 200) {
         //const [res1, data] = await api.room.get.allRooms();
-        const [res1, data] = [{ status: 200 },
-        [
-          {
-            roomNumber: "42",
-            capacity: "2",
-            roomType: "deluxe",
-            price: "20000",
-          },
-          {
-            roomNumber: "22",
-            capacity: "3",
-            roomType: "vip",
-            price: "35900",
-          }
-        ]
-        ] //todo:remove mock
+        const [res1, data] = [
+          { status: 200 },
+          [
+            {
+              roomNumber: "42",
+              capacity: "2",
+              roomType: "deluxe",
+              price: "20000",
+            },
+            {
+              roomNumber: "22",
+              capacity: "3",
+              roomType: "vip",
+              price: "35900",
+            },
+          ],
+        ]; //todo:remove mock
         if (res1.status === 200) {
           //console.log("dispatched##")
           dispatch(setRooms(data));
         }
       }
       return res;
-    }
+    };
   }
 
   /**
@@ -100,10 +98,18 @@ export default class roomThunk {
         dispatch(setRooms(data));
       }
       return res;
-    }
+    };
   }
-
-
+  static getAllAvailableRoomsByBranch(query) {
+    return async (dispatch, getState) => {
+      const [res, data] = await api.branch.get.allAvailableRoomsByBranch(query);
+      if (res.status === 200) {
+        dispatch(setAllAvailableRooms(data));
+        return data;
+      }
+      return res;
+    };
+  }
 
   /**
    * ------------------Remove------------------------------
@@ -115,33 +121,30 @@ export default class roomThunk {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
       //const [res, data1] = await api.room.remove.removeRoom(userId);
-      const [res, data1] = [{ status: 200 }, []] //todo:remove mock
+      const [res, data1] = [{ status: 200 }, []]; //todo:remove mock
       if (res.status === 200) {
         //const [res1, data] = await api.room.get.allRooms();
-        let [res1, data] = [{ status: 200 },
-        [
-          {
-            roomNumber: "22",
-            capacity: "3",
-            roomType: "vip",
-            price: "35900",
-          }
-
-        ]
-        ] //todo:remove mock
+        let [res1, data] = [
+          { status: 200 },
+          [
+            {
+              roomNumber: "22",
+              capacity: "3",
+              roomType: "vip",
+              price: "35900",
+            },
+          ],
+        ]; //todo:remove mock
 
         data = data.filter(function (obj) {
           return obj.userId !== userId;
-        });//todo:remove mock
+        }); //todo:remove mock
 
         if (res1.status === 200) {
           dispatch(setRooms(data));
         }
       }
       return res;
-    }
+    };
   }
-
-
-
 }

@@ -12,6 +12,8 @@ import {
   CCardTitle,
   CCardText,
   CCardFooter,
+  CButton,
+  CDataTable,
   CRow,
 } from "@coreui/react";
 import Joi from "joi";
@@ -22,9 +24,12 @@ import Form from "../../components/common/NewForm";
 import image1 from "../../assets/img/1.jpg";
 import image3 from "../../assets/img/3.jpg";
 import image4 from "../../assets/img/4.jpg";
+import { Card, Col, Row, Button } from "react-bootstrap";
+import api from "../../api";
 
 class CategoryView extends Form {
   state = {
+    roomTypeData: [],
     roomTypes: [
       "Single Room",
       "Double Room",
@@ -50,27 +55,30 @@ class CategoryView extends Form {
     spinner: false,
   };
 
-  //   async componentDidMount() {
-  //     const res = await this.props.getAllCategories();
-  //     if (res.status === 200) {
-  //       const category = this.getCategoryById(this.props.match.params.categoryId);
-  //       if (category) {
-  //         const categoryId = this.props.match.params.categoryId;
-  //         const updateData = cleanQuery(category, [
-  //           "status",
-  //           "name",
-  //           "description",
-  //         ]);
-  //         this.setState({ data: { ...updateData }, categoryId });
-  //       } else {
-  //         this.setState({ loading: false, error: true });
-  //         toast.error("Category not found");
-  //       }
-  //     } else {
-  //       this.setState({ loading: false, error: true });
-  //       toast.error(res.message);
-  //     }
-  //   }
+  async componentDidMount() {
+    const res = await api.roomType.get.allRoomTypes();
+    console.log(res);
+    if (res[0].status === 200) {
+      this.setState({ roomTypeData: [...res[1]] });
+      console.log(this.state.roomTypeData);
+      // const category = this.getCategoryById(this.props.match.params.categoryId);
+      // if (category) {
+      //   const categoryId = this.props.match.params.categoryId;
+      //   const updateData = cleanQuery(category, [
+      //     "status",
+      //     "name",
+      //     "description",
+      //   ]);
+      //   this.setState({ data: { ...updateData }, categoryId });
+      // } else {
+      //   this.setState({ loading: false, error: true });
+      //   toast.error("Category not found");
+      // }
+    } else {
+      this.setState({ loading: false, error: true });
+      toast.error(res[0].message);
+    }
+  }
 
   renderCards() {
     if (this.state.roomTypes.length > 1) {
@@ -107,10 +115,57 @@ class CategoryView extends Form {
     return (
       <CContainer>
         <CRow>
-          <CCol xs="5" md="7">
-            <CCard width="50%">
+          <CCol>
+            <CCard>
               <CCardHeader>Room Categories</CCardHeader>
-              <CCardBody>{this.renderCards()}</CCardBody>
+              <CCardBody>
+                <Row xs={1} md={3} className="g-10">
+                  {/* Array.from({ length: 4 }) */}
+                  {this.state.roomTypeData.map((_, idx) => (
+                    <Col key={idx}>
+                      <Card>
+                        <Card.Img
+                          variant="top"
+                          src={
+                            this.state.images[
+                              Math.floor(Math.random() * (5 - 0 + 1)) + 0
+                            ]
+                          }
+                        />
+                        <Card.Body>
+                          <Card.Title>
+                            {this.state.roomTypeData[idx].roomType}
+                          </Card.Title>
+                          <Card.Text>
+                            {this.state.roomTypeData[idx].description}
+                            <br />
+                            {/* Capacity:{" "}
+                            {this.state.roomData[idx].capacity === 1
+                              ? "One Person"
+                              : this.state.roomData[idx].capacity.toString()}
+                            {this.state.roomData[idx].capacity === 1
+                              ? ""
+                              : "Persons"}
+                            <br />
+                            Price (Rs) : {this.state.roomData[idx].price} */}
+                          </Card.Text>
+                          {/* <Button
+                            key={idx}
+                            onClick={this.addRoom.bind(
+                              this,
+                              idx,
+                              this.state.roomData[idx]
+                            )}
+                            variant="primary"
+                          >
+                            Add
+                          </Button> */}
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </CCardBody>
             </CCard>
           </CCol>
         </CRow>

@@ -2,46 +2,27 @@ import jwtDecode from "jwt-decode";
 import _ from "lodash";
 import api, { registerAccessToken } from "./../../api";
 
-import { setCustomerBookings, setAccountLevel } from "./index";
+import { setBookingBrachData, setBookingRoomData } from "./index";
 
-export default class customerThunk {
+export default class newBookingThunk {
   /**
    * ------------------Add------------------------------
    */
 
   /**
-   * Add coupon
-   */
-  static addBooking(bookingData) {
-    return async (dispatch, getState) => {
-      registerAccessToken(getState().user.tokens.access);
-      const [res, data] = await api.customer.add.booking(bookingData);
-      if (res.status === 200) {
-        const [res1, data] = await api.customer.get.allBookings();
-        if (res1.status === 200) {
-          dispatch(setCustomerBookings(data));
-        }
-      }
-      return res;
-    };
-  }
-  /**
    * --------------------Getters----------------------------------------
    */
   /**
-   * Get All previous bookings
+   * setting data
    */
-  static getAllPreviousBookings(query) {
-    console.log(query);
+  static setBookingBrData(data) {
     return async (dispatch, getState) => {
-      registerAccessToken(getState().user.tokens.access);
-      const [res, data] = await api.booking.get.previousBookings(query);
-
-      if (res.status === 200) {
-        dispatch(setCustomerBookings(data));
-        return data;
-      }
-      return res;
+      dispatch(setBookingBrachData(data));
+    };
+  }
+  static setBookingRmData(data) {
+    return async (dispatch, getState) => {
+      dispatch(setBookingRoomData(data));
     };
   }
 

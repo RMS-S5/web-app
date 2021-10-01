@@ -3,7 +3,7 @@ import { /*createAsyncThunk,*/ createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   rooms: [],
-
+  allAvailableRooms: [],
 };
 
 /**
@@ -17,17 +17,15 @@ const roomSlice = createSlice({
     setRooms(state, action) {
       state.rooms = action.payload;
     },
-
+    setAllAvailableRooms(state, action) {
+      state.allAvailableRooms = action.payload;
+    },
   },
 });
 
 /**
  * Exports
  */
-export const {
-    setBranches,
-    setRoles,
-    setRooms
-} = roomSlice.actions;
+export const { setAllAvailableRooms, setRooms } = roomSlice.actions;
 
 export default roomSlice.reducer;

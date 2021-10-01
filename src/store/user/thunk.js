@@ -89,6 +89,17 @@ export default class userThunk {
       }
     };
   }
+  static getUserDataById(customerId) {
+    return async (dispatch, getState) => {
+      // registerAccessToken(getState().user.tokens.access);
+      const [res, data] = await api.user.get.customerById(customerId);
+      if (res.status === 200) {
+        dispatch(setUserData(data));
+        return data;
+      }
+      return res;
+    };
+  }
 
   static ch;
 }
