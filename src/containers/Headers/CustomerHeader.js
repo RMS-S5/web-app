@@ -56,12 +56,13 @@ const CustomerHeader = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto"></CHeaderNav>
 
-      {/*<CHeaderNav className="px-3">*/}
-      {/*    Hy {(userData) ? userData.name : ''}*/}
-      {/*</CHeaderNav>*/}
+      <CHeaderNav className="px-3">
+        {console.log(userData)}
+        {/* Welcome {userData ? userData.email : ""} */}
+      </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        {/* <CustomerHeaderDropdown /> */}
+        {userData ? <CustomerHeaderDropdown /> : ""}
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">

@@ -20,8 +20,12 @@ const RoomTypeView = React.lazy(() => import("./views/roomType/roomTypeView"));
 /**
  * Manager Profile Components
  */
-const ManagerProfile = React.lazy(() =>
-  import("./views/accountSettings/profile")
+const UserProfile = React.lazy(() => import("./views/accountSettings/profile"));
+const UserProfileEdit = React.lazy(() =>
+  import("./views/accountSettings/profileEdit")
+);
+const UserPasswordChange = React.lazy(() =>
+  import("./views/accountSettings/changePassword")
 );
 
 /**
@@ -90,6 +94,13 @@ const TableTable = React.lazy(() => import("./views/table/tableTable"));
 const CreateCategory = React.lazy(() => import("./views/category/addCategory"));
 const CategoryTable = React.lazy(() => import("./views/category/categoryTable"));
 
+const CustomerViewRooms = React.lazy(() =>
+  import("./views/customer/viewRooms")
+);
+const CustomerReport = React.lazy(() =>
+  import("./views/customer/customerReport")
+);
+const CustomerRatings = React.lazy(() => import("./views/customer/addRatings"));
 
 const routes = [
   //Manager routes
@@ -103,8 +114,18 @@ const routes = [
   {
     path: "/manager/profile",
     name: "Profile",
-    component: ManagerProfile,
+    component: UserProfile,
     accountType: "manager",
+  },
+  {
+    path: "/manager/profile-edit",
+    name: "Profile Edit",
+    component: UserProfileEdit,
+  },
+  {
+    path: "/manager/change-password",
+    name: "Change password",
+    component: UserPasswordChange,
   },
   {
     path: "/manager/staff/add-staff",
@@ -202,8 +223,18 @@ const routes = [
   {
     path: "/branch-manager/profile",
     name: "Profile",
-    component: ManagerProfile,
+    component: UserProfile,
     accountType: "branch-manager",
+  },
+  {
+    path: "/branch-manager/profile-edit",
+    name: "Profile Edit",
+    component: UserProfileEdit,
+  },
+  {
+    path: "/branch-manager/change-password",
+    name: "Change password",
+    component: UserPasswordChange,
   },
   {
     path: "/branch-manager/staff/add-staff",
@@ -300,6 +331,36 @@ const routes = [
     path: "/customer/previous-bookings",
     name: "Previous bookings",
     component: PreviousBookings,
+  },
+  {
+    path: "/customer/add-booking-rooms",
+    name: "Adding Rooms",
+    component: CustomerViewRooms,
+  },
+  {
+    path: "/customer/report-a-problem",
+    name: "Customer Report",
+    component: CustomerReport,
+  },
+  {
+    path: "/customer/add-a-review",
+    name: "Customer Rating",
+    component: CustomerRatings,
+  },
+  {
+    path: "/customer/profile",
+    name: "Profile",
+    component: UserProfile,
+  },
+  {
+    path: "/customer/profile-edit",
+    name: "Profile Edit",
+    component: UserProfileEdit,
+  },
+  {
+    path: "/customer/change-password",
+    name: "Change password",
+    component: UserPasswordChange,
   },
 ];
 

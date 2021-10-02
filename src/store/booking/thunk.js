@@ -2,13 +2,9 @@ import jwtDecode from "jwt-decode";
 import _ from "lodash";
 import api, { registerAccessToken } from "./../../api";
 
-import {
-  setMonthlyCompletedBookings,
-  setBookings,
-} from "./index";
+import { setMonthlyCompletedBookings, setBookings } from "./index";
 
 export default class bookingThunk {
-
   /**
    * --------------------Getters----------------------------------------
    */
@@ -50,7 +46,7 @@ export default class bookingThunk {
         dispatch(setBookings(data));
       }
       return res;
-    }
+    };
   }
 
   /**
@@ -200,7 +196,7 @@ export default class bookingThunk {
         dispatch(setMonthlyCompletedBookings(data));
       }
       return res;
-    }
+    };
   }
 
   /**
@@ -248,13 +244,13 @@ export default class bookingThunk {
         }
       }
       return res;
-    }
+    };
   }
 
   /**
    * Reject Booking
    */
-   static rejectBooking(id) {
+  static rejectBooking(id) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
       const [res, data1] = await api.booking.put.rejectBooking(id);
@@ -293,7 +289,14 @@ export default class bookingThunk {
         }
       }
       return res;
-    }
+    };
   }
 
+  static addBookingData(bookingData) {
+    return async (dispatch, getState) => {
+      const [res, data] = await api.booking.add.newBooking(bookingData);
+      console.log(res);
+      return res;
+    };
+  }
 }

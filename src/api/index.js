@@ -93,6 +93,27 @@ export default {
       async userData() {
         return ajaxResolver(axios.get("/user/get-profile"));
       },
+      async customerById(data) {
+        return ajaxResolver(axios.get(`/user/get-user-by-id/${data}`));
+      },
+    },
+    update: {
+      async changePassword(userId, data) {
+        return ajaxResolver(axios.put(`user/update-password/${userId}`, data));
+      },
+      async updateProfile(userId, data) {
+        return ajaxResolver(axios.put(`user/update-password/${userId}`, data));
+      },
+    },
+  },
+  report: {
+    add: {
+      async customerReport(reportData) {
+        return ajaxResolver(axios.post(`/report/add-new-report`, reportData));
+      },
+      async customerReview(reportData) {
+        return ajaxResolver(axios.post(`/report/add-new-review`, reportData));
+      },
     },
   },
   roomType: {
@@ -257,6 +278,13 @@ export default {
           axios.put(`/booking/reject-booking/${bookingId}`));
       },
     },
+    add: {
+      async newBooking(bookingData) {
+        return ajaxResolver(
+          axios.post(`/booking/add-new-booking`, bookingData)
+        );
+      },
+    },
   },
 
   order: {
@@ -299,6 +327,14 @@ export default {
       async updateStaff(userId, data) {
         return ajaxResolver(
           axios.put(`/user/update-staff-member/${userId}`, data, formDataConfig)
+        );
+      },
+      async allBrachesCustomer(query) {
+        return ajaxResolver(axios.get(`/branch/get-all-branches-customer`));
+      },
+      async allAvailableRoomsByBranch(query) {
+        return ajaxResolver(
+          axios.get(`/branch/get-available-rooms-by-branch/${query}`)
         );
       },
     },

@@ -22,7 +22,7 @@ import bookingReducer, {
 
 import customerReportReducer, { setCustomerReports } from "./customerReport";
 
-import roomReducer, { setRooms } from "./room";
+import roomReducer, { setRooms, setAllAvailableRooms } from "./room";
 
 import foodItemReducer, { setFoodItems } from "./foodItem";
 
@@ -34,6 +34,10 @@ import customerReducer, {
 } from "./customer";
 
 import tableReducer, { setTables } from "./table";
+import newBookingReducer, {
+  setBookingBrachData,
+  setBookingRoomData,
+} from "./newBooking";
 
 /**
  * Thunk Actions
@@ -50,6 +54,7 @@ import foodItemThunk from "./foodItem/thunk";
 import categoryThunk from "./category/thunk";
 import tableThunk from "./table/thunk";
 
+import newBookingThunk from "./newBooking/thunk";
 import customerThunk from "./customer/thunk";
 
 const store = configureStore({
@@ -67,6 +72,7 @@ const store = configureStore({
     category: categoryReducer,
     customer: customerReducer,
     table: tableReducer,
+    newBooking: newBookingReducer,
   },
 
   middleware: getDefaultMiddleware({
@@ -110,6 +116,7 @@ export const actions = {
   },
   room: {
     setRooms,
+    setAllAvailableRooms,
   },
   foodItem: {
     setFoodItems,
@@ -123,6 +130,10 @@ export const actions = {
   },
   table: {
     setTables,
+  },
+  newBooking: {
+    setBookingBrachData,
+    setBookingRoomData,
   },
 };
 
@@ -139,6 +150,7 @@ export const thunks = {
   category: categoryThunk,
   customer: customerThunk,
   table: tableThunk,
+  newBooking: newBookingThunk,
 };
 
 /**

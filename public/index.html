@@ -36,12 +36,31 @@
     />
     <title>HRMS</title>
   </head>
+  <style>
+    df-messenger {
+      --df-messenger-bot-message: #878fac;
+      --df-messenger-button-titlebar-color: #f2c94c;
+      --df-messenger-chat-background-color: #fafafa;
+      --df-messenger-font-color: white;
+      --df-messenger-send-icon: #b3b1b0;
+      --df-messenger-user-message: #f2c94c;
+    }
+  </style>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script
       type="text/javascript"
       src="https://www.payhere.lk/lib/payhere.js"
     ></script>
+
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      intent="WELCOME"
+      chat-title="Augora Hotel and Restaurant"
+      agent-id="8b0edd18-d396-4a3e-a9a8-25143140238d"
+      language-code="en"
+    ></df-messenger>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
