@@ -97,11 +97,22 @@ export default {
         return ajaxResolver(axios.get(`/user/get-user-by-id/${data}`));
       },
     },
+    update: {
+      async changePassword(userId, data) {
+        return ajaxResolver(axios.put(`user/update-password/${userId}`, data));
+      },
+      async updateProfile(userId, data) {
+        return ajaxResolver(axios.put(`user/update-password/${userId}`, data));
+      },
+    },
   },
   report: {
     add: {
       async customerReport(reportData) {
         return ajaxResolver(axios.post(`/report/add-new-report`, reportData));
+      },
+      async customerReview(reportData) {
+        return ajaxResolver(axios.post(`/report/add-new-review`, reportData));
       },
     },
   },

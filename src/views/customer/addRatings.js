@@ -26,17 +26,27 @@ import { getAllRoles } from "../../store/staff/select";
 import CIcon from "@coreui/icons-react";
 import { getUserData } from "../../store/user/select";
 import api from "../../api";
+import Rating from "@material-ui/lab/Rating";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
+import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
+import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
+import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAltOutlined";
+import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
-class customerReport extends Form {
+class customerRating extends Form {
   state = {
     data: {
-      userId: "",
-      report: "",
-      mobileNumber: "",
-      customerName: "",
+      review: "",
+      recommendation: "",
     },
+    userData: [],
+    rating: 3,
     image: "",
     imageSrc: "",
+    isLoggedIn: false,
     errors: {},
     btnDisable: false,
     spinner: false,
@@ -54,27 +64,18 @@ class customerReport extends Form {
     // size: Joi.string().label("Size"),
     // description: Joi.string().label("Description"),
     // status: Joi.string().label("Available"),
-    report: Joi.string().label("Report"),
-    userId: Joi.string().label("user id"),
-    mobileNumber: Joi.string().label("Mobile number"),
-    customerName: Joi.string().label("customer name"),
+    review: Joi.string().label("review"),
+    recommendation: Joi.string().label("recommendation"),
   };
 
   async componentDidMount() {
+    console.log(this.props);
     if (this.props.userData.hasOwnProperty("userId")) {
       let userData = await this.props.getUserDataById(
         this.props.userData.userId
       );
 
       this.setState({ userData: userData, isLoggedIn: true });
-
-      this.setState({
-        data: {
-          customerName: userData.firstName,
-          mobileNumber: userData.mobileNumber,
-          userId: userData.userId,
-        },
-      });
     } else {
       toast.error("You must login to continue");
     }
@@ -85,26 +86,83 @@ class customerReport extends Form {
   }
 
   render() {
+    function IconContainer(props) {
+      const { value, ...other } = props;
+      return <span {...other}>{customIcons[value].icon}</span>;
+    }
+    // IconContainer.propTypes = {
+    //   value: PropTypes.number.isRequired,
+    // };
+    const customIcons = {
+      1: {
+        icon: <SentimentVeryDissatisfiedIcon />,
+        label: "Very Dissatisfied",
+      },
+      2: {
+        icon: <SentimentDissatisfiedIcon />,
+        label: "Dissatisfied",
+      },
+      3: {
+        icon: <SentimentSatisfiedIcon />,
+        label: "Neutral",
+      },
+      4: {
+        icon: <SentimentSatisfiedAltIcon />,
+        label: "Satisfied",
+      },
+      5: {
+        icon: <SentimentVerySatisfiedIcon />,
+        label: "Very Satisfied",
+      },
+    };
     return (
       <CContainer>
         <CRow>
           <CCol>
-            <CardContainer error={this.state.error} header="Report a problem">
+            <CardContainer
+              error={this.state.error}
+              header="Rate us | Add a review | Add a recommendation"
+            >
               <CForm onSubmit={this.handleSubmit}>
                 <CRow>
                   <CCol xs="12" md="6">
+                    <h5>Rate us</h5>
+                  </CCol>
+                </CRow>
+                <Rating
+                  defaultValue={2}
+                  size="large"
+                  name="customized-icons"
+                  value={this.state.rating}
+                  getLabelText={(value) => customIcons[value].label}
+                  IconContainerComponent={IconContainer}
+                  onChange={(event, newValue) => {
+                    this.setState({ rating: newValue });
+                  }}
+                />
+                <CRow>
+                  <CCol xs="12" md="6">
+                    {this.renderTextArea("review", "Type your review", "5", {
+                      placeholder: "type your review",
+                    })}
+                  </CCol>
+                </CRow>
+
+                <CRow>
+                  <CCol xs="12" md="6">
                     {this.renderTextArea(
-                      "report",
-                      "Type your issue here",
-                      "10",
+                      "recommendation",
+                      "Type your any recommendation",
+                      "5",
                       {
-                        placeholder: "type your question",
-                      }
+                        placeholder: "type your any recommendation",
+                      },
+                      true
                     )}
                   </CCol>
                 </CRow>
-                <img height="300" src={this.state.imageSrc} />
-                <CRow>
+
+                {/* <CRow>
                   <CCol xs="12" md="6">
                     {this.renderImageInput(
                       "image",
@@ -116,7 +174,15 @@ class customerReport extends Form {
                       true
                     )}
                   </CCol>
-                </CRow>
+                </CRow> */}
+                {/* <StarRatings
+                  rating={this.state.rating}
+                  starRatedColor="blue"
+                  changeRating={this.changeRating}
+                  numberOfStars={6}
+                  name="rating"
+                /> */}
+
                 <CRow>
                   <CCol>{this.renderButton("Send", "success", "danger")}</CCol>
                 </CRow>
@@ -131,23 +197,32 @@ class customerReport extends Form {
   async callServer() {
     this.setState({ spinner: true });
     console.log("he");
-    const report = {
-      userId: this.state.data.userId,
-      mobileNumber: this.state.data.mobileNumber,
-      description: this.state.data.report,
-      customerName: this.state.data.customerName,
+    let customerId = "";
+
+    if (this.state.isLoggedIn) {
+      customerId = this.state.userData.userId;
+    }
+    const review = {
+      rating: this.state.rating,
+      description: this.state.data.review,
+      recommendation: this.state.data.recommendation,
+      customerId,
     };
-    console.log(report);
-    const res = await api.report.add.customerReport(report);
+
+    const res = await api.report.add.customerReview(review);
 
     this.setState({ spinner: false });
 
     if (res[0].status === 200) {
-      toast.success("Our team will contact you. Thanks for your feedback.");
-      this.state.data.report = "";
-      this.state.image = "";
+      this.setState({
+        data: {
+          review: "",
+          recommendation: "",
+        },
+      });
+      toast.success("Thanks for rating. We improve based on your feedback");
 
-      this.props.history.push("/customer/report-a-problem");
+      this.props.history.push("/customer/add-a-review");
     } else {
       if (res[0].status !== 200) toast.error(res[0].message);
     }
@@ -172,4 +247,4 @@ const mapDispatchToProps = (dispatch) => ({
   // addBookingData : (bookingData) => dispatch(thunks.booking.addBookingData(bookingData))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(customerReport);
+export default connect(mapStateToProps, mapDispatchToProps)(customerRating);

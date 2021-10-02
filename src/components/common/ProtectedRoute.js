@@ -22,7 +22,7 @@ const ProtectedRoute = ({ isLoggedIn, userType, location, ...rest }) => {
   return (
     <Redirect
       to={{
-        pathname: "/admin/auth/login",
+        pathname: "/home/login",
         state: {
           from: location,
         },

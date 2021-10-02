@@ -5,9 +5,11 @@ import {
   CFormGroup,
   CInput,
   CInputGroup,
-  CInputGroupPrepend, CInputGroupText, CInvalidFeedback,
+  CInputGroupPrepend,
+  CInputGroupText,
+  CInvalidFeedback,
   CLabel,
-  CRow
+  CRow,
 } from "@coreui/react";
 import Joi from "joi";
 import React from "react";
@@ -17,16 +19,17 @@ import "react-toastify/dist/ReactToastify.css";
 import CardContainer from "../../components/common/CardContainer";
 import Form from "../../components/common/NewForm";
 import { thunks } from "../../store/index";
-import { getProfileData } from "../../store/user/select";
+import { getProfileData, getUserData } from "../../store/user/select";
 import CIcon from "@coreui/icons-react";
 
 class ProfileEdit extends Form {
   state = {
     data: {
-      name : "",
-      mobile : ""
+      firstName: "",
+      lastName: "",
+      mobileNumber: "",
     },
-    image : "",
+    image: "",
     errors: {},
     btnDisable: false,
     spinner: false,
@@ -35,22 +38,24 @@ class ProfileEdit extends Form {
   };
 
   schema = {
-    name: Joi.string().label("Name"),
-    userType: Joi.string().label("User Type"),
-    mobile: Joi.string().min(9).max(13).required().label("Mobile Number")
+    firstName: Joi.string().label("first name"),
+    lastName: Joi.string().label("last name"),
+    mobileNumber: Joi.string().min(9).max(13).required().label("Mobile Number"),
   };
 
   async componentDidMount() {
+    console.log(this.props);
     //dispatch the event to get the district and cities
     //set to the local states
-    const res = await this.props.getProfileDetails();
-    if (res.status === 200) {
-      const temp = { ...this.props.profileData };
+    const res = await this.props.getUserDataById(this.props.userData.userId);
+    console.log(res);
+    if (res) {
+      const temp = { ...res };
       const data = {
-        name : temp.name,
-        mobile : temp.mobile,
-        userType : temp.userType
-      }
+        firstName: temp.firstName,
+        lastName: temp.lastName,
+        mobileNumber: temp.mobileNumber,
+      };
       this.setState({ data, loading: false });
     } else {
       this.setState({ loading: false, error: false });
@@ -75,32 +80,43 @@ class ProfileEdit extends Form {
               <CForm onSubmit={this.handleSubmit}>
                 <CRow>
                   <CCol xs="12" md="6">
-                    {this.renderInput("name", "Name", "text", {
+                    {this.renderInput("firstName", "Name", "text", {
                       placeholder: "Enter Your Name",
                     })}
                   </CCol>
                 </CRow>
                 <CRow>
                   <CCol xs="12" md="6">
-                    {this.renderInput("mobile", "Mobile Number", "text", {
+                    {this.renderInput("lastName", "Name", "text", {
+                      placeholder: "Enter Your Name",
+                    })}
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol xs="12" md="6">
+                    {this.renderInput("mobileNumber", "Mobile Number", "text", {
                       placeholder: "Enter Your Mobile Number",
                     })}
                   </CCol>
                 </CRow>
                 <CRow>
                   <CCol xs="12" md="6">
-                    <CLabel htmlFor="userType">Admin Type</CLabel>
-                    <CInput id="userType" readOnly value={this.state.data.userType} />
+                    <CLabel htmlFor="userType">Account Type</CLabel>
+                    <CInput
+                      id="userType"
+                      readOnly
+                      value={this.props.userData.accountType}
+                    />
                   </CCol>
                 </CRow>
-                <CRow>
+                {/* <CRow>
                   <CCol xs="12" md="6">
                     {this.renderImageInput("image", "Profile Picture", "file", {
                       placeholder: "Upload your profile picture",
                     })}
                   </CCol>
-                </CRow>
-                <CRow>
+                </CRow> */}
+                <CRow className="mt-3">
                   <CCol>{this.renderButton("Save", "success", "danger")}</CCol>
                 </CRow>
               </CForm>
@@ -113,26 +129,16 @@ class ProfileEdit extends Form {
 
   async callServer() {
     this.setState({ spinner: true });
-
-    const formData = new FormData();
-    // Update the formData object
-    formData.append(
-        "image",
-        this.state.image,
-    );
-    formData.append(
-        "name",
-        this.state.data.name
-    )
-    formData.append(
-        "mobile",
-        this.state.data.mobile
-    )
+    let filledData = {
+      firstName: this.state.data.firstName,
+      lastName: this.state.data.lastName,
+      mobileNumber: this.state.data.mobileNumber,
+    };
 
     const res1 = await this.props.updateProfileDetails(formData);
     this.setState({ spinner: false });
     if (res1.status === 200) {
-      toast.success(res1.message)
+      toast.success(res1.message);
       this.props.history.push("/admin/profile");
     } else {
       if (res1.status !== 200) toast.error(res1.message);
@@ -141,11 +147,11 @@ class ProfileEdit extends Form {
 }
 
 const mapStateToProps = (state) => ({
-  profileData: getProfileData(state),
+  userData: getUserData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getProfileDetails: () => dispatch(thunks.user.getProfileDetails()),
+  getUserDataById: (userId) => dispatch(thunks.user.getUserDataById(userId)),
   updateProfileDetails: (profileData) =>
     dispatch(thunks.user.updateAdminProfile(profileData)),
 });

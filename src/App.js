@@ -50,20 +50,22 @@ function App() {
             render={(props) => <Home {...props} />}
           />
 
-          {/* <ProtectedRoute
-            isLoggedIn={false}
+          <ProtectedRoute
+            isLoggedIn={true}
+            userType="Manager"
             path="/manager"
             name="Home"
             render={(props) => <MLayout {...props} />}
           />
-          <Redirect from="/" to="/manager" /> */}
-          {/* <ProtectedRoute
-            isLoggedIn={false}
+          {/* <Redirect from="/" to="/manager" /> */}
+          <ProtectedRoute
+            isLoggedIn={true}
+            userType="branchManger"
             path="/branch-manager"
             name="Home"
             render={(props) => <BMLayout {...props} />}
           />
-          <Redirect from="/" to="/branch-manager" /> */}
+          {/* <Redirect from="/" to="/branch-manager" /> */}
 
           <ProtectedRoute
             isLoggedIn={false}
@@ -71,7 +73,7 @@ function App() {
             name="Home"
             render={(props) => <CustomerLayout {...props} />}
           />
-          <Redirect from="/" to="/customer" />
+          <Redirect from="/" to="/home" />
         </Switch>
       </React.Suspense>
       <ToastContainer

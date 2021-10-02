@@ -46,15 +46,14 @@ export default class userThunk {
   static checkToken() {
     return (dispatch, getState) => {
       const accessToken = localStorage.getItem("hrms-access-token");
-      console.log(accessToken);
+      console.log("access", accessToken);
       if (!accessToken) return;
       const payload = jwtDecode(accessToken);
+      console.log("decode", payload);
       if (!payload) return;
 
       dispatch(
-        setUserData(
-          _.pick(payload, ["userId", "name", "userType", "mobile", "image"])
-        )
+        setUserData(_.pick(payload, ["userId", "email", "accountType"]))
       );
 
       const refreshToken = localStorage.getItem("hrms-refresh-token");
@@ -95,6 +94,17 @@ export default class userThunk {
       const [res, data] = await api.user.get.customerById(customerId);
       if (res.status === 200) {
         dispatch(setUserData(data));
+        return data;
+      }
+      return res;
+    };
+  }
+  static changePassword(customerId) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      const [res, data] = await api.user.update.changePassword(customerId);
+      if (res.status === 200) {
+        //dispatch(setUserData(data));
         return data;
       }
       return res;

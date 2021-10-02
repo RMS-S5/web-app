@@ -52,6 +52,8 @@ class Bookingform extends Form {
 
       { key: "arrival", label: "Arrival", _style: { width: "10%" } },
       { key: "departure", label: "Departure", _style: { width: "10%" } },
+      { key: "amount", label: "Amount", _style: { width: "10%" } },
+      { key: "status", label: "Status", _style: { width: "10%" } },
 
       // {
       //   key: "remove_item", //todo:change name
@@ -94,6 +96,7 @@ class Bookingform extends Form {
     );
     let previousBookings = [];
     let bookingIds = [];
+    console.log(bookings);
     if (bookings) {
       for (let i = 0; i < bookings.length; i++) {
         if (bookingIds.includes(bookings[i].bookingId)) {
@@ -107,6 +110,8 @@ class Bookingform extends Form {
             departure: bookings[i].departure.substring(0, 10),
             branchName: bookings[i].branchName,
             roomNumbers: [bookings[i].roomNumber],
+            amount: bookings[i].amount,
+            status: bookings[i].status,
           });
           bookingIds.push(bookings[i].bookingId);
         }
