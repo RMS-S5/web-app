@@ -194,7 +194,7 @@ class FoodItemAdd extends Form {
 
     if (res.status === 200) {
       toast.success(res.message)
-      this.props.history.push("/branch-manager/food-item");
+      this.props.history.push("/branch-manager/food-item/view-food-items");
     } else {
       if (res.status !== 200) toast.error(res.message);
     }

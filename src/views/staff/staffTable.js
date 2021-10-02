@@ -42,7 +42,10 @@ const StaffTable = (props) => {
     if (res.status !== 200) {
       toast.error(res.message);
     }
-    toast.success("Staff member removed successfully");
+    else {
+      toast.success("Staff member removed successfully");
+    }
+
     setLoading(false);
   };
 
@@ -126,8 +129,8 @@ const StaffTable = (props) => {
                         onClick={() => {
                           props.history.push(
                             `/` +
-                              props.accountType +
-                              `/staff/update-staff/${item.userId}`
+                            props.accountType +
+                            `/staff/update-staff/${item.userId}`
                           );
                         }}
                       >

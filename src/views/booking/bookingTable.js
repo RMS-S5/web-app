@@ -36,10 +36,10 @@ const BookingTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
-    const handleAcceptBooking = async (id) => {
+    const handleAcceptBooking = async (bookingId) => {
         setLoading(true);
-        console.log("accept booking with id:", id)
-        const res = await dispatch(thunks.booking.acceptBooking(id)); //todo: add new method
+        console.log("accept booking with bookingId:", bookingId)
+        const res = await dispatch(thunks.booking.acceptBooking(bookingId)); //todo: add new method
         if (res.status !== 200) {
             toast.error(res.message);
         }
@@ -47,10 +47,10 @@ const BookingTable = (props) => {
         setLoading(false);
     }
 
-    const handleRejectBooking = async (id) => {
+    const handleRejectBooking = async (bookingId) => {
         setLoading(true);
-        console.log("reject booking with id:", id)
-        const res = await dispatch(thunks.booking.rejectBooking(id)); //todo: add new method
+        console.log("reject booking with bookingId:", bookingId)
+        const res = await dispatch(thunks.booking.rejectBooking(bookingId)); //todo: add new method
         if (res.status !== 200) {
             toast.error(res.message);
         }
@@ -59,7 +59,7 @@ const BookingTable = (props) => {
     }
 
     const fields = [
-        { key: "id", label: "ID", _style: { width: "30%" } },
+        { key: "bookingId", label: "ID", _style: { width: "30%" } },
         { key: "customerId", label: "Customer ID", _style: { width: "10%" } },
         { key: "customerName", label: "Customer Name", _style: { width: "10%" } },
         { key: "arrival", label: "Arrival", _style: { width: "10%" } },
@@ -131,11 +131,11 @@ const BookingTable = (props) => {
                                             <CButton
                                                 color="success"
                                                 // variant="outline"
-                                                active={item.status === 'placed'}
+                                                disabled={item.status !== 'Placed'}
                                                 shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    handleAcceptBooking(item.id);
+                                                    handleAcceptBooking(item.bookingId);
                                                 }}
                                             >
                                                 Accept
@@ -149,11 +149,11 @@ const BookingTable = (props) => {
                                             <CButton
                                                 color="danger"
                                                 // variant="outline"
-                                                active={item.status === 'placed'}
+                                                disabled={item.status !== 'Placed'}
                                                 shape="rounded-pill"
                                                 size="sm"
                                                 onClick={() => {
-                                                    handleRejectBooking(item.id);
+                                                    handleRejectBooking(item.bookingId);
                                                 }}
                                             >
                                                 Reject

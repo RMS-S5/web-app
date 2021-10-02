@@ -77,8 +77,10 @@ const MDashboard = (props) => {
       dailyDataSetLabels: [],
       monthlyDataSetLabels: [],
     };
-
-    let branchIds = branches.map(element => element.id)
+    console.log("#######")
+    console.log("monthlyCompletedData:", monthlyCompletedData)
+    console.log("#######")
+    let branchIds = branches.map(element => element.branchId)
 
     let today = new Date();
     let thisYear = today.getFullYear();
@@ -139,7 +141,10 @@ const MDashboard = (props) => {
     monthlyCompletedData.forEach((element) => {
       let elementDate = new Date(element.placedTime);
       graphData.monthly = graphData.monthly + 1;
-      graphData.monthlyRevenue = graphData.monthlyRevenue + parseInt(element.totalAmount)
+      if(!isNaN(parseInt(element.totalAmount))){
+        graphData.monthlyRevenue = graphData.monthlyRevenue + parseInt(element.totalAmount)
+      }
+      
       for (let i = 0; i < dSlots.length - 1; i++) {
         // console.log("######");
         // console.log("i:", i);
@@ -165,7 +170,10 @@ const MDashboard = (props) => {
 
       if (elementDate.getDate() === thisDate) {
         graphData.daily = graphData.daily + 1;
-        graphData.dailyRevenue = graphData.dailyRevenue + parseInt(element.totalAmount)
+        if(!isNaN(parseInt(element.totalAmount))){
+          graphData.dailyRevenue = graphData.dailyRevenue + parseInt(element.totalAmount)
+        }
+        
 
         for (let i = 0; i < tSlots.length - 1; i++) {
           // console.log("######");
@@ -196,9 +204,9 @@ const MDashboard = (props) => {
     graphData.dailyDataSetLabels = dailyDataSetLabels;
     graphData.monthlyBranchDataSets = monthlyBranchDataSets;
     graphData.dailyBranchDataSets = dailyBranchDataSets;
-    // console.log("######");
-    // console.log("monthlyDataSetLabels:", graphData.monthlyDataSetLabels);
-    // console.log("######");
+    console.log("######");
+    console.log("graphData:", graphData);
+    console.log("######");
     // console.log("dailyDataSetLabels:", graphData.dailyDataSetLabels);
     // console.log("######");
     // console.log("counts:", counts);
@@ -256,9 +264,9 @@ const MDashboard = (props) => {
               datasets={
                 branches.map((value, index) => (
                   {
-                    label: value.name,
+                    label: value.branchName,
                     backgroundColor: graphColors[index],
-                    data: ordersChartButtons === "Day"? completedOrderData.dailyBranchDataSets[value.id]: ordersChartButtons === "Month"? completedOrderData.monthlyBranchDataSets[value.id]: ordersChartButtons === "Year"? []: []
+                    data: ordersChartButtons === "Day"? completedOrderData.dailyBranchDataSets[value.branchId]: ordersChartButtons === "Month"? completedOrderData.monthlyBranchDataSets[value.branchId]: ordersChartButtons === "Year"? []: []
                   }
                 ))
               }
@@ -309,9 +317,9 @@ const MDashboard = (props) => {
               datasets={
                 branches.map((value, index) => (
                   {
-                    label: value.name,
+                    label: value.branchName,
                     backgroundColor: graphColors[index],
-                    data: bookingsChartButtons === "Day"? completedBookingData.dailyBranchDataSets[value.id]: bookingsChartButtons === "Month"? completedBookingData.monthlyBranchDataSets[value.id]: bookingsChartButtons === "Year"? []: []
+                    data: bookingsChartButtons === "Day"? completedBookingData.dailyBranchDataSets[value.branchId]: bookingsChartButtons === "Month"? completedBookingData.monthlyBranchDataSets[value.branchId]: bookingsChartButtons === "Year"? []: []
                   }
                 ))
               }
