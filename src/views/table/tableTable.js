@@ -43,7 +43,9 @@ const TableTable = (props) => {
     if (res.status !== 200) {
       toast.error(res.message);
     }
-    toast.success("Table removed successfully");
+    else {
+      toast.success("Table removed successfully");
+    }
     setLoading(false);
   };
 

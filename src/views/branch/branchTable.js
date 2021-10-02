@@ -41,8 +41,9 @@ const BranchTable = (props) => {
     const res = await dispatch(thunks.staff.removeBranch(branchId)); //todo: add new method
     if (res.status !== 200) {
       toast.error(res.message);
+    } else {
+      toast.success("Branch removed successfully");
     }
-    toast.success("Branch removed successfully");
     setLoading(false);
   };
 

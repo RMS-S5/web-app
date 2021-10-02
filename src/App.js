@@ -50,20 +50,20 @@ function App() {
             render={(props) => <Home {...props} />}
           />
 
-          <ProtectedRoute
+          {/* <ProtectedRoute
             isLoggedIn={false}
             path="/manager"
             name="Home"
             render={(props) => <MLayout {...props} />}
           />
-          <Redirect from="/" to="/manager" />
-          {/* <ProtectedRoute
+          <Redirect from="/" to="/manager" /> */}
+          <ProtectedRoute
             isLoggedIn={false}
             path="/branch-manager"
             name="Home"
             render={(props) => <BMLayout {...props} />}
           />
-          <Redirect from="/" to="/branch-manager" /> */}
+          <Redirect from="/" to="/branch-manager" />
 
           {/* <ProtectedRoute
             isLoggedIn={false}

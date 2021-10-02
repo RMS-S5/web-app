@@ -50,7 +50,7 @@ class FoodItemView extends Form {
             toast.error("Food Item Not found");
             return;
         }
-        this.setState({foodVariants: foodItem.foodVariants})
+        this.setState({ foodVariants: foodItem.foodVariants })
         console.log("##foodItem:", foodItem)
         return foodItem;
     };
@@ -161,36 +161,36 @@ class FoodItemView extends Form {
                         </CCard>
                     </CCol>
                     <CCol>
-                    <CardContainer
-            //   error={this.state.error}
-            //   loading={this.state.loading}
-              header="Food Variants"
-            >
-              <CRow>
-              <CCol>
-                        <CCard>
-                            <CCardHeader></CCardHeader>
-                            <CCardBody>
-                                <CDataTable
-                                    items={this.state.foodVariants}
-                                    fields={fields}
-                                    // columnFilter
-                                    //footer
-                                    // loading={loading}
-                                    // itemsPerPageSelect
-                                    // itemsPerPage={20}
-                                    hover
-                                    sorter
-                                    pagination
-                                />
-                            </CCardBody>
-                        </CCard>
+                        <CardContainer
+                            //   error={this.state.error}
+                            //   loading={this.state.loading}
+                            header="Food Variants"
+                        >
+                            <CRow>
+                                <CCol>
+                                    <CCard>
+                                        <CCardHeader></CCardHeader>
+                                        <CCardBody>
+                                            <CDataTable
+                                                items={this.state.foodVariants}
+                                                fields={fields}
+                                                // columnFilter
+                                                //footer
+                                                // loading={loading}
+                                                // itemsPerPageSelect
+                                                // itemsPerPage={20}
+                                                hover
+                                                sorter
+                                                pagination
+                                            />
+                                        </CCardBody>
+                                    </CCard>
+                                </CCol>
+                            </CRow>
+                        </CardContainer>
                     </CCol>
-              </CRow>
-            </CardContainer>
-                        </CCol>
-                    
-                    
+
+
                 </CRow>
             </CContainer>
         );
@@ -228,9 +228,29 @@ class FoodItemView extends Form {
         }
         console.log("########") //test
 
-        console.log("##out: ", {...this.state.data,foodVariants: this.state.foodVariants})
+
+
+        let newFoodVariants = []
+        for (const foodVariant of this.state.foodVariants) {
+            console.log("foodVariant:", foodVariant);
+            let newObject = {};
+
+            function camelToUnderscore(key) {
+                return key.replace(/([A-Z])/g, "_$1").toLowerCase();
+            }
+
+            for (var camel in foodVariant) {
+                newObject[camelToUnderscore(camel)] = foodVariant[camel];
+            }
+
+            console.log(newObject);
+            newFoodVariants.push(newObject)
+        }
+
+        console.log("newFoodVariants:", newFoodVariants);
+        console.log("##out: ", { ...this.state.data, foodVariants: this.state.foodVariants })
         console.log("##foodItemId: ", this.state.foodItemId)
-        const res = await this.props.updateFoodItem(this.state.foodItemId, {...this.state.data,foodVariants: this.state.foodVariants});
+        const res = await this.props.updateFoodItem(this.state.foodItemId, { ...this.state.data, foodVariants: newFoodVariants });
 
         this.setState({ spinner: false });
         if (res.status === 200) {
