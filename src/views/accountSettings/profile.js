@@ -43,12 +43,15 @@ const Profile = (props) => {
   if (data.accountType === "Customer") {
     userAccountEdit = "/customer/profile-edit";
     passwordChange = "/customer/change-password";
-  } else if (data.accountType === "manager") {
+  } else if (data.accountType === "Manager") {
     userAccountEdit = "/manager/profile-edit";
     passwordChange = "/manager/change-password";
-  } else if (data.accountType === "branchManager") {
+  } else if (data.accountType === "Branch Manager") {
     userAccountEdit = "/branch-manager/profile-edit";
     passwordChange = "/branch-manager/change-password";
+  } else if (data.accountType === "Receptionist") {
+    userAccountEdit = "/receptionist/profile-edit";
+    passwordChange = "/receptionist/change-password";
   }
   console.log(userAccountEdit, passwordChange);
 

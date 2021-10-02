@@ -144,7 +144,11 @@ class ProfileEdit extends Form {
     this.setState({ spinner: false });
     if (res1.status === 200) {
       toast.success(res1.message);
-      this.props.history.push("/customer/profile");
+      if (this.props.userData.accountType === "Customer") {
+        this.props.history.push("/customer/profile");
+      } else if (this.props.userData.accountType === "Receptionist") {
+        this.props.history.push("/receptionist/profile");
+      }
     } else {
       if (res1.status !== 200) toast.error(res1.message);
     }

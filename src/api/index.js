@@ -180,6 +180,18 @@ export default {
           axios.get(`/booking/get-previous-bookings/${query}`)
         );
       },
+      async bookingsforRE(query) {
+        return ajaxResolver(
+          axios.get(`/booking/get-bookings-for-receptionist`)
+        );
+      },
+    },
+    update: {
+      async bookingStatus(bookingData) {
+        return ajaxResolver(
+          axios.post(`/booking/update-booking-status`, bookingData)
+        );
+      },
     },
     add: {
       async newBooking(bookingData) {

@@ -22,6 +22,7 @@ const BMLayout = React.lazy(() => import("./containers/Layouts/BMLayout"));
 const CustomerLayout = React.lazy(() =>
   import("./containers/Layouts/CustomerLayout")
 );
+const RELayout = React.lazy(() => import("./containers/Layouts/RELayout"));
 const Home = React.lazy(() => import("./views/pages/home"));
 
 function App() {
@@ -66,13 +67,19 @@ function App() {
             render={(props) => <BMLayout {...props} />}
           />
           {/* <Redirect from="/" to="/branch-manager" /> */}
-
+          <ProtectedRoute
+            isLoggedIn={true}
+            path="/receptionist"
+            name="Home"
+            render={(props) => <RELayout {...props} />}
+          />
           <ProtectedRoute
             isLoggedIn={false}
             path="/customer"
             name="Home"
             render={(props) => <CustomerLayout {...props} />}
           />
+
           <Redirect from="/" to="/home" />
         </Switch>
       </React.Suspense>

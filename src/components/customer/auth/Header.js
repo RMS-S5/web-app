@@ -16,6 +16,7 @@ import image3 from "../../../assets/img/3.jpg";
 import image4 from "../../../assets/img/4.jpg";
 import image5 from "../../../assets/img/5.jpg";
 import image2 from "../../../assets/img/2.jpg";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -114,11 +115,29 @@ export default function Header(props) {
               Welcome to the Au<span className={classes.colorText}>gora</span>{" "}
               Hotel & Restaurant
             </h1>
+
             <Scroll to="descrip-cards" smooth={true} offset={500}>
               <IconButton>
                 <ExpandMoreIcon className={classes.expand} />
               </IconButton>
             </Scroll>
+            <Button
+              className="m-2"
+              variant="contained"
+              // onClick={this.props.history.push("/login")}
+            >
+              <Link
+                to="/customer/check-availability"
+                style={{
+                  textDecoration: "none",
+                  color: "Black",
+                  fontWeight: "bold",
+                }}
+              >
+                {" "}
+                Booking
+              </Link>
+            </Button>
           </div>
         </Collapse>
       </div>

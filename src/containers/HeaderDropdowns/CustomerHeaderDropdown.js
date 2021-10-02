@@ -38,7 +38,7 @@ const CustomerHeaderDropdown = () => {
     if (localStorage.getItem("hrms-refresh-token")) {
       localStorage.removeItem("hrms-refresh-token");
     }
-    window.location = "/manager/auth/login"; //todo: update routes
+    window.location = "/home"; //todo: update routes
   };
   console.log(image_url);
   let profileUrl = "";
@@ -48,6 +48,8 @@ const CustomerHeaderDropdown = () => {
     profileUrl = "/manager/profile";
   } else if (userData.accountType === "branch-manager") {
     profileUrl = "/branch-manager/profile";
+  } else if (userData.accountType === "Receptionist") {
+    profileUrl = "/receptionist/profile";
   }
   return (
     <CDropdown inNav className="c-header-nav-items mx-2" direction="down">
@@ -74,17 +76,25 @@ const CustomerHeaderDropdown = () => {
             />
           </div>
         </CDropdownItem>
-        <CDropdownItem to={profileUrl}>
-          {" "}
-          {/*todo:update routes*/}
-          <CIcon name="cil-user" className="mfe-2" />
-          Profile
-        </CDropdownItem>
-        <CDropdownItem divider />
-        <CDropdownItem onClick={handleLogout}>
-          <CIcon name="cil-lock-locked" className="mfe-2" />
-          Logout
-        </CDropdownItem>
+        {userData.email !== "" ? (
+          <CDropdownItem to={profileUrl}>
+            {" "}
+            {/*todo:update routes*/}
+            <CIcon name="cil-user" className="mfe-2" />
+            Profile
+          </CDropdownItem>
+        ) : (
+          ""
+        )}
+        {userData.email !== "" ? <CDropdownItem divider /> : ""}
+        {userData.email !== "" ? (
+          <CDropdownItem onClick={handleLogout}>
+            <CIcon name="cil-lock-locked" className="mfe-2" />
+            Logout
+          </CDropdownItem>
+        ) : (
+          ""
+        )}
       </CDropdownMenu>
     </CDropdown>
   );

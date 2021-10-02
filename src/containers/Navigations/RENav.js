@@ -1,4 +1,4 @@
-const _Customernav = [
+const RENav = [
   //todo:add account type to each item if needed
   // {
   //   _tag: "CSidebarNavItem",
@@ -13,49 +13,33 @@ const _Customernav = [
   {
     _tag: "CSidebarNavItem",
     name: "New Booking",
-    to: "/customer/check-availability",
+    to: "/receptionist/check-availability",
     icon: "cil-home",
     accountType: "any",
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Previous Bookings",
-    to: "/customer/previous-bookings",
+    name: "Update Booking Status",
+    to: "/receptionist/update-booking-status",
     icon: "cil-people",
     accountType: "Customer",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Room Categories",
-    to: "/customer/view-room-categories",
+    to: "/receptionist/view-room-categories",
     icon: "cil-people",
     accountType: "any",
   },
-  {
-    _tag: "CSidebarNavTitle",
-    _children: ["ChatBot Services"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Ask Questions",
-    to: "/customer/ask-questions",
-    icon: "cil-library-add",
-    accountType: "any",
-  },
+
   {
     _tag: "CSidebarNavItem",
     name: "Report a problem",
-    to: "/customer/report-a-problem",
-    icon: "cil-library",
-    accountType: "Customer",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Add a review",
-    to: "/customer/add-a-review",
+    to: "/receptionist/report-a-problem",
     icon: "cil-library",
     accountType: "any",
   },
+
   {
     _tag: "CSidebarNavTitle",
     _children: ["Other"],
@@ -69,4 +53,4 @@ const _Customernav = [
   },
 ];
 
-export default _Customernav;
+export default RENav;

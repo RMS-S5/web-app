@@ -62,7 +62,7 @@ const CustomerHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        {userData ? <CustomerHeaderDropdown /> : ""}
+        <CustomerHeaderDropdown />
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">

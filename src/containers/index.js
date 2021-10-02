@@ -29,6 +29,9 @@ import CustomerHeaderDropdown from "./HeaderDropdowns/CustomerHeaderDropdown";
 import CustomerLayout from "./Layouts/CustomerLayout";
 import CustomerSidebar from "./Sidebars/CustomerSidebar";
 
+// Receptionist
+import RESidebar from "./Sidebars/RESidebar";
+import RELayout from "./Layouts/RELayout";
 export {
   MContent,
   MFooter,
@@ -48,4 +51,6 @@ export {
   CustomerHeaderDropdown,
   CustomerLayout,
   CustomerSidebar,
+  RESidebar,
+  RELayout,
 };

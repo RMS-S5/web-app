@@ -82,7 +82,9 @@ const CustomerReport = React.lazy(() =>
   import("./views/customer/customerReport")
 );
 const CustomerRatings = React.lazy(() => import("./views/customer/addRatings"));
-
+const updateBookingRE = React.lazy(() =>
+  import("./views/Receptionist/updateBooking")
+);
 const routes = [
   //Manager routes
   { path: "/manager/", exact: true, name: "Home" },
@@ -263,12 +265,27 @@ const routes = [
     component: Bookingform,
   },
   {
+    path: "/receptionist/check-availability",
+    name: "Check Availability",
+    component: CheckAvailability,
+  },
+  {
+    path: "/receptionist/booking-form",
+    name: "Booking form",
+    component: Bookingform,
+  },
+  {
     path: "/customer/ask-questions",
     name: "Ask Questions",
     component: AskQuestions,
   },
   {
     path: "/customer/view-room-categories",
+    name: "Room Categories",
+    component: ViewRoomCategories,
+  },
+  {
+    path: "/receptionist/view-room-categories",
     name: "Room Categories",
     component: ViewRoomCategories,
   },
@@ -288,6 +305,11 @@ const routes = [
     component: CustomerReport,
   },
   {
+    path: "/receptionist/report-a-problem",
+    name: "Customer Report",
+    component: CustomerReport,
+  },
+  {
     path: "/customer/add-a-review",
     name: "Customer Rating",
     component: CustomerRatings,
@@ -297,6 +319,7 @@ const routes = [
     name: "Profile",
     component: UserProfile,
   },
+
   {
     path: "/customer/profile-edit",
     name: "Profile Edit",
@@ -306,6 +329,26 @@ const routes = [
     path: "/customer/change-password",
     name: "Change password",
     component: UserPasswordChange,
+  },
+  {
+    path: "/receptionist/profile",
+    name: "Profile",
+    component: UserProfile,
+  },
+  {
+    path: "/receptionist/profile-edit",
+    name: "Profile Edit",
+    component: UserProfileEdit,
+  },
+  {
+    path: "/receptionist/change-password",
+    name: "Change password",
+    component: UserPasswordChange,
+  },
+  {
+    path: "/receptionist/update-booking-status",
+    name: "Change password",
+    component: updateBookingRE,
   },
 ];
 
