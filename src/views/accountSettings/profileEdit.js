@@ -133,13 +133,18 @@ class ProfileEdit extends Form {
       firstName: this.state.data.firstName,
       lastName: this.state.data.lastName,
       mobileNumber: this.state.data.mobileNumber,
+      accountType: this.props.userData.accountType,
     };
 
-    const res1 = await this.props.updateProfileDetails(formData);
+    const res1 = await this.props.updateProfileDetails(
+      this.props.userData.userId,
+      filledData
+    );
+    console.log(res1);
     this.setState({ spinner: false });
     if (res1.status === 200) {
       toast.success(res1.message);
-      this.props.history.push("/admin/profile");
+      this.props.history.push("/customer/profile");
     } else {
       if (res1.status !== 200) toast.error(res1.message);
     }
@@ -152,8 +157,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getUserDataById: (userId) => dispatch(thunks.user.getUserDataById(userId)),
-  updateProfileDetails: (profileData) =>
-    dispatch(thunks.user.updateAdminProfile(profileData)),
+  updateProfileDetails: (userId, profileData) =>
+    dispatch(thunks.user.updateUserProfile(userId, profileData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);

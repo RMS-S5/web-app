@@ -102,7 +102,9 @@ export default {
         return ajaxResolver(axios.put(`user/update-password/${userId}`, data));
       },
       async updateProfile(userId, data) {
-        return ajaxResolver(axios.put(`user/update-password/${userId}`, data));
+        return ajaxResolver(
+          axios.put(`/user/update-user-profile/${userId}`, data)
+        );
       },
     },
   },

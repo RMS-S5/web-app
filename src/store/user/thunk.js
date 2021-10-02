@@ -110,6 +110,21 @@ export default class userThunk {
       return res;
     };
   }
+  static updateUserProfile(userId, Profiledata) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      const [res, data] = await api.user.update.updateProfile(
+        userId,
+        Profiledata
+      );
+      if (res.status === 200) {
+        // dispatch(setUserData(data));
+        // dispatch(setProfileData(data));
+        return res;
+      }
+      return res;
+    };
+  }
 
   static ch;
 }
