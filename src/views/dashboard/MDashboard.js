@@ -27,6 +27,7 @@ import { thunks } from "../../store/index";
 import { getMonthlyCompletedOrders } from "../../store/order/select";
 import { getMonthlyCompletedBookings } from "../../store/booking/select";
 import { getAllBranches } from "../../store/staff/select";
+import { getUserData } from "../../store/user/select";
 
 const MWidgetsDropdown = lazy(() => import('../widgets/MWidgetsDropdown.js'))
 
@@ -36,6 +37,7 @@ const MDashboard = (props) => {
   const dispatch = useDispatch();
   const monthlyCompletedOrders = useSelector(getMonthlyCompletedOrders);
   const monthlyCompletedBookings = useSelector(getMonthlyCompletedBookings);
+  const userData = useSelector(getUserData);
   const branches = useSelector(getAllBranches);
 
   const [amountError, setAmountError] = useState(false);
@@ -46,12 +48,14 @@ const MDashboard = (props) => {
 
   useEffect(async () => {
     setLoading(true);
-    let res = await dispatch(thunks.order.getMonthlyCompletedOrders());
+    console.log("userData:", userData)
+
+    let res = await dispatch(thunks.booking.getMonthlyCompletedBookings());
     if (res.status !== 200) {
       toast.error(res.message);
     }
 
-    res = await dispatch(thunks.booking.getMonthlyCompletedBookings());
+    res = await dispatch(thunks.order.getMonthlyCompletedOrders());
     if (res.status !== 200) {
       toast.error(res.message);
     }
@@ -77,9 +81,9 @@ const MDashboard = (props) => {
       dailyDataSetLabels: [],
       monthlyDataSetLabels: [],
     };
-    console.log("#######")
-    console.log("monthlyCompletedData:", monthlyCompletedData)
-    console.log("#######")
+    // console.log("#######")
+    // console.log("monthlyCompletedData:", monthlyCompletedData)
+    // console.log("#######")
     let branchIds = branches.map(element => element.branchId)
 
     let today = new Date();
@@ -125,7 +129,7 @@ const MDashboard = (props) => {
     }
 
     for (let i = 0; i < tSlots.length - 1; i++) {
-      dailyDataSetLabels.push(tSlots[i].getHours().toString() + ":" + tSlots[i].getMinutes().toString() + "-" + tSlots[i + 1].getHours().toString() + ":" + tSlots[i+1].getMinutes().toString());
+      dailyDataSetLabels.push(tSlots[i].getHours().toString() + ":" + tSlots[i].getMinutes().toString() + "-" + tSlots[i + 1].getHours().toString() + ":" + tSlots[i + 1].getMinutes().toString());
     }
     // console.log("######");
     // console.log("tSlots:", tSlots);
@@ -141,10 +145,10 @@ const MDashboard = (props) => {
     monthlyCompletedData.forEach((element) => {
       let elementDate = new Date(element.placedTime);
       graphData.monthly = graphData.monthly + 1;
-      if(!isNaN(parseInt(element.totalAmount))){
+      if (!isNaN(parseInt(element.totalAmount))) {
         graphData.monthlyRevenue = graphData.monthlyRevenue + parseInt(element.totalAmount)
       }
-      
+
       for (let i = 0; i < dSlots.length - 1; i++) {
         // console.log("######");
         // console.log("i:", i);
@@ -170,10 +174,10 @@ const MDashboard = (props) => {
 
       if (elementDate.getDate() === thisDate) {
         graphData.daily = graphData.daily + 1;
-        if(!isNaN(parseInt(element.totalAmount))){
+        if (!isNaN(parseInt(element.totalAmount))) {
           graphData.dailyRevenue = graphData.dailyRevenue + parseInt(element.totalAmount)
         }
-        
+
 
         for (let i = 0; i < tSlots.length - 1; i++) {
           // console.log("######");
@@ -204,9 +208,9 @@ const MDashboard = (props) => {
     graphData.dailyDataSetLabels = dailyDataSetLabels;
     graphData.monthlyBranchDataSets = monthlyBranchDataSets;
     graphData.dailyBranchDataSets = dailyBranchDataSets;
-    console.log("######");
-    console.log("graphData:", graphData);
-    console.log("######");
+    // console.log("######");
+    // console.log("graphData:", graphData);
+    // console.log("######");
     // console.log("dailyDataSetLabels:", graphData.dailyDataSetLabels);
     // console.log("######");
     // console.log("counts:", counts);
@@ -266,11 +270,11 @@ const MDashboard = (props) => {
                   {
                     label: value.branchName,
                     backgroundColor: graphColors[index],
-                    data: ordersChartButtons === "Day"? completedOrderData.dailyBranchDataSets[value.branchId]: ordersChartButtons === "Month"? completedOrderData.monthlyBranchDataSets[value.branchId]: ordersChartButtons === "Year"? []: []
+                    data: ordersChartButtons === "Day" ? completedOrderData.dailyBranchDataSets[value.branchId] : ordersChartButtons === "Month" ? completedOrderData.monthlyBranchDataSets[value.branchId] : ordersChartButtons === "Year" ? [] : []
                   }
                 ))
               }
-              labels={ordersChartButtons === "Day"? completedOrderData.dailyDataSetLabels: ordersChartButtons === "Month"? completedOrderData.monthlyDataSetLabels: ordersChartButtons === "Year"? "": ""}
+              labels={ordersChartButtons === "Day" ? completedOrderData.dailyDataSetLabels : ordersChartButtons === "Month" ? completedOrderData.monthlyDataSetLabels : ordersChartButtons === "Year" ? "" : ""}
               options={{
                 tooltips: {
                   enabled: true
@@ -315,15 +319,15 @@ const MDashboard = (props) => {
 
             <CChartBar
               datasets={
-                branches.map((value, index) => (
-                  {
-                    label: value.branchName,
-                    backgroundColor: graphColors[index],
-                    data: bookingsChartButtons === "Day"? completedBookingData.dailyBranchDataSets[value.branchId]: bookingsChartButtons === "Month"? completedBookingData.monthlyBranchDataSets[value.branchId]: bookingsChartButtons === "Year"? []: []
-                  }
-                ))
+                  branches.map((value, index) => (
+                    {
+                      label: value.branchName,
+                      backgroundColor: graphColors[index],
+                      data: bookingsChartButtons === "Day" ? completedBookingData.dailyBranchDataSets[value.branchId] : bookingsChartButtons === "Month" ? completedBookingData.monthlyBranchDataSets[value.branchId] : bookingsChartButtons === "Year" ? [] : []
+                    }
+                  )) 
               }
-              labels={bookingsChartButtons === "Day"? completedBookingData.dailyDataSetLabels: bookingsChartButtons === "Month"? completedBookingData.monthlyDataSetLabels: bookingsChartButtons === "Year"? "": ""}
+              labels={bookingsChartButtons === "Day" ? completedBookingData.dailyDataSetLabels : bookingsChartButtons === "Month" ? completedBookingData.monthlyDataSetLabels : bookingsChartButtons === "Year" ? "" : ""}
               options={{
                 tooltips: {
                   enabled: true

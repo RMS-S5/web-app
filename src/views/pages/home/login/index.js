@@ -153,10 +153,10 @@ class Login extends Form {
       console.log(this.props);
       if (this.props.userData.accountType === "Customer") {
         this.props.history.push("/customer");
-      } else if (this.props.userData.accountType === "manager") {
+      } else if (this.props.userData.accountType === "Manager") {
         this.props.history.push("/manager");
-      } else if (this.props.userData.accountType === "branch_manager") {
-        this.props.history.push("/branch-manger");
+      } else if (this.props.userData.accountType === "Branch Manager") {
+        this.props.history.push("/branch-manager");
       }
 
       // this.props.history.push("/customer");

@@ -60,7 +60,7 @@ function App() {
           {/* <Redirect from="/" to="/manager" /> */}
           <ProtectedRoute
             isLoggedIn={true}
-            userType="branchManger"
+            userType="Branch Manager"
             path="/branch-manager"
             name="Home"
             render={(props) => <BMLayout {...props} />}

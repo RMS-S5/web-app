@@ -176,7 +176,7 @@ export default {
     },
     remove: {
       async removeTable(tableNumber) {
-        return ajaxResolver(axios.put(`/table/remove-table/${tableNumber}`));
+        return ajaxResolver(axios.put(`/branch/remove-table/${tableNumber}`));
       },
     },
   },
@@ -326,7 +326,7 @@ export default {
     put: {
       async updateStaff(userId, data) {
         return ajaxResolver(
-          axios.put(`/user/update-staff-member/${userId}`, data, formDataConfig)
+          axios.put(`/user/update-staff-member/${userId}`, data)
         );
       },
       async allBrachesCustomer(query) {
