@@ -80,8 +80,8 @@ class StaffView extends Form {
       let pairValue = [];
       branchesData.forEach((item, index) => {
         pairValue.push({
-          value: item.id,
-          label: item.name,
+          value: item.branchId,
+          label: item.branchName,
         });
       });
       this.setState({ branches: pairValue, loading: false });
@@ -90,7 +90,7 @@ class StaffView extends Form {
       accountTypesData.forEach((item, index) => {
         pairValue1.push({
           value: item.accountType,
-          label: item.description,
+          label: item.accountType,
         });
       });
       this.setState({ accountTypes: pairValue1, loading: false });
@@ -275,7 +275,7 @@ class StaffView extends Form {
     }
     console.log("########"); //test
 
-    const res = await this.props.updateStaff(this.state.userId, formData);
+    const res = await this.props.updateStaff(this.state.userId, this.state.data);
 
     this.setState({ spinner: false });
     if (res.status === 200) {

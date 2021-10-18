@@ -12,9 +12,10 @@ import Joi from "joi";
 import React from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
+import api from "../../api";
 import Form from "../../components/common/NewForm";
 import { thunks } from "../../store/index";
-
+import { getUserData } from "../../store/user/select";
 class ChangePassword extends Form {
   state = {
     data: {
@@ -116,20 +117,27 @@ class ChangePassword extends Form {
     this.setState({ spinner: true });
     const data = { ...this.state.data };
     delete data.repeatNewPassword;
-    const res = await this.props.changePassword(data);
+    // console.log(data, this.props);
+    const res = await api.user.update.changePassword(
+      this.props.userData.userId,
+      data
+    );
     this.setState({ spinner: false });
-    if (res.status === 200) {
-      this.props.history.push("/admin/profile");
+    if (res[0].status === 200) {
+      this.props.history.push("/customer/profile");
     } else {
-      toast.error(res.message);
+      toast.error(res[0].message);
     }
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  userData: getUserData(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  changePassword: (data) => dispatch(thunks.user.changeAdminPassword(data)),
+  // changePassword: (userId, data) =>
+  //   dispatch(api.user.update.changePassword(userId, data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);

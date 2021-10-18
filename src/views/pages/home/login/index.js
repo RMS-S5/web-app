@@ -20,6 +20,7 @@ import "../../../../assets/local-css/auth.css";
 import Form from "../../../../components/common/NewForm";
 import { thunks } from "../../../../store/index";
 import {
+  getUserData,
   getAccessToken,
   getRefreshToken,
   getUserId,
@@ -148,7 +149,17 @@ class Login extends Form {
         localStorage.setItem("hrms-access-token", this.props.accessToken);
         localStorage.setItem("hrms-refresh-token", this.props.refreshToken);
       }
-      this.props.history.push("/customer");
+      let userAccountType = this.props.userData.accountType;
+      console.log(this.props);
+      if (this.props.userData.accountType === "Customer") {
+        this.props.history.push("/customer");
+      } else if (this.props.userData.accountType === "Manager") {
+        this.props.history.push("/manager");
+      } else if (this.props.userData.accountType === "Branch Manager") {
+        this.props.history.push("/branch-manager");
+      }
+
+      // this.props.history.push("/customer");
     } else {
       toast.error(res.message);
     }
@@ -161,6 +172,7 @@ class Login extends Form {
  * @returns
  */
 const mapStateToProps = (state) => ({
+  userData: getUserData(state),
   accessToken: getAccessToken(state),
   refreshToken: getRefreshToken(state),
   currentUserId: getUserId(state),

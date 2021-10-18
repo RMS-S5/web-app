@@ -24,13 +24,14 @@ import { thunks } from "../../store/index";
 import { getAllBranches } from "../../store/staff/select";
 import { getAllRoles } from "../../store/staff/select";
 import CIcon from "@coreui/icons-react";
+import { Button } from "react-bootstrap";
 
 class Bookingform extends Form {
   state = {
     data: {
-      answer: "",
       question: "",
     },
+    answer: "",
     errors: {},
     btnDisable: false,
     spinner: false,
@@ -49,13 +50,11 @@ class Bookingform extends Form {
     // description: Joi.string().label("Description"),
     // status: Joi.string().label("Available"),
     question: Joi.string().label("Question"),
-    first_name: Joi.string().label("First Name"),
-    last_name: Joi.string().label("Last Name"),
-    email: Joi.string().label("Email"),
-
-    mobile_number: Joi.string().label("Mobile Number"),
-    nic: Joi.string().label("NIC"),
   };
+
+  async sendData() {
+    console.log("Sending data...");
+  }
 
   async componentDidMount() {}
 
@@ -70,7 +69,7 @@ class Bookingform extends Form {
           <CCol>
             <CardContainer error={this.state.error} header="Ask Questions">
               <CForm onSubmit={this.handleSubmit}>
-                <CRow>
+                {/* <CRow>
                   <CCol xs="12" md="6">
                     {this.renderInput("question", "Question", "text", {
                       placeholder: "type your question",
@@ -84,11 +83,18 @@ class Bookingform extends Form {
                       disabled: true,
                     })}
                   </CCol>
-                </CRow>
+                </CRow> */}
+                <iframe
+                  chat-title="Nuwan"
+                  width="350"
+                  height="430"
+                  allow="microphone;"
+                  src="https://console.dialogflow.com/api-client/demo/embedded/8b0edd18-d396-4a3e-a9a8-25143140238d"
+                ></iframe>
 
-                <CRow>
-                  <CCol>{this.renderButton("Send", "success", "danger")}</CCol>
-                </CRow>
+                {/* <Button onClick={this.sendData.bind()} variant="primary"> */}
+                {/* Send */}
+                {/* </Button> */}
               </CForm>
             </CardContainer>
           </CCol>

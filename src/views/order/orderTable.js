@@ -85,7 +85,7 @@ const OrderTable = (props) => {
                             sorter
                             pagination
                             scopedSlots={{
-                                order_status: (item) => (
+                                orderStatus: (item) => (
                                     <td>
                                         <CBadge color={getBadge(item.orderStatus)} textColor={"white"}> {/*getBadge(item.status) //todo: add order state*/}
                                             {item.orderStatus}

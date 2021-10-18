@@ -2,12 +2,9 @@ import jwtDecode from "jwt-decode";
 import _ from "lodash";
 import api, { registerAccessToken } from "../../api";
 
-import {
-  setRooms
-} from "./index";
+import { setAllAvailableRooms, setRooms } from "./index";
 
 export default class roomThunk {
-
   /**
    * ------------------Add------------------------------
    */
@@ -16,9 +13,9 @@ export default class roomThunk {
    * Add Room
    */
   static addRoom(roomData) {
-    console.log("########") //test
-    console.log("roomData", roomData) //test
-    console.log("########") //test
+    console.log("########"); //test
+    console.log("roomData", roomData); //test
+    console.log("########"); //test
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
       const [res, data] = await api.room.add.room(roomData);
@@ -29,7 +26,7 @@ export default class roomThunk {
         }
       }
       return res;
-    }
+    };
   }
 
   /**
@@ -49,7 +46,7 @@ export default class roomThunk {
         }
       }
       return res;
-    }
+    };
   }
 
   /**
@@ -66,10 +63,18 @@ export default class roomThunk {
         dispatch(setRooms(data));
       }
       return res;
-    }
+    };
   }
-
-
+  static getAllAvailableRoomsByBranch(query) {
+    return async (dispatch, getState) => {
+      const [res, data] = await api.branch.get.allAvailableRoomsByBranch(query);
+      if (res.status === 200) {
+        dispatch(setAllAvailableRooms(data));
+        return data;
+      }
+      return res;
+    };
+  }
 
   /**
    * ------------------Remove------------------------------
@@ -90,9 +95,6 @@ export default class roomThunk {
         }
       }
       return res;
-    }
+    };
   }
-
-
-
 }
