@@ -264,9 +264,9 @@ export default {
       async allBrachesCustomer(query) {
         return ajaxResolver(axios.get(`/branch/get-all-branches-customer`));
       },
-      async allAvailableRoomsByBranch(query) {
+      async allAvailableRoomsByBranch(data) {
         return ajaxResolver(
-          axios.get(`/branch/get-available-rooms-by-branch/${query}`)
+          axios.post(`/branch/get-available-rooms-by-branch`, data)
         );
       },
     },

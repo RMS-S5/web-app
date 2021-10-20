@@ -158,7 +158,7 @@ class Login extends Form {
       } else if (this.props.userData.accountType === "branch_manager") {
         this.props.history.push("/branch-manger");
       } else if (this.props.userData.accountType === "Receptionist") {
-        this.props.history.push("/receptionist");
+        this.props.history.push("/receptionist/update-booking-status");
       }
 
       // this.props.history.push("/customer");

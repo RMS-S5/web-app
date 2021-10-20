@@ -149,11 +149,15 @@ class CategoryView extends Form {
   }
 
   async componentDidMount() {
+    console.log(this.props);
     if (this.props.location.hasOwnProperty("bookingBranchData")) {
       this.state.bookingBranchData = this.props.location.bookingBranchData;
-      const roomData = await this.props.getAllAvailableRoomsByBranch(
-        this.state.bookingBranchData.branchId
-      );
+      const roomData = await this.props.getAllAvailableRoomsByBranch({
+        branchId: this.props.location.bookingBranchData.branchId,
+        arrival: this.props.location.bookingBranchData.arrival,
+        departure: this.props.location.bookingBranchData.departure,
+      });
+      console.log(roomData);
       // console.log(roomData);
       // console.log(this.props);
       //this.state.roomData = [...this.props.roomData];

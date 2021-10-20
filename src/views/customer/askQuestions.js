@@ -86,8 +86,8 @@ class Bookingform extends Form {
                 </CRow> */}
                 <iframe
                   chat-title="Nuwan"
-                  width="350"
-                  height="430"
+                  width="500"
+                  height="600"
                   allow="microphone;"
                   src="https://console.dialogflow.com/api-client/demo/embedded/8b0edd18-d396-4a3e-a9a8-25143140238d"
                 ></iframe>
