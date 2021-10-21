@@ -1,0 +1,25 @@
+{
+  "$schema": "https://on.cypress.io/cypress.schema.json",
+  "pluginsFile": "cypress/plugins/index.js",
+  "baseUrl": "http://localhost:3000",
+  "viewportHeight": 720,
+  "viewportWidth": 1280,
+  "screenshotOnRunFailure": false,
+  "video": false,
+  "waitForAnimations": false,
+  "animationDistanceThreshold": 50,
+  "pageLoadTimeout": 200000,
+  "defaultCommandTimeout": 30000,
+  "numTestsKeptInMemory": 0,
+  "nodeVersion": "system",
+  "env": {
+    "customer_email": "nuwan@gmail.com",
+    "customer_password": "test123",
+    "manager_email": "testManager@gmail.com",
+    "manager_password": "test123",
+    "bmanager_email": "testBManager@gmail.com",
+    "bmanager_password": "test123",
+    "receptionist_email": "namal@gmail.com",
+    "receptionist_password": "test123"
+  }
+}

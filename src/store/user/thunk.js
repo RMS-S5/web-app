@@ -31,6 +31,7 @@ export default class userThunk {
       const [res, data] = await api.user.login.login(email, password);
       console.log(res);
       if (res.status === 200) {
+        console.log("data from database", data.data);
         dispatch(setUserData(data.data));
         dispatch(setProfileData(data.data));
         dispatch(setTokenData(data.token));

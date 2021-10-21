@@ -76,13 +76,13 @@ const Profile = (props) => {
               <CCol xs="12" md="6">
                 <CFormGroup>
                   <CLabel htmlFor="name">First name</CLabel>
-                  <CInput id="name" readOnly value={data.firstName} />
+                  <CInput id="first_name" readOnly value={data.firstName} />
                 </CFormGroup>
               </CCol>
               <CCol xs="12" md="6">
                 <CFormGroup>
                   <CLabel htmlFor="name">Last name</CLabel>
-                  <CInput id="name" readOnly value={data.lastName} />
+                  <CInput id="last_name" readOnly value={data.lastName} />
                 </CFormGroup>
               </CCol>
             </CRow>

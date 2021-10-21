@@ -80,14 +80,14 @@ class ProfileEdit extends Form {
               <CForm onSubmit={this.handleSubmit}>
                 <CRow>
                   <CCol xs="12" md="6">
-                    {this.renderInput("firstName", "Name", "text", {
+                    {this.renderInput("firstName", "First Name", "text", {
                       placeholder: "Enter Your Name",
                     })}
                   </CCol>
                 </CRow>
                 <CRow>
                   <CCol xs="12" md="6">
-                    {this.renderInput("lastName", "Name", "text", {
+                    {this.renderInput("lastName", "Last Name", "text", {
                       placeholder: "Enter Your Name",
                     })}
                   </CCol>
@@ -148,6 +148,10 @@ class ProfileEdit extends Form {
         this.props.history.push("/customer/profile");
       } else if (this.props.userData.accountType === "Receptionist") {
         this.props.history.push("/receptionist/profile");
+      } else if (this.props.userData.accountType === "Manager") {
+        this.props.history.push("/manager/profile");
+      } else if (this.props.userData.accountType === "Branch Manager") {
+        this.props.history.push("/branch-manager/profile");
       }
     } else {
       if (res1.status !== 200) toast.error(res1.message);

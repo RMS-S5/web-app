@@ -124,10 +124,15 @@ class ChangePassword extends Form {
     );
     this.setState({ spinner: false });
     if (res[0].status === 200) {
+      toast.success("Password successfully changed");
       if (this.props.userData.accountType === "Customer") {
         this.props.history.push("/customer/profile");
       } else if (this.props.userData.accountType === "Receptionist") {
         this.props.history.push("/receptionist/profile");
+      } else if (this.props.userData.accountType === "Manager") {
+        this.props.history.push("/manager/profile");
+      } else if (this.props.userData.accountType === "Branch Manager") {
+        this.props.history.push("/branch-manager/profile");
       }
     } else {
       toast.error(res[0].message);

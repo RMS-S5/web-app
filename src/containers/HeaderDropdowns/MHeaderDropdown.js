@@ -21,7 +21,7 @@ const AVATAR_URL = BACK_END_URL.DEFAULT_FILE_URL;
 const MHeaderDropdown = () => {
   // const image_url1 = useSelector(getImage);
   // const image_url2 = useSelector(getImageFromProfile);
-  const userData = { name: "Nagitha" }; //useSelector(getUserData); //todo:remove mock
+  const userData = useSelector(getUserData);
   let image_url;
   // if(image_url1 != undefined) {
   //   image_url = image_url1;
@@ -54,7 +54,7 @@ const MHeaderDropdown = () => {
           src={image_url}
           textSizeRatio={1}
         />
-        <div className="ml-2 h7">Hey {userData ? userData.name : ""}!</div>
+        <div className="ml-2 h7">{userData ? userData.email : ""}</div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownItem header tag="div" color="light" className="text-center">
