@@ -29,6 +29,7 @@ import { Card, Col, Row, Button } from "react-bootstrap";
 import { thunks } from "../../store/index";
 import { getAllAvailableRoomsByBranch } from "../../store/room/select";
 import api from "../../api";
+import { getUserData } from "../../store/user/select";
 
 class CategoryView extends Form {
   state = {
@@ -303,14 +304,25 @@ class CategoryView extends Form {
       toast.error("Add rooms to continue");
     } else {
       console.log(this.state.selectedRoomData);
-      this.props.history.push({
-        pathname: "/customer/booking-form",
-        branchData: this.state.bookingBranchData,
-        roomData: {
-          amount: this.state.data.amount,
-          rooms: this.state.selectedRoomData,
-        },
-      });
+      if (this.props.userData.accountType === "Receptionist") {
+        this.props.history.push({
+          pathname: "/receptionist/booking-form",
+          branchData: this.state.bookingBranchData,
+          roomData: {
+            amount: this.state.data.amount,
+            rooms: this.state.selectedRoomData,
+          },
+        });
+      } else {
+        this.props.history.push({
+          pathname: "/customer/booking-form",
+          branchData: this.state.bookingBranchData,
+          roomData: {
+            amount: this.state.data.amount,
+            rooms: this.state.selectedRoomData,
+          },
+        });
+      }
     }
 
     //const res = await this.props.checkAvailability(formData);
@@ -345,6 +357,7 @@ class CategoryView extends Form {
 }
 
 const mapStateToProps = (state) => ({
+  userData: getUserData(state),
   roomData: getAllAvailableRoomsByBranch(state),
 });
 

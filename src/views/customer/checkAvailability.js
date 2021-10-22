@@ -26,6 +26,7 @@ import { getBookingBranchData } from "../../store/newBooking/select";
 import { userData } from "../../store/user/select";
 import CIcon from "@coreui/icons-react";
 import api from "../../api";
+import { getUserData } from "../../store/user/select";
 
 class CheckAvailability extends Form {
   state = {
@@ -373,15 +374,26 @@ class CheckAvailability extends Form {
       //   departure: this.state.data.departure,
       //   branchId: this.state.data.branchId,
       // });
-      // console.log(this.props);
-      this.props.history.push({
-        pathname: "/customer/add-booking-rooms",
-        bookingBranchData: {
-          arrival: this.state.data.arrival,
-          departure: this.state.data.departure,
-          branchId: this.state.data.branchId,
-        },
-      });
+      console.log(this.props);
+      if (this.props.userData.accountType === "Receptionist") {
+        this.props.history.push({
+          pathname: "/receptionist/add-booking-rooms",
+          bookingBranchData: {
+            arrival: this.state.data.arrival,
+            departure: this.state.data.departure,
+            branchId: this.state.data.branchId,
+          },
+        });
+      } else {
+        this.props.history.push({
+          pathname: "/customer/add-booking-rooms",
+          bookingBranchData: {
+            arrival: this.state.data.arrival,
+            departure: this.state.data.departure,
+            branchId: this.state.data.branchId,
+          },
+        });
+      }
     } else {
       this.setState({ spinner: false });
       toast.error("Dates are invalid");
@@ -390,6 +402,7 @@ class CheckAvailability extends Form {
 }
 
 const mapStateToProps = (state) => ({
+  userData: getUserData(state),
   //  roomTypes: getAllRoomTypes(state),
   // bookingData: getBookingBranchData(state),
 });

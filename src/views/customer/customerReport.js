@@ -54,9 +54,9 @@ class customerReport extends Form {
     // size: Joi.string().label("Size"),
     // description: Joi.string().label("Description"),
     // status: Joi.string().label("Available"),
-    report: Joi.string().label("Report"),
+    report: Joi.string().min(5).label("Report").required(),
     userId: Joi.string().label("user id"),
-    mobileNumber: Joi.string().label("Mobile number"),
+    mobileNumber: Joi.string().allow(null, "").label("Mobile number"),
     customerName: Joi.string().label("customer name"),
   };
 
@@ -139,15 +139,18 @@ class customerReport extends Form {
     };
     console.log(report);
     const res = await api.report.add.customerReport(report);
-
+    //console.log(this.props);
     this.setState({ spinner: false });
 
     if (res[0].status === 200) {
       toast.success("Our team will contact you. Thanks for your feedback.");
       this.state.data.report = "";
       this.state.image = "";
-
-      this.props.history.push("/customer/report-a-problem");
+      if (this.props.userData.AccountType === "Customer") {
+        this.props.history.push("/customer/report-a-problem");
+      } else if (this.props.userData.AccountType === "Receptionist") {
+        this.props.history.push("/receptionist/report-a-problem");
+      }
     } else {
       if (res[0].status !== 200) toast.error(res[0].message);
     }

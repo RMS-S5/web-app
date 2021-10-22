@@ -85,7 +85,8 @@ class Bookingform extends Form {
                   </CCol>
                 </CRow> */}
                 <iframe
-                  chat-title="Nuwan"
+                  data-cy="dialogflowFrame"
+                  chat-title="Rms"
                   width="500"
                   height="600"
                   allow="microphone;"

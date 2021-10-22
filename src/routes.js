@@ -300,6 +300,11 @@ const routes = [
     component: CustomerViewRooms,
   },
   {
+    path: "/receptionist/add-booking-rooms",
+    name: "Adding Rooms",
+    component: CustomerViewRooms,
+  },
+  {
     path: "/customer/report-a-problem",
     name: "Customer Report",
     component: CustomerReport,

@@ -81,7 +81,10 @@ class AskQuestions extends Form {
       this.props.location.hasOwnProperty("branchData") &&
       this.props.location.hasOwnProperty("roomData")
     ) {
-      if (this.props.userData.hasOwnProperty("userId")) {
+      if (
+        this.props.userData.hasOwnProperty("userId") &&
+        this.props.userData.accountType === "Customer"
+      ) {
         let userData = await this.props.getUserDataById(
           this.props.userData.userId
         );
@@ -180,6 +183,13 @@ class AskQuestions extends Form {
 
   async callServer() {
     this.setState({ spinner: true });
+    console.log(this.props);
+    console.log({
+      first_name: this.state.data.first_name,
+      last_name: this.state.data.last_name,
+      email: this.state.data.email,
+      phone: this.state.data.mobile_number,
+    });
     if (
       this.props.location.hasOwnProperty("branchData") &&
       this.props.location.hasOwnProperty("roomData")
@@ -195,7 +205,7 @@ class AskQuestions extends Form {
         notify_url: "http://sample.com/notify",
         order_id: bookingId,
         items: "Room Bookings",
-        amount: this.state.data.amount,
+        amount: this.props.location.roomData.amount,
         currency: "LKR",
         first_name: this.state.data.first_name,
         last_name: this.state.data.last_name,
@@ -306,9 +316,22 @@ class AskQuestions extends Form {
           roomNumbers: roomDataV,
           first_name: self.state.data.first_name,
           email: self.state.data.email,
-          customerId: self.props.userData.userId,
-          amount: self.state.data.amount,
+          // customerId: self.props.userData.userId,
+          amount: self.props.location.roomData.amount,
         };
+        if (self.state.isLoggedIn) {
+          allData = {
+            bookingId,
+            branchId: self.props.location.branchData.branchId,
+            arrival: self.props.location.branchData.arrival,
+            departure: self.props.location.branchData.departure,
+            roomNumbers: roomDataV,
+            first_name: self.state.data.first_name,
+            email: self.state.data.email,
+            customerId: self.props.userData.userId,
+            amount: self.props.location.roomData.amount,
+          };
+        }
         console.log(allData);
 
         const res = await self.props.addBookingData(allData);
@@ -317,7 +340,11 @@ class AskQuestions extends Form {
 
         if (res.status === 200) {
           toast.success(res.message);
-          self.props.history.push("/customer/previous-bookings");
+          if (self.props.userData.accountType === "Receptionist") {
+            self.props.history.push("/receptionist/update-booking-status");
+          } else {
+            self.props.history.push("/customer/previous-bookings");
+          }
         } else {
           if (res.status !== 200) toast.error(res.message);
         }
