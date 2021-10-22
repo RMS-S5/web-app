@@ -21,7 +21,6 @@ const AVATAR_URL = BACK_END_URL.DEFAULT_FILE_URL;
 const BMHeaderDropdown = () => {
   // const image_url1 = useSelector(getImage);
   // const image_url2 = useSelector(getImageFromProfile);
-  //const userData = { name: "Nagitha" }//useSelector(getUserData); //todo:remove mock
   const userData = useSelector(getUserData);
   let image_url;
   // if(image_url1 != undefined) {

@@ -130,21 +130,15 @@ export default {
       },
     },
     put: {
-      async updateRoomType(room_type, data) {
+      async updateRoomType(roomType, data) {
         return ajaxResolver(
-          axios.put(
-            `/room-type/update-room-type/${room_type}`,
-            data,
-            formDataConfig
-          )
+          axios.put(`/room/update-room-type/${roomType}`, data)
         );
       },
     },
     remove: {
-      async removeRoomType(room_type) {
-        return ajaxResolver(
-          axios.delete(`/room-type/remove-room-type/${room_type}`)
-        );
+      async removeRoomType(roomType) {
+        return ajaxResolver(axios.put(`/room/remove-room-type/${roomType}`));
       },
     },
   },
@@ -161,24 +155,132 @@ export default {
       },
     },
     put: {
-      async updateRoom(room_number, data) {
+      async updateRoom(roomNumber, roomData) {
         return ajaxResolver(
-          axios.put(`/room/update-room/${room_number}`, data, formDataConfig)
+          axios.put(`/room/update-room/${roomNumber}`, roomData)
         );
       },
     },
     remove: {
-      async removeRoom(room_number) {
-        return ajaxResolver(axios.delete(`/room/remove-room/${room_number}`));
+      async removeRoom(roomNumber) {
+        return ajaxResolver(axios.put(`/room/remove-room/${roomNumber}`));
       },
     },
   },
+
+  table: {
+    add: {
+      async table(tableData) {
+        return ajaxResolver(axios.post(`/branch/add-table`, tableData));
+      },
+    },
+    get: {
+      async allTables(query) {
+        return ajaxResolver(
+          axios.get(`/branch/branch-tables`, { params: query })
+        );
+      },
+    },
+    remove: {
+      async removeTable(tableNumber) {
+        return ajaxResolver(axios.put(`/branch/remove-table/${tableNumber}`));
+      },
+    },
+  },
+
+  branch: {
+    add: {
+      async branch(branchData) {
+        return ajaxResolver(axios.post(`/branch/add-branch`, branchData));
+      },
+    },
+    get: {
+      async allBranches(query) {
+        return ajaxResolver(axios.get(`/branch/branches`, { params: query }));
+      },
+    },
+    remove: {
+      async removeBranch(branchId) {
+        return ajaxResolver(axios.put(`/branch/remove-branch/${branchId}`));
+      },
+    },
+  },
+
+  customerReport: {
+    get: {
+      async allCustomerReports(query) {
+        return ajaxResolver(axios.get(`/customer-report/customer-reports`));
+      },
+    },
+  },
+
+  category: {
+    add: {
+      async category(categoryData) {
+        return ajaxResolver(
+          axios.post(`/food-item/add-category`, categoryData)
+        );
+      },
+    },
+    get: {
+      async allCategories(query) {
+        return ajaxResolver(
+          axios.get(`/food-item/categories-all`, { params: query })
+        );
+      },
+    },
+    remove: {
+      async removeCategory(categoryId) {
+        return ajaxResolver(
+          axios.delete(`/food-item/remove-category/${categoryId}`)
+        );
+      },
+    },
+  },
+
+  foodItem: {
+    add: {
+      async foodItem(foodItemData) {
+        return ajaxResolver(
+          axios.post(`/food-item/add-food-item`, foodItemData)
+        );
+      },
+    },
+    get: {
+      async allFoodItems(query) {
+        return ajaxResolver(
+          axios.get(`/food-item/food-items-all`, { params: query })
+        );
+      },
+    },
+    put: {
+      async updateFoodItem(foodItemId, foodItemData) {
+        return ajaxResolver(
+          axios.put(`/food-item/update-food-item/${foodItemId}`, foodItemData)
+        );
+      },
+    },
+    remove: {
+      async removeFoodItem(foodItemId) {
+        return ajaxResolver(
+          axios.delete(`/food-item/remove-food-item/${foodItemId}`)
+        );
+      },
+    },
+  },
+
   booking: {
     get: {
       async previousBookings(query) {
         return ajaxResolver(
           axios.get(`/booking/get-previous-bookings/${query}`)
         );
+      },
+      async allBookings(query) {
+        return ajaxResolver(axios.get(`/booking/bookings`));
+      },
+      async monthlyCompletedBookings(query) {
+        return ajaxResolver(axios.get(`/booking/bookings-monthly-completed`));
       },
       async bookingsforRE(query) {
         return ajaxResolver(
@@ -193,6 +295,14 @@ export default {
         );
       },
     },
+    put: {
+      async acceptBooking(bookingId) {
+        return ajaxResolver(axios.put(`/booking/accept-booking/${bookingId}`));
+      },
+      async rejectBooking(bookingId) {
+        return ajaxResolver(axios.put(`/booking/reject-booking/${bookingId}`));
+      },
+    },
     add: {
       async newBooking(bookingData) {
         return ajaxResolver(
@@ -205,11 +315,16 @@ export default {
   order: {
     get: {
       async allOrders(query) {
-        return ajaxResolver(axios.get(`/order/get-orders`, { params: query }));
+        return ajaxResolver(axios.get(`/order/orders`, { params: query }));
       },
       async orderCounts(query) {
         return ajaxResolver(
           axios.get(`/order/get-order-counts`, { params: query })
+        );
+      },
+      async monthlyCompletedOrders(query) {
+        return ajaxResolver(
+          axios.get(`/order/orders-monthly-completed`, { params: query })
         );
       },
     },
@@ -224,41 +339,21 @@ export default {
     add: {
       async staff(staffData) {
         return ajaxResolver(
-          axios.post(`/staff/add-staff`, staffData, formDataConfig)
+          axios.post(`/user/register/staff-member`, staffData)
         );
       },
     },
     get: {
       async allStaffm(query) {
         return ajaxResolver(
-          axios.get(`/staff/get-all-staffm`, { params: query })
+          axios.get(`/user/staff-members`, { params: query })
         );
       },
     },
     put: {
-      async updateStaff(user_id, data) {
+      async updateStaff(userId, data) {
         return ajaxResolver(
-          axios.put(`/staff/update-staff/${user_id}`, data, formDataConfig)
-        );
-      },
-    },
-    remove: {
-      async removeStaff(user_id) {
-        return ajaxResolver(axios.delete(`/staff/remove-staff/${user_id}`));
-      },
-    },
-  },
-
-  branch: {
-    add: {
-      async branch(branchData) {
-        return ajaxResolver(axios.post(`/product/add-branch`, branchData));
-      },
-    },
-    get: {
-      async allBranches(query) {
-        return ajaxResolver(
-          axios.get(`/product/get-branches`, { params: query })
+          axios.put(`/user/update-staff-member/${userId}`, data)
         );
       },
       async allBrachesCustomer(query) {
@@ -270,37 +365,19 @@ export default {
         );
       },
     },
-    put: {
-      async updateBranch(id, data) {
-        return ajaxResolver(axios.put(`/product/update-branch/${id}`, data));
-      },
-    },
     remove: {
-      async removeBranch(id) {
-        return ajaxResolver(axios.delete(`/product/remove-branch/${id}`));
+      async removeStaff(userId) {
+        return ajaxResolver(axios.delete(`/user/remove-staff/${userId}`));
       },
     },
   },
 
-  role: {
-    add: {
-      async role(roleData) {
-        return ajaxResolver(axios.post(`/product/add-role`, roleData));
-      },
-    },
+  accountType: {
     get: {
-      async allRoles(query) {
-        return ajaxResolver(axios.get(`/product/get-roles`, { params: query }));
-      },
-    },
-    put: {
-      async updateRole(role, data) {
-        return ajaxResolver(axios.put(`/product/update-role/${role}`, data));
-      },
-    },
-    remove: {
-      async removeRole(role) {
-        return ajaxResolver(axios.delete(`/product/remove-role/${role}`));
+      async allAccountTypes(query) {
+        return ajaxResolver(
+          axios.get(`/user/account-types`, { params: query })
+        );
       },
     },
   },

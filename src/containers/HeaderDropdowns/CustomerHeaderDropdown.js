@@ -44,9 +44,9 @@ const CustomerHeaderDropdown = () => {
   let profileUrl = "";
   if (userData.accountType === "Customer") {
     profileUrl = "/customer/profile";
-  } else if (userData.accountType === "manager") {
+  } else if (userData.accountType === "Manager") {
     profileUrl = "/manager/profile";
-  } else if (userData.accountType === "branch-manager") {
+  } else if (userData.accountType === "Branch Manager") {
     profileUrl = "/branch-manager/profile";
   } else if (userData.accountType === "Receptionist") {
     profileUrl = "/receptionist/profile";

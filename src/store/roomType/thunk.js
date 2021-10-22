@@ -38,29 +38,11 @@ export default class roomTypeThunk {
   static updateRoomType(roomType, roomTypeData) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.roomType.put.updateRoomType(roomType, roomTypeData);
-      const [res, data1] = [{ status: 200 }, []]; //todo:remove mock
+      console.log("#@#@#@@#")
+      const [res, data1] = await api.roomType.put.updateRoomType(roomType, roomTypeData);
       if (res.status === 200) {
-        //const [res1, data] = await api.roomType.get.allRoomTypes();
-        const [res1, data] = [
-          { status: 200 },
-          [
-            {
-              roomType: "deluxe",
-              description: "deluxe room",
-            },
-            {
-              roomType: "vip",
-              description: "vip room",
-            },
-            {
-              roomType: "suite",
-              description: "suite room",
-            },
-          ],
-        ]; //todo:remove mock
+        const [res1, data] = await api.roomType.get.allRoomTypes();
         if (res1.status === 200) {
-          //console.log("dispatched##")
           dispatch(setRoomTypes(data));
         }
       }
@@ -78,23 +60,6 @@ export default class roomTypeThunk {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
       const [res, data] = await api.roomType.get.allRoomTypes(query);
-      //   const [res, data] = [{status: 200},
-      //     [
-      //       {
-      //         roomType: "deluxe",
-      //         description: "deluxe room"
-      //       },
-      //       {
-      //         roomType: "vip",
-      //         description: "vip room"
-      //       },
-      //       {
-      //         roomType: "suite",
-      //         description: "suite room"
-      //       }
-      //     ]
-      // ] //todo:remove mock
-      //console.log("data:", data)
       if (res.status === 200) {
         dispatch(setRoomTypes(data));
       }
@@ -111,32 +76,9 @@ export default class roomTypeThunk {
   static removeRoomType(roomType) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      //const [res, data1] = await api.roomType.remove.removeRoomType(roomType);
-      const [res, data1] = [{ status: 200 }, []]; //todo:remove mock
+      const [res, data1] = await api.roomType.remove.removeRoomType(roomType);
       if (res.status === 200) {
-        //const [res1, data] = await api.roomType.get.allRoomTypes();
-        let [res1, data] = [
-          { status: 200 },
-          [
-            {
-              roomType: "deluxe",
-              description: "deluxe room",
-            },
-            {
-              roomType: "vip",
-              description: "vip room",
-            },
-            {
-              roomType: "suite",
-              description: "suite room",
-            },
-          ],
-        ]; //todo:remove mock
-
-        data = data.filter(function (obj) {
-          return obj.roomType !== roomType;
-        }); //todo:remove mock
-
+        const [res1, data] = await api.roomType.get.allRoomTypes();
         if (res1.status === 200) {
           dispatch(setRoomTypes(data));
         }

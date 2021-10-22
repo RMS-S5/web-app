@@ -3,45 +3,12 @@ import React from "react";
 
 
 
-const _BMnav = [ //todo:add account type to each item if needed
+const _BMnav = [ //todo:prioritize each sidebar element based on uasge
   {
     _tag: "CSidebarNavItem",
     name: "Dashboard",
     to: "/branch-manager/dashboard",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
-  },
-  {
-    _tag: "CSidebarNavTitle",
-    _children: ["Staff Management"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Add Staff",
-    to: "/branch-manager/staff/add-staff",
-    icon: "cil-user",
-
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "View Staff",
-    to: "/branch-manager/staff/view-staffm",
-    icon: "cil-people",
-  },
-  {
-    _tag: "CSidebarNavTitle",
-    _children: ["Room Management"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Add Room",
-    to: "/branch-manager/room/add-room",
-    icon: "cilBed",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "View Rooms",
-    to: "/branch-manager/room/view-rooms",
-    icon: "cil-list",
   },
   {
     _tag: "CSidebarNavTitle",
@@ -61,6 +28,38 @@ const _BMnav = [ //todo:add account type to each item if needed
   },
   {
     _tag: "CSidebarNavTitle",
+    _children: ["Room Management"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Add Room",
+    to: "/branch-manager/room/add-room",
+    icon: "cilBed",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "View Rooms",
+    to: "/branch-manager/room/view-rooms",
+    icon: "cil-list",
+  },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Table Management"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Add Table",
+    to: "/branch-manager/table/add-table",
+    icon: "cil-window",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "View Tables",
+    to: "/branch-manager/table/view-tables",
+    icon: "cil-library",
+  },
+  {
+    _tag: "CSidebarNavTitle",
     _children: ["Booking Management"],
   },
   {
@@ -69,6 +68,7 @@ const _BMnav = [ //todo:add account type to each item if needed
     to: "/branch-manager/booking/view-bookings",
     icon: "cil-list",
   },
+
   {
     _tag: "CSidebarNavTitle",
     _children: ["Orders"],
@@ -79,6 +79,26 @@ const _BMnav = [ //todo:add account type to each item if needed
     to: "/branch-manager/order/view-orders",
     icon: "cil-list",
   },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Staff Management"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Add Staff",
+    to: "/branch-manager/staff/add-staff",
+    icon: "cil-user",
+
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "View Staff",
+    to: "/branch-manager/staff/view-staffm",
+    icon: "cil-people",
+  },
+
+
+
   
   
 ];

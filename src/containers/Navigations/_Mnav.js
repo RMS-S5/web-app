@@ -41,6 +41,38 @@ const _Mnav = [
     to: "/manager/room-type/view-room-types",
     icon: "cil-library",
   },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Category Management"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Add Category",
+    to: "/manager/category/add-category",
+    icon: "cil-burger",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "View Categories",
+    to: "/manager/category/view-categories",
+    icon: "cil-library",
+  },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Branch Management"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Add Branch",
+    to: "/manager/branch/add-branch",
+    icon: "cil-building",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "View Branches",
+    to: "/manager/branch/view-branches",
+    icon: "cil-library",
+  },
   // {
   //   _tag: "CSidebarNavTitle",
   //   _children: ["Other"],

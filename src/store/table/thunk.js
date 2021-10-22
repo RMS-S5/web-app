@@ -1,71 +1,73 @@
 import jwtDecode from "jwt-decode";
 import _ from "lodash";
-import api, { registerAccessToken } from "./../../api";
+import api, { registerAccessToken } from "../../api";
 
 import {
-  setCategories
+  setTables
 } from "./index";
 
-export default class categoryThunk {
+export default class tableThunk {
 
   /**
    * ------------------Add------------------------------
    */
 
   /**
-   * Add Category
+   * Add Table
    */
-  static addCategory(categoryData) {
+  static addTable(tableData) {
     console.log("########") //test
-    console.log("categoryData", categoryData) //test
+    console.log("tableData", tableData) //test
     console.log("########") //test
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      const [res, data] = await api.category.add.category(categoryData);
+      const [res, data] = await api.table.add.table(tableData);
       if (res.status === 200) {
-        const [res1, data] = await api.category.get.allCategories();
+        const [res1, data] = await api.table.get.allTables();
         if (res1.status === 200) {
-          dispatch(setCategories(data));
+          dispatch(setTables(data));
         }
       }
       return res;
     }
   }
-
-  
+ 
 
   /**
    * --------------------Getters----------------------------------------
    */
   /**
-   * Get All Categories
+   * Get All Tables
    */
-  static getAllCategories(query) {
+  static getAllTables(query) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      const [res, data] = await api.category.get.allCategories(query);      
+      const [res, data] = await api.table.get.allTables(query);
       if (res.status === 200) {
-        dispatch(setCategories(data));
+        dispatch(setTables(data));
       }
       return res;
     }
   }
 
+
+
   /**
    * ------------------Remove------------------------------
    */
   /**
-   * Remove Category
+   * Remove Table
    */
-  static removeCategory(categoryId) {
+  static removeTable(userId) {
     return async (dispatch, getState) => {
       registerAccessToken(getState().user.tokens.access);
-      const [res, data1] = await api.category.remove.removeCategory(categoryId);
+      const [res, data1] = await api.table.remove.removeTable(userId);
+
       if (res.status === 200) {
-        const [res1, data] = await api.category.get.allCategories();
-        
+        const [res1, data] = await api.table.get.allTables();
+
         if (res1.status === 200) {
-          dispatch(setCategories(data));
+          dispatch(setTables(data));
         }
       }
       return res;

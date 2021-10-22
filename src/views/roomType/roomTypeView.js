@@ -119,7 +119,7 @@ class RoomTypeView extends Form {
         }
         console.log("########") //test
 
-        const res = await this.props.updateRoomType(this.state.roomType, formData);
+        const res = await this.props.updateRoomType(this.state.roomType, this.state.data);
 
         this.setState({ spinner: false });
         if (res.status === 200) {

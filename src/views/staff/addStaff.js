@@ -22,37 +22,25 @@ import Form from "../../components/common/NewForm";
 import { thunks } from "../../store/index";
 //import {getAllCategories} from "../../store/product/select"; //todo:change
 import { getAllBranches } from "../../store/staff/select";
-import { getAllRoles } from "../../store/staff/select";
+import { getAllAccountTypes } from "../../store/staff/select";
 import CIcon from "@coreui/icons-react";
 import humanize from "../../utils/humanize";
 
 class StaffAdd extends Form {
   state = {
     data: {
-      // pCode : "",
-      // categoryId : "",
-      // pName : "",
-      // color : "",
-      // size : "",
-      // stock : "",
-      // price : "",
-      // description : "",
-      //userId : "",
       firstName: "",
       lastName: "",
       email: "",
       password: "",
       accountType: "",
-      role: "",
       branchId: "",
       birthday: "",
       mobileNumber: "",
       nic: "",
     },
-    //image : "",
-    //categories : [],
     branches: [],
-    roles: [],
+    accountTypes: [],
     errors: {},
     btnDisable: false,
     spinner: false,
@@ -61,16 +49,6 @@ class StaffAdd extends Form {
   };
 
   schema = {
-    // pCode: Joi.string().label("Product Code"),
-    // pName: Joi.string().label("Product Name"),
-    // categoryId: Joi.number().label("Category Id"),
-    // stock: Joi.number().label("Stock"),
-    // price: Joi.number().label("Price"),
-    // color: Joi.string().label("Color"),
-    // size: Joi.string().label("Size"),
-    // description: Joi.string().label("Description"),
-    // status: Joi.string().label("Available"),
-    //userId: Joi.string().label("User ID"),
     firstName: Joi.string().label("First Name"),
     lastName: Joi.string().label("Last Name"),
     email: Joi.string()
@@ -78,7 +56,6 @@ class StaffAdd extends Form {
       .label("Email"),
     password: Joi.string().label("Password"),
     accountType: Joi.string().label("Account Type"),
-    role: Joi.string().label("Role"),
     branchId: Joi.string().label("Branch ID"),
     birthday: Joi.date().less("now").label("Birthday"),
     mobileNumber: Joi.string().label("Mobile Number"),
@@ -86,33 +63,14 @@ class StaffAdd extends Form {
   };
 
   async componentDidMount() {
-    //dispatch the event to get the categories
-    //set to the local states
-    //const res = await this.props.getAllCategories();
-    // if (res.status === 200) {
-    //   const categoriesData = this.props.categories;
-    //   let pairValue = [];
-    //   categoriesData.forEach(
-    //       (item, index) => {
-    //         pairValue.push({
-    //           value : item.categoryId,
-    //           label : item.name
-    //         })
-    //       }
-    //   )
-    //   this.setState({ categories:pairValue,loading: false });
-    // } else {
-    //   this.setState({ loading: false, error: true });
-    //   toast.error(res.message);
-    // }
     let res = await this.props.getAllBranches();
     if (res.status === 200) {
       const branchesData = this.props.branches;
       let pairValue = [];
       branchesData.forEach((item, index) => {
         pairValue.push({
-          value: item.id,
-          label: item.name,
+          value: item.branchId,
+          label: item.branchName,
         });
       });
       this.setState({ branches: pairValue, loading: false });
@@ -121,18 +79,25 @@ class StaffAdd extends Form {
       toast.error(res.message);
     }
 
-    res = await this.props.getAllRoles();
+    res = await this.props.getAllAccountTypes();
     if (res.status === 200) {
-      const rolesData = this.props.roles;
+      let accountTypesData = this.props.accountTypes;
+
+      if (this.props.accountType === "manager") {
+        accountTypesData =accountTypesData.filter(item => item.accountType === "Branch Manager")
+      }
+      else if(this.props.accountType === "branch-manager"){
+        accountTypesData = accountTypesData.filter(item => item.accountType === "Waiter" || item.accountType === "Kitchen Staff" || item.accountType === "Receptionist")
+      }
 
       let pairValue = [];
-      rolesData.forEach((item, index) => {
+      accountTypesData.forEach((item, index) => {
         pairValue.push({
-          value: item.role,
-          label: item.role,
+          value: item.accountType,
+          label: item.accountType,
         });
       });
-      this.setState({ roles: pairValue, loading: false });
+      this.setState({ accountTypes: pairValue, loading: false });
     } else {
       this.setState({ loading: false, error: false }); //todo:set error to true
       toast.error(res.message);
@@ -154,13 +119,6 @@ class StaffAdd extends Form {
               header="Add Staff"
             >
               <CForm onSubmit={this.handleSubmit}>
-                {/* <CRow>
-                  <CCol xs="12" md="6">
-                    {this.renderInput("userId", "User ID", "text", {
-                      placeholder: "Enter user ID",// todo:remove since id is autogenerated
-                    })}
-                  </CCol>
-                </CRow> */}
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderInput("firstName", "First Name", "text", {
@@ -191,17 +149,10 @@ class StaffAdd extends Form {
                 </CRow>
                 <CRow>
                   <CCol xs="12" md="6">
-                    {this.renderInput("accountType", "Account Type", "text", {
-                      placeholder: "Enter account type",
-                    })}
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs="12" md="6">
                     {this.renderSelectWithLabelValue(
-                      "role",
-                      "Role",
-                      this.state.roles
+                      "accountType",
+                      "Account Type",
+                      this.state.accountTypes
                     )}
                   </CCol>
                 </CRow>
@@ -235,20 +186,6 @@ class StaffAdd extends Form {
                     })}
                   </CCol>
                 </CRow>
-
-                <CRow>
-                  <CCol xs="12" md="6">
-                    {this.renderImageInput(
-                      "image",
-                      "Profile Image",
-                      "file",
-                      {
-                        placeholder: "Upload profile image",
-                      },
-                      true
-                    )}
-                  </CCol>
-                </CRow>
                 <CRow>
                   <CCol>{this.renderButton("Save", "success", "danger")}</CCol>
                 </CRow>
@@ -265,19 +202,14 @@ class StaffAdd extends Form {
 
     const formData = new FormData();
     // Update the formData object
-    formData.append("image", this.state.image);
-    // formData.append(
-    //     "userId",
-    //     this.state.data.userId
-    // )
     formData.append("firstName", this.state.data.firstName);
     formData.append("lastName", this.state.data.lastName);
     formData.append("email", this.state.data.email);
     formData.append("password", this.state.data.password);
-    formData.append("role", this.state.data.role);
+    formData.append("accountType", this.state.data.accountType);
     formData.append(
       "branchId",
-      this.state.data.branchId //todo:branch must have an id property
+      this.state.data.branchId 
     );
     formData.append("birthday", this.state.data.birthday);
     formData.append("mobileNumber", this.state.data.mobileNumber);
@@ -303,16 +235,13 @@ class StaffAdd extends Form {
 }
 
 const mapStateToProps = (state) => ({
-  //categories: getAllCategories(state),
   branches: getAllBranches(state),
-  roles: getAllRoles(state),
+  accountTypes: getAllAccountTypes(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // getAllCategories : () => dispatch(thunks.product.getAllCategory()),
-  // addProduct : (productData) => dispatch(thunks.product.addProduct(productData))
   getAllBranches: () => dispatch(thunks.staff.getAllBranches()),
-  getAllRoles: () => dispatch(thunks.staff.getAllRoles()),
+  getAllAccountTypes: () => dispatch(thunks.staff.getAllAccountTypes()),
   addStaff: (staffData) => dispatch(thunks.staff.addStaff(staffData)),
 });
 

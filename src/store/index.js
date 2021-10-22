@@ -9,7 +9,7 @@ import userReducer, {
   updateProfileData,
 } from "./user";
 
-import staffReducer, { setBranches, setRoles, setStaffm } from "./staff";
+import staffReducer, { setBranches, setAccountTypes, setStaffm } from "./staff";
 
 import roomTypeReducer, { setRoomTypes } from "./roomType";
 
@@ -33,6 +33,7 @@ import customerReducer, {
   setAccountLevel,
 } from "./customer";
 
+import tableReducer, { setTables } from "./table";
 import newBookingReducer, {
   setBookingBrachData,
   setBookingRoomData,
@@ -51,6 +52,8 @@ import customerReportThunk from "./customerReport/thunk";
 import roomThunk from "./room/thunk";
 import foodItemThunk from "./foodItem/thunk";
 import categoryThunk from "./category/thunk";
+import tableThunk from "./table/thunk";
+
 import newBookingThunk from "./newBooking/thunk";
 import customerThunk from "./customer/thunk";
 
@@ -68,6 +71,7 @@ const store = configureStore({
     foodItem: foodItemReducer,
     category: categoryReducer,
     customer: customerReducer,
+    table: tableReducer,
     newBooking: newBookingReducer,
   },
 
@@ -93,7 +97,7 @@ export const actions = {
 
   staff: {
     setBranches,
-    setRoles,
+    setAccountTypes,
     setStaffm,
   },
   roomType: {
@@ -124,6 +128,9 @@ export const actions = {
     setAccountLevel,
     setCustomerBookings,
   },
+  table: {
+    setTables,
+  },
   newBooking: {
     setBookingBrachData,
     setBookingRoomData,
@@ -142,6 +149,7 @@ export const thunks = {
   foodItem: foodItemThunk,
   category: categoryThunk,
   customer: customerThunk,
+  table: tableThunk,
   newBooking: newBookingThunk,
 };
 

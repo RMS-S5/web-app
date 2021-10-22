@@ -4,7 +4,7 @@ import { /*createAsyncThunk,*/ createSlice } from "@reduxjs/toolkit";
 const initialState = {
   staffm : [],
   branches : [],
-  roles : []
+  accountTypes : []
 
 };
 
@@ -24,8 +24,8 @@ const staffSlice = createSlice({
       state.branches = action.payload;
     },
 
-    setRoles(state, action) {
-      state.roles = action.payload;
+    setAccountTypes(state, action) {
+      state.accountTypes = action.payload;
     },
 
   },
@@ -36,7 +36,7 @@ const staffSlice = createSlice({
  */
 export const {
     setBranches,
-    setRoles,
+    setAccountTypes,
     setStaffm
 } = staffSlice.actions;
 

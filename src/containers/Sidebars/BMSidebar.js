@@ -22,7 +22,7 @@ const Sidebar = () => {
   const accountType = useSelector(getAccountType);
   
 
-  let navItems = navigation.filter((item) => {
+  let navItems = navigation.filter((item) => { //todo:clarify after login implementation
     if (item.accountType) {
       if (item.accountType.indexOf(accountType) !== -1) {
         delete item.accountType;

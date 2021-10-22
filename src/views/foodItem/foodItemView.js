@@ -6,7 +6,9 @@ import {
     CContainer,
     CForm, CInput, CLabel,
     CRow,
+    CDataTable,
 } from "@coreui/react";
+import CardContainer from "../../components/common/CardContainer";
 import Joi from "joi";
 import React from "react";
 import { connect } from "react-redux";
@@ -15,6 +17,11 @@ import Form from "../../components/common/NewForm";
 import { thunks, cleanQuery } from "../../store/index";
 import { getAllFoodItems } from "../../store/foodItem/select";
 import { getAllCategories } from "../../store/category/select";
+
+const fields = [
+    { key: "variantName", label: "Variant Name", _style: { width: "10%" } },
+    { key: "price", label: "Price", _style: { width: "10%" } },
+];
 
 class FoodItemView extends Form {
     state = {
@@ -25,23 +32,26 @@ class FoodItemView extends Form {
             description: "",
             price: "",
         },
+        foodVariants: [],
         categories: [],
-        id: "",
+        foodItemId: "",
         image: "",
         errors: {},
         btnDisable: false,
         spinner: false,
     };
 
-    getFoodItemByID = (id) => {
-        console.log(id, this.props.foodItems);
+    getFoodItemByID = (foodItemId) => {
+        console.log(foodItemId, this.props.foodItems);
         const foodItem = this.props.foodItems.find((item) => {
-            return item.id == id;
+            return item.foodItemId == foodItemId;
         });
         if (!foodItem) {
             toast.error("Food Item Not found");
             return;
         }
+        this.setState({ foodVariants: foodItem.foodVariants })
+        console.log("##foodItem:", foodItem)
         return foodItem;
     };
 
@@ -73,12 +83,12 @@ class FoodItemView extends Form {
             toast.error(res.message);
         }
 
-        const foodItem = this.getFoodItemByID(this.props.match.params.id);
+        const foodItem = this.getFoodItemByID(this.props.match.params.foodItemId);
         if (foodItem) {
             const updateData = cleanQuery(foodItem,
                 ["name", "categoryId", "description", "price"]); //todo: include status when implemented
-            const id = foodItem.id;
-            this.setState({ data: { ...updateData }, id });
+            const foodItemId = foodItem.foodItemId;
+            this.setState({ data: { ...updateData }, foodItemId });
         }
     }
 
@@ -98,7 +108,7 @@ class FoodItemView extends Form {
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             <CLabel htmlFor="name">ID</CLabel>
-                                            <CInput id="name" readOnly value={this.state.id} />
+                                            <CInput id="name" readOnly value={this.state.foodItemId} />
                                         </CCol>
                                     </CRow>
                                     <CRow>
@@ -107,7 +117,7 @@ class FoodItemView extends Form {
                                                 placeholder: "Enter name",
                                             }, false)}
                                         </CCol>
-                                    </CRow>                        
+                                    </CRow>
                                     <CRow>
                                         <CCol xs="12" md="6">
                                             {this.renderSelectWithLabelValue(
@@ -150,6 +160,37 @@ class FoodItemView extends Form {
                             </CCardBody>
                         </CCard>
                     </CCol>
+                    <CCol>
+                        <CardContainer
+                            //   error={this.state.error}
+                            //   loading={this.state.loading}
+                            header="Food Variants"
+                        >
+                            <CRow>
+                                <CCol>
+                                    <CCard>
+                                        <CCardHeader></CCardHeader>
+                                        <CCardBody>
+                                            <CDataTable
+                                                items={this.state.foodVariants}
+                                                fields={fields}
+                                                // columnFilter
+                                                //footer
+                                                // loading={loading}
+                                                // itemsPerPageSelect
+                                                // itemsPerPage={20}
+                                                hover
+                                                sorter
+                                                pagination
+                                            />
+                                        </CCardBody>
+                                    </CCard>
+                                </CCol>
+                            </CRow>
+                        </CardContainer>
+                    </CCol>
+
+
                 </CRow>
             </CContainer>
         );
@@ -180,14 +221,36 @@ class FoodItemView extends Form {
             "price",
             this.state.data.price
         )
-        
+
         console.log("########") //test
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
         }
         console.log("########") //test
 
-        const res = await this.props.updateFoodItem(this.state.id, formData);
+
+
+        let newFoodVariants = []
+        for (const foodVariant of this.state.foodVariants) {
+            console.log("foodVariant:", foodVariant);
+            let newObject = {};
+
+            function camelToUnderscore(key) {
+                return key.replace(/([A-Z])/g, "_$1").toLowerCase();
+            }
+
+            for (var camel in foodVariant) {
+                newObject[camelToUnderscore(camel)] = foodVariant[camel];
+            }
+
+            console.log(newObject);
+            newFoodVariants.push(newObject)
+        }
+
+        console.log("newFoodVariants:", newFoodVariants);
+        console.log("##out: ", { ...this.state.data, foodVariants: this.state.foodVariants })
+        console.log("##foodItemId: ", this.state.foodItemId)
+        const res = await this.props.updateFoodItem(this.state.foodItemId, { ...this.state.data, foodVariants: newFoodVariants });
 
         this.setState({ spinner: false });
         if (res.status === 200) {
@@ -207,7 +270,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     getAllFoodItems: () => dispatch(thunks.foodItem.getAllFoodItems()),
     getAllCategories: () => dispatch(thunks.category.getAllCategories()),
-    updateFoodItem: (id, foodItemData) => dispatch(thunks.foodItem.updateFoodItem(id, foodItemData))
+    updateFoodItem: (foodItemId, foodItemData) => dispatch(thunks.foodItem.updateFoodItem(foodItemId, foodItemData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoodItemView);
