@@ -1,4 +1,4 @@
-describe("Account Setting tests for Customer, Receptionist, Manager and Brach Manager", () => {
+describe("Testing logout function for Customer, Receptionist, Manager and Brach Manager", () => {
   beforeEach(() => {
     // valid dummy credentials
     cy.visit("/home/login");

@@ -65,7 +65,7 @@ class customerRating extends Form {
     // description: Joi.string().label("Description"),
     // status: Joi.string().label("Available"),
     review: Joi.string().label("review"),
-    recommendation: Joi.string().label("recommendation"),
+    recommendation: Joi.string().allow(null, "").label("recommendation"),
   };
 
   async componentDidMount() {

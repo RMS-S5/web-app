@@ -21,7 +21,7 @@ describe("Login tests for Customer, Receptionist, Manager and Brach Manager", ()
         .type("nuwan" + Math.floor(Math.random() * 1000) + "@gmail.com");
       cy.get("#password").should("exist").type("test1234");
       cy.get(".btn").contains("Log In").should("exist").click({ force: true });
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("not.include", "/customer");
     }
   });

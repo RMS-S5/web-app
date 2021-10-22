@@ -250,7 +250,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
 
       cy.get(".btn").contains("Change").should("exist").click({ force: true });
 
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("include", "/customer/profile");
 
       /// Change password again
@@ -291,7 +291,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
 
       cy.get(".btn").contains("Change").should("exist").click({ force: true });
 
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("include", "/manager/profile");
 
       /// Change password again
@@ -335,7 +335,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
 
       cy.get(".btn").contains("Change").should("exist").click({ force: true });
 
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("include", "/branch-manager/profile");
 
       /// Change password again
@@ -378,7 +378,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
 
       cy.get(".btn").contains("Change").should("exist").click({ force: true });
 
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("include", "/receptionist/profile");
 
       /// Change password again

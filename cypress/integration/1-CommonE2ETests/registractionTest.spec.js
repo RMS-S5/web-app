@@ -35,7 +35,7 @@ describe("Registration tests for Customer, Receptionist, Manager and Brach Manag
       cy.get("#password").should("exist").type("test123");
       cy.get("#confirmPassword").should("exist").type("test123");
       cy.contains("Create Account").should("exist").click({ force: true });
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("include", "/home/register");
     }
   });
@@ -53,7 +53,7 @@ describe("Registration tests for Customer, Receptionist, Manager and Brach Manag
       cy.get("#password").should("exist").type("test123");
       cy.get("#confirmPassword").should("exist").type("test123");
       cy.contains("Create Account").should("exist").click({ force: true });
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("include", "/home/register");
     }
   });
@@ -71,7 +71,7 @@ describe("Registration tests for Customer, Receptionist, Manager and Brach Manag
       cy.get("#password").should("exist").type("test123");
       cy.get("#confirmPassword").should("exist").type("test123");
       cy.contains("Create Account").should("exist").click({ force: true });
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("include", "/home/register");
     }
   });
@@ -89,7 +89,7 @@ describe("Registration tests for Customer, Receptionist, Manager and Brach Manag
       cy.get("#password").should("exist").type("test123");
       cy.get("#confirmPassword").should("exist").type("test123");
       cy.contains("Create Account").should("exist").click({ force: true });
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("include", "/home/register");
     }
   });
@@ -107,7 +107,7 @@ describe("Registration tests for Customer, Receptionist, Manager and Brach Manag
       cy.get("#password").should("exist").type("test123");
       cy.get("#confirmPassword").should("exist").type("test123");
       cy.contains("Create Account").should("exist").click({ force: true });
-      cy.get(".Toastify__toast-body").should("exist");
+      cy.get(".Toastify__toast--success").should("exist");
       cy.url().should("include", "/home/register");
     }
   });

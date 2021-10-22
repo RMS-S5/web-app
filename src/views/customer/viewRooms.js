@@ -193,7 +193,7 @@ class CategoryView extends Form {
                 <CRow>
                   <CCol xs="12" md="6">
                     {this.renderInput("amount", "Amount", "text", {
-                      placeholder: "your amo",
+                      placeholder: "Amount",
                       disabled: true,
                     })}
                   </CCol>
@@ -251,7 +251,7 @@ class CategoryView extends Form {
                 <Row xs={1} md={3} className="g-10">
                   {/* Array.from({ length: 4 }) */}
                   {this.state.roomData.map((_, idx) => (
-                    <Col key={idx}>
+                    <Col id={idx} key={idx}>
                       <Card>
                         <Card.Img variant="top" src={image3} />
                         <Card.Body>

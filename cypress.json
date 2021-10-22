@@ -12,6 +12,7 @@
   "defaultCommandTimeout": 30000,
   "numTestsKeptInMemory": 0,
   "nodeVersion": "system",
+  "experimentalShadowDomSupport": true,
   "env": {
     "customer_email": "nuwan@gmail.com",
     "customer_password": "test123",
