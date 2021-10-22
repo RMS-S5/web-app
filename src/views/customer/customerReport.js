@@ -146,6 +146,7 @@ class customerReport extends Form {
       toast.success("Our team will contact you. Thanks for your feedback.");
       this.state.data.report = "";
       this.state.image = "";
+      this.setState({ data: { report: "" }, image: "" });
       if (this.props.userData.AccountType === "Customer") {
         this.props.history.push("/customer/report-a-problem");
       } else if (this.props.userData.AccountType === "Receptionist") {

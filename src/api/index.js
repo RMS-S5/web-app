@@ -198,6 +198,14 @@ export default {
       async allBranches(query) {
         return ajaxResolver(axios.get(`/branch/branches`, { params: query }));
       },
+      async allBrachesCustomer(query) {
+        return ajaxResolver(axios.get(`/branch/get-all-branches-customer`));
+      },
+      async allAvailableRoomsByBranch(data) {
+        return ajaxResolver(
+          axios.post(`/branch/get-available-rooms-by-branch`, data)
+        );
+      },
     },
     remove: {
       async removeBranch(branchId) {
@@ -354,14 +362,6 @@ export default {
       async updateStaff(userId, data) {
         return ajaxResolver(
           axios.put(`/user/update-staff-member/${userId}`, data)
-        );
-      },
-      async allBrachesCustomer(query) {
-        return ajaxResolver(axios.get(`/branch/get-all-branches-customer`));
-      },
-      async allAvailableRoomsByBranch(data) {
-        return ajaxResolver(
-          axios.post(`/branch/get-available-rooms-by-branch`, data)
         );
       },
     },
