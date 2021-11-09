@@ -116,15 +116,7 @@ class Form extends Component {
     // Update the state
 
     this.setState({ image: event.target.files[0] });
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    var url = reader.readAsDataURL(file);
-
-    reader.onloadend = function (e) {
-      this.setState({
-        imageSrc: [reader.result],
-      });
-    }.bind(this);
+    
   };
 
   validateProperty = (name, value) => {

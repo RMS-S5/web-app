@@ -228,7 +228,7 @@ export default {
   foodItem: {
     add: {
       async foodItem(foodItemData) {
-        return ajaxResolver(axios.post(`/food-item/add-food-item`, foodItemData));
+        return ajaxResolver(axios.post(`/food-item/add-food-item`, foodItemData, formDataConfig));
       },
     },
     get: {
@@ -239,7 +239,7 @@ export default {
     put: {
       async updateFoodItem(foodItemId, foodItemData) {
         return ajaxResolver(
-          axios.put(`/food-item/update-food-item/${foodItemId}`, foodItemData));
+          axios.put(`/food-item/update-food-item/${foodItemId}`, foodItemData, formDataConfig));
       },
     },
     remove: {

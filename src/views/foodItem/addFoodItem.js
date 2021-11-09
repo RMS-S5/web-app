@@ -160,7 +160,7 @@ class FoodItemAdd extends Form {
     this.setState({ spinner: true });
 
     const formData = new FormData();
-    // Update the formData object
+    //Update the formData object
     formData.append(
       "image",
       this.state.image
@@ -181,6 +181,13 @@ class FoodItemAdd extends Form {
       "price",
       this.state.data.price
     )
+    
+    for (var i = 0; i < this.state.foodVariants.length; i++) {
+      formData.append(
+        "foodVariants",
+        JSON.stringify(this.state.foodVariants[i])//this.state.foodVariants[i]
+      )
+    }
 
     //console.log("foodVariants:", this.state.foodVariants)
     console.log("########") //test
@@ -188,7 +195,8 @@ class FoodItemAdd extends Form {
       console.log(pair[0] + ', ' + pair[1]);
     }
     console.log("########") //test
-    const res = await this.props.addFoodItem({...this.state.data,foodVariants: this.state.foodVariants});
+    //const res = await this.props.addFoodItem({...this.state.data,foodVariants: this.state.foodVariants});
+    const res = await this.props.addFoodItem(formData);
 
     this.setState({ spinner: false });
 
