@@ -130,6 +130,14 @@ class Register extends Form {
                   </CForm>
                 </CCardBody>
               </CCard>
+              <br /> <br /> <br />
+              <br />
+              <br /> <br /> <br />
+              <br />
+              <br /> <br /> <br />
+              <br />
+              <br /> <br /> <br />
+              <br />
             </CCol>
           </CRow>
         </CContainer>

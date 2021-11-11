@@ -60,9 +60,12 @@ class Login extends Form {
     return (
       <React.Fragment>
         <CRow className="justify-content-center">
-          <CCol md="6"></CCol>
+          <CCol md="7"></CCol>
           <CCol md="4">
-            <CCardGroup className="ml-4 mr-4" style={{ marginTop: "150px" }}>
+            <CCardGroup
+              className="ml-4 mr-4"
+              style={{ marginTop: "200px", marginBottom: "330px" }}
+            >
               <CCard className="p-4">
                 <CCardBody>
                   <CForm onSubmit={this.handleSubmit}>
@@ -122,6 +125,8 @@ class Login extends Form {
                 </CCardBody>
               </CCard>
             </CCardGroup>
+            <br /> <br /> <br />
+            <br />
           </CCol>
         </CRow>
       </React.Fragment>

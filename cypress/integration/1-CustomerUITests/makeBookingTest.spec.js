@@ -74,7 +74,7 @@ describe("Customer booking function should work", () => {
         });
       cy.get(".btn").contains("Confirm Rooms").click({ force: true });
       cy.url().should("include", "/customer/booking-form");
-      cy.get("#email").should("exist").type(customer_email);
+      cy.get("#email").should("exist");
       cy.get("#nic").should("exist").type("982502836V");
       cy.wait(4000);
       cy.get(".btn").contains("Go to payment").should("exist").click();
