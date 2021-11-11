@@ -21,9 +21,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import Form from "../../components/common/NewForm";
-import image1 from "../../assets/img/1.jpg";
-import image3 from "../../assets/img/3.jpg";
-import image4 from "../../assets/img/4.jpg";
+import image1 from "../../assets/img/3.jpg";
+import image2 from "../../assets/img/double.jpg";
+import image3 from "../../assets/img/triple.jpg";
+
+import image4 from "../../assets/img/doanu_hollywood_twin.jpg";
+import image5 from "../../assets/img/executive.jpg";
+import image6 from "../../assets/img/Executive-Suite.jpg";
 import { Card, Col, Row, Button } from "react-bootstrap";
 import api from "../../api";
 
@@ -46,7 +50,7 @@ class CategoryView extends Form {
       "A parlour or living room connected with to one or more bedrooms. The room size or area of Suite rooms are generally between 70 m² to 100 m².",
       "A room with one or more bedrooms and a separate living space. The room size or area of Suite rooms are generally between 70 m² to 100 m².",
     ],
-    images: [image1, image4, image3, image4, image1, image3],
+    images: [image1, image2, image3, image4, image5, image6],
     status: ["Available", "Not Available"],
     pCode: "",
     image: "",
@@ -124,14 +128,7 @@ class CategoryView extends Form {
                   {this.state.roomTypeData.map((_, idx) => (
                     <Col key={idx}>
                       <Card>
-                        <Card.Img
-                          variant="top"
-                          src={
-                            this.state.images[
-                              Math.floor(Math.random() * (5 - 0 + 1)) + 0
-                            ]
-                          }
-                        />
+                        <Card.Img variant="top" src={this.state.images[idx]} />
                         <Card.Body>
                           <Card.Title>
                             {this.state.roomTypeData[idx].roomType}

@@ -22,9 +22,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import Form from "../../components/common/NewForm";
-import image1 from "../../assets/img/1.jpg";
-import image3 from "../../assets/img/3.jpg";
-import image4 from "../../assets/img/4.jpg";
+import image1 from "../../assets/img/3.jpg";
+import image2 from "../../assets/img/double.jpg";
+import image3 from "../../assets/img/triple.jpg";
+
+import image4 from "../../assets/img/doanu_hollywood_twin.jpg";
+import image5 from "../../assets/img/executive.jpg";
+import image6 from "../../assets/img/Executive-Suite.jpg";
 import { Card, Col, Row, Button } from "react-bootstrap";
 import { thunks } from "../../store/index";
 import { getAllAvailableRoomsByBranch } from "../../store/room/select";
@@ -39,12 +43,12 @@ class CategoryView extends Form {
     roomData: [],
     selectedRoomData: [],
     // roomTypes: [
-    //   "Single Room",
-    //   "Double Room",
-    //   "Triple Room",
-    //   "Hollywood Twin Room",
-    //   "Executive Room",
-    //   "Executive Suite",
+    // "Single Room",
+    // "Double Room",
+    // "Triple Room",
+    // "Hollywood Twin Room",
+    // "Executive Room",
+    // "Executive Suite",
     // ],
     // roomDescriptions: [
     //   "A room assigned to one person. May have one or more beds. The room size or area of Single Rooms are generally between 37 m² to 45 m².",
@@ -71,6 +75,14 @@ class CategoryView extends Form {
         filter: false,
       },
     ],
+    room_image: {
+      "Single Room": image1,
+      "Double Room": image2,
+      "Triple Room": image3,
+      "Hollywood Twin Room": image4,
+      "Executive Room": image5,
+      "Executive Suite": image6,
+    },
     pCode: "",
     image: "",
     bookingBranchData: [],
@@ -254,7 +266,15 @@ class CategoryView extends Form {
                   {this.state.roomData.map((_, idx) => (
                     <Col id={idx} key={idx}>
                       <Card>
-                        <Card.Img variant="top" src={image3} />
+                        <Card.Img
+                          variant="top"
+                          src={
+                            this.state.room_image[
+                              this.state.roomData[idx].roomType
+                            ]
+                          }
+                        />
+                        {console.log(this.state.roomData[idx].roomType)}
                         <Card.Body>
                           <Card.Title>
                             {this.state.roomData[idx].roomType}

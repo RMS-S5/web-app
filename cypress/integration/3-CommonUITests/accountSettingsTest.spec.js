@@ -270,7 +270,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
     }
   });
 
-  it("Manger should be able to change password after login", () => {
+  it("Manager should be able to change password after login", () => {
     {
       cy.get("#email").should("exist").type(manager_email);
       cy.get("#password").should("exist").type(manager_password);
@@ -282,7 +282,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
 
       cy.get(".btn")
         .contains("Change Password")
-        .should("exist")
+        // .should("exist")
         .click({ force: true });
 
       cy.get("#currentPassword").should("exist").clear().type(manager_password);
@@ -297,7 +297,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
       /// Change password again
       cy.get(".btn")
         .contains("Change Password")
-        .should("exist")
+        // .should("exist")
         .click({ force: true });
 
       cy.get("#currentPassword").should("exist").clear().type(newPassword);
@@ -321,10 +321,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
       cy.contains(bmanager_email).should("exist").click({ force: true });
       cy.contains("Profile").should("exist").click({ force: true });
 
-      cy.get(".btn")
-        .contains("Change Password")
-        .should("exist")
-        .click({ force: true });
+      cy.get(".btn").contains("Change Password").click({ force: true });
 
       cy.get("#currentPassword")
         .should("exist")
@@ -339,10 +336,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
       cy.url().should("include", "/branch-manager/profile");
 
       /// Change password again
-      cy.get(".btn")
-        .contains("Change Password")
-        .should("exist")
-        .click({ force: true });
+      cy.get(".btn").contains("Change Password").click({ force: true });
 
       cy.get("#currentPassword").should("exist").clear().type(newPassword);
       cy.get("#password").should("exist").clear().type(bmanager_password);
@@ -395,6 +389,7 @@ describe("Account Setting tests for Customer, Receptionist, Manager and Brach Ma
         .type(receptionist_password);
 
       cy.get(".btn").contains("Change").should("exist").click({ force: true });
+      cy.go("back");
     }
   });
 });

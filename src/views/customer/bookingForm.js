@@ -121,7 +121,7 @@ class AskQuestions extends Form {
       <CContainer>
         <CRow>
           <CCol>
-            <CardContainer error={this.state.error} header="Add Booking Data">
+            <CardContainer error={this.state.error} header="Adds Booking Data">
               <CForm onSubmit={this.handleSubmit}>
                 <CRow>
                   <CCol xs="12" md="6">
@@ -199,7 +199,7 @@ class AskQuestions extends Form {
       const self = this;
       var payment = {
         sandbox: true,
-        merchant_id: "1218700", // Replace your Merchant ID
+        merchant_id: "1219130", // Replace your Merchant ID
         return_url: undefined, // Important
         cancel_url: undefined, // Important
         notify_url: "http://sample.com/notify",
