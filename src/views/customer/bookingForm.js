@@ -55,15 +55,6 @@ class AskQuestions extends Form {
   };
 
   schema = {
-    // pCode: Joi.string().label("Product Code"),
-    // pName: Joi.string().label("Product Name"),
-    // categoryId: Joi.number().label("Category Id"),
-    // stock: Joi.number().label("Stock"),
-    // price: Joi.number().label("Price"),
-    // color: Joi.string().label("Color"),
-    // size: Joi.string().label("Size"),
-    // description: Joi.string().label("Description"),
-    // status: Joi.string().label("Available"),
     first_name: Joi.string().label("First Name"),
     last_name: Joi.string().label("Last Name"),
     email: Joi.string().label("Email"),

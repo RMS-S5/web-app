@@ -40,15 +40,6 @@ class Bookingform extends Form {
   };
 
   schema = {
-    // pCode: Joi.string().label("Product Code"),
-    // pName: Joi.string().label("Product Name"),
-    // categoryId: Joi.number().label("Category Id"),
-    // stock: Joi.number().label("Stock"),
-    // price: Joi.number().label("Price"),
-    // color: Joi.string().label("Color"),
-    // size: Joi.string().label("Size"),
-    // description: Joi.string().label("Description"),
-    // status: Joi.string().label("Available"),
     question: Joi.string().label("Question"),
   };
 
@@ -123,18 +114,8 @@ class Bookingform extends Form {
   }
 }
 
-const mapStateToProps = (state) => ({
-  //categories: getAllCategories(state),
-  // branches: getAllBranches(state),
-  // roles: getAllRoles(state),
-});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({
-  // getAllCategories : () => dispatch(thunks.product.getAllCategory()),
-  // addProduct : (productData) => dispatch(thunks.product.addProduct(productData))
-  // getAllBranches : () => dispatch(thunks.staff.getAllBranches()),
-  // getAllRoles : () => dispatch(thunks.staff.getAllRoles()),
-  // addBookingData : (bookingData) => dispatch(thunks.booking.addBookingData(bookingData))
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Bookingform);

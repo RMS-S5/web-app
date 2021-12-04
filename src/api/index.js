@@ -9,8 +9,8 @@ const BASE_URL_LOCAL = process.env.REACT_APP_BASE_URL_LOCAL;
 const FILE_URL_HEROKU = process.env.REACT_APP_FILE_URL_HEROKU;
 const FILE_URL_LOCAL = process.env.REACT_APP_FILE_URL_LOCAL;
 
-const DEFAULT_BASE_URL = BASE_URL_LOCAL; // https://rms-backend-cs3202.herokuapp.com ;
-const DEFAULT_FILE_URL = FILE_URL_LOCAL;
+const DEFAULT_BASE_URL = BASE_URL_HEROKU; //"https://rms-backend-cs3202.herokuapp.com"; //BASE_URL_LOCAL; // https://rms-backend-cs3202.herokuapp.com ;
+const DEFAULT_FILE_URL = FILE_URL_HEROKU;
 
 export const BACK_END_URL = {
   DEFAULT_BASE_URL,
